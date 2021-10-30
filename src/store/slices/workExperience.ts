@@ -24,20 +24,7 @@ const initialWorkExperienceItem: IWorkExperienceItem = {
 
 export const initialWorkExperience = {
     sectionName: "Arbetslivserfarenhet",
-    items: {
-        "a": {
-            ...initialWorkExperienceItem,
-            jobTitle: "a"
-        },
-        "b": {
-            ...initialWorkExperienceItem,
-            jobTitle: "b"
-        },
-        "c": {
-            ...initialWorkExperienceItem,
-            jobTitle: "c"
-        },
-    } as Record<string, IWorkExperienceItem>
+    items: {} as Record<string, IWorkExperienceItem>
 }
 
 export const workExperience = createSlice({
