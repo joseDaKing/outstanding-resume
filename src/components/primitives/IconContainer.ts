@@ -8,7 +8,7 @@ export const IconContainer = styled("div", inlineBlockMixin, {
     alignItems: "center",
     justifyContent: "center",
     fontSize: 24,
-    padding: "$1",
+    _paddingY: "$1",
     color: "$blue-gray-300",
     transitionDuration: 1000,
     transitionProperty: "all",
@@ -24,6 +24,9 @@ export const IconContainer = styled("div", inlineBlockMixin, {
         invisible: {
             true: {
                 opacity: 0
+            },
+            false: {
+                opacity: "1 !important"
             }
         }
     }
