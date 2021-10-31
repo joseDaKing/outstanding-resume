@@ -4,7 +4,7 @@ import { IID } from "../../types";
 
 import { createContext, useContext } from "react";
 
-import { Box, Stack } from "../layout";
+import { Box } from "../layout";
 
 import { DragDropContext, DropResult, Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -12,13 +12,10 @@ import { css } from "../../stitches";
 
 import { useId } from "../../utilis";
 
-import { VariantProps } from "@stitches/react";
-
 interface IReorderItemContext {
     dragHandlerProps: any;
     containerProps: any;
     isDragging: boolean;
-    className: string;
 }
 
 const ReorderItemContext = createContext<IReorderItemContext|null>(null);
@@ -36,13 +33,17 @@ export const useReorderItem = (): IReorderItemContext => {
 }
 
 const draggingStyles = css({
+    position: "relative",
+    zIndex: "$40",
     opacity: "$100",
     boxShadow:"none",
+    marginTop: "$2",
     variants: {
         isDragging: {
             true: {
                 opacity: "$100",
-                boxShadow: "$lg"
+                boxShadow: "$lg",
+                zIndex: "$50"
             }
         }
     }
@@ -61,34 +62,22 @@ const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
             {(provided, snapshot) => {
 
                 const className = draggingStyles({ 
-                    isDragging: snapshot.isDragging 
+                    isDragging: snapshot.isDragging
                 });
 
                 return (
-                    <Box
-                    css={{
-                        position: "relative",
-                        zIndex: snapshot.isDragging ? "$50" : "$40"
-                    }}
-                    ref={provided.innerRef}>
-                        <Box
-                        css={{
-                            _marginY: "$2"
-                        }}>
-                            <ReorderItemContext.Provider
-                            value={{
-                                containerProps: {
-                                    ref: provided.innerRef,
-                                    ...provided.draggableProps
-                                },
-                                dragHandlerProps: provided.dragHandleProps,
-                                isDragging: snapshot.isDragging,
-                                className,
-                            }}>
-                                {children}
-                            </ReorderItemContext.Provider>
-                        </Box>
-                    </Box>
+                    <ReorderItemContext.Provider
+                    value={{
+                        containerProps: {
+                            ref: provided.innerRef,
+                            className,
+                            ...provided.draggableProps
+                        },
+                        dragHandlerProps: provided.dragHandleProps,
+                        isDragging: snapshot.isDragging
+                    }}>
+                        {children}
+                    </ReorderItemContext.Provider>
                 );
             }}
         </Draggable>
@@ -98,11 +87,10 @@ const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
 interface IReorderProps<T extends string | IID> {
     onReorder?: (fromId: string, toId: string) => void;
     items: T[];
-    render: (props: T) => JSX.Element;
-    space?: VariantProps<typeof Stack>["space"];
+    render: (props: T, index: number) => JSX.Element; 
 }
 
-export function Reorder<T extends IID>({ items, onReorder, space = "xs", render }: IReorderProps<T>) {
+export function Reorder<T extends IID>({ items, onReorder, render }: IReorderProps<T>) {
 
     const onDragEndHandler = (event: DropResult) => {
 
@@ -123,28 +111,25 @@ export function Reorder<T extends IID>({ items, onReorder, space = "xs", render 
         onDragEnd={onDragEndHandler}>
             <Droppable droppableId={id}>
                 {(provided => (
-                    <>
-                        <div
+                    <Box   
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}>
+                        {items.map((props, index) => {
 
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}>
-                            {items.map((props, index) => {
+                            const id: string = typeof props === "string" ? props : props.id;
 
-                                const id: string = typeof props === "string" ? props : props.id;
+                            return (
+                                <ReorderItem 
+                                id={id}
+                                key={id} 
+                                index={index}>
+                                    {render(props, index)}
+                                </ReorderItem>
+                            );
+                        })}
 
-                                return (
-                                    <ReorderItem 
-                                    id={id}
-                                    key={id} 
-                                    index={index}>
-                                        {render(props)}
-                                    </ReorderItem>
-                                );
-                            })}
-
-                            {provided.placeholder}
-                        </div>
-                    </>
+                        {provided.placeholder}
+                    </Box>
                 ))}
             </Droppable>
         </DragDropContext>

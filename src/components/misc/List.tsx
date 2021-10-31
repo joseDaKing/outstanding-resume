@@ -12,58 +12,93 @@ import { MdDelete, MdDragHandle } from "react-icons/md";
 
 import { useReorderItem } from "./Reorder";
 
-import { IconContainer } from "../primitives";
-
 import { VariantProps } from "@stitches/react";
+
+import { IconGroupHover, IconContainer } from "../primitives";
+
+import { PlaceAside } from "../layout";
 
 const ListIconContainer = styled(IconContainer, { height: "$16" });
 
 interface IListItemProps {
     onDelete: () => void;
+    index: number;
 }
 
 const ListItem: React.FC<IListItemProps> = ({ children, onDelete }) => {
     
-    const { isDragging, dragHandlerProps, containerProps, className } = useReorderItem();
+    const { isDragging, dragHandlerProps, containerProps } = useReorderItem();
 
     return (
-        <Stack
-        {...containerProps}
-        css={{
-            [`&:hover ${IconContainer}`]: {
-                opacity: 1
-            }
-        }}
-        axis="x">
-            <ListIconContainer
-            {...dragHandlerProps}
-            hover
-            invisible={!isDragging}
-            css={{
-                cursor: isDragging ? "grabbing" : "grab",
-                "&:hover": {
-                    _textColor: "$blue-gray-300",
-                }
-            }}>
-                <MdDragHandle/>
-            </ListIconContainer>
-
-            <Box className={className}>
+        <Box {...containerProps}>
+            <IconGroupHover>
+                <PlaceAside align="start">
+                    <ListIconContainer
+                    {...dragHandlerProps}
+                    hover
+                    invisible={!isDragging}
+                    css={{
+                        cursor: isDragging ? "grabbing" : "grab",
+                    }}>
+                        <MdDragHandle/>
+                    </ListIconContainer>
+                </PlaceAside>
+                
                 {children}
-            </Box>
-            
-            <ListIconContainer
-            hover
-            invisible={!isDragging}
-            css={{
-                cursor: "pointer",
-            }}
-            onClick={onDelete}>
-                <MdDelete/>
-            </ListIconContainer>
-        </Stack>
+                
+                <PlaceAside align="end">
+                    <ListIconContainer
+                    hover
+                    invisible={!isDragging}
+                    css={{
+                        cursor: "pointer",
+                    }}
+                    onClick={onDelete}>
+                        <MdDelete/>
+                    </ListIconContainer>
+                </PlaceAside>
+            </IconGroupHover>
+        </Box>
     );
 }
+
+/* 
+<Stack
+{...containerProps}
+css={{
+    [`&:hover ${IconContainer}`]: {
+        opacity: 1
+    }
+}}
+axis="x">
+    <ListIconContainer
+    {...dragHandlerProps}
+    hover
+    invisible={!isDragging}
+    css={{
+        cursor: isDragging ? "grabbing" : "grab",
+        "&:hover": {
+            _textColor: "$blue-gray-300",
+        }
+    }}>
+        <MdDragHandle/>
+    </ListIconContainer>
+
+    <Box>
+        {children}
+    </Box>
+    
+    <ListIconContainer
+    hover
+    invisible={!isDragging}
+    css={{
+        cursor: "pointer",
+    }}
+    onClick={onDelete}>
+        <MdDelete/>
+    </ListIconContainer>
+</Stack>
+*/
 
 interface IListProps<T extends { id: string; }> {
     label: string; 
@@ -71,7 +106,7 @@ interface IListProps<T extends { id: string; }> {
     onAdd: () => void;
     onDelete: (id: string) => void;
     onReorder: (id1: string, id2: string) => void;
-    render: (item: T) => JSX.Element;
+    render: (item: T, index: number) => JSX.Element;
     space?: VariantProps<typeof Stack>["space"];
 }
 
@@ -84,15 +119,15 @@ export function List<T extends { id: string; }>({ label, items, onReorder, onDel
         axis="y" 
         space="sm">
             <Reorder
-            space={space}
             items={items}
             onReorder={onReorder}
-            render={props => (
+            render={(props, index) => (
                 <ListItem 
-                key={props.id}
                 {...props}
+                index={index}
+                key={props.id}
                 onDelete={onDeleteHandler(props.id)}>
-                    {render(props)}
+                    {render(props, index)}
                 </ListItem>
             )}/>
                
