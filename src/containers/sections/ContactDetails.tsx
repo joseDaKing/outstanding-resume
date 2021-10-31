@@ -4,9 +4,9 @@ import { Stack, Box } from "../../components/layout";
 
 import { Title } from "../../components/typography";
 
-import { TextField } from "../../components/form";
+import { TextField, EditText } from "../../components/form";
 
-import { Disclosure, EditText } from "../../components/misc";
+import { Disclosure } from "../../components/misc";
 
 import { 
     useAppSelector, 

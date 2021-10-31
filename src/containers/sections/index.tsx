@@ -49,6 +49,7 @@ export const Sections: React.FC = () => {
     return (
         <>
             <ContactDetails/>
+
             <ProfessionalExperience/>     
             
             <Reorder

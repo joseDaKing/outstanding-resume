@@ -4,9 +4,9 @@ import { Stack, Box } from "../../components/layout";
 
 import { Text, Title } from "../../components/typography";
 
-import { TextField } from "../../components/form";
+import { TextField, EditText } from "../../components/form";
 
-import { List, Accordion, EditText, useActivateLatestAccordionItem, useReorderItem } from "../../components/misc";
+import { List, Accordion, useActivateLatestAccordionItem, useReorderItem } from "../../components/misc";
 
 import { 
     useAppDispatch, 
@@ -80,26 +80,20 @@ export const Links: React.FC = () => {
 
     const onSectionNameChange = (sectionName: string) => dispatch(link.actions.setSectionName(sectionName));    
 
-    const { containerProps, dragHandlerProps, isDragging, className } = useReorderItem();
+    const { containerProps, dragHandlerProps, isDragging } = useReorderItem();
 
     return (
-        <Box {...containerProps} className={className}>
+        <Box {...containerProps}>
             <Title>
-                <Box inline
-                css={{
-                    [`&:hover ${IconContainer}`]: {
-                        opacity: 1
-                    }
-                }}>
+                <EditText
+                onChange={onSectionNameChange}
+                resetable={initialLink.sectionName}
+                value={sectionName}
+                left={() => (
                     <IconContainer {...dragHandlerProps} invisible={!isDragging} inline>
                         <MdDragHandle/>
                     </IconContainer>
-
-                    <EditText
-                    onChange={onSectionNameChange}
-                    resetable={initialLink.sectionName}
-                    value={sectionName}/>
-                </Box>
+                )}/> 
             </Title>
 
             <Text gutter>

@@ -2,11 +2,9 @@ import React from "react";
 
 import { Box } from "../../components/layout";
 
-import { TextArea } from "../../components/form";
+import { TextArea, EditText } from "../../components/form";
 
 import { Text, Title } from "../../components/typography";
-
-import { EditText } from "../../components/misc";
 
 import { useAppDispatch, useAppSelector, professionalExperience, initialProfessionalExperience } from "../../store";
 
