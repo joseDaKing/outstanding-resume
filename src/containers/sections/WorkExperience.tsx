@@ -6,7 +6,7 @@ import { Text, Title } from "../../components/typography";
 
 import { TextArea, TextField, EditText } from "../../components/form";
 
-import { List, Accordion, useActivateLatestAccordionItem, useReorderItem } from "../../components/misc";
+import { List, Accordion, useReorderItem } from "../../components/misc";
 
 import { useAppDispatch, useAppSelector, workExperience, initialWorkExperience, IWorkExperienceItem } from "../../store";
 
@@ -127,8 +127,6 @@ export const WorkExperience: React.FC = () => {
 
     const itemsWithIds = withId(items);
 
-    useActivateLatestAccordionItem(itemsWithIds);
-
     const onAddHandler = () => dispatch(workExperience.actions.add());
 
     const onRemoveHandler = (id: string) => dispatch(workExperience.actions.remove(id));
@@ -154,7 +152,7 @@ export const WorkExperience: React.FC = () => {
                 )}/>
             </Title>
 
-            <Text gutter>
+            <Text>
                 Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
             </Text>                        
 

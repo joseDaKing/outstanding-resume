@@ -31,7 +31,7 @@ export const ProfessionalExperience: React.FC = () => {
                 value={sectionName}/>
             </Title>
 
-            <Text gutter>
+            <Text>
                 Skriv 2-3 tydliga meningar om din allmänna erfarenhet
             </Text>
 

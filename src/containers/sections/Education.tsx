@@ -6,7 +6,7 @@ import { Text, Title } from "../../components/typography";
 
 import { TextArea, TextField, EditText } from "../../components/form";
 
-import { List, Accordion, useActivateLatestAccordionItem, useReorderItem } from "../../components/misc";
+import { List, Accordion, useReorderItem } from "../../components/misc";
 
 import { withId } from "../../utilis";
 
@@ -134,8 +134,6 @@ export const Education: React.FC = () => {
 
     const itemsWithIds = withId(items);
 
-    useActivateLatestAccordionItem(itemsWithIds);
-
     const onAddHandler = () => dispatch(education.actions.add());
 
     const onRemoveHandler = (id: string) => dispatch(education.actions.remove(id));
@@ -160,7 +158,7 @@ export const Education: React.FC = () => {
                 )}/>
             </Title>
 
-            <Text gutter>
+            <Text>
                 Om så är  relevant, lägg till dina senaste utbildningsresultat och datum här
             </Text>                        
 

@@ -6,7 +6,7 @@ import { Text, Title } from "../../components/typography";
 
 import { TextField, EditText } from "../../components/form";
 
-import { List, Accordion, useActivateLatestAccordionItem, useReorderItem } from "../../components/misc";
+import { List, Accordion, useReorderItem } from "../../components/misc";
 
 import { 
     useAppDispatch, 
@@ -70,8 +70,6 @@ export const Links: React.FC = () => {
 
     const itemsWithId = withId(items);
 
-    useActivateLatestAccordionItem(itemsWithId);
-
     const onAddHandler = () => dispatch(link.actions.add());
 
     const onRemoveHandler = (id: string) => dispatch(link.actions.remove(id));
@@ -96,7 +94,7 @@ export const Links: React.FC = () => {
                 )}/> 
             </Title>
 
-            <Text gutter>
+            <Text>
                 Du kan lägga till länkar till webbplatser som du vill att personalchefer ska se! Du kanske vill lägga till en länk till din portfölj, LinkedIn-profil eller personliga hemsida.
             </Text>                        
 
