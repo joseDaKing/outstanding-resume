@@ -1,3 +1,3 @@
 export interface IOnChange<T> {
-    change?: (value: T) => void;
+    onChange?: (value: T) => void;
 }
