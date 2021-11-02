@@ -1,4 +1,4 @@
-import { IDisabled } from "../IDisabled";
+import { IDisabled } from "./IDisabled";
 
 import { IValue } from "./IValue";
 

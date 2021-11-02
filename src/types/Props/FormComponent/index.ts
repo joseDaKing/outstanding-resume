@@ -1,9 +1,9 @@
-import { IDisabled } from "./IDisabled";
+import { ILabel } from "./ILabel";
 
 import { InteractiveComponent } from "./InteractiveComponent";
 
-export type FormComponent<T, K = T> = IDisabled & InteractiveComponent<T, K>;
+export type FormComponent<T, K = T> = ILabel & InteractiveComponent<T, K>;
 
-export * from "./IDisabled";
+export * from "./ILabel";
 
 export * from "./InteractiveComponent";
