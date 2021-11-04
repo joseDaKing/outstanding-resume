@@ -74,7 +74,7 @@ export const Links: React.FC = () => {
 
     const onRemoveHandler = (id: string) => dispatch(link.actions.remove(id));
 
-    const onReorderHandler = (fromId: string, toId: string) => dispatch(link.actions.reorder([fromId, toId]));
+    const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(link.actions.reorder(ids));
 
     const onSectionNameChange = (sectionName: string) => dispatch(link.actions.setSectionName(sectionName));    
 
@@ -99,11 +99,11 @@ export const Links: React.FC = () => {
             </Text>                        
 
             <List 
-            items={itemsWithId}
+            value={itemsWithId}
             label="Lägg till anställning"
             onAdd={onAddHandler}
             onDelete={onRemoveHandler}
-            onReorder={onReorderHandler}
+            onChange={onChangeHandler}
             render={props => <ListRenderer {...props}/>}/>
         </Box>
     )

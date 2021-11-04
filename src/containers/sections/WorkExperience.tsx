@@ -131,7 +131,7 @@ export const WorkExperience: React.FC = () => {
 
     const onRemoveHandler = (id: string) => dispatch(workExperience.actions.remove(id));
 
-    const onReorderHandler = (fromId: string, toId: string) => dispatch(workExperience.actions.reorder([fromId, toId]));
+    const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(workExperience.actions.reorder(ids));
 
     const onSectionNameChange = (sectionName: string) => dispatch(workExperience.actions.setSectionName(sectionName));
 
@@ -158,10 +158,10 @@ export const WorkExperience: React.FC = () => {
 
             <List 
             label="Lägg till anställning"
-            items={itemsWithIds}
+            value={itemsWithIds}
             onAdd={onAddHandler}
             onDelete={(onRemoveHandler)}
-            onReorder={onReorderHandler}
+            onChange={onChangeHandler}
             render={props => <ListRenderer {...props}/>}/> 
         </Box>  
     )

@@ -138,7 +138,7 @@ export const Education: React.FC = () => {
 
     const onRemoveHandler = (id: string) => dispatch(education.actions.remove(id));
 
-    const onReorderHandler = (fromId: string, toId: string) => dispatch(education.actions.reorder([fromId, toId]));
+    const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(education.actions.reorder(ids));
 
     const onSectionNameChange = (sectionName: string) => dispatch(education.actions.setSectionName(sectionName));
 
@@ -163,11 +163,11 @@ export const Education: React.FC = () => {
             </Text>                        
 
             <List 
-            items={itemsWithIds}
+            value={itemsWithIds}
             label="Lägg till anställning"
             onAdd={onAddHandler}
             onDelete={onRemoveHandler}
-            onReorder={onReorderHandler}
+            onChange={onChangeHandler}
             render={props => <ListRenderer {...props}/>}/>
         </Box>
     )
