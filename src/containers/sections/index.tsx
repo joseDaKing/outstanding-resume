@@ -44,7 +44,7 @@ export const Sections: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const onReorder = (fromId: string, toId: string) => dispatch(sectionOrder.actions.reorder([fromId, toId]));
+    const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(sectionOrder.actions.reorder(ids));
 
     return (
         <>
@@ -53,8 +53,8 @@ export const Sections: React.FC = () => {
             <ProfessionalExperience/>     
             
             <Reorder
-            items={order}
-            onReorder={onReorder}
+            value={order}
+            onChange={onChangeHandler}
             render={({ id }) => <SortableSection key={id} id={id}/>}/>
         </>
     );
