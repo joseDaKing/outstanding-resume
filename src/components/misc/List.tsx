@@ -42,7 +42,6 @@ const ListItem: React.FC<IListItemProps> = ({ space, children, onDelete }) => {
                 <PlaceAside align="start">
                     <ListIconContainer
                     {...dragHandlerProps}
-                    hover
                     invisible={!isDragging}
                     css={{
                         cursor: isDragging ? "grabbing" : "grab",
