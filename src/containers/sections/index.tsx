@@ -47,7 +47,7 @@ export const Sections: React.FC = () => {
     const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(sectionOrder.actions.reorder(ids));
 
     return (
-        <>
+        <>            
             <ContactDetails/>
 
             <ProfessionalExperience/>     
