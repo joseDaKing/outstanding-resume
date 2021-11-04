@@ -10,12 +10,10 @@ import { Box } from "../../components/layout";
 
 import type { ChangeEvent } from "react";
 
-export interface ITextFieldProps extends VariantProps<typeof Box>, VariantProps<typeof FormInput> {
-    value?: string;
-    onChange?: (value: string) => void;
-    label?: string;
+import { FormComponent, ISize } from "../../types";
+
+export interface ITextFieldProps extends ISize, FormComponent<string> {
     placeholder?: string;
-    disabled?: boolean;
 }
 
 export const TextField: React.FC<ITextFieldProps> = ({ inline, disabled, label, placeholder, onChange, value, size }) => {

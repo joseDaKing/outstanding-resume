@@ -16,10 +16,10 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 import { IconContainer, IconGroupHover } from "../primitives";
 
-interface IEditTextProps {
-    value?: string;
+import { InteractiveComponent } from "../../types";
+
+interface IEditTextProps extends InteractiveComponent<string> {
     resetable?: string;
-    onChange?: (value: string) => void;
     left?: () => JSX.Element;
     right?: () => JSX.Element;
 }

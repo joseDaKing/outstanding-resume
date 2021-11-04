@@ -1,8 +1,19 @@
+import React from "react";
 import { styled } from "../../stitches";
+
+import { IIline, ISize } from "../../types";
+
+import { IDisabled } from "../../types/Props/FormComponent/InteractiveComponent/IDisabled";
 
 import { inlineBlockMixin, textAlignMixin } from "../mixins";
 
-export const Button = styled("button", textAlignMixin, inlineBlockMixin, {
+interface IButton extends IDisabled, IIline, ISize {
+    variant?: "fill" | "text"; 
+    align?: "start" | "center" | "end";
+    onClick?: () => void;
+}
+
+const StyledButton = styled("button", textAlignMixin, inlineBlockMixin, {
     fontWeight: "$medium",
     borderRadius: "$md",
     fontFamily: "$mono",
@@ -52,3 +63,12 @@ export const Button = styled("button", textAlignMixin, inlineBlockMixin, {
         variant: "fill"
     }
 });
+
+export const Button: React.FC<IButton> = ({ children, ...props }) => {
+
+    return (
+        <StyledButton {...props}>
+            {children}
+        </StyledButton>
+    );
+}

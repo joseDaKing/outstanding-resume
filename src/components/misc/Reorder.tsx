@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IID } from "../../types";
+import { IID, InteractiveComponent } from "../../types";
 
 import { createContext, useContext } from "react";
 
@@ -11,6 +11,8 @@ import { DragDropContext, DropResult, Droppable, Draggable } from "react-beautif
 import { css } from "../../stitches";
 
 import { useId } from "../../utilis";
+
+import { PropertyValue } from "@stitches/react";
 
 interface IReorderItemContext {
     dragHandlerProps: any;
@@ -84,23 +86,22 @@ const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
     );
 }
 
-interface IReorderProps<T extends string | IID> {
-    onReorder?: (fromId: string, toId: string) => void;
-    items: T[];
+interface IReorderProps<T extends string | IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
     render: (props: T, index: number) => JSX.Element; 
+    space?: PropertyValue<"margin">;
 }
 
-export function Reorder<T extends IID>({ items, onReorder, render }: IReorderProps<T>) {
+export function Reorder<T extends IID>({ value = [], onChange, render }: IReorderProps<T>) {
 
     const onDragEndHandler = (event: DropResult) => {
 
-        const toId: string | null = items[event.destination?.index ?? -1]?.id ?? null;
+        const toId: string | null = value[event.destination?.index ?? -1]?.id ?? null;
 
-        const fromId: string | null = items[event.source?.index ?? -1]?.id ?? null;
+        const fromId: string | null = value[event.source?.index ?? -1]?.id ?? null;
 
-        if (onReorder && fromId && toId) {
+        if (onChange && fromId && toId) {
 
-            onReorder(fromId, toId);
+            onChange([fromId, toId]);
         }
     }
 
@@ -114,7 +115,7 @@ export function Reorder<T extends IID>({ items, onReorder, render }: IReorderPro
                     <Box   
                     ref={provided.innerRef}
                     {...provided.droppableProps}>
-                        {items.map((props, index) => {
+                        {value.map((props, index) => {
 
                             const id: string = typeof props === "string" ? props : props.id;
 

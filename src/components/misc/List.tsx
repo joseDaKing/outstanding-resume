@@ -12,11 +12,13 @@ import { MdDelete, MdDragHandle } from "react-icons/md";
 
 import { useReorderItem } from "./Reorder";
 
-import { VariantProps } from "@stitches/react";
+import { PropertyValue } from "@stitches/react";
 
 import { IconGroupHover, IconContainer } from "../primitives";
 
 import { PlaceAside } from "../layout";
+
+import { IID, InteractiveComponent } from "../../types";
 
 const ListIconContainer = styled(IconContainer, { height: "$16" });
 
@@ -62,55 +64,15 @@ const ListItem: React.FC<IListItemProps> = ({ children, onDelete }) => {
     );
 }
 
-/* 
-<Stack
-{...containerProps}
-css={{
-    [`&:hover ${IconContainer}`]: {
-        opacity: 1
-    }
-}}
-axis="x">
-    <ListIconContainer
-    {...dragHandlerProps}
-    hover
-    invisible={!isDragging}
-    css={{
-        cursor: isDragging ? "grabbing" : "grab",
-        "&:hover": {
-            _textColor: "$blue-gray-300",
-        }
-    }}>
-        <MdDragHandle/>
-    </ListIconContainer>
-
-    <Box>
-        {children}
-    </Box>
-    
-    <ListIconContainer
-    hover
-    invisible={!isDragging}
-    css={{
-        cursor: "pointer",
-    }}
-    onClick={onDelete}>
-        <MdDelete/>
-    </ListIconContainer>
-</Stack>
-*/
-
-interface IListProps<T extends { id: string; }> {
+interface IListProps<T extends IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
     label: string; 
-    items: T[];
     onAdd: () => void;
     onDelete: (id: string) => void;
-    onReorder: (id1: string, id2: string) => void;
     render: (item: T, index: number) => JSX.Element;
-    space?: VariantProps<typeof Stack>["space"];
+    space?: PropertyValue<"margin">;
 }
 
-export function List<T extends { id: string; }>({ label, items, onReorder, onDelete, onAdd, render, space }: IListProps<T>) {  
+export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, render, space }: IListProps<T>) {  
 
     const onDeleteHandler = (id: string) => () => onDelete(id);
 
@@ -119,8 +81,9 @@ export function List<T extends { id: string; }>({ label, items, onReorder, onDel
         axis="y" 
         space="sm">
             <Reorder
-            items={items}
-            onReorder={onReorder}
+            space={space}
+            value={value}
+            onChange={onChange}
             render={(props, index) => (
                 <ListItem 
                 {...props}
@@ -132,6 +95,7 @@ export function List<T extends { id: string; }>({ label, items, onReorder, onDel
             )}/>
                
             <Button 
+            inline
             align="start"
             size="md"
             onClick={onAdd}
