@@ -25,14 +25,19 @@ const ListIconContainer = styled(IconContainer, { height: "$16" });
 interface IListItemProps {
     onDelete: () => void;
     index: number;
+    space?: PropertyValue<"margin">;
 }
 
-const ListItem: React.FC<IListItemProps> = ({ children, onDelete }) => {
+const ListItem: React.FC<IListItemProps> = ({ space, children, onDelete }) => {
     
     const { isDragging, dragHandlerProps, containerProps } = useReorderItem();
 
     return (
-        <Box {...containerProps}>
+        <Box 
+        {...containerProps}
+        css={{
+            marginTop: space
+        }}>
             <IconGroupHover>
                 <PlaceAside align="start">
                     <ListIconContainer
@@ -81,12 +86,12 @@ export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, r
         axis="y" 
         space="sm">
             <Reorder
-            space={space}
             value={value}
             onChange={onChange}
             render={(props, index) => (
                 <ListItem 
                 {...props}
+                space={space}
                 index={index}
                 key={props.id}
                 onDelete={onDeleteHandler(props.id)}>

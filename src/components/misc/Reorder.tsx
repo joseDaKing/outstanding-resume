@@ -12,8 +12,6 @@ import { css } from "../../stitches";
 
 import { useId } from "../../utilis";
 
-import { PropertyValue } from "@stitches/react";
-
 interface IReorderItemContext {
     dragHandlerProps: any;
     containerProps: any;
@@ -88,7 +86,6 @@ const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
 
 interface IReorderProps<T extends string | IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
     render: (props: T, index: number) => JSX.Element; 
-    space?: PropertyValue<"margin">;
 }
 
 export function Reorder<T extends IID>({ value = [], onChange, render }: IReorderProps<T>) {
