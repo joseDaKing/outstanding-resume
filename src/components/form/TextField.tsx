@@ -1,7 +1,5 @@
 import React from "react";
 
-import type { VariantProps } from "@stitches/react";
-
 import { useId } from "../../utilis";
 
 import { FormLabel, FormInput } from "../primitives";
@@ -10,9 +8,9 @@ import { Box } from "../../components/layout";
 
 import type { ChangeEvent } from "react";
 
-import { FormComponent, ISize } from "../../types";
+import { FormComponent } from "../../types";
 
-export interface ITextFieldProps extends ISize, FormComponent<string> {
+export interface ITextFieldProps extends FormComponent<string> {
     placeholder?: string;
 }
 
