@@ -9,7 +9,8 @@ import {
     internship,
     reference,
     extraActivity,
-    hobbies
+    hobbies,
+    language
 } 
 from "./orderableSections";
 
@@ -25,6 +26,7 @@ export type SectionNames = (
     | typeof reference.name
     | typeof extraActivity.name
     | typeof hobbies.name
+    | typeof language.name
 )
 
 

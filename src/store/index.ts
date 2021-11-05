@@ -14,7 +14,8 @@ import {
     internship,
     reference,
     extraActivity,
-    hobbies
+    hobbies,
+    language
 }
 from "./slices";
 
@@ -32,6 +33,7 @@ export const store = configureStore({
         reference: reference.reducer,
         extraActivity: extraActivity.reducer,
         hobbies: hobbies.reducer,
+        language: language.reducer
     }
 });
 
