@@ -20,7 +20,7 @@ import { hobbies } from "./hobbies";
 
 import { removeDuplicates, reorderArray } from "../../utilis";
 
-type SectionNames = (
+export type SectionNames = (
     typeof education.name
     | typeof link.name
     | typeof workExperience.name
