@@ -14,14 +14,21 @@ import {
 } 
 from "./required";
 
+import {
+    Course,
+    ExtraActivity,
+    Hobbies,
+    Internship,
+    Reference
+}
+from "./optional";
+
 import { 
     useAppDispatch, 
     useAppSelector, 
     sectionOrder
 }
 from "../../../store";
-
-const Default: React.FC = () => (<></>);
 
 type Sections = {
     [K in SectionNames]: React.FC
@@ -32,11 +39,11 @@ const SectionComponents: Sections = {
     education: Education,
     link: Link,
     skill: Skill,
-    course: Default,
-    reference: Default,
-    internship: Default,
-    hobbies: Default,
-    "extra-activity": Default
+    course: Course,
+    reference: Reference,
+    internship: Internship,
+    hobbies: Hobbies,
+    "extra-activity": ExtraActivity
 }
 
 const SortableSection: React.FC<IID<SectionNames>> = ({ id }) => {
