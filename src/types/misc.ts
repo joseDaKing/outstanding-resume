@@ -6,4 +6,7 @@ export type ArrayValues<T extends readonly any[]> = T[Extract<keyof T, `${number
 
 export type PDFTemplate = ReactElement<ReactPDF.DocumentProps, string | JSXElementConstructor<any>>;;
 
-export type Items<T = any> = { items: Record<string, T> };
+export type Section<K> = {
+    sectionName: string;
+    items: Record<string, K>;
+};
