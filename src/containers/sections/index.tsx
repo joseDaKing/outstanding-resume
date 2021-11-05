@@ -5,7 +5,8 @@ import {
     useAppSelector, 
     sectionOrder, 
     workExperience, 
-    education
+    education,
+    link
 }
 from "../../store";
 
@@ -21,6 +22,8 @@ import { WorkExperience } from "./WorkExperience";
 
 import { Reorder } from "../../components/misc";
 
+import { Skills } from "./Skills";
+
 import { IID } from "../../types";
 
 const SortableSection: React.FC<IID> = ({ id }) => {
@@ -29,13 +32,18 @@ const SortableSection: React.FC<IID> = ({ id }) => {
 
         return <WorkExperience/>;
     }
-    
-    if (id === education.name) {
+    else if (id === education.name) {
 
         return <Education/>;
     }
+    else if (id === link.name) {
 
-    return <Links/>;
+        return <Links/>;
+    }
+    else {
+
+        return <Skills/>;
+    }
 }
 
 export const Sections: React.FC = () => {
@@ -47,7 +55,7 @@ export const Sections: React.FC = () => {
     const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(sectionOrder.actions.reorder(ids));
 
     return (
-        <>            
+        <>
             <ContactDetails/>
 
             <ProfessionalExperience/>     
