@@ -1,8 +1,6 @@
-import { v4 as uuid } from "uuid";
+import { createCRUDReducers } from "../../utilis";
 
-import { reorder } from "../../utilis";
-
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface ILinkItem {
     label: string;
@@ -22,26 +20,5 @@ export const initialLink = {
 export const link = createSlice({
     name: "link",
     initialState: initialLink,
-    reducers: {
-        setSectionName(state, { payload: sectionName }: PayloadAction<string>) {
-
-            state.sectionName = sectionName;
-        },
-        add(state) {
-
-            state.items[uuid()] = initialLinkItem;
-        },
-        remove(state, { payload: id }: PayloadAction<string>) {
-
-            delete state.items[id];
-        },
-        change(state, { payload: [id, workExperience ]}: PayloadAction<[id: string, workExperience: Partial<ILinkItem>]>) {
-
-            state.items[id] = {
-                ...state.items[id],
-                ...workExperience
-            }
-        },
-        reorder
-    }
+    reducers: createCRUDReducers(initialLinkItem)
 });

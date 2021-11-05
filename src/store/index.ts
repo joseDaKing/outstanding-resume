@@ -9,7 +9,8 @@ import {
     professionalExperience,
     workExperience,
     sectionOrder,
-    skill
+    skill,
+    course
 } 
 from "./slices";
 
@@ -21,7 +22,8 @@ export const store = configureStore({
         professionalExperience: professionalExperience.reducer,
         workExperience: workExperience.reducer,
         sectionOrder: sectionOrder.reducer,
-        skill: skill.reducer
+        skill: skill.reducer,
+        course: course.reducer
     }
 });
 

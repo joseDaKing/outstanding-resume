@@ -1,8 +1,6 @@
-import { reorder } from "../../utilis";
+import { createCRUDReducers } from "../../utilis";
 
-import { v4 as uuid } from "uuid";
-
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface IEducationItem {
     school: string;
@@ -30,26 +28,5 @@ export const initialEducation = {
 export const education = createSlice({
     name: "education",
     initialState: initialEducation,
-    reducers: {
-        setSectionName(state, { payload: sectionName }: PayloadAction<string>) {
-
-            state.sectionName = sectionName;
-        },
-        add(state) {
-
-            state.items[uuid()] = initialEducationItem;
-        },
-        remove(state, { payload: id }: PayloadAction<string>) {
-
-            delete state.items[id];
-        },
-        change(state, { payload: [id, workExperience ]}: PayloadAction<[id: string, workExperience: Partial<IEducationItem>]>) {
-
-            state.items[id] = {
-                ...state.items[id],
-                ...workExperience
-            }
-        },
-        reorder
-    }
+    reducers: createCRUDReducers(initialEducationItem)
 });

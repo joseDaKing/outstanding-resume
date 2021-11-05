@@ -1,8 +1,6 @@
-import { v4 as uuid } from "uuid";
+import { createCRUDReducers } from "../../utilis";
 
-import { reorder } from "../../utilis";
-
-import {  LevelValue } from "../../components/form";
+import { LevelValue } from "../../components/form";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
@@ -18,6 +16,7 @@ const initialSkillItem: ISkillItem = {
 
 export const initialSkill = {
     sectionName: "Kompetenser",
+    showLevel: true,
     items: {} as Record<string, ISkillItem>
 }
 
@@ -25,25 +24,10 @@ export const skill = createSlice({
     name: "skill",
     initialState: initialSkill,
     reducers: {
-        setSectionName(state, { payload: sectionName }: PayloadAction<string>) {
+        ...createCRUDReducers(initialSkillItem),
+        setShowLevel(state, { payload: showLevel }: PayloadAction<boolean>) {
 
-            state.sectionName = sectionName;
-        },
-        add(state) {
-
-            state.items[uuid()] = initialSkillItem;
-        },
-        remove(state, { payload: id }: PayloadAction<string>) {
-
-            delete state.items[id];
-        },
-        change(state, { payload: [id, skill ]}: PayloadAction<[id: string, skill: Partial<ISkillItem>]>) {
-
-            state.items[id] = {
-                ...state.items[id],
-                ...skill
-            }
-        },
-        reorder
+            state.showLevel = showLevel;
+        }
     }
 });

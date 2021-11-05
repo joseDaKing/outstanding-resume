@@ -11,3 +11,13 @@ export * from "./workExperience";
 export * from "./sectionOrder";
 
 export * from "./skill";
+
+export * from "./course";
+
+export * from "./internship";
+
+export * from "./reference";
+
+export * from "./extraActivity";
+
+export * from "./hobbies";
