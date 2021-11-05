@@ -49,7 +49,7 @@ const StyledSquare = styled(Box, {
     }
 });
 
-export const Levels: React.FC<ILevelProps> = ({ label, levels = defaultLevels, disabled, size, inline, value, onChange }) => {
+export const Level: React.FC<ILevelProps> = ({ label, levels = defaultLevels, disabled, size, inline, value, onChange }) => {
     
     const id = useId();    
 

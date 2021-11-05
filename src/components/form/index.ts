@@ -10,4 +10,4 @@ export * from "./ContentEditable";
 
 export * from "./Switch";
 
-export * from "./Levels";
+export * from "./Level";
