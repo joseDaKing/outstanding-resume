@@ -61,7 +61,9 @@ export const Level: React.FC<ILevelProps> = ({ label, levels = defaultLevels, di
 
             onChange(active);
         }
+    /* eslint-disable */
     }, [active]);
+    /* eslint-enable */
 
     const labelPrefix = levels[active];
 
