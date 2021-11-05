@@ -19,6 +19,7 @@ import {
     ExtraActivity,
     Hobbies,
     Internship,
+    Language,
     Reference
 }
 from "./optional";
@@ -43,7 +44,8 @@ const SectionComponents: Sections = {
     reference: Reference,
     internship: Internship,
     hobbies: Hobbies,
-    "extra-activity": ExtraActivity
+    "extra-activity": ExtraActivity,
+    language: Language
 }
 
 const SortableSection: React.FC<IID<SectionNames>> = ({ id }) => {

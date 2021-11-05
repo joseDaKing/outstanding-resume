@@ -7,3 +7,5 @@ export * from "./Hobbies";
 export * from "./Internship";
 
 export * from "./Reference";
+
+export * from "./Language";
