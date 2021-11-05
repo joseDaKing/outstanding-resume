@@ -2,7 +2,7 @@ import { createResetableCRUDReducers } from "../../utilis";
 
 import { IWorkExperienceItem, initialWorkExperienceItem } from "./workExperience";
 
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const initialInternship = {
     sectionName: "Kurser",
