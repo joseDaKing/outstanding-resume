@@ -9,7 +9,7 @@ export interface ISkillItem {
     level: LevelValue;
 }
 
-const initialSkillItem: ISkillItem = {
+export const initialSkillItem: ISkillItem = {
     name: "",
     level: 0
 }
