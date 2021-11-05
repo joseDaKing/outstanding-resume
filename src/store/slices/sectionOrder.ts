@@ -18,6 +18,8 @@ import { extraActivity } from "./extraActivity";
 
 import { hobbies } from "./hobbies";
 
+import { removeDuplicates, reorderArray } from "../../utilis";
+
 type SectionNames = (
     typeof education.name
     | typeof link.name
@@ -30,7 +32,6 @@ type SectionNames = (
     | typeof hobbies.name
 )
 
-import { removeDuplicates, reorderArray } from "../../utilis";
 
 export const sectionOrder = createSlice({
     name: "section-order",
