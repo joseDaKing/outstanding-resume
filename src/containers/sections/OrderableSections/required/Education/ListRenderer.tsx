@@ -1,31 +1,21 @@
 import React from "react";
 
-import { Stack, Box } from "../../components/layout";
+import { Stack } from "../../../../../components/layout";
 
-import { Text, Title } from "../../components/typography";
+import { TextArea, TextField } from "../../../../../components/form";
 
-import { TextArea, TextField, EditText } from "../../components/form";
+import { Accordion } from "../../../../../components/misc";
 
-import { List, Accordion, useReorderItem } from "../../components/misc";
-
-import { withId } from "../../utilis";
-
-import { IID } from "../../types";
-
-import { IconContainer } from "../../components/primitives";
-
-import { MdDragHandle } from "react-icons/md";
+import { IID } from "../../../../../types";
 
 import { 
     IEducationItem,
-    useAppDispatch, 
-    useAppSelector, 
-    initialEducation,
+    useAppDispatch,
     education
 } 
-from "../../store";
+from "../../../../../store";
 
-const ListRenderer: React.FC<IEducationItem & IID> = ({ id, school, exam, city, startDate, endDate, description }) => {
+export const ListRenderer: React.FC<IEducationItem & IID> = ({ id, school, exam, city, startDate, endDate, description }) => {
 
     let title = "(Ej specificerat)";
 
@@ -125,50 +115,3 @@ const ListRenderer: React.FC<IEducationItem & IID> = ({ id, school, exam, city, 
         </Accordion.Item>
     );
 };
-
-export const Education: React.FC = () => {
-
-    const { items, sectionName } = useAppSelector(state => state.education);
-
-    const dispatch = useAppDispatch();
-
-    const itemsWithIds = withId(items);
-
-    const onAddHandler = () => dispatch(education.actions.add());
-
-    const onRemoveHandler = (id: string) => dispatch(education.actions.remove(id));
-
-    const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(education.actions.reorder(ids));
-
-    const onSectionNameChange = (sectionName: string) => dispatch(education.actions.setSectionName(sectionName));
-
-    const { containerProps, dragHandlerProps, isDragging } = useReorderItem();
-
-    return (
-        <Box {...containerProps}>
-            <Title>
-                <EditText
-                onChange={onSectionNameChange}
-                resetable={initialEducation.sectionName}
-                value={sectionName}
-                left={() => (
-                    <IconContainer {...dragHandlerProps} invisible={!isDragging} inline>
-                        <MdDragHandle/>
-                    </IconContainer>
-                )}/>
-            </Title>
-
-            <Text>
-                Om så är  relevant, lägg till dina senaste utbildningsresultat och datum här
-            </Text>                        
-
-            <List 
-            value={itemsWithIds}
-            label="Lägg till anställning"
-            onAdd={onAddHandler}
-            onDelete={onRemoveHandler}
-            onChange={onChangeHandler}
-            render={props => <ListRenderer {...props}/>}/>
-        </Box>
-    )
-}

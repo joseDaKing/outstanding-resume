@@ -1,68 +1,30 @@
 import React from "react";
 
-import { Stack, Box } from "../../components/layout";
+import { Box } from "../../../../../components/layout";
 
-import { Text, Title } from "../../components/typography";
+import { Text, Title } from "../../../../../components/typography";
 
-import { TextField, EditText } from "../../components/form";
+import { EditText } from "../../../../../components/form";
 
-import { List, Accordion, useReorderItem } from "../../components/misc";
+import { List, useReorderItem } from "../../../../../components/misc";
 
 import { 
     useAppDispatch, 
     useAppSelector, 
     link,
-    initialLink,
-    ILinkItem
+    initialLink
 }
-from "../../store";
+from "../../../../../store";
 
-import { IID } from "../../types";
-
-import { withId } from "../../utilis";
+import { withId } from "../../../../../utilis";
 
 import { MdDragHandle } from "react-icons/md";
 
-import { IconContainer } from "../../components/primitives";
+import { IconContainer } from "../../../../../components/primitives";
 
-const ListRenderer: React.FC<ILinkItem & IID> = ({ id, label, url }) => {
+import { ListRenderer } from "./ListRenderer";
 
-    const dispatch = useAppDispatch();
-
-    const onLabelChange = (label: string) => dispatch(link.actions.change([id, {
-        label
-    }]));
-
-    const onUrlChange = (url: string) => dispatch(link.actions.change([id, {
-        url
-    }]));
-
-    return (
-        <Accordion.Item 
-        id={id}
-        title={label || "(Ej specificerat)"}>
-            <Stack 
-            axis="y"
-            space="md">
-                <Stack 
-                axis="x"
-                space="md">
-                    <TextField
-                    onChange={onLabelChange}
-                    value={label}
-                    label="Etikett"/>
-    
-                    <TextField
-                    onChange={onUrlChange}
-                    value={url}
-                    label="Länk"/>
-                </Stack>
-            </Stack>
-        </Accordion.Item>
-    );
-}
-
-export const Links: React.FC = () => {
+export const Link: React.FC = () => {
 
     const { items, sectionName } = useAppSelector(state => state.link);
 

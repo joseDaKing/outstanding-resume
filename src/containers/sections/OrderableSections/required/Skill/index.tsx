@@ -1,68 +1,30 @@
 import React from "react";
 
-import { Stack, Box } from "../../components/layout";
+import { Box } from "../../../../../components/layout";
 
-import { Text, Title } from "../../components/typography";
+import { Text, Title } from "../../../../../components/typography";
 
-import { TextField, EditText, Level, LevelValue, Switch } from "../../components/form";
+import { EditText, Switch } from "../../../../../components/form";
 
-import { List, Accordion, useReorderItem } from "../../components/misc";
+import { List, useReorderItem } from "../../../../../components/misc";
 
 import { 
     useAppDispatch, 
     useAppSelector, 
     skill,
-    initialSkill,
-    ISkillItem
+    initialSkill
 }
-from "../../store";
+from "../../../../../store";
 
-import { IID } from "../../types";
-
-import { withId } from "../../utilis";
+import { withId } from "../../../../../utilis";
 
 import { MdDragHandle } from "react-icons/md";
 
-import { IconContainer } from "../../components/primitives";
+import { IconContainer } from "../../../../../components/primitives";
 
-const ListRenderer: React.FC<ISkillItem & IID> = ({ id, name, level }) => {
+import { ListRenderer } from "./ListRenderer";
 
-    const dispatch = useAppDispatch();
-
-    const onNameChange = (name: string) => dispatch(skill.actions.change([id, {
-        name
-    }]));
-
-    const onLevelChange = (level: LevelValue) => dispatch(skill.actions.change([id, {
-        level
-    }]));
-
-    return (
-        <Accordion.Item 
-        id={id}
-        title={name || "(Ej specificerat)"}>
-            <Stack 
-            axis="y"
-            space="md">
-                <Stack 
-                axis="x"
-                space="md">
-                    <TextField
-                    value={name}
-                    label="Etikett"
-                    onChange={onNameChange}/>
-    
-                    <Level
-                    label="Nivå"
-                    value={level}
-                    onChange={onLevelChange}/>
-                </Stack>
-            </Stack>
-        </Accordion.Item>
-    );
-}
-
-export const Skills: React.FC = () => {
+export const Skill: React.FC = () => {
 
     const { items, sectionName, showLevel } = useAppSelector(state => state.skill);
 

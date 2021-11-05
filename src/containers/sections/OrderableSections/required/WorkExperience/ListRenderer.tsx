@@ -1,24 +1,16 @@
 import React from "react";
 
-import { Stack, Box } from "../../components/layout";
+import { Stack } from "../../../../../components/layout";
 
-import { Text, Title } from "../../components/typography";
+import { TextArea, TextField } from "../../../../../components/form";
 
-import { TextArea, TextField, EditText } from "../../components/form";
+import { Accordion } from "../../../../../components/misc";
 
-import { List, Accordion, useReorderItem } from "../../components/misc";
+import { useAppDispatch, workExperience, IWorkExperienceItem } from "../../../../../store";
 
-import { useAppDispatch, useAppSelector, workExperience, initialWorkExperience, IWorkExperienceItem } from "../../store";
+import { IID } from "../../../../../types";
 
-import { IID } from "../../types";
-
-import { withId } from "../../utilis";
-
-import { MdDragHandle } from "react-icons/md";
-
-import { IconContainer } from "../../components/primitives";
-
-const ListRenderer: React.FC<IWorkExperienceItem & IID> = ({ id, jobTitle, employer, startDate, endDate, city, description }) => {
+export const ListRenderer: React.FC<IWorkExperienceItem & IID> = ({ id, jobTitle, employer, startDate, endDate, city, description }) => {
 
     let title = "(Ej specificerat)";
 
@@ -118,51 +110,3 @@ const ListRenderer: React.FC<IWorkExperienceItem & IID> = ({ id, jobTitle, emplo
         </Accordion.Item>
     );
 };
-
-export const WorkExperience: React.FC = () => {
-
-    const { items, sectionName } = useAppSelector(state => state.workExperience);
-
-    const dispatch = useAppDispatch();
-
-    const itemsWithIds = withId(items);
-
-    const onAddHandler = () => dispatch(workExperience.actions.add());
-
-    const onRemoveHandler = (id: string) => dispatch(workExperience.actions.remove(id));
-
-    const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(workExperience.actions.reorder(ids));
-
-    const onSectionNameChange = (sectionName: string) => dispatch(workExperience.actions.setSectionName(sectionName));
-
-    const { containerProps, dragHandlerProps, isDragging } = useReorderItem();
-    
-    return (
-        <Box 
-        {...containerProps}>
-            <Title >
-                <EditText
-                onChange={onSectionNameChange}
-                resetable={initialWorkExperience.sectionName}
-                value={sectionName}
-                left={() => (
-                    <IconContainer {...dragHandlerProps} invisible={!isDragging} inline>
-                        <MdDragHandle/>
-                    </IconContainer>
-                )}/>
-            </Title>
-
-            <Text>
-                Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
-            </Text>                        
-
-            <List 
-            label="Lägg till anställning"
-            value={itemsWithIds}
-            onAdd={onAddHandler}
-            onDelete={(onRemoveHandler)}
-            onChange={onChangeHandler}
-            render={props => <ListRenderer {...props}/>}/> 
-        </Box>  
-    )
-}
