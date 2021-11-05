@@ -10,13 +10,13 @@ import { FormComponent } from "../../types";
 
 import { styled } from "../../stitches";
 
-type LevelsValues = {
-    [K in 0 | 1 | 2 | 3 | 4]: string;
+export type LevelValue = 0 | 1 | 2 | 3 | 4;
+
+type LevelLabels = {
+    [K in LevelValue]: string;
 };
 
-type Value = keyof LevelsValues;
-
-const defaultLevels = Object.fromEntries(Array(5).fill(0).map((_, index) => [index, `${index}`])) as LevelsValues;
+const defaultLevels = Object.fromEntries(Array(5).fill(0).map((_, index) => [index, `${index}`])) as LevelLabels;
 
 const colors = {
     0: "$red",
@@ -26,8 +26,8 @@ const colors = {
     4: "$green"
 } as const;
 
-interface ILevelProps extends FormComponent<Value> {
-    levels?: LevelsValues;
+interface ILevelProps extends FormComponent<LevelValue> {
+    levels?: LevelLabels;
 }
 
 const StyledSquare = styled(Box, {
@@ -53,7 +53,7 @@ export const Levels: React.FC<ILevelProps> = ({ label, levels = defaultLevels, d
     
     const id = useId();    
 
-    const [active, setActive] = useState<Value>(value ?? 0);
+    const [active, setActive] = useState<LevelValue>(value ?? 0);
 
     useEffect(() => {
 
@@ -75,7 +75,7 @@ export const Levels: React.FC<ILevelProps> = ({ label, levels = defaultLevels, d
         
         if (!disabled) {
 
-            setActive(index as Value);
+            setActive(index as LevelValue);
         }
     };
 
