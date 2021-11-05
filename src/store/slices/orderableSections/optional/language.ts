@@ -1,4 +1,4 @@
-import { createCRUDReducers } from "../../../../utilis";
+import { createResetableCRUDReducers } from "../../../../utilis";
 
 import { LevelValue } from "../../../../components/form";
 
@@ -22,5 +22,5 @@ export const initialLanguage = {
 export const language = createSlice({
     name: "language",
     initialState: initialLanguage,
-    reducers: createCRUDReducers(initialLanguageItem)
+    reducers: createResetableCRUDReducers(initialLanguageItem, initialLanguage)
 });
