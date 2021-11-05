@@ -7,6 +7,7 @@ import { FormComponent } from "../../types";
 import { styled } from "../../stitches";
 
 import { FormLabel } from "../primitives";
+
 import { useId } from "../../utilis";
 
 const StyledContainer = styled("span", {
@@ -92,7 +93,7 @@ export const Switch: React.FC<FormComponent<boolean>> = ({ value, inline, onChan
             onChange(isChecked);
         }
     /* eslint-disable */
-    }, [value]);
+    }, [isChecked]);
     /* eslint-enable */
     
     const onClickHandler = () => {
