@@ -6,7 +6,7 @@ export const initialHobbies = {
 }
 
 export const hobbies = createSlice({
-    name: "professional-experience",
+    name: "hobbies",
     initialState: initialHobbies,
     reducers: {
         change(state, { payload: hobbies }: PayloadAction<Partial<typeof initialHobbies>>) {
@@ -17,7 +17,6 @@ export const hobbies = createSlice({
 
                 state[hobbiesKey] = hobbies[hobbiesKey] as any;
             }
-            
         },
         reset(state) {
 
