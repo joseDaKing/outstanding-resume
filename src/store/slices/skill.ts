@@ -16,7 +16,7 @@ const initialSkillItem: ISkillItem = {
 
 export const initialSkill = {
     sectionName: "Kompetenser",
-    showLevel: true,
+    showLevel: false,
     items: {} as Record<string, ISkillItem>
 }
 
