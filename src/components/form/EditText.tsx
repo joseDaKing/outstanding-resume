@@ -55,7 +55,7 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
         }
     /* eslint-disable */
     }, [text]);
-    /* eslint-endable */
+    /* eslint-enable */
 
     const [isDisabled, setIsDisabled] = useState(true);
 
