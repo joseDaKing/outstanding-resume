@@ -16,19 +16,21 @@ from "./orderableSections";
 
 import { removeDuplicates, reorderArray } from "../../utilis";
 
-export type SectionNames = (
-    typeof education.name
-    | typeof link.name
-    | typeof workExperience.name
-    | typeof skill.name
+export type RemovableSectionName = (
     | typeof course.name
     | typeof internship.name
     | typeof reference.name
     | typeof extraActivity.name
     | typeof hobbies.name
     | typeof language.name
-)
-
+);
+export type SectionNames = (
+    typeof education.name
+    | typeof link.name
+    | typeof workExperience.name
+    | typeof skill.name
+    | RemovableSectionName
+);
 
 export const sectionOrder = createSlice({
     name: "section-order",
@@ -53,7 +55,7 @@ export const sectionOrder = createSlice({
 
             state.items = removeDuplicates([...state.items, sectionOrder]);
         },
-        remove(state, {  payload: sectionOrder }: PayloadAction<SectionNames>) {
+        remove(state, {  payload: sectionOrder }: PayloadAction<RemovableSectionName>) {
 
             const indexToRemove = state.items.indexOf(sectionOrder);
 
