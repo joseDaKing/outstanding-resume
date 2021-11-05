@@ -4,7 +4,7 @@ import { Stack, Box } from "../../components/layout";
 
 import { Text, Title } from "../../components/typography";
 
-import { TextField, EditText, Level, LevelValue } from "../../components/form";
+import { TextField, EditText, Level, LevelValue, Switch } from "../../components/form";
 
 import { List, Accordion, useReorderItem } from "../../components/misc";
 
@@ -64,7 +64,7 @@ const ListRenderer: React.FC<ISkillItem & IID> = ({ id, name, level }) => {
 
 export const Skills: React.FC = () => {
 
-    const { items, sectionName } = useAppSelector(state => state.skill);
+    const { items, sectionName, showLevel } = useAppSelector(state => state.skill);
 
     const dispatch = useAppDispatch();
 
@@ -76,7 +76,9 @@ export const Skills: React.FC = () => {
 
     const onChangeHandler = (ids: [fromId: string, toId: string]) => dispatch(skill.actions.reorder(ids));
 
-    const onSectionNameChange = (sectionName: string) => dispatch(skill.actions.setSectionName(sectionName));    
+    const onSectionNameChangeHandler = (sectionName: string) => dispatch(skill.actions.setSectionName(sectionName));    
+
+    const onSwitchChangeHandler = (shouldShowLevel: boolean) => dispatch(skill.actions.setShowLevel(shouldShowLevel));
 
     const { containerProps, dragHandlerProps, isDragging } = useReorderItem();
 
@@ -84,7 +86,7 @@ export const Skills: React.FC = () => {
         <Box {...containerProps}>
             <Title>
                 <EditText
-                onChange={onSectionNameChange}
+                onChange={onSectionNameChangeHandler}
                 resetable={initialSkill.sectionName}
                 value={sectionName}
                 left={() => (
@@ -94,9 +96,16 @@ export const Skills: React.FC = () => {
                 )}/> 
             </Title>
 
-            <Text>
+            <Text gutter>
                 Du kan lägga till länkar till webbplatser som du vill att personalchefer ska se! Du kanske vill lägga till en länk till din portfölj, LinkedIn-profil eller personliga hemsida.
-            </Text>                        
+            </Text>
+
+            {itemsWithId.length ?
+                <Switch
+                value={showLevel}
+                onChange={onSwitchChangeHandler}
+                label="Dölj erfarenhetsnivå"/>
+            : null}
 
             <List 
             value={itemsWithId}
