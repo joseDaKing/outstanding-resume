@@ -1,6 +1,6 @@
-import { createCRUDReducers } from "../../utilis";
+import { createCRUDReducers } from "../../../../utilis";
 
-import { LevelValue } from "../../components/form";
+import { LevelValue } from "../../../../components/form";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 

@@ -1,6 +1,6 @@
-import { createResetableCRUDReducers } from "../../utilis";
+import { createResetableCRUDReducers } from "../../../../utilis";
 
-import { IWorkExperienceItem, initialWorkExperienceItem } from "./workExperience";
+import { IWorkExperienceItem, initialWorkExperienceItem } from "../required";
 
 import { createSlice } from "@reduxjs/toolkit";
 

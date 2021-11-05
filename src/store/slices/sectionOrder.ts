@@ -1,22 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { education } from "./education";
-
-import { link } from "./link";
-
-import { workExperience } from "./workExperience";
-
-import { skill } from "./skill";
-
-import { course } from "./course";
-
-import { internship } from "./internship";
-
-import { reference } from "./reference";
-
-import { extraActivity } from "./extraActivity";
-
-import { hobbies } from "./hobbies";
+import {
+    education,
+    link,
+    workExperience,
+    skill,
+    course,
+    internship,
+    reference,
+    extraActivity,
+    hobbies
+} 
+from "./orderableSections";
 
 import { removeDuplicates, reorderArray } from "../../utilis";
 

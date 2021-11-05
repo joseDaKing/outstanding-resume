@@ -2,29 +2,21 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { contactDetails } from "./slices/contactDetails";
-
-import { education } from "./slices/education";
-
-import { link } from "./slices/link";
-
-import { professionalExperience } from "./slices/professionalExperience";
-
-import { workExperience } from "./slices/workExperience";
-
-import { sectionOrder } from "./slices/sectionOrder";
-
-import { skill } from "./slices/skill";
-
-import { course } from "./slices/course";
-
-import { internship } from "./slices/internship";
-
-import { reference } from "./slices/reference";
-
-import { extraActivity } from "./slices/extraActivity";
-
-import { hobbies } from "./slices/hobbies";
+import {
+    contactDetails,
+    education,
+    link,
+    professionalExperience,
+    workExperience,
+    sectionOrder,
+    skill,
+    course,
+    internship,
+    reference,
+    extraActivity,
+    hobbies
+}
+from "./slices";
 
 export const store = configureStore({
     reducer: {
