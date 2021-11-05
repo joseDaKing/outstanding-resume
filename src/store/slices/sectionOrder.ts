@@ -6,6 +6,8 @@ import { education } from "./education";
 
 import { link } from "./link";
 
+import { skill } from "./skill";
+
 import { reorderArray } from "../../utilis";
 
 export const sectionOrder = createSlice({
@@ -14,7 +16,8 @@ export const sectionOrder = createSlice({
         items: [
             workExperience.name,
             education.name,
-            link.name
+            link.name,
+            skill.name
         ] as Array<string>
     },
     reducers: {

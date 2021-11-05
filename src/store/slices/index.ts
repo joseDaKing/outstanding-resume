@@ -8,4 +8,6 @@ export * from "./professionalExperience";
 
 export * from "./workExperience";
 
-export * from "./sectionOrder"
+export * from "./sectionOrder";
+
+export * from "./skill";
