@@ -18,7 +18,7 @@ import { IconGroupHover, IconContainer } from "../primitives";
 
 import { PlaceAside } from "../layout";
 
-import { IID, InteractiveComponent } from "../../types";
+import { IID, IIndex, InteractiveComponent } from "../../types";
 
 const ListIconContainer = styled(IconContainer, { height: "$16" });
 
@@ -72,11 +72,11 @@ interface IListProps<T extends IID> extends InteractiveComponent<T[], [fromId: s
     label: string; 
     onAdd: () => void;
     onDelete: (id: string) => void;
-    render: (item: T, index: number) => JSX.Element;
+    Component: React.FC<T & IIndex>;
     space?: PropertyValue<"margin">;
 }
 
-export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, render, space }: IListProps<T>) {  
+export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, Component, space }: IListProps<T>) {  
 
     const onDeleteHandler = (id: string) => () => onDelete(id);
 
@@ -87,14 +87,14 @@ export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, r
             <Reorder
             value={value}
             onChange={onChange}
-            render={(props, index) => (
+            Component={props => (
                 <ListItem 
                 {...props}
                 space={space}
-                index={index}
                 key={props.id}
                 onDelete={onDeleteHandler(props.id)}>
-                    {render(props, index)}
+                    {<Component 
+                    {...props}/>}
                 </ListItem>
             )}/>
                

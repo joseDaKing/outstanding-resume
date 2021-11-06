@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IID, InteractiveComponent } from "../../types";
+import { IID, IIndex, InteractiveComponent } from "../../types";
 
 import { createContext, useContext } from "react";
 
@@ -49,9 +49,7 @@ const draggingStyles = css({
     }
 });
 
-interface ReorderItemProps extends IID {
-    index: number;
-}
+type ReorderItemProps = IID & IIndex;
 
 const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
 
@@ -84,11 +82,11 @@ const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
     );
 }
 
-interface IReorderProps<T extends string | IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
-    render: (props: T, index: number) => JSX.Element; 
+interface IReorderProps<T extends IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
+    Component: React.FC<T & IIndex>
 }
 
-export function Reorder<T extends IID>({ value = [], onChange, render }: IReorderProps<T>) {
+export function Reorder<T extends IID>({ value = [], onChange, Component }: IReorderProps<T>) {
 
     const onDragEndHandler = (event: DropResult) => {
 
@@ -112,20 +110,16 @@ export function Reorder<T extends IID>({ value = [], onChange, render }: IReorde
                     <Box   
                     ref={provided.innerRef}
                     {...provided.droppableProps}>
-                        {value.map((props, index) => {
-
-                            const id: string = typeof props === "string" ? props : props.id;
-
-                            return (
-                                <ReorderItem 
-                                id={id}
-                                key={id} 
-                                index={index}>
-                                    {render(props, index)}
-                                </ReorderItem>
-                            );
-                        })}
-
+                        {value.map((props, index) => (
+                            <ReorderItem 
+                            id={props.id}
+                            key={props.id} 
+                            index={index}>
+                                <Component
+                                {...props}
+                                index={index}/>
+                            </ReorderItem>
+                        ))}
                         {provided.placeholder}
                     </Box>
                 ))}
