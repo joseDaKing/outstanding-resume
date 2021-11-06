@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { MdEdit, MdLoop } from "react-icons/md";
 
-import { css, styled } from "../../stitches";
+import { css } from "../../stitches";
 
 import { ContentEditable } from "./ContentEditable";
 
@@ -35,10 +35,6 @@ const ContentEditableStyles = css({
         outline: "none",
         _borderBottomOpacity: 1,
     }
-});
-
-const EditTextIconContainer = styled(IconContainer, {
-    cursor: "pointer"
 });
 
 export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange, children, left, right }) => {
@@ -126,8 +122,9 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
 
                 <PlaceAside align="end">
                     <IconContainer
-                    pointer
                     hover
+                    pointer
+                    invisible
                     css={{
                         paddingLeft: "$2",
                     }}
@@ -135,10 +132,11 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
                         <MdEdit/>
                     </IconContainer>
 
-                    {resetable !== text && 
+                    {!!resetable && resetable !== text && 
                     <IconContainer
-                    pointer
                     hover
+                    pointer
+                    invisible
                     onClick={onResetHandler}>
                         <MdLoop/>
                     </IconContainer>}
