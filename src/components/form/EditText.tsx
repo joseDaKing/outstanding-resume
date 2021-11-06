@@ -125,21 +125,23 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
                 </OutsideClickHandler>
 
                 <PlaceAside align="end">
-                    <EditTextIconContainer
+                    <IconContainer
+                    pointer
                     hover
                     css={{
                         paddingLeft: "$2",
                     }}
                     onClick={onEditModeHandler}>
                         <MdEdit/>
-                    </EditTextIconContainer>
+                    </IconContainer>
 
                     {resetable !== text && 
-                    <EditTextIconContainer
+                    <IconContainer
+                    pointer
                     hover
                     onClick={onResetHandler}>
                         <MdLoop/>
-                    </EditTextIconContainer>}
+                    </IconContainer>}
 
                     {right && right()}
                 </PlaceAside>
