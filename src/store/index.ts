@@ -37,7 +37,7 @@ export const store = configureStore({
     }
 });
 
-export * from "./slices";
+export * as slices from "./slices";
 
 export type RootState = ReturnType<typeof store.getState>
 

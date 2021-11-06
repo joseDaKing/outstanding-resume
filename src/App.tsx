@@ -4,7 +4,7 @@ import { Stack, Box } from "./components/layout";
 
 import { Accordion } from "./components/misc";
 
-import { Sections }from "./containers";
+import { ItemsContainer } from "./container";
 
 import "./globalStyles";
 
@@ -25,7 +25,16 @@ export const App: React.FC = () => {
                     <Stack 
                     axis="y"
                     space="lg">
-                        <Sections/>
+                        <ItemsContainer
+                        section="workExperience"
+                        label="Lägg till en ny"
+                        render={props => (
+                            <p> 
+                                Abra 
+                                <br/>
+                                props.city: {props.city}
+                            </p>
+                        )}/>
                     </Stack>
                 </Box>
 
