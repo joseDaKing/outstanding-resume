@@ -3,14 +3,14 @@ import { createResetableCRUDReducers } from "../../../../utilis";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface ICourseItem {
-    course: string;
+    courseName: string;
     institution: string;
     startDate: string;
     endDate: string;
 }
 
 const initialCourseItem: ICourseItem = {
-    course: "",
+    courseName: "",
     institution: "",
     startDate: "",
     endDate: ""
