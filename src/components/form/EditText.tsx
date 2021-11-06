@@ -20,8 +20,8 @@ import { InteractiveComponent } from "../../types";
 
 interface IEditTextProps extends InteractiveComponent<string> {
     resetable?: string;
-    left?: () => JSX.Element;
-    right?: () => JSX.Element;
+    Left?: React.FC;
+    Right?: React.FC;
 }
 
 const ContentEditableStyles = css({
@@ -37,7 +37,7 @@ const ContentEditableStyles = css({
     }
 });
 
-export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange, children, left, right }) => {
+export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange, Left, Right }) => {
 
     const contentEditableRef = useRef<HTMLDivElement>(null);
 
@@ -102,9 +102,9 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
             <IconGroupHover inline>
                 <Box css={{ height: 0.1 }}/>
                 
-                {left &&
+                {Left &&
                 <PlaceAside align="start">
-                    {left()}
+                    {<Left/>}
                 </PlaceAside>}                
 
                 <OutsideClickHandler
@@ -141,7 +141,8 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
                         <MdLoop/>
                     </IconContainer>}
 
-                    {right && right()}
+                    {Right && 
+                    <Right/>}
                 </PlaceAside>
 
                 <Box css={{ height: 0.1 }}/>
