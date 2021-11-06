@@ -4,7 +4,7 @@ export * from "./ExtraActivity";
 
 export * from "./Hobbies";
 
-export * from "./Internship";
+export * from "./Interhship";
 
 export * from "./Reference";
 

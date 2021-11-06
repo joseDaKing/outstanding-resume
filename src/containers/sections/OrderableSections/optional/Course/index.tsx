@@ -1,11 +1,12 @@
-import React from "react";
+import { initialCourse, course } from "../../../../../store";
 
-import { } from "./ListRenderer";
+import { createCRUDContainer } from "../../shared";
 
-export const Course: React.FC = () => {
+import { ListRenderer } from "./ListRenderer";
 
-    return (
-        <>
-        </>
-    );
-}
+export const Course = createCRUDContainer({
+    selector: state => state.course,
+    actions: course.actions,
+    ListRenderer: ListRenderer,
+    initialSectionName: initialCourse.sectionName
+});
