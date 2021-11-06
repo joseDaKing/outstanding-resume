@@ -37,27 +37,31 @@ interface ICRUDActions {
     reset?: () => PayloadAction;
 }
 
-interface IOptions<T> {
+interface IOptions<T, K extends ICRUDActions> {
     isRemovable?: RemovableSectionName;
-    actions: ICRUDActions;
+    actions: K;
     initialSectionName: string;
     selector: Selector<T>;
-    ListRenderer: React.FC<T & IID>
+    ListRenderer: React.FC<T & IID>;
     descriptionText?: string;
+    Custom?: React.FC<K & Section<T>>;
 }
 
-export function createCRUDContainer<T extends object>({ 
+export function createCRUDContainer<T extends object, K extends ICRUDActions>({ 
     actions, 
     selector, 
     ListRenderer,
     descriptionText,
     initialSectionName,
-    isRemovable
-}: IOptions<T>): React.FC {
+    isRemovable,
+    Custom
+}: IOptions<T, K>): React.FC {
 
     return () => {
         
-        const { items, sectionName } = useAppSelector(selector);
+        const section = useAppSelector(selector);
+
+        const { items, sectionName } = section;
 
         const itemsWithIds = withId(items);
 
@@ -124,6 +128,13 @@ export function createCRUDContainer<T extends object>({
                 <Text>
                     {descriptionText}
                 </Text>}
+
+                {Custom &&
+                <>
+                    <Custom 
+                    {...section}
+                    {...actions}/>
+                </>}
 
                 <List 
                 label="Lägg till anställning"
