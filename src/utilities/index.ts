@@ -1,4 +1,4 @@
-export * from "./createCRUDReducers";
+export * from "./reducers";
 
 export * from "./id";
 

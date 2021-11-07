@@ -2,31 +2,30 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 import { v4 as uuid } from "uuid";
 
-import { Section } from "../types";
+import { Items } from "../../types";
 
-import { reorderArray } from "./reorder";
+import { reorderArray } from "../reorder";
+
+import { setSectionNameReducer } from "./setSectionNameReducer";
 
 export const createCRUDReducers = <T>(initialItem: T) => ({
-    setSectionName(state: Section<T>, { payload: sectionName }: PayloadAction<string>) {
-
-        state.sectionName = sectionName;
-    },
-    add(state: Section<T>) {
+    ...setSectionNameReducer,
+    add(state: Items<T>) {
 
         state.items[uuid()] = initialItem;
     },
-    remove(state: Section<T>, { payload: id }: PayloadAction<string>) {
+    remove(state: Items<T>, { payload: id }: PayloadAction<string>) {
     
         delete state.items[id];
     },
-    change(state: Section<T>, { payload: [id, workExperience ]}: PayloadAction<[id: string, workExperience: Partial<T>]>) {
+    change(state: Items<T>, { payload: [id, workExperience ]}: PayloadAction<[id: string, workExperience: Partial<T>]>) {
     
         state.items[id] = {
             ...state.items[id],
             ...workExperience
         }
     },
-    reorder(state: Section<T>, { payload: [fromId, toId]}: PayloadAction<[fromId: string, toId: string]>) {
+    reorder(state: Items<T>, { payload: [fromId, toId]}: PayloadAction<[fromId: string, toId: string]>) {
 
         const itemsEntries = Object.entries(state.items);
 
@@ -42,9 +41,9 @@ export const createCRUDReducers = <T>(initialItem: T) => ({
     }
 });
 
-export const createResetableCRUDReducers = <T>(initialItem: T, initialSection: Section<T>) => ({
+export const createResetableCRUDReducers = <T>(initialItem: T, initialSection: Items<T>) => ({
     ...createCRUDReducers(initialItem),
-    reset(state: Section<T>) {
+    reset(state: Items<T>) {
 
         state.sectionName = initialSection.sectionName;
 
