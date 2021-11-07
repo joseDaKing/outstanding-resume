@@ -21,19 +21,19 @@ from "./slices";
 
 export const store = configureStore({
     reducer: {
-        contactDetails: contactDetails.reducer,
-        education: education.reducer,
-        link: link.reducer,
-        professionalExperience: professionalExperience.reducer,
-        workExperience: workExperience.reducer,
-        sectionOrder: sectionOrder.reducer,
-        skill: skill.reducer,
-        course: course.reducer,
-        internship: internship.reducer,
-        reference: reference.reducer,
-        extraActivity: extraActivity.reducer,
-        hobbies: hobbies.reducer,
-        language: language.reducer
+        [contactDetails.name]: contactDetails.reducer,
+        [education.name]: education.reducer,
+        [link.name]: link.reducer,
+        [professionalExperience.name]: professionalExperience.reducer,
+        [workExperience.name]: workExperience.reducer,
+        [sectionOrder.name]: sectionOrder.reducer,
+        [skill.name]: skill.reducer,
+        [course.name]: course.reducer,
+        [internship.name]: internship.reducer,
+        [reference.name]: reference.reducer,
+        [extraActivity.name]: extraActivity.reducer,
+        [hobbies.name]: hobbies.reducer,
+        [language.name]: language.reducer
     }
 });
 
