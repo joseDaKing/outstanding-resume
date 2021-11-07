@@ -68,17 +68,19 @@ const ListItem: React.FC<IListItemProps> = ({ space, children, onDelete }) => {
     );
 }
 
+export type ListItemComponentProps<T extends IID> = T & IIndex;
+
 interface IListProps<T extends IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
     label: string; 
     onAdd: () => void;
-    onDelete: (id: string) => void;
-    Component: React.FC<T & IIndex>;
+    onRemove: (id: string) => void;
+    Component: React.FC<ListItemComponentProps<T>>;
     space?: PropertyValue<"margin">;
 }
 
-export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, Component, space }: IListProps<T>) {  
+export function List<T extends IID>({ label, value, onChange, onRemove, onAdd, Component, space }: IListProps<T>) {  
 
-    const onDeleteHandler = (id: string) => () => onDelete(id);
+    const onRemoveHandler = (id: string) => () => onRemove(id);
 
     return (
         <Stack 
@@ -92,7 +94,7 @@ export function List<T extends IID>({ label, value, onChange, onDelete, onAdd, C
                 {...props}
                 space={space}
                 key={props.id}
-                onDelete={onDeleteHandler(props.id)}>
+                onDelete={onRemoveHandler(props.id)}>
                     {<Component 
                     {...props}/>}
                 </ListItem>
