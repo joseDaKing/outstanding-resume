@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { setSectionNameReducer } from "../../../../utilities";
+import { setDescripitonReducer } from "../../../../utilities/reducers/setDescriptionReducer";
 
 export const initialHobbies = {
     sectionName: "Yrkeserfarenhet",
@@ -9,15 +11,8 @@ export const hobbies = createSlice({
     name: "hobbies",
     initialState: initialHobbies,
     reducers: {
-        change(state, { payload: hobbies }: PayloadAction<Partial<typeof initialHobbies>>) {
-
-            for (const key of Object.keys(hobbies)) {
-
-                const hobbiesKey = key as keyof typeof initialHobbies;
-
-                state[hobbiesKey] = hobbies[hobbiesKey] as any;
-            }
-        },
+        ...setSectionNameReducer,
+        ...setDescripitonReducer,
         reset(state) {
 
             state.sectionName = initialHobbies.sectionName;
