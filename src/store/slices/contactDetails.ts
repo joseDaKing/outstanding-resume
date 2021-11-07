@@ -1,33 +1,35 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { setSectionNameReducer } from "../../utilities";
 
 export const initialContactDetails = {
     sectionName: "Kontaktuppgifter",
-    jobTitle: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobilenumber: "",
-    country: "",
-    city: "",
-    address: "",
-    zipCode: "",
-    driverLicense: "",
-    nationality: "",
-    birthDate: "",
-    birthPlace: "",
+    fields: {
+        jobTitle: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        mobilenumber: "",
+        country: "",
+        city: "",
+        address: "",
+        zipCode: "",
+        driverLicense: "",
+        nationality: "",
+        birthDate: "",
+        birthPlace: "",
+    }
 };
 
 export const contactDetails = createSlice({
     name: "contact-details",
     initialState: initialContactDetails,
     reducers: {
-        change(state, { payload: contactDetails }: PayloadAction<Partial<typeof initialContactDetails>>) {
+        ...setSectionNameReducer,
+        change(state, { payload: fields }: PayloadAction<Partial<typeof initialContactDetails["fields"]>>) {
 
-            for (const key in contactDetails) {
-
-                const contactDetailsKey = key as keyof typeof contactDetails;
-
-                state[contactDetailsKey] = contactDetails[contactDetailsKey] as any;
+            state.fields = {
+                ...state.fields,
+                ...fields
             }
         }
     }
