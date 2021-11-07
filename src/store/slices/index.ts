@@ -16,6 +16,8 @@ import {
 } 
 from "./orderableSections";
 
+import { sectionOrder } from "./sectionOrder";
+
 export const slices = {
     [contactDetails.name]: contactDetails,
     [professionalExperience.name]: professionalExperience,
@@ -29,6 +31,7 @@ export const slices = {
     [link.name]: link,
     [skill.name]: skill,
     [workExperience.name]: workExperience,
+    [sectionOrder.name]: sectionOrder
 }
 
 export const reducers = {
@@ -44,6 +47,7 @@ export const reducers = {
     [link.name]: link.reducer,
     [skill.name]: skill.reducer,
     [workExperience.name]: workExperience.reducer,
+    [sectionOrder.name]: sectionOrder.reducer
 }
 
 export { initialContactDetails } from "./contactDetails";
