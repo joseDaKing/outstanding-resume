@@ -2,14 +2,14 @@ import { createResetableCRUDReducers } from "../../../../utilities";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface IReference {
+export interface IReferenceItem {
     personName: string;
     mobilenumber: string;
     company: string;
     email: string;
 }
 
-const initialReferenceItem: IReference = {
+const initialReferenceItem: IReferenceItem = {
     personName: "",
     mobilenumber: "",
     company: "",
@@ -19,7 +19,7 @@ const initialReferenceItem: IReference = {
 export const initialReference = {
     sectionName: "Referenser",
     hide: false,
-    items: {} as Record<string, IReference>
+    items: {} as Record<string, IReferenceItem>
 }
 
 export const reference = createSlice({
