@@ -1,4 +1,4 @@
-import { createCRUDReducers } from "../../../../utilis";
+import { createCRUDReducers } from "../../../../utilities";
 
 import { LevelValue } from "../../../../components/form";
 

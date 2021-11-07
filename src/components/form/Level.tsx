@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Box, Stack } from "../layout";
 
-import { useId } from "../../utilis";
+import { useId } from "../../utilities";
 
 import { FormLabel } from "../primitives";
 

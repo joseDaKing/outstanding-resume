@@ -14,7 +14,7 @@ import {
 } 
 from "./orderableSections";
 
-import { removeDuplicates, reorderArray } from "../../utilis";
+import { removeDuplicates, reorderArray } from "../../utilities";
 
 export type RemovableSectionName = (
     | typeof course.name

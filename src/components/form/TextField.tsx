@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useId } from "../../utilis";
+import { useId } from "../../utilities";
 
 import { FormLabel, FormInput } from "../primitives";
 

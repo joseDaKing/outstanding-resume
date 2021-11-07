@@ -1,4 +1,4 @@
-import { createCRUDReducers } from "../../../../utilis";
+import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 

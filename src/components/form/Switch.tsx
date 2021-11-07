@@ -8,7 +8,7 @@ import { styled } from "../../stitches";
 
 import { FormLabel } from "../primitives";
 
-import { useId } from "../../utilis";
+import { useId } from "../../utilities";
 
 const StyledContainer = styled("span", {
     padding: "$0_5",

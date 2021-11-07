@@ -1,9 +1,10 @@
 import React from "react";
+
 import { styled } from "../../stitches";
 
 import { IIline, ISize } from "../../types";
 
-import { IDisabled } from "../../types/Props/FormComponent/InteractiveComponent/IDisabled";
+import { IDisabled } from "../../types/";
 
 import { inlineBlockMixin, textAlignMixin } from "../mixins";
 
