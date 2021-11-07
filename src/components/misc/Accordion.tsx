@@ -8,7 +8,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 import { usePreviousImmediate } from "rooks";
 
-import { IID } from "../../types";
+import { IID, ILabel } from "../../types";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -98,12 +98,11 @@ export const useActivateLatestAccordionItem = (items: IID[]) => {
     /* eslint-enable */
 }
 
-interface IAccordionItemProps {
-    title: string;
+interface IAccordionItemProps extends Required<ILabel> {
     id: string;
 }
 
-const AccordionItem: React.FC<IAccordionItemProps> = ({ id, title, children }) => {
+const AccordionItem: React.FC<IAccordionItemProps> = ({ id, label, children }) => {
 
     const { activeValue, setActive } = useAccordion();
 
@@ -127,7 +126,7 @@ const AccordionItem: React.FC<IAccordionItemProps> = ({ id, title, children }) =
             isOpen={isOpen}
             onClick={onClickHandler}>
                 
-                {title}
+                {label}
 
                 <Box 
                 css={{
