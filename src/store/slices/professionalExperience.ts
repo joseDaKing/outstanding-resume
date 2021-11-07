@@ -1,4 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+import { setSectionNameReducer } from "../../utilities";
+
+import { setDescripitonReducer } from "../../utilities/reducers/setDescriptionReducer";
 
 export const initialProfessionalExperience = {
     sectionName: "Yrkeserfarenhet",
@@ -9,15 +13,7 @@ export const professionalExperience = createSlice({
     name: "professional-experience",
     initialState: initialProfessionalExperience,
     reducers: {
-        change(state, { payload: professionalExperience }: PayloadAction<Partial<typeof initialProfessionalExperience>>) {
-
-            for (const key of Object.keys(professionalExperience)) {
-
-                const professionalExperienceKey = key as keyof typeof initialProfessionalExperience;
-
-                state[professionalExperienceKey] = professionalExperience[professionalExperienceKey] as any;
-            }
-            
-        }
+        ...setSectionNameReducer,
+        ...setDescripitonReducer
     }
 });
