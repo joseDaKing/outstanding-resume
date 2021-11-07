@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { IID, IIndex, InteractiveComponent } from "../../types";
 
@@ -102,6 +102,8 @@ export function Reorder<T extends IID>({ value = [], onChange, Component }: IReo
 
     const id = useId();
 
+    const Abra = useCallback(Component, [Component.toString()]);
+
     return (
         <DragDropContext
         onDragEnd={onDragEndHandler}>
@@ -115,7 +117,7 @@ export function Reorder<T extends IID>({ value = [], onChange, Component }: IReo
                             id={props.id}
                             key={props.id} 
                             index={index}>
-                                <Component
+                                <Abra
                                 {...props}
                                 index={index}/>
                             </ReorderItem>
