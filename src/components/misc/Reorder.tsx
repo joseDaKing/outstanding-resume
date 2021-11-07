@@ -10,7 +10,7 @@ import { DragDropContext, DropResult, Droppable, Draggable } from "react-beautif
 
 import { css } from "../../stitches";
 
-import { useId } from "../../utilis";
+import { useId } from "../../utilities";
 
 interface IReorderItemContext {
     dragHandlerProps: any;
