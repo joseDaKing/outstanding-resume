@@ -8,12 +8,12 @@ import { RootState, useAppDispatch, useAppSelector } from "../store";
 
 import { slices } from "../store/slices";
 
-import { Section } from "../types";
+import { Items } from "../types";
 
 import { withId } from "../utilities";
 
 type Item<T extends keyof RootState> = (
-    RootState[T] extends Section ?
+    RootState[T] extends Items ?
         RootState[T]["items"][""]
     : never
 );
@@ -34,6 +34,7 @@ type UpdateField<T extends keyof RootState> = <K extends keyof Item<T>>(field: K
 type FilterSections<T extends keyof RootState> = Exclude<
     T,
     "hobbies"
+    | "section-order"
     | "contact-details"
     | "professional-experience"
 >;
