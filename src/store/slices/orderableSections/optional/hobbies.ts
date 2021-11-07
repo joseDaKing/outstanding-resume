@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
 import { setSectionNameReducer } from "../../../../utilities";
+
 import { setDescripitonReducer } from "../../../../utilities/reducers/setDescriptionReducer";
 
 export const initialHobbies = {
