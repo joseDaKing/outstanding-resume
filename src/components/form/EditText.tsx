@@ -123,9 +123,9 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
                 <PlaceAside align="end">
                     <IconContainer
                     hover
-                    pointer
                     invisible
                     css={{
+                        cursor: "pointer",
                         paddingLeft: "$2",
                     }}
                     onClick={onEditModeHandler}>
@@ -135,9 +135,11 @@ export const EditText: React.FC<IEditTextProps> = ({ value, resetable, onChange,
                     {!!resetable && resetable !== text && 
                     <IconContainer
                     hover
-                    pointer
                     invisible
-                    onClick={onResetHandler}>
+                    onClick={onResetHandler}
+                    css={{
+                        cursor: "pointer"
+                    }}>
                         <MdLoop/>
                     </IconContainer>}
 
