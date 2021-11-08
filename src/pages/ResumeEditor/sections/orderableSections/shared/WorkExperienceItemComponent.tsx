@@ -1,3 +1,5 @@
+import React from "react";
+
 import { TextArea, TextField } from "../../../../../components/form";
 
 import { Stack } from "../../../../../components/layout";
@@ -27,12 +29,17 @@ export const WorkExperienceItemComponent: ItemComponent<"work-experience"> = ({ 
             axis="x">
                 <Stack
                 space="xs"
-                axis="x">
+                axis="x"
+                css={{
+                    alignItems: "flex-end"
+                }}>
                     <TextField
                     {...bind("startDate")}
-                    label="Start- och slutdatum"/>
+                    placeholder="Start datum"
+                    label="Datum"/>
 
                     <TextField
+                    placeholder="Slut datum"
                     {...bind("endDate")}/>
                 </Stack>
 

@@ -39,13 +39,16 @@ export const Course: React.FC = () => {
                     </Stack>
 
                     <Stack
+                    axis="x"
                     space="xs">
                         <TextField
                         {...bind("startDate")}
-                        label="Start- och slutdatum"/>
+                        label="Datum"
+                        placeholder="Start datum"/>
 
                         <TextField 
-                        {...bind("endDate")}/>
+                        {...bind("endDate")}
+                        placeholder="Slut datum"/>
                     </Stack>
                 </Stack>
             )}/>

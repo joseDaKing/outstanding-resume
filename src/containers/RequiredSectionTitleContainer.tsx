@@ -4,7 +4,7 @@ import { EditText } from "../components/form";
 
 import { Title } from "../components/typography";
 
-import { useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 import { MdDragHandle } from "react-icons/md";
 
@@ -22,6 +22,8 @@ export function RequiredSectionTitleContainer<T extends RequiredSliceGroupNames>
 
     const sectionName = useAppSelector(store => store[section].sectionName);
 
+    const dispatch = useAppDispatch();
+
     const sliceGroup = requiredSliceGroups[section];
 
     const setSectionName = sliceGroup.slice.actions.setSectionName;
@@ -30,12 +32,14 @@ export function RequiredSectionTitleContainer<T extends RequiredSliceGroupNames>
 
     const { isDragging, dragHandlerProps } = useReorderItem();
 
+    const onChangeHandler = (value: string) => dispatch(setSectionName(value));
+
     return (
         <Title 
         gutter>
             <EditText
             value={sectionName}
-            onChange={setSectionName}
+            onChange={onChangeHandler}
             resetable={initialSectionName}
             Left={() => (
                 <IconContainer

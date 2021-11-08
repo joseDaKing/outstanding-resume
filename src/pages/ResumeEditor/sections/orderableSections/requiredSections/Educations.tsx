@@ -46,7 +46,7 @@ export const Education: React.FC = () => {
                 axis="y">
                     <Stack
                     space="sm"
-                    axis="y">
+                    axis="x">
                         <TextField
                         {...bind("school")}
                         label="Skola"/>
@@ -58,15 +58,21 @@ export const Education: React.FC = () => {
 
                     <Stack
                     space="sm"
-                    axis="y">
+                    axis="x">
                         <Stack
+                        css={{
+                            width: "50%",
+                            alignItems: "flex-end"
+                        }}
                         axis="x"
                         space="xs">
                             <TextField
                             {...bind("endDate")}
-                            label="Start- och slutdatum"/>
+                            placeholder="Start datum"
+                            label="Datum"/>
                             
                             <TextField
+                            placeholder="Slut datum"
                             {...bind("startDate")}/>
                         </Stack>
 

@@ -4,7 +4,7 @@ import { EditText } from "../components/form";
 
 import { Title } from "../components/typography";
 
-import { useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 import { FixedSliceGroupNames, fixedSliceGroups } from "../store/slices/fixedSections";
 
@@ -16,17 +16,21 @@ export function FixedSectionTitleContainer<T extends FixedSliceGroupNames>({ sec
 
     const sectionName = useAppSelector(store => store[section].sectionName);
 
-    const sliceGroup = fixedSliceGroups[section];
+    const dispatch = useAppDispatch();
 
-    const setSectionName = sliceGroup.slice.actions.setSectionName;
+    const { slice, initialState } = fixedSliceGroups[section];
 
-    const initialSectionName = sliceGroup.initialState.sectionName;
+    const setSectionName = slice.actions.setSectionName;
+
+    const initialSectionName = initialState.sectionName;
+
+    const onChangeHandler = (value: string) => dispatch(setSectionName(value));
 
     return (
         <Title gutter>
             <EditText
             value={sectionName}
-            onChange={setSectionName}
+            onChange={onChangeHandler}
             resetable={initialSectionName}/>
         </Title>
     );
