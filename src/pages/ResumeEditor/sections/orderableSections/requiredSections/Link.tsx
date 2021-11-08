@@ -21,7 +21,7 @@ export const Link: React.FC = () => {
             <ItemsContainer
             section="link"
             buttonLabel="Lägg till länk"
-            accordionLabel={({ label }) => label}
+            accordionLabel={({ label }) => label || "(Ej specificerat)"}
             Component={({ bind }) => (
                 <Stack
                 axis="x"

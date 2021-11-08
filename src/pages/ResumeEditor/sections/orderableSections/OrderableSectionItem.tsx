@@ -7,17 +7,18 @@ import React from "react";
 import { IID } from "../../../../types";
 
 import { OrderableSliceGroupNames } from "../../../../store/slices/orderableSections";
+import { useReorderItem } from "../../../../components/misc";
 
 const orderableSections = {
     ...optionalSections,
     ...requiredSections
 };
 
-type SectionMappingType = {
+type SectionMapping = {
     [K in OrderableSliceGroupNames]: React.FC
 }
 
-const SectionMapping: SectionMappingType = {
+const sectionMapping: SectionMapping = {
     education: orderableSections.Education,
     link: orderableSections.Link,
     skill: orderableSections.Skill,
@@ -32,7 +33,17 @@ const SectionMapping: SectionMappingType = {
 
 export const OrderableSectionItem: React.FC<IID<OrderableSliceGroupNames>> = ({ id }) => {
 
-    const SectionComponent = SectionMapping[id];
+    const SectionComponent = sectionMapping[id];
 
-    return <SectionComponent/>;
+    console.log(!!SectionComponent)
+
+    const { containerProps, dragHandlerProps } = useReorderItem();
+
+    return (
+        <div
+        {...dragHandlerProps}
+        {...containerProps}>
+
+        </div>
+    );
 }

@@ -39,7 +39,7 @@ export const Skill: React.FC = () => {
             <ItemsContainer
             section="skill"
             buttonLabel="Lägg till kompetens"
-            accordionLabel={({ name }) => name}
+            accordionLabel={({ name }) => name || "(Ej specificerat)"}
             Component={({ bind }) => (
                 <Stack
                 space="sm"
