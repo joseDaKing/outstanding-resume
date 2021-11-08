@@ -3,6 +3,7 @@ import React from "react";
 import { TextField } from "../../../../components/form";
 
 import { Box, Stack } from "../../../../components/layout";
+import { Disclosure } from "../../../../components/misc";
 
 import { FixedSectionTitleContainer } from "../../../../containers";
 
@@ -52,53 +53,60 @@ export const ContactDetails: React.FC = () => {
                     label="Telefon"/>
                 </Stack>
 
-                <Stack
-                space="sm"
-                axis="x">
-                    <TextField
-                    {...bind("country")}
-                    label="Land"/>
+                <Disclosure
+                label="Visa extra uppgifter">
+                    <Stack
+                    space="sm"
+                    axis="y">
+                        <Stack
+                        space="sm"
+                        axis="x">
+                            <TextField
+                            {...bind("country")}
+                            label="Land"/>
 
-                    <TextField
-                    {...bind("city")}
-                    label="City"/>
-                </Stack>
+                            <TextField
+                            {...bind("city")}
+                            label="City"/>
+                        </Stack>
 
-                <Stack
-                space="sm"
-                axis="x">
-                    <TextField
-                    {...bind("address")}
-                    label="Adress"/>
+                        <Stack
+                        space="sm"
+                        axis="x">
+                            <TextField
+                            {...bind("address")}
+                            label="Adress"/>
 
-                    <TextField
-                    {...bind("zipCode")}
-                    label="Postnummer"/>
-                </Stack>
+                            <TextField
+                            {...bind("zipCode")}
+                            label="Postnummer"/>
+                        </Stack>
 
-                <Stack
-                space="sm"
-                axis="x">
-                    <TextField
-                    {...bind("driverLicense")}
-                    label="Körkort"/>
+                        <Stack
+                        space="sm"
+                        axis="x">
+                            <TextField
+                            {...bind("driverLicense")}
+                            label="Körkort"/>
 
-                    <TextField
-                    {...bind("nationality")}
-                    label="Nationalitet"/>
-                </Stack>
+                            <TextField
+                            {...bind("nationality")}
+                            label="Nationalitet"/>
+                        </Stack>
 
-                <Stack
-                space="sm"
-                axis="x">
-                    <TextField
-                    {...bind("birthPlace")}
-                    label="Födelseort"/>
+                        <Stack
+                        space="sm"
+                        axis="x">
+                            <TextField
+                            {...bind("birthPlace")}
+                            label="Födelseort"/>
 
-                    <TextField
-                    {...bind("birthDate")}
-                    label="Födelsedatum"/>
-                </Stack>
+                            <TextField
+                            {...bind("birthDate")}
+                            label="Födelsedatum"/>
+                        </Stack>
+                    </Stack>
+                </Disclosure>
             </Stack>
         </Box>
     );
