@@ -4,23 +4,27 @@ import { LevelValue } from "../../../../components/form";
 
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ILanguageItem {
+interface ILanguageItem {
     language: string;
     level: LevelValue;
 }
 
-export const initialLanguageItem: ILanguageItem = {
+const initialLanguageItem: ILanguageItem = {
     language: "",
     level: 0
 }
 
-export const initialLanguage = {
+const initialLanguage = {
     sectionName: "Språk",
     items: {} as Record<string, ILanguageItem>
 }
 
-export const language = createSlice({
-    name: "language",
+export const language = {
     initialState: initialLanguage,
-    reducers: createResetableCRUDReducers(initialLanguageItem, initialLanguage)
-});
+    initialItem: initialLanguageItem,
+    slice: createSlice({
+        name: "language",
+        initialState: initialLanguage,
+        reducers: createResetableCRUDReducers(initialLanguageItem, initialLanguage)
+    })
+};

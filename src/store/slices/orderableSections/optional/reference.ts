@@ -2,7 +2,7 @@ import { createResetableCRUDReducers } from "../../../../utilities";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface IReferenceItem {
+interface IReferenceItem {
     personName: string;
     mobilenumber: string;
     company: string;
@@ -16,20 +16,24 @@ const initialReferenceItem: IReferenceItem = {
     email: ""
 }
 
-export const initialReference = {
+const initialReference = {
     sectionName: "Referenser",
     hide: false,
     items: {} as Record<string, IReferenceItem>
 }
 
-export const reference = createSlice({
-    name: "reference",
+export const reference = {
     initialState: initialReference,
-    reducers: {
-        ...createResetableCRUDReducers(initialReferenceItem, initialReference),
-        hideSection(state, { payload: hide}: PayloadAction<boolean>) {
-
-            state.hide = hide;
+    initialItem: initialReferenceItem,
+    slice: createSlice({
+        name: "reference",
+        initialState: initialReference,
+        reducers: {
+            ...createResetableCRUDReducers(initialReferenceItem, initialReference),
+            hideSection(state, { payload: hide}: PayloadAction<boolean>) {
+    
+                state.hide = hide;
+            }
         }
-    }
-});
+    })
+};

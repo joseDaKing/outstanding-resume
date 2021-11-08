@@ -2,7 +2,7 @@ import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ILinkItem {
+interface ILinkItem {
     label: string;
     url: string
 }
@@ -12,13 +12,17 @@ const initialLinkItem: ILinkItem = {
     url: ""
 }
 
-export const initialLink = {
+const initialLink = {
     sectionName: "Hemsidor & Sociala länkar",
     items: {} as Record<string, ILinkItem>
 }
 
-export const link = createSlice({
-    name: "link",
+export const link = {
     initialState: initialLink,
-    reducers: createCRUDReducers(initialLinkItem)
-});
+    initialItem: initialLinkItem,
+    slice: createSlice({
+        name: "link",
+        initialState: initialLink,
+        reducers: createCRUDReducers(initialLinkItem)
+    })
+};

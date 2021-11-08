@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { setSectionNameReducer } from "../../utilities";
 
-export const initialContactDetails = {
+const initialContactDetails = {
     sectionName: "Kontaktuppgifter",
     fields: {
         jobTitle: "",
@@ -20,17 +21,20 @@ export const initialContactDetails = {
     }
 };
 
-export const contactDetails = createSlice({
-    name: "contact-details",
+export const contactDetails = {
     initialState: initialContactDetails,
-    reducers: {
-        ...setSectionNameReducer,
-        change(state, { payload: fields }: PayloadAction<Partial<typeof initialContactDetails["fields"]>>) {
-
-            state.fields = {
-                ...state.fields,
-                ...fields
+    slice: createSlice({
+        name: "contact-details",
+        initialState: initialContactDetails,
+        reducers: {
+            ...setSectionNameReducer,
+            change(state, { payload: fields }: PayloadAction<Partial<typeof initialContactDetails["fields"]>>) {
+    
+                state.fields = {
+                    ...state.fields,
+                    ...fields
+                }
             }
         }
-    }
-});
+    })
+}

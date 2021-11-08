@@ -2,7 +2,7 @@ import { createResetableCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ICourseItem {
+interface ICourseItem {
     courseName: string;
     institution: string;
     startDate: string;
@@ -16,13 +16,17 @@ const initialCourseItem: ICourseItem = {
     endDate: ""
 }
 
-export const initialCourse = {
+const initialCourse = {
     sectionName: "Kurser",
     items: {} as Record<string, ICourseItem>
 }
 
-export const course = createSlice({
-    name: "course",
+export const course = {
+    initialItem: initialCourseItem,
     initialState: initialCourse,
-    reducers: createResetableCRUDReducers(initialCourseItem, initialCourse)
-});
+    slice: createSlice({
+        name: "course",
+        initialState: initialCourse,
+        reducers: createResetableCRUDReducers(initialCourseItem, initialCourse)
+    })
+};

@@ -1,16 +1,20 @@
 import { createResetableCRUDReducers } from "../../../../utilities";
 
-import { IWorkExperienceItem, initialWorkExperienceItem } from "../required";
+import { workExperience } from "../required";
 
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialExtraActivity = {
+const initialExtraActivity = {
     sectionName: "Extra aktiviteter",
-    items: {} as Record<string, IWorkExperienceItem>
+    items: {} as Record<string, typeof workExperience.initialItem>
 }
 
-export const extraActivity = createSlice({
-    name: "extra-activity",
+export const extraActivity = {
     initialState: initialExtraActivity,
-    reducers: createResetableCRUDReducers(initialWorkExperienceItem, initialExtraActivity)
-});
+    initialItem: workExperience.initialItem,
+    slice: createSlice({
+        name: "extra-activity",
+        initialState: initialExtraActivity,
+        reducers: createResetableCRUDReducers(workExperience.initialItem, initialExtraActivity)
+    })
+};

@@ -2,7 +2,7 @@ import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface IEducationItem {
+interface IEducationItem {
     school: string;
     exam: string;
     city: string;
@@ -20,13 +20,17 @@ const initialEducationItem: IEducationItem = {
     description: "",
 }
 
-export const initialEducation = {
+const initialEducation = {
     sectionName: "Utbildning",
     items: {} as Record<string, IEducationItem>
 }
 
-export const education = createSlice({
-    name: "education",
+export const education = {
     initialState: initialEducation,
-    reducers: createCRUDReducers(initialEducationItem)
-});
+    initialItem: initialEducationItem,
+    slice: createSlice({
+        name: "education",
+        initialState: initialEducation,
+        reducers: createCRUDReducers(initialEducationItem)
+    })
+};
