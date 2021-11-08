@@ -17,7 +17,7 @@ type Item<T extends ItemsSliceGroupNames> = (typeof orderableSliceGroups)[T]["in
 
 export type ItemComponent<T extends ItemsSliceGroupNames> = (props: ItemComponentProps<T>) => React.ReactElement<any, any> | null;;
 
-export type ItemComponentProps<T extends ItemsSliceGroupNames> = ListItemComponentProps<Item<T> & IID> & {
+export type ItemComponentProps<T extends ItemsSliceGroupNames> = {
     bind: Bind<Item<T>>;
 };
 
