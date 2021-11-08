@@ -14,16 +14,19 @@ type ItemsSliceGroupNames = Exclude<OrderableSliceGroupNames, typeof orderableSl
 
 type Item<T extends ItemsSliceGroupNames> = (typeof orderableSliceGroups)[T]["initialItem"];
 
+
+export type ItemComponent<T extends ItemsSliceGroupNames> = (props: ItemComponentProps<T>) => React.ReactElement<any, any> | null;;
+
+export type ItemComponentProps<T extends ItemsSliceGroupNames> = ListItemComponentProps<Item<T> & IID> & {
+    bind: Bind<Item<T>>;
+};
+
 interface IItemsContainer<T extends ItemsSliceGroupNames> {
     section: T;
     buttonLabel: string;
     accordionLabel: ((props: Item<T>) => string);
-    Component: (props: ItemComponent<T>) => JSX.Element;
+    Component: ItemComponent<T>;
 }
-
-type ItemComponent<T extends ItemsSliceGroupNames> = ListItemComponentProps<Item<T> & IID> & {
-    bind: Bind<Item<T>>;
-};
 
 export function ItemsContainer<T extends ItemsSliceGroupNames>({ accordionLabel, buttonLabel, section, Component }: IItemsContainer<T>) {
 
