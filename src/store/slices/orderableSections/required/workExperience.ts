@@ -2,6 +2,8 @@ import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 
+import { SliceGroup } from "../../../../types";
+
 interface IWorkExperienceItem {
     jobTitle: string;
     employer: string;
@@ -11,7 +13,7 @@ interface IWorkExperienceItem {
     description: string;
 }
 
-const initialWorkExperienceItem: IWorkExperienceItem = {
+const initialItem: IWorkExperienceItem = {
     jobTitle: "",
     employer: "",
     city: "",
@@ -20,17 +22,19 @@ const initialWorkExperienceItem: IWorkExperienceItem = {
     description: "",
 }
 
-const initialWorkExperience = {
+const initialState = {
     sectionName: "Arbetslivserfarenhet",
     items: {} as Record<string, IWorkExperienceItem>
 }
 
-export const workExperience = {
-    initialState: initialWorkExperience,
-    initialItem: initialWorkExperienceItem,
-    slice: createSlice({
-        name: "work-experience",
-        initialState: initialWorkExperience,
-        reducers: createCRUDReducers(initialWorkExperienceItem)
-    })
+const slice = createSlice({
+    name: "work-experience",
+    initialState,
+    reducers: createCRUDReducers(initialItem)
+});
+
+export const workExperience: SliceGroup<typeof initialState, typeof slice, typeof initialItem> = {
+    initialState,
+    initialItem,
+    slice
 };

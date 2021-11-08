@@ -4,17 +4,21 @@ import { workExperience } from "../required";
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialInternship = {
+import { SliceGroup } from "../../../../types";
+
+const initialState = {
     sectionName: "Kurser",
     items: {} as Record<string, typeof workExperience.initialItem>
 }
 
-export const internship = {
+const slice = createSlice({
+    name: "internship",
+    initialState,
+    reducers: createResetableCRUDReducers(workExperience.initialItem, initialState)
+});
+
+export const internship: SliceGroup<typeof initialState, typeof slice, typeof workExperience.initialItem> = {
     initialItem: workExperience.initialItem,
-    initialState: initialInternship,
-    slice: createSlice({
-        name: "internship",
-        initialState: initialInternship,
-        reducers: createResetableCRUDReducers(workExperience.initialItem, initialInternship)
-    })
+    initialState,
+    slice,
 };

@@ -2,27 +2,31 @@ import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 
+import { SliceGroup } from "../../../../types";
+
 interface ILinkItem {
     label: string;
     url: string
 }
 
-const initialLinkItem: ILinkItem = {
+const initialItem: ILinkItem = {
     label: "",
     url: ""
 }
 
-const initialLink = {
+const initialState = {
     sectionName: "Hemsidor & Sociala länkar",
     items: {} as Record<string, ILinkItem>
 }
 
-export const link = {
-    initialState: initialLink,
-    initialItem: initialLinkItem,
-    slice: createSlice({
-        name: "link",
-        initialState: initialLink,
-        reducers: createCRUDReducers(initialLinkItem)
-    })
+const slice = createSlice({
+    name: "link",
+    initialState,
+    reducers: createCRUDReducers(initialItem)
+});
+
+export const link: SliceGroup<typeof initialState, typeof slice, typeof initialItem> = {
+    initialState,
+    initialItem,
+    slice
 };

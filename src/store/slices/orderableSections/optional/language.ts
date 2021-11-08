@@ -4,27 +4,31 @@ import { LevelValue } from "../../../../components/form";
 
 import { createSlice } from "@reduxjs/toolkit";
 
+import { SliceGroup } from "../../../../types";
+
 interface ILanguageItem {
     language: string;
     level: LevelValue;
 }
 
-const initialLanguageItem: ILanguageItem = {
+const initialItem: ILanguageItem = {
     language: "",
     level: 0
 }
 
-const initialLanguage = {
+const initialState = {
     sectionName: "Språk",
     items: {} as Record<string, ILanguageItem>
 }
 
-export const language = {
-    initialState: initialLanguage,
-    initialItem: initialLanguageItem,
-    slice: createSlice({
-        name: "language",
-        initialState: initialLanguage,
-        reducers: createResetableCRUDReducers(initialLanguageItem, initialLanguage)
-    })
+const slice = createSlice({
+    name: "language",
+    initialState,
+    reducers: createResetableCRUDReducers(initialItem, initialState)
+});
+
+export const language: SliceGroup<typeof initialState, typeof slice, typeof initialItem>= {
+    initialState,
+    initialItem,
+    slice
 };

@@ -4,34 +4,38 @@ import { LevelValue } from "../../../../components/form";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { SliceGroup } from "../../../../types";
+
 interface ISkillItem {
     name: string;
     level: LevelValue;
 }
 
-const initialSkillItem: ISkillItem = {
+const initialItem: ISkillItem = {
     name: "",
     level: 0
 }
 
-const initialSkill = {
+const initialState = {
     sectionName: "Kompetenser",
     showLevel: false,
     items: {} as Record<string, ISkillItem>
 }
 
-export const skill = {
-    initialState: initialSkill,
-    initialItem: initialSkillItem,
-    slice: createSlice({
-        name: "skill",
-        initialState: initialSkill,
-        reducers: {
-            ...createCRUDReducers(initialSkillItem),
-            setShowLevel(state, { payload: showLevel }: PayloadAction<boolean>) {
-    
-                state.showLevel = showLevel;
-            }
+const slice = createSlice({
+    name: "skill",
+    initialState,
+    reducers: {
+        ...createCRUDReducers(initialItem),
+        setShowLevel(state, { payload: showLevel }: PayloadAction<boolean>) {
+
+            state.showLevel = showLevel;
         }
-    })
+    }
+});
+
+export const skill: SliceGroup<typeof initialState, typeof slice, typeof initialItem> = {
+    initialState,
+    initialItem,
+    slice,
 };

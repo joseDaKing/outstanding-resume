@@ -2,25 +2,27 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { setSectionNameReducer, setDescripitonReducer } from "../../../../utilities";
 
-const initialHobbies = {
+const initialState = {
     sectionName: "Yrkeserfarenhet",
     description: ""
 }
 
-export const hobbies = {
-    initialState: initialHobbies,
-    slice: createSlice({
-        name: "hobbies",
-        initialState: initialHobbies,
-        reducers: {
-            ...setSectionNameReducer,
-            ...setDescripitonReducer,
-            reset(state) {
-    
-                state.sectionName = initialHobbies.sectionName;
-    
-                state.description = initialHobbies.description;
-            }
+const slice = createSlice({
+    name: "hobbies",
+    initialState,
+    reducers: {
+        ...setSectionNameReducer,
+        ...setDescripitonReducer,
+        reset(state) {
+
+            state.sectionName = initialState.sectionName;
+
+            state.description = initialState.description;
         }
-    })
+    }
+});
+
+export const hobbies = {
+    initialState,
+    slice,
 };

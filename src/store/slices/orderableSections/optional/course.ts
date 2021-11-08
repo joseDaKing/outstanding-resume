@@ -2,6 +2,8 @@ import { createResetableCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
 
+import { SliceGroup } from "../../../../types";
+
 interface ICourseItem {
     courseName: string;
     institution: string;
@@ -9,24 +11,26 @@ interface ICourseItem {
     endDate: string;
 }
 
-const initialCourseItem: ICourseItem = {
+const initialItem: ICourseItem = {
     courseName: "",
     institution: "",
     startDate: "",
     endDate: ""
 }
 
-const initialCourse = {
+const initialState = {
     sectionName: "Kurser",
     items: {} as Record<string, ICourseItem>
 }
 
-export const course = {
-    initialItem: initialCourseItem,
-    initialState: initialCourse,
-    slice: createSlice({
-        name: "course",
-        initialState: initialCourse,
-        reducers: createResetableCRUDReducers(initialCourseItem, initialCourse)
-    })
+const slice = createSlice({
+    name: "course",
+    initialState,
+    reducers: createResetableCRUDReducers(initialItem, initialState)
+});
+
+export const course: SliceGroup<typeof initialState, typeof slice, typeof initialItem> = {
+    initialItem,
+    initialState,
+    slice
 };

@@ -4,16 +4,16 @@ import { setSectionNameReducer } from "../../utilities";
 
 import { setDescripitonReducer } from "../../utilities/reducers/setDescriptionReducer";
 
-const initialProfessionalExperience = {
+const initialState = {
     sectionName: "Yrkeserfarenhet",
     description: ""
 }
 
 export const professionalExperience = {
-    initialState: initialProfessionalExperience,
+    initialState,
     slice: createSlice({
         name: "professional-experience",
-        initialState: initialProfessionalExperience,
+        initialState,
         reducers: {
             ...setSectionNameReducer,
             ...setDescripitonReducer

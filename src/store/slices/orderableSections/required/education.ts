@@ -11,7 +11,7 @@ interface IEducationItem {
     description: string;
 }
 
-const initialEducationItem: IEducationItem = {
+const initialItem: IEducationItem = {
     school: "",
     exam: "",
     city: "",
@@ -20,17 +20,19 @@ const initialEducationItem: IEducationItem = {
     description: "",
 }
 
-const initialEducation = {
+const initialState = {
     sectionName: "Utbildning",
     items: {} as Record<string, IEducationItem>
 }
 
+const slice = createSlice({
+    name: "education",
+    initialState,
+    reducers: createCRUDReducers(initialItem)
+});
+
 export const education = {
-    initialState: initialEducation,
-    initialItem: initialEducationItem,
-    slice: createSlice({
-        name: "education",
-        initialState: initialEducation,
-        reducers: createCRUDReducers(initialEducationItem)
-    })
+    initialState,
+    initialItem,
+    slice
 };
