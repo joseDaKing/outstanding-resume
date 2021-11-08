@@ -6,4 +6,4 @@ export * from "./removeDuplicates";
 
 export * from "./reorder";
 
-export * from "./createSliceGroup";
+export * from "./createReducersFromSliceGroups";
