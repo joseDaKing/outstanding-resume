@@ -7,7 +7,6 @@ import React from "react";
 import { IID } from "../../../../types";
 
 import { OrderableSliceGroupNames } from "../../../../store/slices/orderableSections";
-import { useReorderItem } from "../../../../components/misc";
 
 const orderableSections = {
     ...optionalSections,
