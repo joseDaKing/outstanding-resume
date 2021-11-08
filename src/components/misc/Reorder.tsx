@@ -102,7 +102,9 @@ export function Reorder<T extends IID>({ value = [], onChange, Component }: IReo
 
     const id = useId();
 
+    /* eslint-disable */
     const Abra = useCallback(Component, [Component.toString()]);
+    /* eslint-enable */
 
     return (
         <DragDropContext
