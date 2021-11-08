@@ -27,7 +27,7 @@ export function FixedSectionTitleContainer<T extends FixedSliceGroupNames>({ sec
     const onChangeHandler = (value: string) => dispatch(setSectionName(value));
 
     return (
-        <Title gutter>
+        <Title>
             <EditText
             value={sectionName}
             onChange={onChangeHandler}

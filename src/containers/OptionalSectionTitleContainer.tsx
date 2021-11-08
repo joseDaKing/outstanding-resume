@@ -46,8 +46,7 @@ export function OptionalSectionTitleContainer<T extends OptionalSliceGroupNames>
     }
 
     return (
-        <Title 
-        gutter>
+        <Title>
             <EditText
             value={sectionName}
             onChange={setSectionName}

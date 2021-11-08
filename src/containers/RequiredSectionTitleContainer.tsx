@@ -35,8 +35,7 @@ export function RequiredSectionTitleContainer<T extends RequiredSliceGroupNames>
     const onChangeHandler = (value: string) => dispatch(setSectionName(value));
 
     return (
-        <Title 
-        gutter>
+        <Title>
             <EditText
             value={sectionName}
             onChange={onChangeHandler}
