@@ -13,11 +13,11 @@ const orderableSections = {
     ...requiredSections
 };
 
-type SectionMapping = {
+type SectionMappingType = {
     [K in OrderableSliceGroupNames]: React.FC
 }
 
-const sectionMapping: SectionMapping = {
+const SectionMapping: SectionMappingType = {
     education: orderableSections.Education,
     link: orderableSections.Link,
     skill: orderableSections.Skill,
@@ -32,7 +32,7 @@ const sectionMapping: SectionMapping = {
 
 export const OrderableSectionItem: React.FC<IID<OrderableSliceGroupNames>> = ({ id }) => {
 
-    const SectionComponent = sectionMapping[id];
+    const SectionComponent = SectionMapping[id];
 
     return <SectionComponent/>;
 }

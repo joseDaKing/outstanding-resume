@@ -9,7 +9,9 @@ import {
     ProfessionalExperience,
     ContactDetails
 } 
-from "./sections"
+from "./sections";
+
+import { AddSections } from "../../containers";
 
 export const ResumeEditor: React.FC = () => {
 
@@ -27,8 +29,12 @@ export const ResumeEditor: React.FC = () => {
                     padding: "$10"
                 }}>
                     <ContactDetails/>
+                    
                     <ProfessionalExperience/>
+                    
                     <OrderableSections/>
+                    
+                    <AddSections/>
                 </Box>
 
                 <Box 
