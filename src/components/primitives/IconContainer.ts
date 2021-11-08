@@ -28,16 +28,10 @@ export const IconContainer = styled("div", inlineBlockMixin, {
             false: {
                 opacity: "1 !important"
             }
-        },
-        pointer: {
-            true: {
-                cursor: "pointer"
-            }
         }
     },
     defaultVariants: {
         hover: false,
-        invisible: false,
-        pointer: false
+        invisible: false
     }
 });
