@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { OptionalSliceGroupNames } from "../orderableSections/optional";
+import { OptionalSliceGroupNames } from "./orderableSections/optional";
 
-import { OrderableSliceGroupNames } from "../orderableSections";
+import { OrderableSliceGroupNames } from "./orderableSections";
 
-import { removeDuplicates, reorderArray } from "../../../utilities";
+import { removeDuplicates, reorderArray } from "../../utilities";
 
-import { SliceGroup } from "../../../types";
+import { SliceGroup } from "../../types";
 
-import { workExperience } from "../orderableSections/required/workExperience";
+import { workExperience } from "./orderableSections/required/workExperience";
 
-import { education } from "../orderableSections/required/education";
+import { education } from "./orderableSections/required/education";
 
-import { link } from "../orderableSections/required/link";
+import { link } from "./orderableSections/required/link";
 
-import { skill } from "../orderableSections/required/skill";
+import { skill } from "./orderableSections/required/skill";
 
 const initialState = {
     items: [
