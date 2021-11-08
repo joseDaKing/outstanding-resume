@@ -6,11 +6,7 @@ export type SliceGroup<T, K extends Slice, P extends object | never = never> = S
     initialState: T;
     slice: K;
 } & ([P] extends [never] ? {} : { 
-    initalItem: P;
+    initialItem: P;
 })>;
 
-export type SliceGroupBase = {
-    initialState: any;
-    slice: Slice;
-    initialItem?: Object;
-};
+export type SliceGroupBase = SliceGroup<any, Slice, Object>;
