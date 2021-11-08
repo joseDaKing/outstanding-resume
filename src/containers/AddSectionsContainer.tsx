@@ -4,7 +4,7 @@ import { Box, Stack } from "../components/layout";
 
 import { Title } from "../components/typography";
 
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 import { optionalSliceGroups } from "../store/slices/orderableSections/optional";
 
@@ -20,6 +20,14 @@ interface IListLabelProps extends Required<ILabel>, IDisabled {
 
 const ListLabel: React.FC<IListLabelProps> = ({ label, onClick, disabled }) => {
 
+    const onClickHandler = () => {
+
+        if (onClick && !disabled) {
+
+            onClick();
+        }
+    }
+
     return (
         <Box
         css={{
@@ -30,11 +38,11 @@ const ListLabel: React.FC<IListLabelProps> = ({ label, onClick, disabled }) => {
             cursor: disabled ? "default" : "pointer",
             fontWeight: "$normal",
             "&:hover": {
-                color: disabled ? "inherit" : "$light-blue-500"
+                color: disabled ? "$gray-400" : "$light-blue-500"
             }
         }}
         as="li"
-        onClick={onClick}>
+        onClick={onClickHandler}>
             {label} 
         </Box>
     );
@@ -46,15 +54,13 @@ export const AddSections: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
+    const sectionOrderItems = useAppSelector(store => store["section-order"].items);
+
     const labels = Object.values(optionalSliceGroups).map(({ initialState, slice }) => ({
         key: slice.name,
         label: initialState.sectionName,
-        onClick: () => {
-
-            console.log("click", slice.name)
-
-            // dispatch(sectionOrderActions.add(slice.name))
-        }
+        disabled: sectionOrderItems.includes(slice.name),
+        onClick: () => dispatch(sectionOrderActions.add(slice.name))
     }));
 
     return (
