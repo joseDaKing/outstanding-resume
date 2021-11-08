@@ -12,7 +12,7 @@ import { IID } from "../types";
 
 import { withId } from "../utilities";
 
-type ItemsSliceGroupNames = Exclude<OrderableSliceGroupNames, "hobbies">;
+type ItemsSliceGroupNames = Exclude<OrderableSliceGroupNames, typeof orderableSliceGroups.hobbies.slice.name>;
 
 type Item<T extends ItemsSliceGroupNames> = (typeof orderableSliceGroups)[T]["initialItem"];
 
