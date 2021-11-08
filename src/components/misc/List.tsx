@@ -74,7 +74,7 @@ interface IListProps<T extends IID> extends InteractiveComponent<T[], [fromId: s
     label: string; 
     onAdd: () => void;
     onRemove: (id: string) => void;
-    Component: React.FC<ListItemComponentProps<T>>;
+    Component: (props: ListItemComponentProps<T>) => JSX.Element;
     space?: PropertyValue<"margin">;
 }
 

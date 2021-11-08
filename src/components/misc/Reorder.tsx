@@ -83,7 +83,7 @@ const ReorderItem: React.FC<ReorderItemProps> = ({ id, index, children }) => {
 }
 
 interface IReorderProps<T extends IID> extends InteractiveComponent<T[], [fromId: string, toId: string]> {
-    Component: React.FC<T & IIndex>
+    Component: (props: T & IIndex) => JSX.Element;
 }
 
 export function Reorder<T extends IID>({ value = [], onChange, Component }: IReorderProps<T>) {
