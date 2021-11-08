@@ -12,4 +12,4 @@ export type Simplify<T> = {
     [K in keyof T]: T[K];
 }
 
-export type Bind<T extends Object> = <K extends keyof T>(key: K) =>  IValue<T[K]> & IOnChange<T[K]>;
+export type Bind<T extends Object> = <K extends keyof T>(key: K) =>  Required<IValue<T[K]> & IOnChange<T[K]>>;
