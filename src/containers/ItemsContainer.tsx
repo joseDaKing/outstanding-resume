@@ -4,48 +4,38 @@ import { Stack } from "../components/layout";
 
 import { Accordion, List, ListItemComponentProps } from "../components/misc";
 
-import { RootState, useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
-import { slices } from "../store/slices";
+import { OrderableSliceGroupNames, orderableSliceGroups } from "../store/slices/orderableSections";
 
-import { Items } from "../types";
+import { IID } from "../types";
 
 import { withId } from "../utilities";
 
-type Item<T extends keyof RootState> = (
-    RootState[T] extends Items ?
-        RootState[T]["items"][""]
-    : never
-);
+type ItemsSliceGroupNames = Exclude<OrderableSliceGroupNames, "hobbies">;
 
-interface IItemsContainer<T extends keyof RootState> {
+type Item<T extends ItemsSliceGroupNames> = (typeof orderableSliceGroups)[T]["initialItem"];
+
+interface IItemsContainer<T extends ItemsSliceGroupNames> {
     section: T;
     buttonLabel: string;
     accordionLabel: ((props: Item<T>) => string);
-    Component: React.FC<ItemComponent<T>>;
+    Component: (props: ItemComponent<T>) => JSX.Element;
 }
 
-type ItemComponent<T extends keyof RootState> = ListItemComponentProps<Item<T>> & {
+type ItemComponent<T extends ItemsSliceGroupNames> = ListItemComponentProps<Item<T> & IID> & {
     updateField: UpdateField<T>;
 };
 
-type UpdateField<T extends keyof RootState> = <K extends keyof Item<T>>(field: K) => (value: Item<T>[K]) => void;
+type UpdateField<T extends ItemsSliceGroupNames> = <K extends keyof Item<T>>(field: K) => (value: Item<T>[K]) => void;
 
-type FilterSections<T extends keyof RootState> = Exclude<
-    T,
-    "hobbies"
-    | "section-order"
-    | "contact-details"
-    | "professional-experience"
->;
-
-export function ItemsContainer<T extends FilterSections<keyof RootState>>({ accordionLabel, buttonLabel, section, Component }: IItemsContainer<T>) {
+export function ItemsContainer<T extends ItemsSliceGroupNames>({ accordionLabel, buttonLabel, section, Component }: IItemsContainer<T>) {
 
     const store = useAppSelector(store => store[section]);
 
-    const itemsWithId = withId(store.items as any) as Array<Item<T>>;
+    const itemsWithId = withId(store.items as Record<string, Item<T>>);
 
-    const actions = slices[section].actions;
+    const actions = orderableSliceGroups[section].slice.actions;
 
     const dispatch = useAppDispatch();
 
@@ -66,17 +56,22 @@ export function ItemsContainer<T extends FilterSections<keyof RootState>>({ acco
         onRemove={onRemoveHandler}
         onChange={onReorderHandler}
         label={buttonLabel}
-        Component={props => (
-            <Accordion.Item 
-            label={accordionLabel(props)}
-            id={props.id}>
-                <Stack 
-                axis="y">
-                    <Component
-                    {...props}
-                    updateField={createUpdateField(props.id)}/>
-                </Stack>
-            </Accordion.Item>
-        )}/>
+        Component={props => {
+
+            props
+
+            return (
+                <Accordion.Item 
+                label={accordionLabel(props)}
+                id={props.id}>
+                    <Stack 
+                    axis="y">
+                        <Component
+                        {...props as any}
+                        updateField={createUpdateField(props.id)}/>
+                    </Stack>
+                </Accordion.Item>
+            );
+        }}/>
     );
 }
