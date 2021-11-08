@@ -1,12 +1,14 @@
+import React from "react";
+
 import { Stack } from "../components/layout";
 
-import { Accordion, List, ListItemComponentProps } from "../components/misc";
+import { Accordion, List } from "../components/misc";
 
 import { useAppDispatch, useAppSelector } from "../store";
 
 import { OrderableSliceGroupNames, orderableSliceGroups } from "../store/slices/orderableSections";
 
-import { Bind, IID } from "../types";
+import { Bind } from "../types";
 
 import { withId } from "../utilities";
 
