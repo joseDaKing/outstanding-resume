@@ -23,6 +23,8 @@ export const WorkExperience: React.FC = () => {
             buttonLabel="Lägg till anställning"
             accordionLabel={workExperienceItemLabel}
             Component={props => <WorkExperienceItemComponent {...props}/>}/>
+
+            <br/>
         </Box>
     ); 
 }

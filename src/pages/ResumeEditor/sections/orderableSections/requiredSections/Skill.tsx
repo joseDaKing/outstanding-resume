@@ -53,6 +53,8 @@ export const Skill: React.FC = () => {
                     label="Nivå"/>
                 </Stack>
             )}/>
+
+            <br/>
         </Box>
     ); 
 }

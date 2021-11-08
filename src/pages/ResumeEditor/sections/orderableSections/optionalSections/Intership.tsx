@@ -23,6 +23,8 @@ export const Intership: React.FC = () => {
             buttonLabel="Lägg till praktikplats"
             accordionLabel={workExperienceItemLabel}
             Component={props => <WorkExperienceItemComponent {...props}/>}/>
+            
+            <br/>
         </Box>
     ); 
 }

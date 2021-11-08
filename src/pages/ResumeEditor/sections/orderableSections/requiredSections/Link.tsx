@@ -35,6 +35,8 @@ export const Link: React.FC = () => {
                     label="Länk"/>
                 </Stack>
             )}/>
+
+            <br/>
         </Box>
     ); 
 }

@@ -14,6 +14,12 @@ import { professionalExperience } from "../../../../store/slices/fixedSections/p
 
 export const ProfessionalExperience: React.FC = () => {
 
+    const description = useAppSelector(store => store["professional-experience"].description);
+
+    const dispatch = useAppDispatch()
+
+    const onChangeHandler = (description: string) => dispatch(professionalExperience.slice.actions.setSectionName(description));
+
     return (
         <Box>
             <FixedSectionTitleContainer
@@ -23,25 +29,12 @@ export const ProfessionalExperience: React.FC = () => {
                 Skriv 2 - 3 tydliga meningar om dina allmäna erfarenhet
             </Text>
 
-            <Body/>
-        </Box>
-    );
-}
-
-function Body() {
-
-    const description = useAppSelector(store => store["professional-experience"].description);
-
-    const dispatch = useAppDispatch()
-
-    const onChangeHandler = (description: string) => dispatch(professionalExperience.slice.actions.setSectionName(description));
-
-    return (
-        <>
             <TextArea
             value={description}
             onChange={onChangeHandler}
             placeholder="t.ex passionerad naturkunskapslärare med > 8 års erfarenhet och följande meriter..."/>
-        </>
+
+            <br/>
+        </Box>
     );
 }

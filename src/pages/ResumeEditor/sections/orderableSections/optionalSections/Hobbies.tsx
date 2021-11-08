@@ -33,6 +33,8 @@ export const Hobbies: React.FC = () => {
             onChange={onChangeHandler}
             label="Vad tycker du om?"
             placeholder="t.ex skidåkning, fallskärmshoppning, målning"/>
+
+            <br/>
         </Box>
     ); 
 }

@@ -108,6 +108,8 @@ export const ContactDetails: React.FC = () => {
                     </Stack>
                 </Disclosure>
             </Stack>
+
+            <br/>
         </Box>
     );
 }

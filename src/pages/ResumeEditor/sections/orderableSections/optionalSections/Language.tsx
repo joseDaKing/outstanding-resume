@@ -35,6 +35,8 @@ export const Language: React.FC = () => {
                     label="Nivå"/>
                 </Stack>
             )}/>
+
+            <br/>
         </Box>
     ); 
 }

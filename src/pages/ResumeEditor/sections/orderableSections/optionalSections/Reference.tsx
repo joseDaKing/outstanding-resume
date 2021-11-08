@@ -86,6 +86,8 @@ export const Reference: React.FC = () => {
                     </Stack>
                 </Stack>
             )}/>
+
+            <br/>
         </Box>
     ); 
 }

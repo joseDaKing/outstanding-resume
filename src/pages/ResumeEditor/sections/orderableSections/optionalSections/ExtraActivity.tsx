@@ -23,6 +23,8 @@ export const ExtraActivity: React.FC = () => {
             buttonLabel="Lägg till aktivitet"
             accordionLabel={workExperienceItemLabel}
             Component={props => <WorkExperienceItemComponent {...props}/>}/>
+
+            <br/>
         </Box>
     ); 
 }

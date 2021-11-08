@@ -86,6 +86,8 @@ export const Education: React.FC = () => {
                     label="Beskrvining"/>
                 </Stack>
             )}/>
+
+            <br/>
         </Box>
     ); 
 }
