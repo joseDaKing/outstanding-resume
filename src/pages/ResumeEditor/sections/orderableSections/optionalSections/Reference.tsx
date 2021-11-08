@@ -18,12 +18,9 @@ export const Reference: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const {
-        hide: shouldHideReference,
-        items
-    } = useAppSelector(store => store.reference);
+    const shouldHideReference = useAppSelector(store => store.reference.hide);
 
-    const hasItems = Object.values(items).length !== 0;
+    const hasItems = useAppSelector(store => Object.values(store.reference.items).length !== 0); 
 
     const onChagneHandler = (value: boolean) => dispatch(reference.slice.actions.hideSection(value));
 

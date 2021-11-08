@@ -18,6 +18,8 @@ export const Skill: React.FC = () => {
 
     const shouldShowLevel = useAppSelector(store => store.skill.showLevel);
 
+    const hasItems = useAppSelector(store => Object.values(store.skill.items).length !== 0);
+
     const dispatch = useAppDispatch();
 
     const onChangeHandler = (value: boolean) => dispatch(skill.slice.actions.setShowLevel(value));
@@ -28,10 +30,11 @@ export const Skill: React.FC = () => {
             <RequiredSectionTitleContainer
             section="skill"/>
             
+            {hasItems && 
             <Switch
             value={shouldShowLevel}
             onChange={onChangeHandler}
-            label="Dölj erfarenhetsnivå"/>
+            label="Dölj erfarenhetsnivå"/>}
 
             <ItemsContainer
             section="skill"
