@@ -1,4 +1,5 @@
-import { createSlice, Slice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
 import { SliceGroup } from "../../../../types";
 
 import { setSectionNameReducer, setDescripitonReducer } from "../../../../utilities";
