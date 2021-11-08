@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Stack } from "../components/layout";
 
 import { Accordion, List, ListItemComponentProps } from "../components/misc";
@@ -56,22 +54,17 @@ export function ItemsContainer<T extends ItemsSliceGroupNames>({ accordionLabel,
         onRemove={onRemoveHandler}
         onChange={onReorderHandler}
         label={buttonLabel}
-        Component={props => {
-
-            props
-
-            return (
-                <Accordion.Item 
-                label={accordionLabel(props)}
-                id={props.id}>
-                    <Stack 
-                    axis="y">
-                        <Component
-                        {...props as any}
-                        updateField={createUpdateField(props.id)}/>
-                    </Stack>
-                </Accordion.Item>
-            );
-        }}/>
+        Component={props => (
+            <Accordion.Item 
+            label={accordionLabel(props)}
+            id={props.id}>
+                <Stack 
+                axis="y">
+                    <Component
+                    {...props as any}
+                    updateField={createUpdateField(props.id)}/>
+                </Stack>
+            </Accordion.Item>
+        )}/>
     );
 }

@@ -6,11 +6,9 @@ import { useAppDispatch, useAppSelector } from "../store";
 
 import { MdDelete, MdDragHandle } from "react-icons/md";
 
-import { PlaceAside } from "../components/layout";
-
 import { useReorderItem } from "../components/misc";
 
-import { IconGroupHover, IconContainer } from "../components/primitives";
+import { IconContainer } from "../components/primitives";
 
 import { OptionalSliceGroupNames, optionalSliceGroups } from "../store/slices/orderableSections/optional";
 
@@ -48,38 +46,31 @@ export function OptionalSectionTitleContainer<T extends OptionalSliceGroupNames>
     return (
         <Title 
         gutter>
-            <IconGroupHover 
-            inline>
-                <PlaceAside
-                align="start">
-                    <IconContainer
-                    {...dragHandlerProps}
-                    invisible
-                    css={{
-                        cursor: isDragging ? "grabbing" : "grab",
-                    }}>
-                        <MdDragHandle/>
-                    </IconContainer>
-                </PlaceAside>
-
-                <EditText
-                value={sectionName}
-                onChange={setSectionName}
-                resetable={initialSectionName}/>
-
-                <PlaceAside
-                align="end">
-                    <IconContainer
-                    onClick={onDeleteHandler}
-                    invisible
-                    hover
-                    css={{
-                        cursor: "pointer"
-                    }}>
-                        <MdDelete/>
-                    </IconContainer>
-                </PlaceAside>
-            </IconGroupHover>
+            <EditText
+            value={sectionName}
+            onChange={setSectionName}
+            resetable={initialSectionName}
+            Right={() => (
+                <IconContainer
+                onClick={onDeleteHandler}
+                invisible
+                hover
+                css={{
+                    cursor: "pointer"
+                }}>
+                    <MdDelete/>
+                </IconContainer>
+            )}
+            Left={() => (
+                <IconContainer
+                {...dragHandlerProps}
+                invisible
+                css={{
+                    cursor: isDragging ? "grabbing" : "grab",
+                }}>
+                    <MdDragHandle/>
+                </IconContainer>
+            )}/>
         </Title>
     );
 }

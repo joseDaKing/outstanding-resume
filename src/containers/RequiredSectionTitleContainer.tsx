@@ -6,11 +6,9 @@ import { useAppSelector } from "../store";
 
 import { MdDragHandle } from "react-icons/md";
 
-import { PlaceAside } from "../components/layout";
-
 import { useReorderItem } from "../components/misc";
 
-import { IconGroupHover, IconContainer } from "../components/primitives";
+import { IconContainer } from "../components/primitives";
 
 import { RequiredSliceGroupNames, requiredSliceGroups } from "../store/slices/orderableSections/required";
 
@@ -33,25 +31,20 @@ export function RequiredSectionTitleContainer<T extends RequiredSliceGroupNames>
     return (
         <Title 
         gutter>
-            <IconGroupHover 
-            inline>
-                <PlaceAside
-                align="start">
-                    <IconContainer
-                    {...dragHandlerProps}
-                    invisible
-                    css={{
-                        cursor: isDragging ? "grabbing" : "grab",
-                    }}>
-                        <MdDragHandle/>
-                    </IconContainer>
-                </PlaceAside>
-
-                <EditText
-                value={sectionName}
-                onChange={setSectionName}
-                resetable={initialSectionName}/>
-            </IconGroupHover>
+            <EditText
+            value={sectionName}
+            onChange={setSectionName}
+            resetable={initialSectionName}
+            Left={() => (
+                <IconContainer
+                {...dragHandlerProps}
+                invisible
+                css={{
+                    cursor: isDragging ? "grabbing" : "grab",
+                }}>
+                    <MdDragHandle/>
+                </IconContainer>
+            )}/>
         </Title>
     );
 }
