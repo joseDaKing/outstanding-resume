@@ -18,10 +18,10 @@ import { skill } from "./orderableSections/required/skill";
 
 const initialState = {
     items: [
-        workExperience["slice"]["name"],
-        education["slice"]["name"],
-        link["slice"]["name"],
-        skill["slice"]["name"],
+        workExperience.slice.name,
+        education.slice.name,
+        link.slice.name,
+        skill.slice.name,
     ] as Array<OrderableSliceGroupNames>
 };
 
