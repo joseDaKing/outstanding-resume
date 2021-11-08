@@ -2,11 +2,15 @@ import { Slice } from "@reduxjs/toolkit";
 
 import { Simplify } from "../misc";
 
-export type SliceGroup<T, K extends Slice, P extends object | never = never> = Simplify<{
+export type SliceGroup<T, K extends Slice, P extends object | undefined = undefined> = Simplify<{
     initialState: T;
     slice: K;
-} & ([P] extends [never] ? {} : { 
+} & ([P] extends [undefined] ? {} : { 
     initialItem: P;
 })>;
 
-export type SliceGroupBase = SliceGroup<any, Slice, Object>;
+export type SliceGroupBase = {
+    initialState: any;
+    slice: Slice;
+    initialItem?: Object;
+};
