@@ -34,16 +34,6 @@ const sectionMapping: SectionMapping = {
 export const OrderableSectionItem: React.FC<IID<OrderableSliceGroupNames>> = ({ id }) => {
 
     const SectionComponent = sectionMapping[id];
-
-    console.log(!!SectionComponent)
-
-    const { containerProps, dragHandlerProps } = useReorderItem();
-
-    return (
-        <div
-        {...dragHandlerProps}
-        {...containerProps}>
-
-        </div>
-    );
+    
+    return <SectionComponent/>;
 }
