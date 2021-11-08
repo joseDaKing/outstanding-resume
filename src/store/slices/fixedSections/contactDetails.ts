@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { SliceGroup } from "../../../types";
 
-import { setSectionNameReducer } from "../../utilities";
+import { setSectionNameReducer } from "../../../utilities";
 
 const initialState = {
     sectionName: "Kontaktuppgifter",
@@ -36,7 +37,7 @@ const slice = createSlice({
     }
 })
 
-export const contactDetails = {
+export const contactDetails: SliceGroup<typeof initialState, typeof slice> = {
     initialState,
     slice,
 }

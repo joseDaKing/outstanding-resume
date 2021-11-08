@@ -1,3 +1,10 @@
-export * from "./required";
+import { requiredSliceGroups } from "./required";
 
-export * from "./optional";
+import { optionalSliceGroups } from "./optional";
+
+export const orderableSliceGroups = {
+    ...requiredSliceGroups,
+    ...optionalSliceGroups
+}
+
+export type OrderableSliceGroupNames = keyof typeof orderableSliceGroups;

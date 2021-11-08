@@ -1,6 +1,7 @@
 import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
+import { SliceGroup } from "../../../../types";
 
 interface IEducationItem {
     school: string;
@@ -31,7 +32,7 @@ const slice = createSlice({
     reducers: createCRUDReducers(initialItem)
 });
 
-export const education = {
+export const education: SliceGroup<typeof initialState, typeof slice, typeof initialItem> = {
     initialState,
     initialItem,
     slice

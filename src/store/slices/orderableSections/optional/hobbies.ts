@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, Slice } from "@reduxjs/toolkit";
+import { SliceGroup } from "../../../../types";
 
 import { setSectionNameReducer, setDescripitonReducer } from "../../../../utilities";
 
@@ -22,7 +23,7 @@ const slice = createSlice({
     }
 });
 
-export const hobbies = {
+export const hobbies: SliceGroup<typeof initialState, typeof slice> = {
     initialState,
     slice,
 };
