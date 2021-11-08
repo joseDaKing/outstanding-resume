@@ -50,6 +50,13 @@ export const Skill: React.FC = () => {
 
                     <Level
                     {...bind("level")}
+                    levels={{
+                        0: "Nybörjare",
+                        1: "Nybörjare",
+                        2: "Skicklig",
+                        3: "Erfaren",
+                        4: "Expert",
+                    }}
                     label="Nivå"/>
                 </Stack>
             )}/>

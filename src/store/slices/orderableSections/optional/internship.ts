@@ -7,7 +7,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { SliceGroup } from "../../../../types";
 
 const initialState = {
-    sectionName: "Kurser",
+    sectionName: "Praktikplatser",
     items: {} as Record<string, typeof workExperience.initialItem>
 }
 

@@ -18,7 +18,7 @@ export const ProfessionalExperience: React.FC = () => {
 
     const dispatch = useAppDispatch()
 
-    const onChangeHandler = (description: string) => dispatch(professionalExperience.slice.actions.setSectionName(description));
+    const onChangeHandler = (description: string) => dispatch(professionalExperience.slice.actions.setDescription(description));
 
     return (
         <Box>

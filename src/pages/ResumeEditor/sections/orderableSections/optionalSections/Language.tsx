@@ -25,13 +25,20 @@ export const Language: React.FC = () => {
             Component={({ bind }) => (
                 <Stack
                 space="sm"
-                axis="y">
+                axis="x">
                     <TextField
                     {...bind("language")}
                     label="Språk"/>
 
                     <Level
                     {...bind("level")}
+                    levels={{
+                        0: "Nybörjare",
+                        1: "Nybörjare",
+                        2: "Skicklig",
+                        3: "Erfaren",
+                        4: "Expert",
+                    }}
                     label="Nivå"/>
                 </Stack>
             )}/>

@@ -39,6 +39,10 @@ export const Course: React.FC = () => {
                     </Stack>
 
                     <Stack
+                    css={{
+                        alignItems: "flex-end",
+                        width: "50%"
+                    }}
                     axis="x"
                     space="xs">
                         <TextField
