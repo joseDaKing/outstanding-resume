@@ -33,7 +33,7 @@ export const createCRUDReducers = <T>(initialItem: T) => ({
     
         const toIndex = itemsEntries.findIndex(([id]) => id === toId);
     
-        if (-1 < fromIndex && -1 < toIndex) {
+        if (-1 < fromIndex && -1 < toIndex && toIndex !== fromIndex) {
     
             state.items = Object.fromEntries(reorderArray(itemsEntries, fromIndex, toIndex));
         
