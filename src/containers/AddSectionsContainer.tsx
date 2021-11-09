@@ -50,7 +50,7 @@ const ListLabel: React.FC<IListLabelProps> = ({ label, onClick, disabled }) => {
 
 const sectionOrderActions = sectionOrder.slice.actions;
 
-export const AddSections: React.FC = () => {    
+export const AddSectionsContainer: React.FC = () => {    
 
     const dispatch = useAppDispatch();
 
