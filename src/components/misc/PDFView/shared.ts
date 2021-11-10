@@ -1,6 +1,6 @@
-import { PDFTemplate } from "../../../types";
+import { PDFComponent } from "../../../types";
 
 export interface IPDFViewSharedProps {
     scale?: number;
-    Document: PDFTemplate;
+    Document: PDFComponent;
 }

@@ -6,7 +6,7 @@ import { IOnChange, IValue } from "./Props";
 
 export type ArrayValues<T extends readonly any[]> = T[Extract<keyof T, `${number}`>];
 
-export type PDFTemplate<T extends {} = {}> = (props: T) => ReactElement<ReactPDF.DocumentProps, string | JSXElementConstructor<any>>;
+export type PDFComponent<T extends {} = {}> = (props: T) => ReactElement<ReactPDF.DocumentProps, string | JSXElementConstructor<any>>;
 
 export type Simplify<T> = {
     [K in keyof T]: T[K];
