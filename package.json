@@ -29,6 +29,7 @@
         "rooks": "^5.7.3",
         "slate": "^0.66.5",
         "slate-react": "^0.69.0",
+        "type-fest": "^2.5.3",
         "typescript": "^4.4.4",
         "uuid": "^8.3.2",
         "web-vitals": "^1.1.2"
