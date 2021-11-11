@@ -5,7 +5,7 @@ import { SliceGroup } from "../../../../types";
 import { setSectionNameReducer, setDescripitonReducer } from "../../../../utilities";
 
 const initialState = {
-    sectionName: "Yrkeserfarenhet",
+    sectionName: "Hobbies",
     description: ""
 }
 
