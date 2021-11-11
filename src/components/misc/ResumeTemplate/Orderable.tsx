@@ -6,7 +6,9 @@ import { View } from "@react-pdf/renderer";
 
 import { useAppSelector } from "../../../store";
 
-import { itemsContainerComponents } from "./itemsContainers"
+import { itemsContainers } from "./itemsContainers";
+
+import { HobbiesWrapper } from "./HobbiesWrapper";
 
 export const Orderable: React.FC<OrderableProps> = ({ sections, sectionStyle, containerStyle }) => {
 
@@ -39,7 +41,7 @@ export const Orderable: React.FC<OrderableProps> = ({ sections, sectionStyle, co
                         );
                     }
 
-                    const ItemsContainerWrapper = itemsContainerComponents[section];
+                    const ItemsContainerWrapper = itemsContainers[section];
 
                     return (
                         <View style={sectionStyle}>
