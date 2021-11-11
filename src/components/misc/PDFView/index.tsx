@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { IPDFViewSharedProps } from "./shared";
-
 import { PDFSkeleton } from "./PDFSkeleton";
 
 import { Box, Stack } from "../../layout";
@@ -11,6 +9,11 @@ import { usePDF } from "@react-pdf/renderer";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 
 import { Header } from "./Header";
+
+export interface IPDFViewSharedProps {
+    scale?: number;
+    Document: React.FC;
+}
 
 export const PDFView: React.FC<IPDFViewSharedProps> = ({ Document: PDF, scale }) => { 
 

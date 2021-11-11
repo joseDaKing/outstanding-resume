@@ -2,15 +2,15 @@ import React from "react";
 
 import { Box } from "../../layout";
 
-import { IPDFViewSharedProps } from "./shared";
-
-type PDFSkeletonProps = Required<Omit<IPDFViewSharedProps, "Document">>;
+interface IPDFSkeletonProps {
+    scale: number;
+}
 
 const A4_WIDTH_IN_PX = 595;
 
 const A4_HEIGHT_IN_PX = 842;
 
-export const PDFSkeleton: React.FC<PDFSkeletonProps> = ({ scale, children }) => {
+export const PDFSkeleton: React.FC<IPDFSkeletonProps> = ({ scale, children }) => {
 
     const width = scale * A4_WIDTH_IN_PX;
 
@@ -28,7 +28,7 @@ export const PDFSkeleton: React.FC<PDFSkeletonProps> = ({ scale, children }) => 
     );
 }
 
-export const PDFSkeletonError: React.FC<PDFSkeletonProps> = props => {
+export const PDFSkeletonError: React.FC<IPDFSkeletonProps> = props => {
 
     return (
         <PDFSkeleton

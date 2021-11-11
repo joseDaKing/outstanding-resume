@@ -1,6 +1,6 @@
 import { Slice } from "@reduxjs/toolkit";
 
-import { Simplify } from "../misc";
+import { Simplify } from "type-fest";
 
 export type SliceGroup<T, K extends Slice, P extends object | undefined = undefined> = Simplify<{
     initialState: T;
