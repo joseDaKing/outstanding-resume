@@ -3,10 +3,23 @@ import type { ReactElement, JSXElementConstructor } from "react";
 import ReactPDF from "@react-pdf/renderer";
 
 import { IOnChange, IValue } from "./Props";
+import { Merge } from "type-fest";
 
 export type ArrayValues<T extends readonly any[]> = T[Extract<keyof T, `${number}`>];
 
-export type PDFComponent<T extends {} = {}> = (props: T) => ReactElement<ReactPDF.DocumentProps, string | JSXElementConstructor<any>>;
+type PDFJSX = (
+    ReactElement<
+        ReactPDF.DocumentProps, 
+        string 
+        | JSXElementConstructor<any>
+    > 
+    | null 
+    | undefined
+);
+
+type PDFComponentPropsWithChildren<T extends {}> = Merge<{ children: PDFJSX; }, T>;
+
+export type PDFComponent<T extends {} = {}> = (props: PDFComponentPropsWithChildren<T>) => PDFJSX;
 
 export type Simplify<T> = {
     [K in keyof T]: T[K];
