@@ -96,3 +96,5 @@ export const useResumeTemplateContext = () => {
 
     return resumeProps;
 }
+
+export const ResumeSectionStyleContext = React.createContext<Style|undefined>({});

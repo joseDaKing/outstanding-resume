@@ -1,6 +1,6 @@
 import React from "react";
 
-import { OrderableProps, StyleProp, useResumeTemplateContext} from "./shared";
+import { OrderableProps, ResumeSectionStyleContext, StyleProp, useResumeTemplateContext} from "./shared";
 
 import { View } from "@react-pdf/renderer";
 
@@ -29,9 +29,10 @@ const OrderableSection: React.FC<OrderableSectionProps> = ({ sectionName, index,
     const Section = Sections[sectionName];
 
     return (
-        <View style={style}>
+        <ResumeSectionStyleContext.Provider 
+        value={style}>
             <Section/>
-        </View>
+        </ResumeSectionStyleContext.Provider>
     );
 }
 

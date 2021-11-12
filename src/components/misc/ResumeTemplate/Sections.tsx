@@ -1,8 +1,10 @@
-import React, { memo } from "react";
+import React, { useContext } from "react";
 
-import { ItemsSliceGroupNames, useResumeTemplateContext } from "./shared";
+import { View } from "@react-pdf/renderer";
 
 import { SectionsItems } from "./SectionItems";
+
+import { ItemsSliceGroupNames, ResumeSectionStyleContext, useResumeTemplateContext } from "./shared";
 
 function createSection<T extends ItemsSliceGroupNames>(type: T): React.FC {
 
@@ -10,7 +12,7 @@ function createSection<T extends ItemsSliceGroupNames>(type: T): React.FC {
 
         const { state } = useResumeTemplateContext();
 
-        const { sectionName } = state[type];
+        const { sectionName, items } = state[type];
 
         const SectionItems = SectionsItems[type];
 
@@ -18,10 +20,15 @@ function createSection<T extends ItemsSliceGroupNames>(type: T): React.FC {
 
         const SectionWrapper = SectionWrappers[type] as any;
 
+        const style = useContext(ResumeSectionStyleContext);
+        
         return (
-            <SectionWrapper
-            Items={SectionItems}
-            sectionName={sectionName}/>
+            <View 
+            style={style}>
+                <SectionWrapper
+                Items={SectionItems}
+                sectionName={sectionName}/>
+            </View>
         );
     };
 }
