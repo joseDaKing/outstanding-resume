@@ -7,3 +7,5 @@ export * from "./removeDuplicates";
 export * from "./reorder";
 
 export * from "./createReducersFromSliceGroups";
+
+export * from "./isStrArrayValid";
