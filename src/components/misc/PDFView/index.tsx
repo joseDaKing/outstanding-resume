@@ -10,24 +10,19 @@ import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 
 import { Header } from "./Header";
 
-import { useAppSelector } from "../../../store";
-
-import { useDebouncedValue } from "rooks";
-
 export interface IPDFViewSharedProps {
     scale?: number;
     Document: React.FC;
+    changes?: string[]
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ Document: PDF, scale }) => { 
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ Document: PDF, changes, scale }) => { 
 
     const [instance, updateInstance] = usePDF({
         document: <PDF/>
-    });  
+    });
 
-    const store = useAppSelector(store => JSON.stringify(store));
-
-    const change = useDebouncedValue(store, 700);
+    const change = JSON.stringify(changes ?? []);
 
     useEffect(() => updateInstance(), [change]);
 
