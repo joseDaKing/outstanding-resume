@@ -6,9 +6,9 @@ interface IPDFSkeletonProps {
     scale: number;
 }
 
-const A4_WIDTH_IN_PX = 595;
+const A4_WIDTH_IN_PX = 593;
 
-const A4_HEIGHT_IN_PX = 842;
+const A4_HEIGHT_IN_PX = 840;
 
 export const PDFSkeleton: React.FC<IPDFSkeletonProps> = ({ scale, children }) => {
 

@@ -4,29 +4,29 @@ import { PDFSkeleton } from "./PDFSkeleton";
 
 import { Box, Stack } from "../../layout";
 
-import { usePDF } from "@react-pdf/renderer";
+import { DocumentProps } from "react-pdf";
 
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 
+import { pdf } from "@react-pdf/renderer";
+
 import { Header } from "./Header";
+
+import { useAsync } from "react-use";
+
 
 export interface IPDFViewSharedProps {
     scale?: number;
     document: JSX.Element;
-    changes?: string[]
+    change: string[];
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scale }) => { 
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, change, scale }) => { 
 
-    const [instance, updateInstance] = usePDF({
-        document
-    });
-
-    const change = JSON.stringify(changes ?? []);
-
-    useEffect(() => updateInstance(), [change]);
-
-    const [isLoading, setIsLoading] = useState(true);
+    const [
+        isLoading,
+        setIsLoading
+    ] = useState(true);
 
     const [numberOfPages , setNumberOfPages] = useState(1);
     
@@ -34,12 +34,26 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scal
 
     const defaultedScale = scale ?? 0.5;
 
-    const nodData = (
+    const noData = (
         <PDFSkeleton
         scale={defaultedScale}/>
     );
 
-    return (
+    const onLoadSuccess: DocumentProps["onLoadSuccess"] = ({ numPages }) => setNumberOfPages(numPages);
+        
+    const onRenderSuccess = () => setIsLoading(false);
+
+    const { value: url } = useAsync(async () => {
+        
+        const blob = await pdf(document).toBlob();
+        
+        const url = URL.createObjectURL(blob);
+
+        return url;
+
+    }, [change.join("")]);
+
+    return ( 
         <Stack
         axis="y"
         align="center"
@@ -61,20 +75,20 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scal
                     userSelect: "none",
                     borderRadius: "$md",
                 }}>
-                    {instance.url ?
-                    <Document
-                    noData={nodData}
-                    loading={nodData}
-                    file={{ url: instance.url }}
-                    onLoadSuccess={({ numPages }) => setNumberOfPages(numPages)}>
+                    {url ?
+                    <Document                
+                    file={url}
+                    noData={noData}
+                    loading={noData}
+                    onLoadSuccess={onLoadSuccess}>
                         <Page
-                        onRenderSuccess={() => setIsLoading(false)}
-                        noData={nodData}
-                        loading={nodData}
+                        scale={defaultedScale}
+                        noData={noData}
+                        loading={noData}
                         pageNumber={currentPage}
-                        scale={defaultedScale}/>
+                        onRenderSuccess={onRenderSuccess}/>
                     </Document>
-                    : nodData}
+                    : noData}
                 </Box>
             </Box>
         </Stack>
