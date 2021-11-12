@@ -1,4 +1,4 @@
-export function isStrArrayValid(array: string[]) {
+export function isStrArrayValid(array: string[]): boolean {
 
     let isValid = false;
 
