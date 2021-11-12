@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { PDFSkeleton } from "./PDFSkeleton";
 
@@ -23,10 +23,9 @@ export interface IPDFViewSharedProps {
 
 export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, change, scale }) => { 
 
-    const [
-        isLoading,
-        setIsLoading
-    ] = useState(true);
+    const loading = useState(true);
+
+    const setIsLoading = loading[1];
 
     const [numberOfPages , setNumberOfPages] = useState(1);
     
