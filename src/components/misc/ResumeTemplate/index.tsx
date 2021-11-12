@@ -58,3 +58,7 @@ export const ResumeTemplate: React.FC<ResumeTemplateProps> = ({
         </Document>
     );
 }
+
+export type {
+    ResumeTemplateProps
+}
