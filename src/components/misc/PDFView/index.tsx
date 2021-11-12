@@ -12,14 +12,14 @@ import { Header } from "./Header";
 
 export interface IPDFViewSharedProps {
     scale?: number;
-    Document: React.FC;
+    document: JSX.Element;
     changes?: string[]
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ Document: PDF, changes, scale }) => { 
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scale }) => { 
 
     const [instance, updateInstance] = usePDF({
-        document: <PDF/>
+        document
     });
 
     const change = JSON.stringify(changes ?? []);
