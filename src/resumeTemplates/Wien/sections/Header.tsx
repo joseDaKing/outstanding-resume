@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Text } from "@react-pdf/renderer";
+
 import { ResumeTemplateProps } from "../../../components/misc";
 
 export const Header: ResumeTemplateProps["Header"] = ({ 
@@ -8,7 +10,11 @@ export const Header: ResumeTemplateProps["Header"] = ({
     jobTitle 
 }) => {
     return (
-        <>
-        </>
+        <Text
+        style={{
+            fontSize: 48
+        }}>
+            {firstName}
+        </Text>
     );
 };

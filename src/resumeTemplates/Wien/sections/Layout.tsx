@@ -10,7 +10,6 @@ export const Layout: ResumeTemplateProps["Layout"]  = ({
 }) => {
 
     return (
-        <>
-        </>
+        <Header/>
     );
 }

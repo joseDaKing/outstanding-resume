@@ -18,10 +18,10 @@ import { useAsync } from "react-use";
 export interface IPDFViewSharedProps {
     scale?: number;
     document: JSX.Element;
-    change: string[];
+    changes: Array<string>;
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, change, scale }) => { 
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scale }) => { 
 
     const loading = useState(true);
 
@@ -50,7 +50,7 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, change, scale
 
         return url;
 
-    }, [change.join("")]);
+    }, [changes.join("")]);
 
     return ( 
         <Stack

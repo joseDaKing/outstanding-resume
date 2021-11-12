@@ -26,6 +26,7 @@ export const ResumeTemplate: React.FC<ResumeTemplateProps> = ({
     ...ItemComponents
 }) => {
 
+
     const itemsComponents: ItemsComponents = {
         "work-experience": ItemComponents.WorkExperience,
         internship: ItemComponents.WorkExperience,
@@ -37,6 +38,7 @@ export const ResumeTemplate: React.FC<ResumeTemplateProps> = ({
         language: ItemComponents.Language,
         reference: ItemComponents.Reference
     }
+    
     return (
         <Document>
             <Page>

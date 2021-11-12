@@ -9,8 +9,11 @@ export const HobbiesWrapper: React.FC<StyleProp> = ({ style }) => {
     const { Description, state: { hobbies } } = useResumeTemplateContext();
 
     return (
-        <View style={style}>
-            <Description {...hobbies}/>
-        </View>
+        <>
+            {hobbies.description &&
+            <View style={style}>
+                <Description {...hobbies}/>
+            </View>}
+        </>
     );
 }

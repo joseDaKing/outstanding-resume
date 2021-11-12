@@ -1,5 +1,7 @@
 import React from "react";
 
+import { isStrArrayValid } from "../../../utilities";
+
 import { View } from "@react-pdf/renderer";
 
 import { StyleProp, useResumeTemplateContext } from "./shared";
@@ -23,9 +25,14 @@ export const ContactDetailsWrapper: React.FC<StyleProp> = ({ style }) => {
         ...rest
     }
 
+    const isValid = isStrArrayValid(Object.values(rest));
+
     return (
-        <View style={style}>
-            <ContactDetails {...contactDetailsProps}/>
-        </View>
+        <>
+            {isValid &&
+            <View style={style}>
+                <ContactDetails {...contactDetailsProps}/>
+            </View>}
+        </>
     );
-}
+};

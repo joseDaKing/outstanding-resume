@@ -1,24 +1,24 @@
 import React from "react";
 
-import { useDebouncedValue } from "rooks";
-
 import { useAppSelector } from "../../store";
 
 import { PDFView } from "../../components/misc";
 
 import { WienResumeTemplate } from "../../resumeTemplates";
 
+import { useDebouncedValue } from "rooks";
+
 export const View: React.FC = () => {
 
-    const store = useAppSelector(store => store); 
+    const initialStore = useAppSelector(store => store); 
 
-    const [ debouncedStore ] = useDebouncedValue(store, 750);
+    const [debouncedStore] = useDebouncedValue(initialStore, 750);
 
-    const debouncedStoreWithDefault = debouncedStore || store;
+    const store = debouncedStore ?? initialStore
 
     return (
         <PDFView
-        change={[JSON.stringify(debouncedStoreWithDefault)]}
+        changes={[JSON.stringify(store)]}
         document={<WienResumeTemplate {...store}/>}/>
     );
 }

@@ -1,12 +1,39 @@
 import React from "react";
 
-import { OrderableProps, useResumeTemplateContext} from "./shared";
+import { OrderableProps, StyleProp, useResumeTemplateContext} from "./shared";
 
 import { View } from "@react-pdf/renderer";
 
-import { itemsContainers } from "./itemsContainers";
+import { Sections } from "./Sections";
 
 import { HobbiesWrapper } from "./HobbiesWrapper";
+
+import { OrderableSliceGroupNames } from "../../../store/slices/orderableSections";
+
+type OrderableSectionProps = StyleProp & {
+    index: number;
+    sectionName: OrderableSliceGroupNames;
+}
+
+const OrderableSection: React.FC<OrderableSectionProps> = ({ sectionName, index, style }) => {
+
+    if (sectionName === "hobbies") {
+
+        return (
+            <View style={style}>
+                <HobbiesWrapper/>
+            </View>
+        );
+    }
+
+    const Section = Sections[sectionName];
+
+    return (
+        <View style={style}>
+            <Section/>
+        </View>
+    );
+}
 
 export const Orderable: React.FC<OrderableProps> = ({ sections, sectionStyle, containerStyle }) => {
 
@@ -19,34 +46,24 @@ export const Orderable: React.FC<OrderableProps> = ({ sections, sectionStyle, co
         sections = sectionOrder;
     }
 
-    const sectionsToRender = sections.filter(section => sectionOrder.includes(section));
+    const sectionNamesToRender = sections.filter(sectionName => sectionOrder.includes(sectionName));
 
     return (
         <>
-            {sectionsToRender.length &&
+            {sectionNamesToRender.length &&
             <View style={containerStyle}>
-                {sectionsToRender.map((section, index) => {
+                {sectionNamesToRender.map((sectionName, index) => {
 
                     if (typeof sectionStyle === "function") {
 
                         sectionStyle = sectionStyle(index);
                     }
 
-                    if (section === "hobbies") {
-
-                        return (
-                            <View style={sectionStyle}>
-                                <HobbiesWrapper/>
-                            </View>
-                        );
-                    }
-
-                    const ItemsContainerWrapper = itemsContainers[section];
-
                     return (
-                        <View style={sectionStyle}>
-                            <ItemsContainerWrapper/>
-                        </View>
+                        <OrderableSection
+                        index={index}
+                        style={sectionStyle}
+                        sectionName={sectionName}/>
                     );
                 })}
             </View>}

@@ -11,8 +11,11 @@ export const ProfessionalExperienceWrapper: React.FC<StyleProp> = ({ style }) =>
     const professionalExperienceProps = state["professional-experience"];
 
     return (
-        <View style={style}>
-            <Description {...professionalExperienceProps}/>
-        </View>
+        <>
+            {professionalExperienceProps.description &&
+            <View style={style}>
+                <Description {...professionalExperienceProps}/>
+            </View>}
+        </>
     );
-}
+};
