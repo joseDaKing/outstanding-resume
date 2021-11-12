@@ -17,15 +17,14 @@ import { ContactDetailsWrapper } from "./ContactDetailsWrapper";
 
 import { ProfessionalExperienceWrapper } from "./ProfessionalExperienceWrapper";
 
-export const ResumeTemplate: React.FC<ResumeTemplateProps> = props => {
-
-    const {
-        Layout,
-        Header,
-        ContactDetails,
-        Description,
-        ...ItemComponents
-    } = props
+export const ResumeTemplate: React.FC<ResumeTemplateProps> = ({
+    Layout,
+    Header,
+    ContactDetails,
+    Description,
+    state,
+    ...ItemComponents
+}) => {
 
     const itemsComponents: ItemsComponents = {
         "work-experience": ItemComponents.WorkExperience,
@@ -43,7 +42,10 @@ export const ResumeTemplate: React.FC<ResumeTemplateProps> = props => {
             <Page>
                 <ResumeTemplateContext.Provider 
                 value={{
-                    ...props,
+                    state,
+                    Header,
+                    ContactDetails,
+                    Description,
                     ...itemsComponents
                 }}>
                     <Layout

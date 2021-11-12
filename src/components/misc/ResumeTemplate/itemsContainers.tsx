@@ -1,7 +1,5 @@
 import React from "react";
 
-import { useAppSelector } from "../../../store";
-
 import { items } from "./items";
 
 import { ItemsSliceGroupNames, useResumeTemplateContext } from "./shared";
@@ -10,12 +8,9 @@ function createItemsContainer<T extends ItemsSliceGroupNames>(type: T): React.FC
 
     return () => {
 
-        const sectionName = useAppSelector(store => {
-        
-            const { sectionName } = store[type];
+        const { state } = useResumeTemplateContext();
 
-            return sectionName
-        });
+        const { sectionName } = state[type];
 
         const Items = items[type];
 

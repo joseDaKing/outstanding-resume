@@ -2,15 +2,13 @@ import React from "react";
 
 import { View } from "@react-pdf/renderer";
 
-import { useAppSelector } from "../../../store";
-
 import {  StyleProp, useResumeTemplateContext } from "./shared";
 
 export const ProfessionalExperienceWrapper: React.FC<StyleProp> = ({ style }) => {
 
-    const professionalExperienceProps = useAppSelector(store => store["professional-experience"]);
+    const { Description, state } = useResumeTemplateContext();
 
-    const { Description } = useResumeTemplateContext();
+    const professionalExperienceProps = state["professional-experience"];
 
     return (
         <View style={style}>

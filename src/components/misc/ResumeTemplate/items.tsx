@@ -4,11 +4,9 @@ import { View } from "@react-pdf/renderer";
 
 import { orderableSliceGroups } from "../../../store/slices/orderableSections";
 
-import { useAppSelector } from "../../../store";
-
 import { withId } from "../../../utilities";
 
-import { ItemsProps, ItemsSliceGroupNames } from "./shared";
+import { ItemsProps, ItemsSliceGroupNames, useResumeTemplateContext } from "./shared";
 
 type InitialItem<T extends ItemsSliceGroupNames> = (typeof orderableSliceGroups)[T]["initialItem"];
 
@@ -16,12 +14,9 @@ function createItems<T extends ItemsSliceGroupNames>(type: T): React.FC<ItemsPro
 
     return ({ style, children }) => {
 
-        const items = useAppSelector(store => {
-            
-            const { items } = store[type];
+        const { state } = useResumeTemplateContext();
 
-            return withId(items as any);
-        });
+        const items = withId(state[type].items as any);
 
         return (
             <View 

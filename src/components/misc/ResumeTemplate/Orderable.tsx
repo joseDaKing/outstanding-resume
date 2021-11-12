@@ -1,10 +1,8 @@
 import React from "react";
 
-import { OrderableProps} from "./shared";
+import { OrderableProps, useResumeTemplateContext} from "./shared";
 
 import { View } from "@react-pdf/renderer";
-
-import { useAppSelector } from "../../../store";
 
 import { itemsContainers } from "./itemsContainers";
 
@@ -12,7 +10,9 @@ import { HobbiesWrapper } from "./HobbiesWrapper";
 
 export const Orderable: React.FC<OrderableProps> = ({ sections, sectionStyle, containerStyle }) => {
 
-    const sectionOrder = useAppSelector(store => store["section-order"].items);
+    const { state } = useResumeTemplateContext();
+
+    const sectionOrder = state["section-order"].items;
 
     if (!sections) {
 

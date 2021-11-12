@@ -8,6 +8,8 @@ import { contactDetails } from "../../../store/slices/fixedSections/contactDetai
 
 import { OrderableSliceGroupNames, orderableSliceGroups } from "../../../store/slices/orderableSections";
 
+import { RootState } from "../../../store";
+
 type Style = Exclude<ReactPDF.ViewProps["style"], undefined>;
 
 export type StyleProp = {
@@ -54,6 +56,7 @@ type ItemsContainerProps<T> = {
 }
 
 export type ResumeTemplateProps = Simplify<{
+    state: RootState;
     Layout: React.FC<LayoutProps>
     Header: React.FC<HeaderProps>;
     ContactDetails: React.FC<ContactDetailsProps>;
@@ -73,8 +76,7 @@ export type ItemsComponents = {
     [K in ItemsSliceGroupNames]: Get<ResumeTemplateProps, PascalCase<K>>;
 }
 
-
-type ResumeTemplateContextType = null | (ItemsComponents & Pick<
+type ResumeTemplateContextType = null | (ItemsComponents & { state: RootState; } & Pick<
     ResumeTemplateProps, 
     "Header" 
     | "Description"
