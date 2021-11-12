@@ -11,7 +11,9 @@ import {
 } 
 from "./sections";
 
-import { AddSections } from "../../containers";
+import { AddSectionsContainer } from "../../containers";
+
+import { View } from "./View";
 
 export const ResumeEditor: React.FC = () => {
 
@@ -34,14 +36,14 @@ export const ResumeEditor: React.FC = () => {
                     
                     <OrderableSections/>
                     
-                    <AddSections/>
+                    <AddSectionsContainer/>
                 </Box>
 
                 <Box 
-                css={{
-                    backgroundColor: "$blue-gray-400"
+                css={{ 
+                    backgroundColor: "$blue-gray-400" 
                 }}>
-                    
+                    <View/>
                 </Box>
             </Stack>
         </Accordion>
