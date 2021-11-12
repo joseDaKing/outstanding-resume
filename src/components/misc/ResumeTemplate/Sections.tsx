@@ -6,6 +6,8 @@ import { SectionsItems } from "./SectionItems";
 
 import { ItemsSliceGroupNames, ResumeSectionStyleContext, useResumeTemplateContext } from "./shared";
 
+import { isItemsValid } from "../../../utilities/";
+
 function createSection<T extends ItemsSliceGroupNames>(type: T): React.FC {
 
     return () => {
@@ -22,13 +24,18 @@ function createSection<T extends ItemsSliceGroupNames>(type: T): React.FC {
 
         const style = useContext(ResumeSectionStyleContext);
         
+        const isValid = isItemsValid(items as any);
+
         return (
-            <View 
-            style={style}>
-                <SectionWrapper
-                Items={SectionItems}
-                sectionName={sectionName}/>
-            </View>
+            <>
+                {isValid &&
+                <View 
+                style={style}>
+                    <SectionWrapper
+                    Items={SectionItems}
+                    sectionName={sectionName}/>
+                </View>}
+            </>
         );
     };
 }
