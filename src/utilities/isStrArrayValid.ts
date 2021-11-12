@@ -1,15 +1,10 @@
 export function isStrArrayValid(array: string[]) {
 
-    let isValid = true;
+    let isValid = false;
 
     for (const item of array) {
 
-        isValid = isValid && !!item;
-
-        if (!isValid) {
-
-            break;
-        }
+        isValid = isValid || !!item;
     }
 
     return isValid;
