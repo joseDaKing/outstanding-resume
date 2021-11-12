@@ -9,3 +9,5 @@ export * from "./reorder";
 export * from "./createReducersFromSliceGroups";
 
 export * from "./isStrArrayValid";
+
+export * from "./isItemsValid";

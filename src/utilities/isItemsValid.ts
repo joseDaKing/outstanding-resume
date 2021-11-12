@@ -1,4 +1,4 @@
-export function isItemsvalid(items: Record<string, Record<string, string>>): boolean {
+export function isItemsValid(items: Record<string, Record<string, string>>): boolean {
     
     return !!Object.values(items).map(item => Object.values(item)).flat().join()
 }
