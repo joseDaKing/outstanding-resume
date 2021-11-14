@@ -14,43 +14,61 @@ import { Header } from "./Header";
 
 import { useAsync } from "react-use";
 
-
 export interface IPDFViewSharedProps {
     scale?: number;
     document: JSX.Element;
-    changes: Array<string>;
+    changes?: Array<string>;
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scale }) => { 
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scale = 0.5 }) => { 
 
     const loading = useState(true);
 
     const setIsLoading = loading[1];
 
-    const [numberOfPages , setNumberOfPages] = useState(1);
+    const [numberOfPages, setNumberOfPages] = useState(1);
     
     const [currentPage, setCurrentPage] = useState(1);
 
-    const defaultedScale = scale ?? 0.5;
-
     const noData = (
         <PDFSkeleton
-        scale={defaultedScale}/>
+        scale={scale}/>
     );
+
+    const pdfViewProps = {
+        error: noData,
+        noData: noData,
+        loading: noData,
+    }
 
     const onLoadSuccess: DocumentProps["onLoadSuccess"] = ({ numPages }) => setNumberOfPages(numPages);
         
     const onRenderSuccess = () => setIsLoading(false);
 
-    const { value: url } = useAsync(async () => {
-        
-        const blob = await pdf(document).toBlob();
-        
-        const url = URL.createObjectURL(blob);
+    const result = useAsync(async () => { 
 
-        return url;
+        try {
 
-    }, [changes.join("")]);
+            if (!document) {
+
+                return null;
+            }
+
+            console.log(document);
+
+            const blob = await pdf(document).toBlob();
+            
+            const url = URL.createObjectURL(blob);
+    
+            return { url };
+        }
+        catch(error) {
+
+            console.log(error);
+
+            throw error;
+        }
+    }, [document]);
 
     return ( 
         <Stack
@@ -74,20 +92,20 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scal
                     userSelect: "none",
                     borderRadius: "$md",
                 }}>
-                    {url ?
-                    <Document                
-                    file={url}
-                    noData={noData}
-                    loading={noData}
+
+                    {result.value ?
+                    <Document  
+                    {...pdfViewProps}      
+                    file={result.value}
                     onLoadSuccess={onLoadSuccess}>
                         <Page
-                        scale={defaultedScale}
-                        noData={noData}
-                        loading={noData}
+                        {...pdfViewProps}
+                        scale={scale}
                         pageNumber={currentPage}
                         onRenderSuccess={onRenderSuccess}/>
-                    </Document>
-                    : noData}
+                    </Document> : null}
+
+                    {(result.loading || result.error) ? noData : null}
                 </Box>
             </Box>
         </Stack>
