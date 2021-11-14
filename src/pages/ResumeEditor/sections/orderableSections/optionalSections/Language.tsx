@@ -21,13 +21,13 @@ export const Language: React.FC = () => {
             <ItemsContainer
             section="language"
             buttonLabel="Lägg till språk"
-            accordionLabel={({ language }) => language || "(Ej specificerat)"}
+            accordionLabel={({ name }) => name || "(Ej specificerat)"}
             Component={({ bind }) => (
                 <Stack
                 space="sm"
                 axis="x">
                     <TextField
-                    {...bind("language")}
+                    {...bind("name")}
                     label="Språk"/>
 
                     <Level
