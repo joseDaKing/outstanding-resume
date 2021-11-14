@@ -1,24 +1,19 @@
 import { createResetableCRUDReducers } from "../../../../utilities";
 
-import { LevelValue } from "../../../../components/form";
-
 import { createSlice } from "@reduxjs/toolkit";
 
 import { SliceGroup } from "../../../../types";
 
-interface ILanguageItem {
-    language: string;
-    level: LevelValue;
-}
+import { ISkillItem } from "../required/skill";
 
-const initialItem: ILanguageItem = {
-    language: "",
+const initialItem: ISkillItem = {
+    name: "",
     level: 0
 }
 
 const initialState = {
     sectionName: "Språk",
-    items: {} as Record<string, ILanguageItem>
+    items: {} as Record<string, ISkillItem>
 }
 
 const slice = createSlice({

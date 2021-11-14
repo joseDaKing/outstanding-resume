@@ -6,7 +6,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { SliceGroup } from "../../../../types";
 
-interface ISkillItem {
+export interface ISkillItem {
     name: string;
     level: LevelValue;
 }
