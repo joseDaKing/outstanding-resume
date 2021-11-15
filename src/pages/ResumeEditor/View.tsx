@@ -18,7 +18,10 @@ export const View: React.FC = () => {
 
     const template = useMemo(() => {
         return <Berlin {...(debouncedStore as any)}/>
+    
+    /* eslint-disable */
     }, [JSON.stringify(debouncedStore)]);
+    /* eslint-enable */
 
     return (
         <PDFView
