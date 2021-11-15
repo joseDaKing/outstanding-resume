@@ -72,6 +72,7 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => {
         align="center"
         css={{
             height: "100%",
+            flexBasis: "100%",
             alignItems: "center",
         }}>
             <Box
