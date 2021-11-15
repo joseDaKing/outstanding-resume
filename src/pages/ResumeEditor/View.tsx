@@ -6,28 +6,16 @@ import { PDFView } from "../../components/misc";
 
 import { Berlin } from "../../resumes";
 
-import { useAppSelector } from "../../store";
+import { RootState, useAppSelector } from "../../store";
 
 import { Box, Stack } from "../../components/layout";
 
 import { Button } from "../../components/form";
 
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { useNavigate } from "react-router";
 
-export const View: React.FC = () => {
-
-    const store = useAppSelector(store => store);
-
-    const [debouncedStore] = useDebouncedValue(store, 1000, {
-        initializeWithNull: false
-    });
-
-    const resume = useMemo(() => {
-        return <Berlin {...(debouncedStore as any)}/>
-    
-    /* eslint-disable */
-    }, [JSON.stringify(debouncedStore)]);
-    /* eslint-enable */
+const getFileName = (store: RootState) => {
 
     const { firstName, lastName } = store["contact-details"].fields;
 
@@ -46,6 +34,30 @@ export const View: React.FC = () => {
         fileName = `${lastName}`;
     }
 
+    return fileName;
+}
+
+export const View: React.FC = () => {
+
+    const store = useAppSelector(store => store);
+
+    const [debouncedStore] = useDebouncedValue(store, 1000, {
+        initializeWithNull: false
+    });
+
+    const resume = useMemo(() => {
+        return <Berlin {...(debouncedStore as any)}/>
+    
+    /* eslint-disable */
+    }, [JSON.stringify(debouncedStore)]);
+    /* eslint-enable */
+
+    const fileName = getFileName(store);
+
+    const navigator = useNavigate();
+
+    const onClickHandler = () => navigator("/view");
+
     return (
         <Stack 
         css={{
@@ -53,6 +65,7 @@ export const View: React.FC = () => {
         }}
         axis="y">
             <PDFView
+            onClick={onClickHandler}
             document={resume}/>
 
             <Box 
