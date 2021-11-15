@@ -2,7 +2,7 @@ import "./globalStyles";
 
 import React from "react";
 
-import { ResumeEditor } from "./pages";
+import { ResumeEditor, View } from "./pages";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export const App: React.FC = () => {
 
             <Route 
             path="/view"
-            element={<ResumeEditor/>}/>
+            element={<View/>}/>
         </Routes>
     );
 }
