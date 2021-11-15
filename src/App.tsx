@@ -13,6 +13,10 @@ export const App: React.FC = () => {
             <Route 
             path="/"
             element={<ResumeEditor/>}/>
+
+            <Route 
+            path="/view"
+            element={<ResumeEditor/>}/>
         </Routes>
     );
 }
