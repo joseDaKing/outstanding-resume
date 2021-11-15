@@ -15,8 +15,7 @@ export const Layout: IResumeTemplateProps["Layout"]  = ({
         <View 
         style={{
             width: "100vw",
-            height: "100vh",
-            backgroundColor: "red"
+            height: "100vh"
         }}>
             <Header/>
         </View>
