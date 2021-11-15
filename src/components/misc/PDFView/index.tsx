@@ -20,7 +20,6 @@ export interface IPDFViewSharedProps {
     document: JSX.Element;
 }
 
-/* eslint-disable */
 export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => { 
 
     const [isLoading, setIsLoading] = useState(true);
