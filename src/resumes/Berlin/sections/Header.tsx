@@ -10,10 +10,6 @@ export const Header: IResumeTemplateProps["Header"] = ({
     jobTitle 
 }) => {
 
-    console.log("firstName: ", firstName);
-    console.log("lastName: ", lastName);
-    console.log("jobTitle: ", jobTitle);
-
     return (
         <View>
             <Text>
