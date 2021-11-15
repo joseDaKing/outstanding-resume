@@ -168,6 +168,7 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, onClick }) =>
                     </AnimatePresence>
 
                     <Stack
+                    onClick={onClick}
                     align="center" 
                     css={{
                         _inset: "0px",
@@ -175,7 +176,7 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, onClick }) =>
                         position: "absolute",
                         zIndex: "$50",
                     }}>
-                        <IconContainer onClick={onClick}>
+                        <IconContainer>
                             <MdOpenInFull size={28}/>
                         </IconContainer>
                     </Stack>
