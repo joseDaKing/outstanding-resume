@@ -4,6 +4,17 @@ import React from "react";
 
 import { ResumeEditor } from "./pages";
 
-export const App: React.FC = () => <ResumeEditor/>
+import { Routes, Route } from "react-router-dom";
+
+export const App: React.FC = () => {
+    
+    return (
+        <Routes>
+            <Route 
+            path="/"
+            element={<ResumeEditor/>}/>
+        </Routes>
+    );
+}
 
 export default App;
