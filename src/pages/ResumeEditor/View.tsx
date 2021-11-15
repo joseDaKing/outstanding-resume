@@ -8,6 +8,12 @@ import { Berlin } from "../../resumes";
 
 import { useAppSelector } from "../../store";
 
+import { Box, Stack } from "../../components/layout";
+
+import { Button } from "../../components/form";
+
+import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
+
 export const View: React.FC = () => {
 
     const store = useAppSelector(store => store);
@@ -16,15 +22,59 @@ export const View: React.FC = () => {
         initializeWithNull: false
     });
 
-    const template = useMemo(() => {
+    const resume = useMemo(() => {
         return <Berlin {...(debouncedStore as any)}/>
     
     /* eslint-disable */
     }, [JSON.stringify(debouncedStore)]);
     /* eslint-enable */
 
+    const { firstName, lastName } = store["contact-details"].fields;
+
+    let fileName = "resume";
+
+    if (firstName && lastName) {
+
+        fileName = `${firstName}_${lastName}`;
+    }
+    else if (firstName) {
+
+        fileName = `${firstName}`;
+    }
+    else if (lastName) {
+
+        fileName = `${lastName}`;
+    }
+
     return (
-        <PDFView
-        document={template}/>
+        <Stack 
+        css={{
+            height: "100%"
+        }}
+        axis="y">
+            <PDFView
+            document={resume}/>
+
+            <Box 
+            css={{
+                _marginY: "$4",
+                flexBasis: 0,
+                textAlign: "center"
+            }}>
+                <PDFDownloadLink 
+                document={resume}>
+                    {({ url }) => (
+                        <a
+                        download={fileName}
+                        href={url ?? ""}>
+                            <Button
+                            inline>
+                                Ladda ner (PDF)
+                            </Button>
+                        </a>
+                    )}
+                </PDFDownloadLink>
+            </Box>
+        </Stack>
     );
 }
