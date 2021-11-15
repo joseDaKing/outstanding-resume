@@ -12,7 +12,7 @@ import { Box, Stack } from "../../components/layout";
 
 import { Button } from "../../components/form";
 
-import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export const View: React.FC = () => {
 
