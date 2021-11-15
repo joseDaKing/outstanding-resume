@@ -16,11 +16,26 @@ import { useBoundingclientrectRef, useMediaMatch, usePreviousDifferent } from "r
 
 import { AnimatePresence, motion } from "framer-motion";
 
+import { MdOpenInFull } from "react-icons/md";
+
+import { styled } from "../../../stitches";
+
+const IconContainer = styled(Stack, {
+    _size: "$12",
+    color: "white",
+    alignItems: "center",
+    borderRadius: "$full",
+    backgroundColor: "$light-blue-400",
+    transitionDuration: "$100",
+    transitionProperty: "all",
+});
+
 export interface IPDFViewSharedProps {
     document: JSX.Element;
+    onClick?: () => void;
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => { 
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, onClick }) => { 
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -62,8 +77,10 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => {
         containerHeight,
         containerWidth,
         isLandscape,
-        baseScale: 0.5
+        baseScale: 0.5,
     });
+
+    const clickable = !!onClick;
 
     return ( 
         <Stack
@@ -91,7 +108,17 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => {
                     borderRadius: "$md",
                     position: "relative",
                     width, 
-                    height
+                    height,
+                    cursor: clickable ? "pointer" : "default",
+                    [`& ${IconContainer}`]: {
+                        opacity: 0,
+                        transform: "scale(0)",
+                        display: clickable ? "flex" : "none"
+                    },
+                    [`&:hover ${IconContainer}`]: {
+                        opacity: 1,
+                        transform: "scale(1)"
+                    }
                 }}>
                     <PDFSkeleton
                     width={width}
@@ -139,6 +166,19 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => {
                             onRenderSuccess={onPDFRenderSuccess}/>
                         </Box>
                     </AnimatePresence>
+
+                    <Stack
+                    align="center" 
+                    css={{
+                        _inset: "0px",
+                        alignItems: "center",
+                        position: "absolute",
+                        zIndex: "$50",
+                    }}>
+                        <IconContainer onClick={onClick}>
+                            <MdOpenInFull size={28}/>
+                        </IconContainer>
+                    </Stack>
                 </Box>
             </Box>
         </Stack>
