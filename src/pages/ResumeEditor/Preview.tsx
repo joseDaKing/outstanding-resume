@@ -13,6 +13,7 @@ import { Box, Stack } from "../../components/layout";
 import { Button } from "../../components/form";
 
 import { PDFDownloadLink } from "@react-pdf/renderer";
+
 import { useNavigate } from "react-router";
 
 const getFileName = (store: RootState) => {
@@ -37,7 +38,7 @@ const getFileName = (store: RootState) => {
     return fileName;
 }
 
-export const View: React.FC = () => {
+export const Preview: React.FC = () => {
 
     const store = useAppSelector(store => store);
 

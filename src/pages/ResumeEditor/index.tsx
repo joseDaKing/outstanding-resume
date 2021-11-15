@@ -13,7 +13,7 @@ from "./sections";
 
 import { AddSectionsContainer } from "../../containers";
 
-import { View } from "./View";
+import { Preview } from "./Preview";
 
 export const ResumeEditor: React.FC = () => {
 
@@ -43,7 +43,7 @@ export const ResumeEditor: React.FC = () => {
                 css={{ 
                     backgroundColor: "$blue-gray-400" 
                 }}>
-                    <View/>
+                    <Preview/>
                 </Box>
             </Stack>
         </Accordion>
