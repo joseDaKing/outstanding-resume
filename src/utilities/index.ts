@@ -9,3 +9,5 @@ export * from "./reorder";
 export * from "./createReducersFromSliceGroups";
 
 export * from "./isObjectValid";
+
+export * from "./getFileName";
