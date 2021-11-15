@@ -6,7 +6,7 @@ import { useReorderItem } from "../../../../../components/misc";
 
 import { ItemsContainer, OptionalSectionTitleContainer } from "../../../../../containers";
 
-import { WorkExperienceItemComponent, workExperienceItemLabel } from "../shared";
+import { WorkExperienceItem, workExperienceItemLabel } from "../shared";
 
 export const Intership: React.FC = () => {
 
@@ -22,7 +22,7 @@ export const Intership: React.FC = () => {
             section="internship"
             buttonLabel="Lägg till praktikplats"
             accordionLabel={workExperienceItemLabel}
-            Component={props => <WorkExperienceItemComponent {...props}/>}/>
+            Component={props => <WorkExperienceItem {...props}/>}/>
             
             <br/>
         </Box>

@@ -1,4 +1,4 @@
-import { workExperience } from "../../../../../store/slices/orderableSections/required/workExperience"
+import { workExperience } from "../../../../../store/slices/orderableSections/required/workExperience";
 
 export const workExperienceItemLabel = ({ jobTitle, employer }: typeof workExperience.initialItem): string => {
 

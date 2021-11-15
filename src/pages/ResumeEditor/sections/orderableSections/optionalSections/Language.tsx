@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Level, TextField } from "../../../../../components/form";
-
-import { Box, Stack } from "../../../../../components/layout";
+import { Box } from "../../../../../components/layout";
 
 import { useReorderItem } from "../../../../../components/misc";
 
 import { ItemsContainer, OptionalSectionTitleContainer } from "../../../../../containers";
+
+import { skillLabel, SkillItem } from "../shared";
 
 export const Language: React.FC = () => {
 
@@ -21,27 +21,8 @@ export const Language: React.FC = () => {
             <ItemsContainer
             section="language"
             buttonLabel="Lägg till språk"
-            accordionLabel={({ name }) => name || "(Ej specificerat)"}
-            Component={({ bind }) => (
-                <Stack
-                space="sm"
-                axis="x">
-                    <TextField
-                    {...bind("name")}
-                    label="Språk"/>
-
-                    <Level
-                    {...bind("level")}
-                    levels={{
-                        0: "Nybörjare",
-                        1: "Nybörjare",
-                        2: "Skicklig",
-                        3: "Erfaren",
-                        4: "Expert",
-                    }}
-                    label="Nivå"/>
-                </Stack>
-            )}/>
+            accordionLabel={skillLabel}
+            Component={props => <SkillItem {...props}/>}/>
 
             <br/>
         </Box>

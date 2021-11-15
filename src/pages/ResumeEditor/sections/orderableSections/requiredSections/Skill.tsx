@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Level, Switch, TextField } from "../../../../../components/form";
+import { Switch } from "../../../../../components/form";
 
-import { Box, Stack } from "../../../../../components/layout";
+import { Box } from "../../../../../components/layout";
 
 import { useReorderItem } from "../../../../../components/misc";
 
@@ -11,6 +11,8 @@ import { ItemsContainer, RequiredSectionTitleContainer } from "../../../../../co
 import { useAppDispatch, useAppSelector } from "../../../../../store";
 
 import { skill } from "../../../../../store/slices/orderableSections/required/skill";
+
+import { skillLabel, SkillItem } from "../shared";
 
 export const Skill: React.FC = () => {
 
@@ -39,27 +41,8 @@ export const Skill: React.FC = () => {
             <ItemsContainer
             section="skill"
             buttonLabel="Lägg till kompetens"
-            accordionLabel={({ name }) => name || "(Ej specificerat)"}
-            Component={({ bind }) => (
-                <Stack
-                space="sm"
-                axis="x">
-                    <TextField
-                    {...bind("name")}
-                    label="Färdight"/>
-
-                    <Level
-                    {...bind("level")}
-                    levels={{
-                        0: "Nybörjare",
-                        1: "Nybörjare",
-                        2: "Skicklig",
-                        3: "Erfaren",
-                        4: "Expert",
-                    }}
-                    label="Nivå"/>
-                </Stack>
-            )}/>
+            accordionLabel={skillLabel}
+            Component={props => <SkillItem {...props}/>}/>
 
             <br/>
         </Box>

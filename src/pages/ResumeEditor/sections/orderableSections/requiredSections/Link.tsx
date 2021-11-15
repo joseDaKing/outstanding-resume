@@ -8,6 +8,29 @@ import { useReorderItem } from "../../../../../components/misc";
 
 import { ItemsContainer, RequiredSectionTitleContainer } from "../../../../../containers";
 
+import { link } from "../../../../../store/slices/orderableSections/required/link";
+
+import { Bind } from "../../../../../types";
+
+const linkLabel = ({ label }: typeof link["initialItem"]) => label || "(Ej specificerat)";
+
+const LinkItem: React.FC<{ bind: Bind<typeof link["initialItem"]>}> = ({ bind }) => {
+
+    return (
+        <Stack
+        axis="x"
+        space="sm">
+            <TextField
+            {...bind("label")}
+            label="Etikett"/>
+    
+            <TextField
+            {...bind("url")}
+            label="Länk"/>
+        </Stack>
+    );
+}
+
 export const Link: React.FC = () => {
 
     const { containerProps } = useReorderItem();
@@ -21,20 +44,8 @@ export const Link: React.FC = () => {
             <ItemsContainer
             section="link"
             buttonLabel="Lägg till länk"
-            accordionLabel={({ label }) => label || "(Ej specificerat)"}
-            Component={({ bind }) => (
-                <Stack
-                axis="x"
-                space="sm">
-                    <TextField
-                    {...bind("label")}
-                    label="Etikett"/>
-
-                    <TextField
-                    {...bind("url")}
-                    label="Länk"/>
-                </Stack>
-            )}/>
+            accordionLabel={linkLabel}
+            Component={LinkItem}/>
 
             <br/>
         </Box>

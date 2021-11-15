@@ -6,7 +6,7 @@ import { Stack } from "../../../../../components/layout";
 
 import { ItemComponent } from "../../../../../containers";
 
-export const WorkExperienceItemComponent: ItemComponent<"work-experience"> = ({ bind }) => {
+export const WorkExperienceItem: ItemComponent<"work-experience"> = ({ bind }) => {
 
     return (
         <Stack
