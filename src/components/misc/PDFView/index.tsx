@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { PDFSkeleton } from "./PDFSkeleton";
-
 import { Box, Stack } from "../../layout";
 
 import { DocumentProps } from "react-pdf";
@@ -14,64 +12,63 @@ import { Header } from "./Header";
 
 import { useAsync } from "react-use";
 
+import { useBoundingclientrectRef, useMediaMatch, usePreviousDifferent } from "rooks";
+
+import { AnimatePresence, motion } from "framer-motion";
+
 export interface IPDFViewSharedProps {
-    scale?: number;
     document: JSX.Element;
-    changes?: Array<string>;
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scale = 0.5 }) => { 
+/* eslint-disable */
+export const PDFView: React.FC<IPDFViewSharedProps> = ({ document }) => { 
 
-    const loading = useState(true);
-
-    const setIsLoading = loading[1];
+    const [isLoading, setIsLoading] = useState(true);
 
     const [numberOfPages, setNumberOfPages] = useState(1);
     
     const [currentPage, setCurrentPage] = useState(1);
 
-    const noData = (
-        <PDFSkeleton
-        scale={scale}/>
-    );
-
-    const pdfViewProps = {
-        error: noData,
-        noData: noData,
-        loading: noData,
-    }
-
-    const onLoadSuccess: DocumentProps["onLoadSuccess"] = ({ numPages }) => setNumberOfPages(numPages);
+    const onPDFLoadSuccess: DocumentProps["onLoadSuccess"] = ({ numPages }) => setNumberOfPages(numPages);
         
-    const onRenderSuccess = () => setIsLoading(false);
+    const onPDFRenderSuccess = () => setIsLoading(false);
 
     const result = useAsync(async () => { 
 
-        try {
+        setIsLoading(true);
 
-            if (!document) {
+        if (!document) {
 
-                return null;
-            }
-
-            console.log(document);
-
-            const blob = await pdf(document).toBlob();
-            
-            const url = URL.createObjectURL(blob);
-    
-            return { url };
+            return null;
         }
-        catch(error) {
 
-            console.log(error);
+        const blob = await pdf(document).toBlob();
+        
+        const url = URL.createObjectURL(blob);
 
-            throw error;
-        }
+        return { url };
     }, [document]);
+
+    const prevResult = usePreviousDifferent(result);
+
+    const [ref, containerRect] = useBoundingclientrectRef();
+    
+    const containerWidth = containerRect?.width ?? 1;
+
+    const containerHeight = containerRect?.height ?? 1;
+
+    const isLandscape = useMediaMatch("(orientation: landscape)");
+
+    const { scale, width, height } = getScale({
+        containerHeight,
+        containerWidth,
+        isLandscape,
+        baseScale: 0.5
+    });
 
     return ( 
         <Stack
+        ref={ref}
         axis="y"
         align="center"
         css={{
@@ -82,6 +79,7 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scal
             as="span" 
             inline>  
                 <Header
+                isLoading={isLoading}
                 setCurrentPageNumber={setCurrentPage}
                 currentPageNumber={currentPage}
                 numberOfPages={numberOfPages}/>
@@ -91,23 +89,167 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, changes, scal
                     overflow: "hidden",
                     userSelect: "none",
                     borderRadius: "$md",
+                    position: "relative",
+                    width, 
+                    height
                 }}>
+                    <PDFSkeleton
+                    width={width}
+                    height={height}/>
 
-                    {result.value ?
-                    <Document  
-                    {...pdfViewProps}      
-                    file={result.value}
-                    onLoadSuccess={onLoadSuccess}>
-                        <Page
-                        {...pdfViewProps}
+                    <Box 
+                    css={{
+                        position: "absolute",
+                        zIndex: "$10"
+                    }}>
+                        <DocumentContainer
                         scale={scale}
-                        pageNumber={currentPage}
-                        onRenderSuccess={onRenderSuccess}/>
-                    </Document> : null}
+                        file={prevResult?.value}
+                        currentPage={currentPage}/>
+                    </Box>
 
-                    {(result.loading || result.error) ? noData : null}
+                    <AnimatePresence exitBeforeEnter>
+                        <Box
+                        key={result.value?.url}
+                        as={motion.div}
+                        css={{
+                            position: "relative",
+                            zIndex: "$20"
+                        }}
+                        variants={{
+                            open: { 
+                                opacity: 1
+                            },
+                            hidden: {
+                                opacity: 0
+                            }
+                        }}
+                        initial="hidden"
+                        animate="open"
+                        exit="hidden"
+                        transition={{ 
+                            duration: 0.5, 
+                            delay: 0.25
+                        }}>
+                            <DocumentContainer
+                            scale={scale}
+                            file={result.value}
+                            currentPage={currentPage}
+                            onLoadSuccess={onPDFLoadSuccess}
+                            onRenderSuccess={onPDFRenderSuccess}/>
+                        </Box>
+                    </AnimatePresence>
                 </Box>
             </Box>
         </Stack>
+    );
+}
+
+
+
+const BASE_WIDTH = 350;
+
+const BASE_HEIGHT = 578;
+
+const A4_WIDTH_IN_PX = 593;
+
+const A4_HEIGHT_IN_PX = 840;
+
+interface IGetScaleArgs {
+    containerWidth: number;
+    containerHeight: number;
+    isLandscape: boolean;
+    canBeVertical?: boolean;
+    baseScale?: number;
+}
+
+function getScale({ 
+    containerWidth,
+    containerHeight,
+    isLandscape,
+    baseScale = 0.4,
+    canBeVertical = true
+}: IGetScaleArgs) {
+
+    const scaleVertical = containerWidth / BASE_WIDTH * baseScale;
+
+    const scaleHorizontal = containerHeight / BASE_HEIGHT * baseScale;
+
+    const scale = (!isLandscape && canBeVertical) ? scaleVertical : scaleHorizontal;
+
+    return {
+        scale,
+        width: A4_WIDTH_IN_PX * scale,
+        height: A4_HEIGHT_IN_PX * scale
+    };
+}
+
+
+
+interface IPDFSkeletonProps {
+    height: number;
+    width: number;
+}
+
+function PDFSkeleton({ height, width }: IPDFSkeletonProps) {
+
+    return (
+        <Box
+        css={{
+            backgroundColor: "white",
+            position: "absolute",
+            width,
+            height
+        }}/>
+    );
+}
+
+
+
+interface IDocumentContainerProps {
+    scale?: number; 
+    width?: number;
+    height?: number;
+    currentPage: number;
+    onLoadSuccess?: DocumentProps["onLoadSuccess"];
+    onRenderSuccess?: () => void;
+    file?: {
+        url: string;
+    } | null;
+}
+
+function DocumentContainer({ 
+    scale,
+    width,
+    height,
+    currentPage,
+    onLoadSuccess,
+    onRenderSuccess,
+    file
+}: IDocumentContainerProps) {
+
+    const pdfViewProps = {
+        error: "",
+        noData: "",
+        loading: "",
+    }
+
+    return (
+        <>
+            {!!file && 
+            <Document
+            {...pdfViewProps}
+            file={file}
+            onLoadSuccess={onLoadSuccess}>
+                <Page
+                {...pdfViewProps}
+                scale={scale}
+                width={width}
+                height={height}
+                pageNumber={currentPage}
+                
+                onRenderSuccess={onRenderSuccess}/>
+            </Document>}
+        </>
     );
 }
