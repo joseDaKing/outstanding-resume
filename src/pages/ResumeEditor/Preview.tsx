@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import { useDebouncedValue } from "rooks";
 
-import { PDFView } from "../../components/misc";
+import { Paginator, PDFView, usePDFView } from "../../components/misc";
 
 import { Berlin } from "../../resumes";
 
@@ -39,6 +39,8 @@ export const Preview: React.FC = () => {
 
     const onClickHandler = () => navigator("/view");
 
+    const pdfViewProps = usePDFView();
+
     return (
         <Stack 
         css={{
@@ -47,10 +49,15 @@ export const Preview: React.FC = () => {
         }}
         axis="y">
             
-            <PDFView
-            currentPage={1}
-            onClick={onClickHandler}
-            document={resume}/>
+            <Box>
+                <Paginator
+                {...pdfViewProps}/>
+
+                <PDFView
+                {...pdfViewProps}
+                onClick={onClickHandler}
+                document={resume}/>
+            </Box>
 
             <Box 
             css={{

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 import { Stack, Box } from "../components/layout";
 
-import { PDFView } from "../components/misc";
+import { Paginator, PDFView, usePDFView } from "../components/misc";
 
 import { useDebouncedValue } from "rooks";
 
@@ -40,6 +40,8 @@ export const View: React.FC = () => {
     const navigator = useNavigate();
 
     const onClickHandler = () => navigator("/");
+
+    const pdfViewProps = usePDFView();
 
     return (
         <Stack
@@ -120,8 +122,19 @@ export const View: React.FC = () => {
                 padding: "$8",
                 overflowY: "scroll"
             }}>
+                <Box
+                css={{
+                    top: 0,
+                    zIndex: "$50",
+                    position: "sticky"
+                }}>
+                    <Paginator 
+                    black
+                    {...pdfViewProps}/>
+                </Box>
+
                 <PDFView
-                currentPage={1}
+                {...pdfViewProps}
                 scale={1.4}
                 document={resume}/>
             </Box>
