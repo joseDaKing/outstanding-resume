@@ -6,7 +6,7 @@ import { Paginator, PDFView, usePDFView } from "../../components/misc";
 
 import { Berlin } from "../../resumes";
 
-import { RootState, useAppSelector } from "../../store";
+import { useAppSelector } from "../../store";
 
 import { Box, Stack } from "../../components/layout";
 
