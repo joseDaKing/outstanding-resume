@@ -42,10 +42,13 @@ export const Preview: React.FC = () => {
     return (
         <Stack 
         css={{
-            height: "100%"
+            height: "100%",
+            padding: "$8"
         }}
         axis="y">
+            
             <PDFView
+            currentPage={1}
             onClick={onClickHandler}
             document={resume}/>
 
