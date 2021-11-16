@@ -157,14 +157,14 @@ interface IPDFViewListeners {
 interface IPDFViewProps extends IDocumentListeners, IPDFViewListeners {
     document: JSX.Element;
     scale?: number;
-    currentPage: number;
+    currentPageNumber: number;
     onClick?: () => void;
 }
 
 export const PDFView: React.FC<IPDFViewProps> = ({ 
     onClick,
     document,
-    currentPage,
+    currentPageNumber,
     onError,
     onLoadEnd,
     onLoadStart,
@@ -214,7 +214,7 @@ export const PDFView: React.FC<IPDFViewProps> = ({
                 onError={onError}
                 onLoadEnd={onLoadEnd}
                 file={result.value}
-                currentPage={currentPage}/>
+                currentPage={currentPageNumber}/>
             </Box>
 
             {isClickable &&
