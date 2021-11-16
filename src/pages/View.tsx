@@ -129,7 +129,7 @@ export const View: React.FC = () => {
                     position: "sticky"
                 }}>
                     <Paginator 
-                    black
+                    dark
                     {...pdfViewProps}/>
                 </Box>
 
