@@ -27,12 +27,14 @@ const IconContainer = styled(Stack, {
 });
 
 const PDFViewContainer = styled(Box, {
-    overflow: "hidden",
+    backgroundColor: "red",
     userSelect: "none",
     borderRadius: "$md",
     position: "relative",
     cursor: "default",
     margin: "auto",
+    overflow: "hidden",
+    flexBasis: "auto !important",
     [`& ${IconContainer}`]: {
         transform: "scale(0)",
     },
