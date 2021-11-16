@@ -87,9 +87,9 @@ const PDFSkeleton: React.FC<IPDFSkeletonProps> = ({ scale }) => {
 
 
 interface IDocumentListeners {
-    onLoadProgress?: DocumentProps["onLoadProgress"];
-    onLoadSuccess?: DocumentProps["onLoadSuccess"];
-    onRenderSuccess?: () => void;
+    onLoadEnd?: () => void;
+    onError?: () => void;
+    onNumberOfPages?: (numberOfPages: number) => void;
 }
 
 interface IDocumentContainerProps extends IDocumentListeners {
@@ -108,9 +108,9 @@ const DocumentContainer: React.FC<IDocumentContainerProps> = ({
     width,
     height,
     currentPage,
-    onLoadSuccess,
-    onLoadProgress,
-    onRenderSuccess,
+    onLoadEnd,
+    onError,
+    onNumberOfPages,
     file
 }) => {
 
@@ -120,67 +120,79 @@ const DocumentContainer: React.FC<IDocumentContainerProps> = ({
         loading: "",
     }
 
+    const onLoadSuccessHandler: DocumentProps["onLoadSuccess"] = ({ numPages }) => {
+        
+        onNumberOfPages && onNumberOfPages(numPages);
+    }
+
     return (
         <>
             {!!file && 
             <Document
             {...pdfViewProps}
-            file={file}
-            onLoadProgress={onLoadProgress}
-            onLoadSuccess={onLoadSuccess}>
+            onLoadError={onError}
+            onSourceError={onError}
+            onLoadSuccess={onLoadSuccessHandler}
+            file={file}>
                 <Page
                 {...pdfViewProps}
                 scale={scale}
                 width={width}
                 height={height}
                 pageNumber={currentPage}
-                onRenderSuccess={onRenderSuccess}/>
+                onLoadError={onError}
+                onRenderError={onError}
+                onGetTextError={onError}
+                onGetAnnotationsError={onError}
+                onRenderSuccess={onLoadEnd}/>
             </Document>}
         </>
     );
 }
 
-
-interface IPDFListeners {
-    onToPDFStart?: () => void;
-    onToPDFEnd?: () => void;
-    onClick?: () => void;
+interface IPDFViewListeners {
+    onLoadStart: () => void;
 }
 
-interface IPDFViewProps extends IDocumentListeners, IPDFListeners {
+interface IPDFViewProps extends IDocumentListeners, IPDFViewListeners {
     document: JSX.Element;
     scale?: number;
     currentPage: number;
+    onClick?: () => void;
 }
 
 export const PDFView: React.FC<IPDFViewProps> = ({ 
     onClick,
     document,
     currentPage,
-    onLoadSuccess,
-    onLoadProgress,
-    onRenderSuccess,
-    onToPDFEnd,
-    onToPDFStart,
+    onError,
+    onLoadEnd,
+    onLoadStart,
     scale = 0.5
 }) => { 
     
     const result = useAsync(async () => { 
 
-        onToPDFStart && onToPDFStart();
-
-        if (!document) {
-
-            return null;
-        }
-
-        const blob = await pdf(document).toBlob();
+        try {
+            onLoadStart && onLoadStart();
         
-        const url = URL.createObjectURL(blob);
+            if (!document) {
 
-        onToPDFEnd && onToPDFEnd();
+                return null;
+            }
 
-        return { url };
+            const blob = await pdf(document).toBlob();
+            
+            const url = URL.createObjectURL(blob);
+
+            return { url };
+        }
+        catch(error) {
+
+            onError && onError();
+
+            throw error;
+        }
     }, [document]);
 
     const isClickable = !!onClick;
@@ -199,9 +211,8 @@ export const PDFView: React.FC<IPDFViewProps> = ({
             }}>
                 <DocumentContainer
                 scale={scale}
-                onLoadProgress={onLoadProgress}
-                onLoadSuccess={onLoadSuccess}
-                onRenderSuccess={onRenderSuccess}
+                onError={onError}
+                onLoadEnd={onLoadEnd}
                 file={result.value}
                 currentPage={currentPage}/>
             </Box>
@@ -224,66 +235,48 @@ export const PDFView: React.FC<IPDFViewProps> = ({
     );
 }
 
+type Listeners = Required<IPDFViewListeners & IDocumentListeners & IPaginatorListeners>;
+
 export const usePDFView = () => {
 
-    const [isUpdating, setIsUpdating] = useState(false);
-
     const [isLoading, setIsLoading] = useState(true);
+
+    const [hasError, setHasError] = useState(false);
 
     const [numberOfPages, setNumberOfPages] = useState(1);
 
     const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
-    type Listeners = Required<IPaginatorListeners & IDocumentListeners & Omit<IPDFListeners, "onClick">>;
-
     const listeners: Listeners = {
-        onLoadProgress: () => {
-            
-        },
-        onLoadSuccess: ({ numPages }) => {
-            
-            setNumberOfPages(numPages);
-        },
-        onRenderSuccess: () => {
+        onNext: () => setCurrentPageNumber(prevCurrentPageNumber => {
 
-        },
-        onToPDFEnd: () => {
+            if (prevCurrentPageNumber < numberOfPages) {
 
-        },
-        onToPDFStart: () => {
+                return ++prevCurrentPageNumber;
+            }
 
-        },
-        onNext: () => {
+            return prevCurrentPageNumber;
+        }),
+        onPrev: () => setCurrentPageNumber(prevCurrentPageNumber => {
 
-            setCurrentPageNumber(prevCurrentPageNumber => {
+            if (1 < prevCurrentPageNumber) {
 
-                if (prevCurrentPageNumber < numberOfPages) {
+                return --prevCurrentPageNumber;
+            }
 
-                    return ++prevCurrentPageNumber;
-                }
-
-                return prevCurrentPageNumber;
-            })
-        },
-        onPrev: () => {
-
-            setCurrentPageNumber(prevCurrentPageNumber => {
-
-                if (1 < prevCurrentPageNumber) {
-
-                    return --prevCurrentPageNumber;
-                }
-
-                return prevCurrentPageNumber;
-            })
-        }
+            return prevCurrentPageNumber;
+        }),
+        onLoadStart: () => setIsLoading(true),
+        onLoadEnd: () => setIsLoading(false),
+        onError: () => setHasError(true),
+        onNumberOfPages: setNumberOfPages
     }
 
     return {
+        hasError,
+        isLoading,
         currentPageNumber,
         numberOfPages,
-        isUpdating,
-        isLoading,
         ...listeners
-    };
+    }
 }
