@@ -151,7 +151,7 @@ const DocumentContainer: React.FC<IDocumentContainerProps> = ({
 }
 
 interface IPDFViewListeners {
-    onLoadStart: () => void;
+    onLoadStart?: () => void;
 }
 
 interface IPDFViewProps extends IDocumentListeners, IPDFViewListeners {
