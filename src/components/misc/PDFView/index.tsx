@@ -30,12 +30,13 @@ const IconContainer = styled(Stack, {
     transitionProperty: "all",
 });
 
-export interface IPDFViewSharedProps {
+export interface IPDFViewProps {
     document: JSX.Element;
     onClick?: () => void;
+    scale?: number;
 }
 
-export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, onClick }) => { 
+export const PDFView: React.FC<IPDFViewProps> = ({ document, onClick, scale: baseScale = 0.5 }) => { 
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -77,7 +78,7 @@ export const PDFView: React.FC<IPDFViewSharedProps> = ({ document, onClick }) =>
         containerHeight,
         containerWidth,
         isLandscape,
-        baseScale: 0.5,
+        baseScale
     });
 
     const clickable = !!onClick;
