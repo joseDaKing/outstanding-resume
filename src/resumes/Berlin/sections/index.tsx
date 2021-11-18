@@ -6,8 +6,6 @@ export * from "./Description";
 
 export * from "./Header";
 
-export * from "./Language";
-
 export * from "./Layout";
 
 export * from "./Link";
