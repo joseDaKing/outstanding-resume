@@ -168,6 +168,7 @@ export const PDFView: React.FC<IPDFViewProps> = ({
     onError,
     onLoadEnd,
     onLoadStart,
+    onNumberOfPages,
     scale = 0.5
 }) => { 
     
@@ -213,6 +214,7 @@ export const PDFView: React.FC<IPDFViewProps> = ({
                 scale={scale}
                 onError={onError}
                 onLoadEnd={onLoadEnd}
+                onNumberOfPages={onNumberOfPages}
                 file={result.value}
                 currentPage={currentPageNumber}/>
             </Box>
