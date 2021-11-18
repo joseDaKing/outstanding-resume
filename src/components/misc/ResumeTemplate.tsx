@@ -10,7 +10,7 @@ import { OrderableSliceGroupNames, orderableSliceGroups } from "../../store/slic
 
 import { RootState } from "../../store";
 
-import { isObjectValid, withId } from "../../utilities";
+import { withId } from "../../utilities";
 
 import { IID } from "../../types";
 
