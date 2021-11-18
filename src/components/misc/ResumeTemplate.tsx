@@ -111,12 +111,9 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
     const ContactDetailsWrapper = useCallback<React.FC<StyleProp>>(({ style }) => {
 
         return (
-            <>
-                {isObjectValid(contactDetailsProps) &&
-                <View style={style}>
-                    <ContactDetails {...contactDetailsProps}/>
-                </View>}
-            </>
+            <View style={style}>
+                <ContactDetails {...contactDetailsProps}/>
+            </View>
         );
     /* eslint-disable */
     }, [contactDetailsDependency]);
@@ -125,12 +122,9 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
     const HeaderWrapper = useCallback<React.FC<StyleProp>>(({ style }) => {
 
         return (
-            <>
-                {isObjectValid(contactDetailsProps) &&
-                <View style={style}>
-                    <Header {...contactDetailsProps}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Header {...contactDetailsProps}/>
+            </View>
         );
     /* eslint-disable */
     }, [contactDetailsDependency]);
@@ -145,12 +139,9 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
     const ProfessionalExperienceWrapper = useCallback<React.FC<StyleProp>>(({ style }) => {
 
         return (
-            <>
-                {isObjectValid(professionalExperience) &&
-                <View style={style}>
-                    <Description {...professionalExperience}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Description {...professionalExperience}/>
+            </View>
         );
     /* eslint-disable */
     }, [professionalExperienceDependency]); 
@@ -165,12 +156,9 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
     const HobbiesWrapper = useCallback<React.FC<StyleProp>>(({ style }) => {
 
         return (
-            <>
-                {isObjectValid(professionalExperience) &&
-                <View style={style}>
-                    <Description {...hobbies}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Description {...hobbies}/>
+            </View>
         );
     /* eslint-disable */
     }, [hobbiesDependency]); 
@@ -186,21 +174,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = workExperience;
 
-        const items = withId(workExperience.items).filter(isObjectValid)
+        const items = withId(workExperience.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <WorkExperience
-                    sectionName={sectionName}
-                    Items={({ style, children }) => (
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <WorkExperience
+                sectionName={sectionName}
+                Items={({ style, children }) => (
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [workExperienceDependency]);
@@ -216,21 +201,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = extraActivity;
 
-        const items = withId(extraActivity.items).filter(isObjectValid)
+        const items = withId(extraActivity.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <WorkExperience
-                    sectionName={sectionName}
-                    Items={({ style, children }) => (
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <WorkExperience
+                sectionName={sectionName}
+                Items={({ style, children }) => (
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [extraActivityDependency]);
@@ -247,21 +229,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = internship;
 
-        const items = withId(internship.items).filter(isObjectValid)
+        const items = withId(internship.items);
 
-        return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <WorkExperience
-                    sectionName={sectionName}
-                    Items={({ style, children }) => (
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+        return (           
+            <View style={style}>
+                <WorkExperience
+                sectionName={sectionName}
+                Items={({ style, children }) => (
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [internshipDependency]);
@@ -277,21 +256,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = education;
 
-        const items = withId(education.items).filter(isObjectValid)
+        const items = withId(education.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <Education
-                    sectionName={sectionName}
-                    Items={({ style, children }) => (
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Education
+                sectionName={sectionName}
+                Items={({ style, children }) => (
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [educationDependency]);
@@ -307,21 +283,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = link;
 
-        const items = withId(link.items).filter(isObjectValid)
+        const items = withId(link.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <Link
-                    sectionName={sectionName}
-                    Items={({ style, children }) => (
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Link
+                sectionName={sectionName}
+                Items={({ style, children }) => (
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [linkDependency]);
@@ -337,21 +310,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = skill;
 
-        const items = withId(skill.items).filter(isObjectValid)
+        const items = withId(skill.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <Skill
-                    sectionName={sectionName}
-                    Items={({ style, children }) => ( 
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Skill
+                sectionName={sectionName}
+                Items={({ style, children }) => ( 
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [skillDependency]);
@@ -367,21 +337,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = language;
 
-        const items = withId(language.items).filter(isObjectValid)
+        const items = withId(language.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <Skill
-                    sectionName={sectionName}
-                    Items={({ style, children }) => ( 
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Skill
+                sectionName={sectionName}
+                Items={({ style, children }) => ( 
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [languageDependency]);
@@ -397,21 +364,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = course;
 
-        const items = withId(course.items).filter(isObjectValid)
+        const items = withId(course.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <Course
-                    sectionName={sectionName}
-                    Items={({ style, children }) => ( 
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Course
+                sectionName={sectionName}
+                Items={({ style, children }) => ( 
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [courseDependency]);
@@ -427,21 +391,18 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
 
         const { sectionName } = reference;
 
-        const items = withId(reference.items).filter(isObjectValid)
+        const items = withId(reference.items);
 
         return (
-            <>
-                {items.length &&
-                <View style={style}>
-                    <Reference
-                    sectionName={sectionName}
-                    Items={({ style, children }) => ( 
-                        <View style={style}>
-                            {items.map(children)}
-                        </View>
-                    )}/>
-                </View>}
-            </>
+            <View style={style}>
+                <Reference
+                sectionName={sectionName}
+                Items={({ style, children }) => ( 
+                    <View style={style}>
+                        {items.map(children)}
+                    </View>
+                )}/>
+            </View>
         );
     /* eslint-disable */
     }, [referenceDependency]);
