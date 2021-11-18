@@ -26,8 +26,7 @@ export const WorkExperience: IResumeTemplateProps["WorkExperience"] = ({
                     employer,
                     startDate,
                     endDate,
-                    city,
-                    description
+                    ...props
                 }) => {
 
                     const title = `${jobTitle}${jobTitle && employer && ","} ${employer}`.trim();
@@ -37,10 +36,9 @@ export const WorkExperience: IResumeTemplateProps["WorkExperience"] = ({
                     return (
                         <Item
                         key={id}
-                        city={city}
                         date={date}
                         title={title}
-                        description={description}/>
+                        {...props}/>
                     );
                 }}
             </Items>

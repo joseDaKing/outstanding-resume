@@ -1,3 +1,4 @@
+import { View } from "@react-pdf/renderer";
 import React from "react";
 
 import { IResumeTemplateProps } from "../../../components/misc";
@@ -20,8 +21,15 @@ export const Reference: IResumeTemplateProps["Reference"] = ({
             </SectionTitle>
 
             <Items>
-                {({ personName, company, mobilenumber, email}) => (
-                    <>
+                {({ 
+                    id,
+                    personName, 
+                    company, 
+                    mobilenumber, 
+                    email
+                }) => (
+                    <View 
+                    key={id}>
                         <SubTitle
                         gutter="xss">
                             {personName}
@@ -41,7 +49,7 @@ export const Reference: IResumeTemplateProps["Reference"] = ({
                         <Text>
                             {mobilenumber}
                         </Text>
-                    </>
+                    </View>
                 )}
             </Items>
         </>

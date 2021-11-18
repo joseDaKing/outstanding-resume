@@ -26,8 +26,7 @@ export const Education: IResumeTemplateProps["Education"] = ({
                     exam,
                     startDate,
                     endDate,
-                    city,
-                    description
+                    ...props
                 }) => {
 
                     const title = `${exam}${exam && school && ","} ${school}`.trim();
@@ -37,10 +36,9 @@ export const Education: IResumeTemplateProps["Education"] = ({
                     return (
                         <Item
                         key={id}
-                        city={city}
                         date={date}
                         title={title}
-                        description={description}/>
+                        {...props}/>
                     );
                 }}
             </Items>
