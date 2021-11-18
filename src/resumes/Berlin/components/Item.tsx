@@ -41,7 +41,7 @@ export const Item: React.FC<IITemProps> = ({
     return (
         <>
             {isValid &&
-            <>
+            <View>
                 {(isTitleValid || isCityValid) && 
                 <View
                 style={{
@@ -50,8 +50,7 @@ export const Item: React.FC<IITemProps> = ({
                     display: "flex"
                 }}>
                     {isTitleValid &&
-                    <SubTitle
-                    gutter="xss">
+                    <SubTitle>
                         {title}
                     </SubTitle>}
 
@@ -77,7 +76,7 @@ export const Item: React.FC<IITemProps> = ({
                 gutter="sm">
                     {description}
                 </Text>}
-            </>}
+            </View>}
         </>
     );
 }

@@ -16,12 +16,7 @@ export const Layout: IResumeTemplateProps["Layout"]  = ({
 }) => {
 
     return (
-        <View 
-        style={{
-            padding: theme.spacings.lg,
-            paddingLeft: theme.spacings.xl,
-            paddingRight: theme.spacings.xl,
-        }}>
+        <View>
             <Header/>
             
             <Seperator 

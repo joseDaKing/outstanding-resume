@@ -6,10 +6,16 @@ import { ResumeTemplate } from "../../components/misc";
 
 import * as sections from "./sections";
 
-export const Berlin: React.FC<RootState> = ({ children: _, ...state}) => {
+import { theme } from "./theme";
+
+export const Berlin: React.FC<RootState> = state => {
 
     return (
         <ResumeTemplate
+        style={{
+            paddingVertical: theme.spacings.lg,
+            paddingHorizontal: theme.spacings.xl
+        }}
         state={state}
         {...sections}/>
     );
