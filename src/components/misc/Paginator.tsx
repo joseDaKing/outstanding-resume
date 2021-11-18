@@ -6,6 +6,8 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 import { styled } from "../../stitches";
 
+
+
 const TextContainer = styled(Box, {
     fontFamily: "sans-serif",
     letterSpacing: "$widest",
@@ -64,13 +66,13 @@ export interface IPaginatorListeners {
 interface IPaginatorProps extends IPaginatorListeners {
     numberOfPages: number;
     currentPageNumber: number;
-    black?: boolean;
+    dark?: boolean;
 }
 
 export const Paginator: React.FC<IPaginatorProps> = ({ 
     onNext,
     onPrev,
-    black,
+    dark,
     numberOfPages,
     currentPageNumber
 }) => {
@@ -84,9 +86,7 @@ export const Paginator: React.FC<IPaginatorProps> = ({
         space="xs"
         axis="x"
         align="center"
-        css={{
-            backgroundColor: black ? "$blue-gray-800" : "transparent"
-        }}>
+        dark={dark}>
 
             <IconContainer
             as="button"
