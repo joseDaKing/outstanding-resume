@@ -81,6 +81,7 @@ export interface IResumeTemplateProps {
     Skill: React.FC<ItemsContainerProps<SkillItem>>;
     Course: React.FC<ItemsContainerProps<CourseItem>>;
     Reference: React.FC<ItemsContainerProps<ReferenceItem>>;
+    style?: Style;
 }
 
 export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({ 
@@ -94,7 +95,8 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
     Link,
     Skill,
     Course,
-    Reference
+    Reference,
+    style
 }) => {
 
     const { "contact-details": contactDetails } = state;
@@ -497,7 +499,9 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
     
     return (
         <Document>
-            <Page size="A4">
+            <Page 
+            style={style}
+            size="A4">
                 <Layout
                 Header={HeaderWrapper}
                 Orderable={OrderableWrapper}
