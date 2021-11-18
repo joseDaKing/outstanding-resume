@@ -15,7 +15,7 @@ const initialItem: ILinkItem = {
 }
 
 const initialState = {
-    sectionName: "Hemsidor & Sociala länkar",
+    sectionName: "Länkar",
     items: {} as Record<string, ILinkItem>
 }
 

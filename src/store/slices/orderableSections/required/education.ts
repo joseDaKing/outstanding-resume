@@ -1,6 +1,7 @@
 import { createCRUDReducers } from "../../../../utilities";
 
 import { createSlice } from "@reduxjs/toolkit";
+
 import { SliceGroup } from "../../../../types";
 
 interface IEducationItem {
