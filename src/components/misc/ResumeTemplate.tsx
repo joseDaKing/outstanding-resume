@@ -14,6 +14,8 @@ import { isObjectValid, withId } from "../../utilities";
 
 import { IID } from "../../types";
 
+
+
 type Style = Exclude<ReactPDF.ViewProps["style"], undefined>;
 
 type StyleProp = {
@@ -81,7 +83,6 @@ export interface IResumeTemplateProps {
     Reference: React.FC<ItemsContainerProps<ReferenceItem>>;
 }
 
-/* eslint-disable */
 export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({ 
     state,
     Layout,
@@ -115,7 +116,9 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                 </View>}
             </>
         );
+    /* eslint-disable */
     }, [contactDetailsDependency]);
+    /* eslint-enable */
 
     const HeaderWrapper = useCallback<React.FC<StyleProp>>(({ style }) => {
 
@@ -127,8 +130,10 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                 </View>}
             </>
         );
+    /* eslint-disable */
     }, [contactDetailsDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { "professional-experience": professionalExperience  } = state;
@@ -145,8 +150,10 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                 </View>}
             </>
         );
+    /* eslint-disable */
     }, [professionalExperienceDependency]); 
-
+    /* eslint-enable */
+    
 
 
     const { hobbies } = state;
@@ -163,8 +170,10 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                 </View>}
             </>
         );
+    /* eslint-disable */
     }, [hobbiesDependency]); 
-
+    /* eslint-enable */
+    
 
 
     const { "work-experience": workExperience } = state;
@@ -190,9 +199,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [workExperienceDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { "extra-activity": extraActivity } = state;
@@ -218,9 +229,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [extraActivityDependency]);
-
+    /* eslint-enable */
+    
 
 
 
@@ -247,9 +260,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [internshipDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { education } = state;
@@ -275,9 +290,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [educationDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { link } = state;
@@ -303,9 +320,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [linkDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { skill } = state;
@@ -331,9 +350,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [skillDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { language } = state;
@@ -359,9 +380,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [languageDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { course } = state;
@@ -387,9 +410,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [courseDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { reference } = state;
@@ -415,9 +440,11 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     )}/>
                 </View>}
             </>
-        )
+        );
+    /* eslint-disable */
     }, [referenceDependency]);
-
+    /* eslint-enable */
+    
 
 
     const { "section-order": sectionOrder } = state;
@@ -441,7 +468,7 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
         language: LanguageWrapper
     }
 
-    const OrderableWrapper = useCallback<React.FC<OrderableProps>>(({ sections = [], containerStyle, sectionStyle }) => {
+    const OrderableWrapper = useCallback<React.FC<OrderableProps>>(({ sections = sectionOrder.items, containerStyle, sectionStyle }) => {
 
         const filteredSectionOrder = sectionOrder.items.filter(sectionName => sections.includes(sectionName));
 
@@ -457,13 +484,17 @@ export const ResumeTemplate: React.FC<IResumeTemplateProps> = ({
                     }
 
                     return  (
-                        <OrderableSection style={sectionStyle}/>
+                        <OrderableSection 
+                        key={sectionName}
+                        style={sectionStyle}/>
                     );
                 })}
             </View>
         );
+    /* eslint-disable */
     }, [sectionOrderDependency]);
-
+    /* eslint-enable */
+    
     return (
         <Document>
             <Page size="A4">
