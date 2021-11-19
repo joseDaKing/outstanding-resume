@@ -11,3 +11,5 @@ export * from "./createReducersFromSliceGroups";
 export * from "./isObjectValid";
 
 export * from "./getFileName";
+
+export * from "./filterEmptyStr";
