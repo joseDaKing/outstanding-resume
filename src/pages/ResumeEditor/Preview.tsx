@@ -22,8 +22,6 @@ import { useMedia } from "react-use";
 
 import { media } from "../../css/media";
 
-import { Spinner } from "../../components/misc/Spinner";
-
 export const Preview: React.FC = () => {
 
     const store = useAppSelector(store => store);
