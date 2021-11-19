@@ -28,7 +28,13 @@ export const ResumeEditor: React.FC = () => {
                 css={{
                     backgroundColor: "white",
                     overflowY: "scroll",
-                    padding: "$10"
+                    padding: "$10",
+                    flexBasis: "40%",
+                    width: "40%",
+                    "@xl": {
+                        flexBasis: "50%",
+                        width: "50%"
+                    }
                 }}>
                     <ContactDetails/>
                     
@@ -41,7 +47,13 @@ export const ResumeEditor: React.FC = () => {
 
                 <Box 
                 css={{ 
-                    backgroundColor: "$blue-gray-400" 
+                    backgroundColor: "$blue-gray-400",
+                    flexBasis: "60%",
+                    width: "60%",
+                    "@xl": {
+                        flexBasis: "50%",
+                        width: "50%"
+                    }
                 }}>
                     <Preview/>
                 </Box>

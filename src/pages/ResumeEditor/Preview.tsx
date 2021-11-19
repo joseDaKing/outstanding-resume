@@ -18,6 +18,10 @@ import { useNavigate } from "react-router";
 
 import { getFileName } from "../../utilities";
 
+import { useMedia } from "react-use";
+
+import { media } from "../../css/media";
+
 export const Preview: React.FC = () => {
 
     const store = useAppSelector(store => store);
@@ -40,7 +44,9 @@ export const Preview: React.FC = () => {
     const onClickHandler = () => navigator("/view");
 
     const pdfViewProps = usePDFView();
-
+    
+    const isXL = useMedia(media.xl);
+    
     return (
         <Stack 
         css={{
@@ -55,6 +61,7 @@ export const Preview: React.FC = () => {
 
                 <PDFView
                 {...pdfViewProps}
+                scale={isXL ? 1 : 0.5}
                 onClick={onClickHandler}
                 document={resume}/>
             </Box>
