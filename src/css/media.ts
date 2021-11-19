@@ -1,11 +1,11 @@
 export const media = {
-    sm: "@media (min-width: 640px)",
+    sm: "(min-width: 640px)",
 
-    md: "@media (min-width: 768px)",
+    md: "(min-width: 768px)",
 
-    lg: "@media (min-width: 1024px)",
+    lg: "(min-width: 1024px)",
 
-    xl: "@media (min-width: 1280px)",
+    xl: "(min-width: 1280px)",
 
-    "2xl": "@media (min-width: 1536px)"
+    "2xl": "(min-width: 1536px)"
 } as const;

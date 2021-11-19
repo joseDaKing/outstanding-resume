@@ -22,6 +22,8 @@ import { useMedia } from "react-use";
 
 import { media } from "../../css/media";
 
+import { Spinner } from "../../components/misc/Spinner";
+
 export const Preview: React.FC = () => {
 
     const store = useAppSelector(store => store);
@@ -45,7 +47,7 @@ export const Preview: React.FC = () => {
 
     const pdfViewProps = usePDFView();
     
-    const isXL = useMedia(media.xl);
+    const isXL = useMedia(`@media ${media.xl}`) && false;
     
     return (
         <Stack 
@@ -72,26 +74,19 @@ export const Preview: React.FC = () => {
                 flexBasis: 0,
                 textAlign: "center"
             }}>
+                
                 <PDFDownloadLink 
                 document={resume}>
                     {({ url }) => (
                         <>
-                            {url && (
-                                pdfViewProps.isLoading ?
-                                <a
-                                download={fileName}
-                                href={url ?? ""}>
-                                    <Button
-                                    inline>
-                                        Ladda ner (PDF)
-                                    </Button>
-                                </a> :
+                            <a
+                            download={fileName}
+                            href={url ?? ""}>
                                 <Button
-                                disabled
                                 inline>
                                     Ladda ner (PDF)
                                 </Button>
-                            )}
+                            </a>
                         </>
                     )}
                 </PDFDownloadLink>

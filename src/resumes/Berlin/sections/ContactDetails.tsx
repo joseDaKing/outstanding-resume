@@ -1,6 +1,7 @@
 import React from "react";
 
 import { IResumeTemplateProps } from "../../../components/misc";
+import { filterEmptyStr } from "../../../utilities";
 
 import { SectionTitle, Text, SubTitle } from "../components";
 
@@ -84,7 +85,7 @@ export const ContactDetails: IResumeTemplateProps["ContactDetails"] = ({
                     {(zipCode || city) &&
                     <Text
                     gutter="xss">
-                        {`${zipCode}${(zipCode && city) ? "," : ""} ${city}`}
+                        {filterEmptyStr([zipCode, city]).join(", ")}
                     </Text>}
 
                     {isCountryValid &&

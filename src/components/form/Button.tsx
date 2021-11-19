@@ -5,6 +5,7 @@ import { styled } from "../../stitches";
 import { IIline, ISize } from "../../types";
 
 import { IDisabled } from "../../types/";
+import { Box } from "../layout";
 
 import { inlineBlockMixin, textAlignMixin } from "../mixins";
 
@@ -12,6 +13,7 @@ interface IButton extends IDisabled, IIline, ISize {
     variant?: "fill" | "text"; 
     align?: "start" | "center" | "end";
     onClick?: () => void;
+    icon?: JSX.Element;
 }
 
 const StyledButton = styled("button", textAlignMixin, inlineBlockMixin, {
@@ -65,10 +67,18 @@ const StyledButton = styled("button", textAlignMixin, inlineBlockMixin, {
     }
 });
 
-export const Button: React.FC<IButton> = ({ children, ...props }) => {
+export const Button: React.FC<IButton> = ({ children, icon, ...props }) => {
 
     return (
         <StyledButton {...props}>
+            {icon &&
+            <Box
+            css={{
+                marginRight: "$2_5"
+            }}
+            inline>
+                {icon}
+            </Box>}
             {children}
         </StyledButton>
     );

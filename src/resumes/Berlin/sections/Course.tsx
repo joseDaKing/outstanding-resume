@@ -1,6 +1,7 @@
 import React from "react";
 
 import { IResumeTemplateProps } from "../../../components/misc";
+import { filterEmptyStr } from "../../../utilities";
 
 import { SectionTitle, Seperator, Item } from "../components";
 
@@ -29,9 +30,9 @@ export const Course: IResumeTemplateProps["Course"] = ({
                     
                 }) => {
 
-                    const title = `${courseName}${courseName && institution && ","} ${institution}`.trim();
-                        
-                    const date = `${startDate} ${startDate && endDate && "-"} ${endDate}`.trim();
+                    const title = filterEmptyStr([courseName, institution]).join(" på ")
+
+                    const date = filterEmptyStr([startDate, endDate]).join(" - ");
 
                     return (
                         <Item
