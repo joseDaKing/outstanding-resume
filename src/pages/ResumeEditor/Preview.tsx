@@ -75,14 +75,24 @@ export const Preview: React.FC = () => {
                 <PDFDownloadLink 
                 document={resume}>
                     {({ url }) => (
-                        <a
-                        download={fileName}
-                        href={url ?? ""}>
-                            <Button
-                            inline>
-                                Ladda ner (PDF)
-                            </Button>
-                        </a>
+                        <>
+                            {url && (
+                                pdfViewProps.isLoading ?
+                                <a
+                                download={fileName}
+                                href={url ?? ""}>
+                                    <Button
+                                    inline>
+                                        Ladda ner (PDF)
+                                    </Button>
+                                </a> :
+                                <Button
+                                disabled
+                                inline>
+                                    Ladda ner (PDF)
+                                </Button>
+                            )}
+                        </>
                     )}
                 </PDFDownloadLink>
             </Box>
