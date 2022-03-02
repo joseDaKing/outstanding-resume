@@ -2,10 +2,11 @@ import { stitches } from "stitches";
 
 import fontMetrics from "@capsizecss/metrics/roboto";
 
-import { text } from "mixins";
+import { textSelection, textAlign } from "mixins";
 
 
-export const Title = stitches.styled("h1", text.textSelection, text.textAlign, {
+
+export const Title = stitches.styled("h1", textSelection, textAlign, {
     fontFamily: "$primary",
     fontWeight: 600,
     capSize: {
