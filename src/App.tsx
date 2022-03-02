@@ -12,8 +12,6 @@ function App() {
     screen
     alignCross="center"
     axis="x">
-    
-
       <ScrollArea css={{
         width: "$1__2",
         height: "100%",
@@ -23,11 +21,11 @@ function App() {
           padding: "$8",
           spaceY: "$4"
         }}>
-          <Title color="neutral">
+          <Title>
             Stats at a glance
           </Title>
 
-          <SubTitle color="neutral">
+          <SubTitle>
             Performant
           </SubTitle>
 

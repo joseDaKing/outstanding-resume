@@ -16,25 +16,25 @@ export const SubTitle = stitches.styled("h2", textSelection, textAlign, {
     variants: {
         color: {
             primary: {
-                color: "$primary12"
+                color: "$primary11"
             },
             secondary: {
-                color: "$secondary12"
+                color: "$secondary11"
             },
             neutral: {
                 color: "$neutral12"
             },
             action: {
-                color: "$action12"
+                color: "$action11"
             },
             success: {
-                color: "$success12"
+                color: "$success11"
             },
             warning: {
-                color: "$warning12"
+                color: "$warning11"
             },
             danger: {
-                color: "$danger12"
+                color: "$danger11"
             }
         }
     },
