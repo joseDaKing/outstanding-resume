@@ -2,7 +2,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { Box, Stack, ScrollArea } from "components/layout";
 
-import { SubTitle, Title, Text } from "components/typography";
+import { SubTitle, Title, Text, Link as Highlight } from "components/typography";
 
 
 
@@ -30,7 +30,8 @@ function App() {
           </SubTitle>
 
           <Text color="neutral">
-            Stitches has a fully-typed API, to minimize the learning curve, and provide the best possible developer experience.
+            Packed full of useful features like theming, smart tokens, 
+            <Highlight href="#id">css</Highlight> prop, <Highlight>as</Highlight> prop, utils, and a fully-typed API.
           </Text>
         </Box>
       </ScrollArea>

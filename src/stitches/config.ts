@@ -1286,42 +1286,27 @@ export const utils: Utils = {
     sideLeft: styles => ({
         "&[data-side='left']": styles
     }),
-    hover(styles) {
-        
-        return {
-            "@media (hover: hover)": {
-                "&:hover": this.stateUndisabled(styles)
-            }
-        };
-    },
-    active(styles) {
-
-        return {
-            "&:active": this.stateUndisabled(styles)
+    hover: styles => ({
+        "@media (hover: hover)": {
+            "&:hover": styles
         }
-    },
-    focus(styles) {
-
-        return {
-            "@media (hover: hover)": {
-                "&:focus": this.stateUndisabled(styles)
-            }
+    }),
+    active: styles => ({
+        "&:active": styles
+    }),
+    focus: styles => ({
+        "@media (hover: hover)": {
+            "&:focus": styles
         }
-    },
-    focusWithin(styles) {
-
-        return {
-            "@media (hover: hover)": {
-                "&:focus-within": this.stateUndisabled(styles)
-            }
+    }),
+    focusWithin: styles => ({
+        "@media (hover: hover)": {
+            "&:focus-within": styles
         }
-    },
-    focusVisible(styles) {
-
-        return {
-            "@media (hover: hover)": {
-                "&:focus-visible": this.stateUndisabled(styles)
-            }
+    }),
+    focusVisible: styles => ({
+        "@media (hover: hover)": {
+            "&:focus-visible": styles
         }
-    }
+    })
 }

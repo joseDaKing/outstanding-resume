@@ -6,25 +6,25 @@ export const textSelection = stitches.css({
     variants: {
         color: {
             primary: {
-                selectionBackgroundColor: "$primaryA4"
+                selectionBackgroundColor: "$primaryA5"
             },
             secondary: {
-                selectionBackgroundColor: "$secondaryA4"
+                selectionBackgroundColor: "$secondaryA5"
             },
             neutral: {
-                selectionBackgroundColor: "$neutralA4"
+                selectionBackgroundColor: "$neutralA5"
             },
             action: {
-                selectionBackgroundColor: "$actionA4"
+                selectionBackgroundColor: "$actionA5"
             },
             success: {
-                selectionBackgroundColor: "$successA4"
+                selectionBackgroundColor: "$successA5"
             },
             warning: {
-                selectionBackgroundColor: "$warningA4"
+                selectionBackgroundColor: "$warningA5"
             },
             danger: {
-                selectionBackgroundColor: "$dangerA4"
+                selectionBackgroundColor: "$dangerA5"
             }
         }
     },
