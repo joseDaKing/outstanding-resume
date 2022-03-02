@@ -4,12 +4,42 @@ import { CSSProps } from "types";
 
 import { Root, Viewport, Scrollbar, Thumb, Corner } from "@radix-ui/react-scroll-area";
 
+import { VariantProps } from "@stitches/react";
+
 import { stitches } from "stitches";
 
 
 
 const StyledRoot = stitches.styled(Root, {
-    overflow: "hidden"
+    overflow: "hidden",
+    variants: {
+        color: {
+            primary: {
+                $$scrollbarColor: "$color$primaryA8"
+            },
+            secondary: {
+                $$scrollbarColor: "$color$secondaryA8"
+            },
+            neutral: {
+                $$scrollbarColor: "$color$neutralA8"
+            },
+            action: {
+                $$scrollbarColor: "$color$actionA8"
+            },
+            success: {
+                $$scrollbarColor: "$color$successA8"
+            },
+            warning: {
+                $$scrollbarColor: "$color$warningA8"
+            },
+            danger: {
+                $$scrollbarColor: "$color$dangerA8"
+            }
+        }
+    },
+    defaultVariants: {
+        color: "primary"
+    }
 });
 
 StyledRoot.displayName = "ScrollAreaRoot";
@@ -52,7 +82,7 @@ const StyledThumb = stitches.styled(Thumb, {
         content: "''",
         transition: "$200",
         borderRadius: "$$scrollbarSize",
-        backgroundColor: "$neutralA8",
+        backgroundColor: "$$scrollbarColor",
         position: "absolute",
         transformTranslateY: "-$1__2",
         transformTranslateX: "-$1__2",
@@ -67,11 +97,13 @@ const StyledCorner = stitches.styled(Corner, {
 
 StyledCorner.displayName = "ScrollCorner";
 
-export const ScrollArea: React.FC<CSSProps> = props => {
+type ScrollAreaProps = CSSProps & VariantProps<typeof StyledRoot>;
+
+export const ScrollArea: React.FC<ScrollAreaProps> = props => {
 
     return (
         <StyledRoot 
-        css={props.css}>
+        {...props}>
             <StyledViewport>
                 {props.children}
             </StyledViewport>

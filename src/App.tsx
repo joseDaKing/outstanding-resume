@@ -12,7 +12,7 @@ function App() {
     screen
     alignCross="center"
     axis="x">
-      <ScrollArea css={{
+      <ScrollArea color="neutral" css={{
         width: "$1__2",
         height: "100%",
         backgroundColor: "$inverted",
@@ -31,7 +31,7 @@ function App() {
 
           <Text color="neutral">
             Packed full of useful features like theming, smart tokens, 
-            <Highlight href="#id">css</Highlight> prop, <Highlight>as</Highlight> prop, utils, and a fully-typed API.
+            <Highlight href="#id">css</Highlight> prop, <Highlight href="#id">as</Highlight> prop, utils, and a fully-typed API.
           </Text>
         </Box>
       </ScrollArea>
