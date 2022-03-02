@@ -8,6 +8,7 @@ export const Link = stitches.styled("a", textSelection, {
     textDecoration: "underline",
     textDecorationStyle: "solid",
     cursor: "pointer",
+    paddingX: "$1",
     variants: {
         color: {
             primary: {
