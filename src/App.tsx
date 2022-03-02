@@ -1,6 +1,6 @@
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
-import { Box, Stack } from "components/layout";
+import { Box, Stack, ScrollArea } from "components/layout";
 
 import { SubTitle, Title, Text } from "components/typography";
 
@@ -12,29 +12,31 @@ function App() {
     screen
     alignCross="center"
     axis="x">
-      <Box
-      fullY
-      css={{
+    
+
+      <ScrollArea css={{
         width: "$1__2",
-        boxShadow: "$2xl",
-        padding: "$4",
+        height: "100%",
         backgroundColor: "$inverted",
-        spaceY: "$3"
       }}>
-        <Title color="neutral">
-          Stats at a glance
-        </Title>
-
-        <SubTitle color="neutral">
-          Performant
-        </SubTitle>
-
-        <Text color="neutral" css={{
-          width: "$1__2"
+        <Box css={{
+          padding: "$8",
+          spaceY: "$4"
         }}>
-          Stitches has a fully-typed API, to minimize the learning curve, and provide the best possible developer experience.
-        </Text>
-      </Box>
+          <Title color="neutral">
+            Stats at a glance
+          </Title>
+
+          <SubTitle color="neutral">
+            Performant
+          </SubTitle>
+
+          <Text color="neutral">
+            Stitches has a fully-typed API, to minimize the learning curve, and provide the best possible developer experience.
+          </Text>
+        </Box>
+      </ScrollArea>
+      
       
       <Stack fullY alignMain="center" css={{
         width: "$1__2",

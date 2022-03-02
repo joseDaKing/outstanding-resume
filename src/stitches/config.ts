@@ -76,6 +76,7 @@ const varThemeMap = {
 } as any;
 
 const propertyThemeMap = {
+    transition: "transition",
     letterSpacing: "letterSpacing",
     opacity: "opacity",
     boxShadow: "shadow",
@@ -840,11 +841,13 @@ type Utils = {
     sideRight: (styles: ThemedCSS) => {},
     sideBottom: (styles: ThemedCSS) => {},
     sideLeft: (styles: ThemedCSS) => {},
-    hover(styles: ThemedCSS): {}
-    active(styles: ThemedCSS): {};
-    focus(styles: ThemedCSS): {};
-    focusWithin(styles: ThemedCSS): {};
-    focusVisible(styles: ThemedCSS): {};
+    hover: (styles: ThemedCSS) => {}
+    active: (styles: ThemedCSS) => {};
+    focus: (styles: ThemedCSS) => {};
+    focusWithin:(styles: ThemedCSS) => {};
+    focusVisible: (styles: ThemedCSS) => {};
+    orientationHorizontal: (styles: ThemedCSS) => {},
+    orientationVertical: (styles: ThemedCSS) => {}
 }
 
 type ThemedCSS = CSS<Stitches<"", typeof media, typeof theme, typeof themeMap, Utils>["config"]>;
@@ -1255,6 +1258,12 @@ export const utils: Utils = {
     }),
     stateUndisabled: styles => ({
         "&:not(:disabled,[data-disabled])": styles
+    }),
+    orientationHorizontal: styles => ({
+        "&[orientation='horizontal']": styles
+    }),
+    orientationVertical: styles => ({
+        "&[orientation='vertical']": styles
     }),
     alignStart: styles => ({
         "&[data-align='start']": styles
