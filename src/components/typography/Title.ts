@@ -4,6 +4,8 @@ import fontMetrics from "@capsizecss/metrics/roboto";
 
 import { textSelection, textAlign } from "mixins";
 
+import { colorStyles } from "helpers";
+
 
 
 export const Title = stitches.styled("h1", textSelection, textAlign, {
@@ -15,32 +17,23 @@ export const Title = stitches.styled("h1", textSelection, textAlign, {
     },
     variants: {
         color: {
-            primary: {
-                color: "$primary11"
-            },
-            secondary: {
-                color: "$secondary11"
-            },
-            neutral: {
-                color: "$neutral12"
-            },
-            action: {
-                color: "$action11"
-            },
-            success: {
-                color: "$success11"
-            },
-            warning: {
-                color: "$warning11"
-            },
-            danger: {
-                color: "$danger11"
-            },
+            primary: {},
+            secondary: {},
+            neutral: {},
+            action: {},
+            success: {},
+            warning: {},
+            danger: {},
         }
     },
     defaultVariants: {
         color: "primary"
     },
+    compoundVariants: colorStyles({
+        styles: (getColor, colorName) => ({
+            color: colorName === "neutral" ? getColor("11") : getColor("12")
+        })
+    })
 });
 
 Title.displayName = "Title";

@@ -9,6 +9,6 @@ export interface CSSProps {
 }
 
 export interface IconProps {
-    startIcon?: React.ComponentType<any>;
-    endIcon?: React.ComponentType<any>;
+    StartIcon?: React.ComponentType<any>;
+    EndIcon?: React.ComponentType<any>;
 }

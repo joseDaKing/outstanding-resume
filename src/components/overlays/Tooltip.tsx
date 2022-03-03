@@ -9,6 +9,7 @@ import { CSSProps } from "types";
 import { VariantProps } from "@stitches/react";
 
 import fontMetrics from "@capsizecss/metrics/roboto";
+import { colorStyles } from "helpers";
 
 
 
@@ -18,7 +19,7 @@ export const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
 
 export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
     padding: "$3",
-    borderRadius: "$xs",
+    borderRadius: "$sm",
     color: "$inverted",
     fontFamily: "$primary",
     fontWeight: 200,
@@ -39,9 +40,15 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         },
         variant: {
             inverted: {
-                boxShadow: "$3xl"
+                boxShadow: "$3xl",
+                backgroundColor: "$inverted",
+                [`& ${StyledArrow}`]: {
+                    fill: "$inverted",
+                }
             },
-            filled: {}
+            filled: {
+                color: "$inverted"
+            }
         }
     },
     defaultVariants: {
@@ -49,142 +56,21 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         variant: "filled"
     },
     compoundVariants: [
-        {
-            color: "primary",
+        ...colorStyles({
             variant: "filled",
-            css: {
-                backgroundColor: "$primary10",
+            styles: (getColor, colorName) => ({
+                backgroundColor: colorName === "neutral" ? getColor("12") : getColor("10"),
                 [`& ${StyledArrow.selector}`]: {
-                    fill: "$primary10",
+                    fill: getColor("10"),
                 },
-            }
-        },
-        {
-            color: "secondary",
-            variant: "filled",
-            css: {
-                backgroundColor: "$secondary10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$secondary10",
-                },
-            }
-        },
-        {
-            color: "neutral",
-            variant: "filled",
-            css: {
-                backgroundColor: "$neutral12",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$neutral12",
-                },
-            }
-        },
-        {
-            color: "action",
-            variant: "filled",
-            css: {
-                backgroundColor: "$action10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$action10",
-                },
-            }
-        },
-        {
-            color: "success",
-            variant: "filled",
-            css: {
-                backgroundColor: "$success10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$success10",
-                },
-            }
-        },
-        {
-            color: "warning",
-            variant: "filled",
-            css: {
-                backgroundColor: "$warning10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$warning10",
-                },
-            }
-        },
-        {
-            color: "danger",
-            variant: "filled",
-            css: {
-                backgroundColor: "$danger10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$danger10",
-                },
-            }
-        },
-        {
-            color: "primary",
+            })
+        }),
+        ...colorStyles({
             variant: "inverted",
-            css: {
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                },
-                color: "$primary11"
-            }
-        },
-        {
-            color: "secondary",
-            variant: "inverted",
-            css: {
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                },
-                color: "$secondary11"
-            }
-        },
-        {
-            color: "neutral",
-            variant: "inverted",
-            css: {
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                },
-                color: "$neutral12"
-            }
-        },
-        {
-            color: "success",
-            variant: "inverted",
-            css: {
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                },
-                color: "$success11"
-            }
-        },
-        {
-            color: "warning",
-            variant: "inverted",
-            css: {
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                },
-                color: "$warning11"
-            }
-        },
-        {
-            color: "danger",
-            variant: "inverted",
-            css: {
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                },
-                color: "$danger11"
-            }
-        }
+            styles: (getColor, colorName) => ({
+                color: colorName === "neutral" ? getColor("12") : getColor("10"),
+            })
+        })
     ]
 });
 

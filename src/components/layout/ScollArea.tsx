@@ -7,6 +7,7 @@ import { Root, Viewport, Scrollbar, Thumb, Corner } from "@radix-ui/react-scroll
 import { VariantProps } from "@stitches/react";
 
 import { stitches } from "stitches";
+import { colorStyles } from "helpers";
 
 
 
@@ -14,32 +15,23 @@ const StyledRoot = stitches.styled(Root, {
     overflow: "hidden",
     variants: {
         color: {
-            primary: {
-                $$scrollbarColor: "$color$primaryA8"
-            },
-            secondary: {
-                $$scrollbarColor: "$color$secondaryA8"
-            },
-            neutral: {
-                $$scrollbarColor: "$color$neutralA8"
-            },
-            action: {
-                $$scrollbarColor: "$color$actionA8"
-            },
-            success: {
-                $$scrollbarColor: "$color$successA8"
-            },
-            warning: {
-                $$scrollbarColor: "$color$warningA8"
-            },
-            danger: {
-                $$scrollbarColor: "$color$dangerA8"
-            }
+            primary: {},
+            secondary: {},
+            neutral: {},
+            action: {},
+            success: {},
+            warning: {},
+            danger: {}
         }
     },
     defaultVariants: {
         color: "primary"
-    }
+    },
+    compoundVariants: colorStyles({
+        styles: getColor => ({
+            $$scrollbarColor: `$color${getColor("8", true)}`
+        })
+    })
 });
 
 StyledRoot.displayName = "ScrollAreaRoot";

@@ -5,6 +5,7 @@ import { Box, Stack, ScrollArea } from "components/layout";
 import { SubTitle, Title, Text } from "./components/typography";
 
 import { Tooltip } from "components/overlays";
+import { Button } from "components/form";
 
 
 function App() {
@@ -21,14 +22,15 @@ function App() {
         <Box css={{
           spaceY: "$4",
           padding: "$4",
-          textAlign: "center"
         }}>
 
           <Tooltip>
             <Tooltip.Trigger asChild>
-              <button>
-                Abra
-              </button>
+              <Button content css={{
+                margin: "auto"
+              }}>
+                Button
+              </Button>
             </Tooltip.Trigger>
 
             <Tooltip.Content>

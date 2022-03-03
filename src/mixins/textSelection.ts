@@ -1,3 +1,5 @@
+import { colorStyles } from "helpers";
+
 import { stitches } from "stitches";
 
 
@@ -5,30 +7,21 @@ import { stitches } from "stitches";
 export const textSelection = stitches.css({
     variants: {
         color: {
-            primary: {
-                selectionBackgroundColor: "$primaryA5"
-            },
-            secondary: {
-                selectionBackgroundColor: "$secondaryA5"
-            },
-            neutral: {
-                selectionBackgroundColor: "$neutralA5"
-            },
-            action: {
-                selectionBackgroundColor: "$actionA5"
-            },
-            success: {
-                selectionBackgroundColor: "$successA5"
-            },
-            warning: {
-                selectionBackgroundColor: "$warningA5"
-            },
-            danger: {
-                selectionBackgroundColor: "$dangerA5"
-            }
+            primary: {},
+            secondary: {},
+            neutral: {},
+            action: {},
+            success: {},
+            warning: {},
+            danger: {}
         }
     },
     defaultVariants: {
         color: "primary"
     },
+    compoundVariants: colorStyles({
+        styles: getColor => ({
+            selectionBackgroundColor: getColor("5", true)
+        })
+    })
 });

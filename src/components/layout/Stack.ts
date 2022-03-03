@@ -46,8 +46,8 @@ export const Stack = stitches.styled(Box, {
     },
     defaultVariants: {
         axis: "y",
-        alignMain: "start",
-        alignCross: "start"
+        alignMain: "center",
+        alignCross: "center"
     }
 });
 
