@@ -29,63 +29,99 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
     },
     variants: {
         color: {
-            primary: {
-                backgroundColor: "$primary10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$primary10",
-                },
-            },
-            secondary: {
-                backgroundColor: "$secondary10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$secondary10",
-                },
-            },
-            neutral: {
-                backgroundColor: "$neutral12",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$neutral12",
-                },
-            },
-            action: {
-                backgroundColor: "$action10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$action10",
-                },
-            },
-            success: {
-                backgroundColor: "$success10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$success10",
-                },
-            },
-            warning: {
-                backgroundColor: "$warning10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$warning10",
-                },
-            },
-            danger: {
-                backgroundColor: "$danger10",
-                [`& ${StyledArrow.selector}`]: {
-                    fill: "$danger10",
-                },
-            },
+            primary: {},
+            secondary: {},
+            neutral: {},
+            action: {},
+            success: {},
+            warning: {},
+            danger: {}
         },
-        inverted: {
-            true: {
+        variant: {
+            inverted: {
                 boxShadow: "$3xl"
-            }
-        },
+            },
+            filled: {}
+        }
     },
     defaultVariants: {
         color: "primary",
-        inverted: false,
+        variant: "filled"
     },
     compoundVariants: [
         {
             color: "primary",
-            inverted: true,
+            variant: "filled",
+            css: {
+                backgroundColor: "$primary10",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$primary10",
+                },
+            }
+        },
+        {
+            color: "secondary",
+            variant: "filled",
+            css: {
+                backgroundColor: "$secondary10",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$secondary10",
+                },
+            }
+        },
+        {
+            color: "neutral",
+            variant: "filled",
+            css: {
+                backgroundColor: "$neutral12",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$neutral12",
+                },
+            }
+        },
+        {
+            color: "action",
+            variant: "filled",
+            css: {
+                backgroundColor: "$action10",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$action10",
+                },
+            }
+        },
+        {
+            color: "success",
+            variant: "filled",
+            css: {
+                backgroundColor: "$success10",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$success10",
+                },
+            }
+        },
+        {
+            color: "warning",
+            variant: "filled",
+            css: {
+                backgroundColor: "$warning10",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$warning10",
+                },
+            }
+        },
+        {
+            color: "danger",
+            variant: "filled",
+            css: {
+                backgroundColor: "$danger10",
+                [`& ${StyledArrow.selector}`]: {
+                    fill: "$danger10",
+                },
+            }
+        },
+        {
+            color: "primary",
+            variant: "inverted",
             css: {
                 backgroundColor: "$inverted",
                 [`& ${StyledArrow}`]: {
@@ -96,7 +132,7 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         },
         {
             color: "secondary",
-            inverted: true,
+            variant: "inverted",
             css: {
                 backgroundColor: "$inverted",
                 [`& ${StyledArrow}`]: {
@@ -107,7 +143,7 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         },
         {
             color: "neutral",
-            inverted: true,
+            variant: "inverted",
             css: {
                 backgroundColor: "$inverted",
                 [`& ${StyledArrow}`]: {
@@ -118,7 +154,7 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         },
         {
             color: "success",
-            inverted: true,
+            variant: "inverted",
             css: {
                 backgroundColor: "$inverted",
                 [`& ${StyledArrow}`]: {
@@ -129,7 +165,7 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         },
         {
             color: "warning",
-            inverted: true,
+            variant: "inverted",
             css: {
                 backgroundColor: "$inverted",
                 [`& ${StyledArrow}`]: {
@@ -140,7 +176,7 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
         },
         {
             color: "danger",
-            inverted: true,
+            variant: "inverted",
             css: {
                 backgroundColor: "$inverted",
                 [`& ${StyledArrow}`]: {
