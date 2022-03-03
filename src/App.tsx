@@ -2,9 +2,12 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { Box, Stack, ScrollArea } from "components/layout";
 
-import { SubTitle, Title, Text } from "./components/typography";
+// import { SubTitle, Title, Text } from "components/typography";
+
+import { PlusIcon } from "@radix-ui/react-icons";
 
 import { Tooltip } from "components/overlays";
+
 import { Button } from "components/form";
 
 
@@ -26,7 +29,7 @@ function App() {
 
           <Tooltip>
             <Tooltip.Trigger asChild>
-              <Button content variant="text" css={{
+              <Button content variant="ghost" StartIcon={PlusIcon} size="lg" css={{
                 margin: "auto"
               }}>
                 Button

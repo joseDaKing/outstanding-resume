@@ -19,6 +19,8 @@ const StyledText = stitches.styled("span", {
     alignItems: "center",
     justifyContent: "center",
     gap: "inherit",
+    fontFamily: "$primary",
+    textTransform: "uppercase",
     "& svg": {
         display: "inline-block"
     }
@@ -35,6 +37,9 @@ const StyledButton = stitches.styled("button", round, content, {
                 },
                 paddingX: "$2_5",
                 paddingY: "$2",
+                [`& ${StyledText}`]: {
+                    gap: "$2"
+                },
                 "& svg": {
                     size: 13,
                 },
@@ -46,6 +51,9 @@ const StyledButton = stitches.styled("button", round, content, {
                 },
                 paddingX: "$3",
                 paddingY: "$2_5",
+                [`& ${StyledText}`]: {
+                    gap: "$2_5"
+                },
                 "& svg": {
                     size: 14,
                 },
@@ -57,6 +65,9 @@ const StyledButton = stitches.styled("button", round, content, {
                 },
                 paddingX: "$3_5",
                 paddingY: "$3",
+                [`& ${StyledText}`]: {
+                    gap: "$3"
+                },
                 "& svg": {
                     size: 15,
                 },
@@ -232,3 +243,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
         </StyledButton>
     );
 });
+
+Button.toString = () => StyledButton.selector;
