@@ -29,6 +29,6 @@ export const textSelection = stitches.css({
         }
     },
     defaultVariants: {
-        color: "primary",
+        color: "primary"
     },
 });

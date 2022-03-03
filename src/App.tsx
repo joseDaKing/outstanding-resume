@@ -2,7 +2,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { Box, Stack, ScrollArea } from "components/layout";
 
-import { SubTitle, Title, Text, Link as Highlight } from "components/typography";
+import { SubTitle, Title, Text } from "./components/typography";
 
 
 
@@ -18,8 +18,11 @@ function App() {
         backgroundColor: "$inverted",
       }}>
         <Box css={{
-          padding: "$8",
-          spaceY: "$4"
+          spaceY: "$4",
+          margin: "$4",
+          padding: "$4",
+          borderRadius: "$md",
+          backgroundColor: "$secondary3"
         }}>
           <Title>
             Stats at a glance
@@ -28,11 +31,7 @@ function App() {
           <SubTitle>
             Performant
           </SubTitle>
-
-          <Text color="neutral">
-            Packed full of useful features like theming, smart tokens, 
-            <Highlight href="#id">css</Highlight> prop, <Highlight href="#id">as</Highlight> prop, utils, and a fully-typed API.
-          </Text>
+          
         </Box>
       </ScrollArea>
       

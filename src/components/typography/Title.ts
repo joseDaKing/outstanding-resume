@@ -35,12 +35,12 @@ export const Title = stitches.styled("h1", textSelection, textAlign, {
             },
             danger: {
                 color: "$danger11"
-            }
+            },
         }
     },
     defaultVariants: {
         color: "primary"
-    }
+    },
 });
 
 Title.displayName = "Title";
