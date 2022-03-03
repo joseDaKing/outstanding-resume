@@ -4,6 +4,7 @@ import { Box, Stack, ScrollArea } from "components/layout";
 
 import { SubTitle, Title, Text } from "./components/typography";
 
+import { Tooltip } from "components/overlays";
 
 
 function App() {
@@ -19,19 +20,21 @@ function App() {
       }}>
         <Box css={{
           spaceY: "$4",
-          margin: "$4",
           padding: "$4",
-          borderRadius: "$md",
-          backgroundColor: "$secondary3"
+          textAlign: "center"
         }}>
-          <Title>
-            Stats at a glance
-          </Title>
 
-          <SubTitle>
-            Performant
-          </SubTitle>
-          
+          <Tooltip>
+            <Tooltip.Trigger asChild>
+              <button>
+                Abra
+              </button>
+            </Tooltip.Trigger>
+
+            <Tooltip.Content>
+              Add to library
+            </Tooltip.Content>
+          </Tooltip>
         </Box>
       </ScrollArea>
       

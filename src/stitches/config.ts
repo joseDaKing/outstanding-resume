@@ -76,6 +76,8 @@ const varThemeMap = {
 } as any;
 
 const propertyThemeMap = {
+    outlineWidth: "borderWidth",
+    borderWidth: "borderWidth",
     transition: "transition",
     letterSpacing: "letterSpacing",
     opacity: "opacity",
