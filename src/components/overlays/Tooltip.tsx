@@ -9,6 +9,7 @@ import { CSSProps } from "types";
 import { VariantProps } from "@stitches/react";
 
 import fontMetrics from "@capsizecss/metrics/roboto";
+
 import { colorStyles } from "helpers";
 
 
@@ -60,8 +61,8 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
             variant: "filled",
             styles: (getColor, colorName) => ({
                 backgroundColor: colorName === "neutral" ? getColor("12") : getColor("10"),
-                [`& ${StyledArrow.selector}`]: {
-                    fill: getColor("10"),
+                [`& ${StyledArrow}`]: {
+                    fill: colorName === "neutral" ? getColor("12") : getColor("10"),
                 },
             })
         }),

@@ -26,14 +26,14 @@ function App() {
 
           <Tooltip>
             <Tooltip.Trigger asChild>
-              <Button content css={{
+              <Button content variant="text" css={{
                 margin: "auto"
               }}>
                 Button
               </Button>
             </Tooltip.Trigger>
 
-            <Tooltip.Content>
+            <Tooltip.Content color="neutral">
               Add to library
             </Tooltip.Content>
           </Tooltip>
