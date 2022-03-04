@@ -2,13 +2,9 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { Box, Stack, ScrollArea } from "components/layout";
 
-// import { SubTitle, Title, Text } from "components/typography";
-
 import { PlusIcon } from "@radix-ui/react-icons";
 
-import { Tooltip } from "components/overlays";
-
-import { Button } from "components/form";
+import { IconButton, Button } from "components/form";
 
 
 function App() {
@@ -22,25 +18,31 @@ function App() {
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Box css={{
+        <Stack css={{
           spaceY: "$4",
           padding: "$4",
         }}>
 
-          <Tooltip>
-            <Tooltip.Trigger asChild>
-              <Button content variant="ghost" StartIcon={PlusIcon} size="lg" css={{
-                margin: "auto"
-              }}>
-                Button
-              </Button>
-            </Tooltip.Trigger>
+          
+        </Stack>
 
-            <Tooltip.Content color="neutral">
-              Add to library
-            </Tooltip.Content>
-          </Tooltip>
-        </Box>
+        <Stack axis="x" css={{
+          gap: "$4"
+        }}>
+          <IconButton
+          round
+          content
+          variant="ghost"
+          Icon={PlusIcon}/>
+
+          <Button
+          round
+          content
+          variant="ghost"
+          StartIcon={PlusIcon}>
+            Abra
+          </Button>
+        </Stack>
       </ScrollArea>
       
       

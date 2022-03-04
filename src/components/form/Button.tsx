@@ -1,6 +1,4 @@
-import React, { forwardRef } from "react";
-
-import fontMetrics from "@capsizecss/metrics/roboto";
+import { forwardRef } from "react";
 
 import { stitches } from "stitches";
 
@@ -8,71 +6,17 @@ import { VariantProps } from "@stitches/react";
 
 import { CSSProps, IconProps } from "types";
 
-import { content, round } from "mixins";
+import { content, round, formLargeContainer, formLargeText } from "mixins";
 
 import { colorStyles } from "helpers";
 
 
 
-const StyledText = stitches.styled("span", {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "inherit",
-    fontFamily: "$primary",
-    textTransform: "uppercase",
-    "& svg": {
-        display: "inline-block"
-    }
-});
+export const StyledText = stitches.styled("span", formLargeText, {});
 
-const StyledButton = stitches.styled("button", round, content, {
+export const StyledButton = stitches.styled("button", formLargeContainer, round, content, {
     display: "block",
     variants: {
-        size: {
-            sm: {
-                capSize: {
-                    fontSize: 14,
-                    fontMetrics
-                },
-                paddingX: "$2_5",
-                paddingY: "$2",
-                [`& ${StyledText}`]: {
-                    gap: "$2"
-                },
-                "& svg": {
-                    size: 13,
-                },
-            },
-            md: {
-                capSize: {
-                    fontSize: 15,
-                    fontMetrics
-                },
-                paddingX: "$3",
-                paddingY: "$2_5",
-                [`& ${StyledText}`]: {
-                    gap: "$2_5"
-                },
-                "& svg": {
-                    size: 14,
-                },
-            },
-            lg: {
-                capSize: {
-                    fontSize: 16,
-                    fontMetrics
-                },
-                paddingX: "$3_5",
-                paddingY: "$3",
-                [`& ${StyledText}`]: {
-                    gap: "$3"
-                },
-                "& svg": {
-                    size: 15,
-                },
-            },
-        },
         color: {
             primary: {},
             secondary: {},
@@ -111,7 +55,6 @@ const StyledButton = stitches.styled("button", round, content, {
         }
     },
     defaultVariants: {
-        size: "md",
         color: "primary",
         variant: "filled"
     },
