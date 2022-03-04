@@ -1,10 +1,11 @@
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
-import { Box, Stack, ScrollArea } from "components/layout";
-
 import { PlusIcon } from "@radix-ui/react-icons";
 
-import { IconButton, Button } from "components/form";
+import { IconButton, Textfield } from "components/form";
+
+import { Box, Stack, ScrollArea } from "components/layout";
+
 
 
 function App() {
@@ -12,36 +13,24 @@ function App() {
     <Stack 
     screen
     alignCross="center"
-    axis="x">
+    orientation="horizontal">
       <ScrollArea color="neutral" css={{
         width: "$1__2",
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Stack css={{
-          spaceY: "$4",
-          padding: "$4",
-        }}>
-
-          
-        </Stack>
-
-        <Stack axis="x" css={{
-          gap: "$4"
+        <Stack full css={{
+          padding: "$6",
+          gap: "$3" 
         }}>
           <IconButton
-          round
           content
           variant="ghost"
           Icon={PlusIcon}/>
 
-          <Button
-          round
-          content
-          variant="ghost"
-          StartIcon={PlusIcon}>
-            Abra
-          </Button>
+          <Textfield
+          defaultValue="Value"          
+          placeholder="Placeholder"/>
         </Stack>
       </ScrollArea>
       

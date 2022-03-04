@@ -13,11 +13,11 @@ export const Stack = stitches.styled(Box, {
         flexBasis: "auto"
     },
     variants: {
-        axis: {
-            x: {
+        orientation: {
+            horizontal: {
                 flexDirection: "row"
             },
-            y: {
+            vertical: {
                 flexDirection: "column"
             }
         },
@@ -45,7 +45,7 @@ export const Stack = stitches.styled(Box, {
         }
     },
     defaultVariants: {
-        axis: "y",
+        orientation: "horizontal",
         alignMain: "center",
         alignCross: "center"
     }
