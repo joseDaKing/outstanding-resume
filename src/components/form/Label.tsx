@@ -111,7 +111,9 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                         </Box>
                     </Tooltip.Trigger>
 
-                    <Tooltip.Content css={{
+                    <Tooltip.Content
+                    {...variantProps as any}
+                    css={{
                         maxWidth: "$52"
                     }}>
                         {help}
