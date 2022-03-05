@@ -6,11 +6,11 @@ import { VariantProps } from "@stitches/react";
 
 import { CSSProps } from "types";
 
-import { StyledButton } from "./Button";
+import * as Button from "./Button";
 
 
 
-const StyledIconButton = stitches.styled(StyledButton, {
+const Root = stitches.styled(Button.Root, {
     display: "block",
     "&::before,&::after": {
         display: "none !important",
@@ -33,13 +33,17 @@ const StyledIconButton = stitches.styled(StyledButton, {
     },
 });
 
-const StyledIconContainer = stitches.styled("span", {
+Root.displayName = "IconButtonRoot";
+
+const IconContainer = stitches.styled("span", {
     display: "block",
     width: "fit-content",
     margin: "auto"
 });
 
-type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledButton> & CSSProps & {
+IconContainer.displayName = "IconContainer";
+
+type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.Root> & CSSProps & {
     Icon: ComponentType<any>;
 };
 
@@ -61,15 +65,17 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
     };
 
     return (
-        <StyledIconButton 
+        <Root 
         {...htmlProps} 
         {...styledProps}
         ref={ref}>
-            <StyledIconContainer>
+            <IconContainer>
                 <Icon/>
-            </StyledIconContainer>
-        </StyledIconButton>
+            </IconContainer>
+        </Root>
     );
 });
 
-IconButton.toString = () => StyledIconButton.selector;
+IconButton.displayName = "IconButton";
+
+IconButton.toString = () => Root.selector;

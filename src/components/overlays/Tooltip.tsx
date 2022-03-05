@@ -96,6 +96,8 @@ const TriggerContent: React.FC<TooltipContentProps> = props => {
     );
 }
 
+TriggerContent.displayName = "TooltipTriggerContent";
+
 TriggerContent.toString = () => StyledContent.selector;
 
 type SubComponents = {

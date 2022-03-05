@@ -2,6 +2,8 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 import { Box, Stack, ScrollArea } from "components/layout";
 
+import { TextField, Switch } from "components/form";
+
 
 
 function App() {
@@ -19,7 +21,14 @@ function App() {
           padding: "$6",
           gap: "$12",
         }}>
-          
+          <TextField 
+          label="Label"
+          help="Help"
+          placeholder="Placeholder"/>
+
+          <Switch
+          label="Label"
+          help="Help"/>
         </Stack>
       </ScrollArea>
       
@@ -39,14 +48,15 @@ function App() {
           margin: "auto",
           width: "$1__2",
         }}>
-          <AspectRatio ratio={1/Math.sqrt(2)}>
-            <Box full css={{
-              margin: "auto",
-              boxShadow: "$2xl",
-              borderRadius: "$sm",
-              backgroundColor: "$inverted"
-            }}/>
-          </AspectRatio>
+          <Stack orientation="vertical" full css={{
+            padding: "$6",
+            gap: "$12",
+          }}>
+            <Switch
+            variant="inverted"
+            label="Label"
+            help="Help"/>
+          </Stack>
         </Box>
       </Stack>
     </Stack>

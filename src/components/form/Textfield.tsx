@@ -10,21 +10,21 @@ import { colorStyles } from "helpers";
 
 import { CSSProps } from "types";
 
-import { Label } from "./Label";
+import { Label, LabelProps } from "./Label";
+
+import { Stack } from "../layout";
+
+import { useId } from "@radix-ui/react-id";
 
 
-
-const StyledContainer = stitches.styled("div", {
-    display: "flex",
-    flexDirection: "column",
-    gap: "$2"
-});
 
 const StyledInputContainer = stitches.styled("label", round, formLargeContainer, {
     display: "block",
     outlineWidth: "$1",
     outlineOffset: "-$borderWidth$1",
+    cursor: "text",
     stateDisabled: {
+        cursor: "default",
         outlineColor: "$washed8",
         color: "$washed10",
     },
@@ -55,16 +55,20 @@ const StyledInputContainer = stitches.styled("label", round, formLargeContainer,
     })
 });
 
+StyledInputContainer.displayName = "TextFieldRoot";
+
 const StyledInputText = stitches.styled("span", formLargeText, {
     overflow: "hidden"
 });
+
+StyledInputText.displayName = "TextFieldText";
 
 const StyledInput = stitches.styled("input", textSelection, {
     fontFamily: "inherit",
     fontSize: "inherit",
     fontWeight: "inherit",
     backgroundColor: "transparent",
-    width: "100%",
+    width: "100%", 
     focusVisible: {
         outline: "none"
     },
@@ -94,7 +98,9 @@ const StyledInput = stitches.styled("input", textSelection, {
     })
 });
 
-type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omit<
+StyledInput.displayName = "TextFieldInput";
+
+type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & LabelProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"
@@ -102,7 +108,6 @@ type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omi
     | "defaultChecked"
     | "size"
 > & {
-    label?: string;
     type?: (
         "email" 
         | "password" 
@@ -113,13 +118,14 @@ type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omi
     );
 }
 
-export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
     
     const { 
         size,
         color,
         css,
         label,
+        help,
         ...htmlProps
     } = props;
 
@@ -128,17 +134,29 @@ export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, re
         color
     }
 
+    const labelProps = {
+        color,
+        label,
+        help,
+        disabled: props.disabled
+    }
+
+    const id = useId();
+
     return (
-        <StyledContainer css={css}>
-            {label &&
+        <Stack
+        css={{
+            ...(css ?? {}),
+            gap: "$2_5"
+        }}
+        alignCross="start"
+        orientation="vertical">
             <Label 
-            data-disabled={props.disabled ? "" : undefined}
-            color={color}
+            htmlFor={id}
             css={{
                 marginLeft: "$2"
-            }}>
-                {label}
-            </Label>}
+            }}
+            {...labelProps}/>
 
             <StyledInputContainer 
             {...variantProps}
@@ -146,12 +164,15 @@ export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, re
                 <StyledInputText>
                     <StyledInput
                     {...htmlProps}
+                    id={id}
                     color={color}
                     ref={ref}/>
                 </StyledInputText>
             </StyledInputContainer>
-        </StyledContainer>
+        </Stack>
     );
 });
 
-Textfield.toString = () => StyledInputContainer.selector;
+TextField.displayName = "TextField";
+
+TextField.toString = () => StyledInputContainer.selector;

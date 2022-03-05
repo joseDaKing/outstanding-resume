@@ -12,9 +12,11 @@ import { colorStyles } from "helpers";
 
 
 
-export const StyledText = stitches.styled("span", formLargeText, {});
+export const Text = stitches.styled("span", formLargeText, {});
 
-export const StyledButton = stitches.styled("button", formLargeContainer, round, {
+Text.displayName = "ButtonText";
+
+export const Root = stitches.styled("button", formLargeContainer, round, {
     display: "block",
     userSelect: "none",
     variants: {
@@ -137,7 +139,9 @@ export const StyledButton = stitches.styled("button", formLargeContainer, round,
     ]
 });
 
-type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledButton> & CSSProps & IconProps;
+Root.displayName = "ButtonRoot";
+
+type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Root> & CSSProps & IconProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, EndIcon, ...props }, ref) => {
 
@@ -166,11 +170,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
     }
 
     return (
-        <StyledButton 
+        <Root 
         {...htmlProps} 
         {...styledProps}
         ref={ref}>
-            <StyledText>
+            <Text>
                 {StartIcon && 
                 <StartIcon/>}
 
@@ -181,9 +185,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
 
                 {EndIcon && 
                 <EndIcon/>}
-            </StyledText>
-        </StyledButton>
+            </Text>
+        </Root>
     );
 });
 
-Button.toString = () => StyledButton.selector;
+Button.displayName = "Button";
+
+Button.toString = () => Root.selector;
