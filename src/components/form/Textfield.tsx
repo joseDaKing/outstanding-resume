@@ -8,9 +8,19 @@ import { formLargeText, formLargeContainer, round, textSelection } from "mixins"
 
 import { colorStyles } from "helpers";
 
+import { CSSProps } from "types";
+
+import { Label } from "./Label";
 
 
-const StyledContainer = stitches.styled("label", round, formLargeContainer, {
+
+const StyledContainer = stitches.styled("div", {
+    display: "flex",
+    flexDirection: "column",
+    gap: "$2"
+});
+
+const StyledInputContainer = stitches.styled("label", round, formLargeContainer, {
     display: "block",
     outlineWidth: "$1",
     outlineOffset: "-$borderWidth$1",
@@ -33,19 +43,19 @@ const StyledContainer = stitches.styled("label", round, formLargeContainer, {
         color: "primary"
     },
     compoundVariants: colorStyles({
-        styles: getColor => ({
+        styles: (getColor, colorName) => ({
             outlineStyle: "solid",
-            outlineColor: getColor("8"),
+            outlineColor: colorName === "neutral" ? getColor("12") : getColor("11"),
             focusWithin: {
                 outlineWidth: "$2",
-                outlineColor: getColor("10"),
+                outlineColor: colorName === "neutral" ? getColor("11") : getColor("10"),
             },
-            color: getColor("10"),
+            color: colorName === "neutral" ? getColor("12") : getColor("11"),
         })
     })
 });
 
-const StyledText = stitches.styled("span", formLargeText, {
+const StyledInputText = stitches.styled("span", formLargeText, {
     overflow: "hidden"
 });
 
@@ -54,12 +64,13 @@ const StyledInput = stitches.styled("input", textSelection, {
     fontSize: "inherit",
     fontWeight: "inherit",
     backgroundColor: "transparent",
+    width: "100%",
     focusVisible: {
         outline: "none"
     },
     stateDisabled: {
-        color: "$washed10",
-        placeholderColor: "$washed7"
+        color: "$washed11",
+        placeholderColor: "$washed8 !important"
     },
     variants: {
         color: {
@@ -76,14 +87,14 @@ const StyledInput = stitches.styled("input", textSelection, {
         color: "primary"
     },
     compoundVariants: colorStyles({
-        styles: getColor => ({
-            color: getColor("10"),
-            placeholderColor: getColor("7"),
+        styles: (getColor, colorName) => ({
+            color: colorName === "neutral" ? getColor("12") : getColor("11"),
+            placeholderColor: colorName === "neutral" ? getColor("9") : getColor("8")
         })
     })
 });
 
-type TextfieldProps = VariantProps<typeof StyledContainer> & Omit<
+type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"
@@ -91,6 +102,7 @@ type TextfieldProps = VariantProps<typeof StyledContainer> & Omit<
     | "defaultChecked"
     | "size"
 > & {
+    label?: string;
     type?: (
         "email" 
         | "password" 
@@ -106,6 +118,8 @@ export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, re
     const { 
         size,
         color,
+        css,
+        label,
         ...htmlProps
     } = props;
 
@@ -115,15 +129,29 @@ export const Textfield = forwardRef<HTMLInputElement, TextfieldProps>((props, re
     }
 
     return (
-        <StyledContainer 
-        {...variantProps}
-        data-disabled={props.disabled ? "" : undefined}>
-            <StyledText>
-                <StyledInput
-                {...htmlProps}
-                color={color}
-                ref={ref}/>
-            </StyledText>
+        <StyledContainer css={css}>
+            {label &&
+            <Label 
+            data-disabled={props.disabled ? "" : undefined}
+            color={color}
+            css={{
+                marginLeft: "$2"
+            }}>
+                {label}
+            </Label>}
+
+            <StyledInputContainer 
+            {...variantProps}
+            data-disabled={props.disabled ? "" : undefined}>
+                <StyledInputText>
+                    <StyledInput
+                    {...htmlProps}
+                    color={color}
+                    ref={ref}/>
+                </StyledInputText>
+            </StyledInputContainer>
         </StyledContainer>
     );
 });
+
+Textfield.toString = () => StyledInputContainer.selector;

@@ -1,4 +1,3 @@
-
 import { stitches } from "stitches";
 
 import { Box } from "./Box";
@@ -42,6 +41,11 @@ export const Stack = stitches.styled(Box, {
             end: {
                 alignItems: "flex-end"
             },
+        },
+        wrap: {
+            true: {
+                flexWrap: "wrap"
+            }
         }
     },
     defaultVariants: {

@@ -29,8 +29,14 @@ const StyledIconButton = stitches.styled(StyledButton, {
         }
     },
     defaultVariants: {
-        size: "md"
+        size: "md",
     },
+});
+
+const StyledIconContainer = stitches.styled("span", {
+    display: "block",
+    width: "fit-content",
+    margin: "auto"
 });
 
 type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledButton> & CSSProps & {
@@ -44,7 +50,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
         round,
         color,
         variant,
-        content,
         ...htmlProps
     } = props;
 
@@ -53,7 +58,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
         round,
         color,
         variant,
-        content,
     };
 
     return (
@@ -61,8 +65,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
         {...htmlProps} 
         {...styledProps}
         ref={ref}>
-            {Icon && 
-            <Icon/>}
+            <StyledIconContainer>
+                <Icon/>
+            </StyledIconContainer>
         </StyledIconButton>
     );
 });

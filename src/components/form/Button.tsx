@@ -6,7 +6,7 @@ import { VariantProps } from "@stitches/react";
 
 import { CSSProps, IconProps } from "types";
 
-import { content, round, formLargeContainer, formLargeText } from "mixins";
+import { round, formLargeContainer, formLargeText } from "mixins";
 
 import { colorStyles } from "helpers";
 
@@ -14,8 +14,9 @@ import { colorStyles } from "helpers";
 
 export const StyledText = stitches.styled("span", formLargeText, {});
 
-export const StyledButton = stitches.styled("button", formLargeContainer, round, content, {
+export const StyledButton = stitches.styled("button", formLargeContainer, round, {
     display: "block",
+    userSelect: "none",
     variants: {
         color: {
             primary: {},
@@ -145,7 +146,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
         round,
         color,
         variant,
-        content,
         ...htmlProps
     } = props;
 
@@ -154,7 +154,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
         round,
         color,
         variant,
-        content,
     };
 
     if (props.dir === "ltr") {
