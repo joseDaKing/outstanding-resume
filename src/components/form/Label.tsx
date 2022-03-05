@@ -104,6 +104,9 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                         <Box
                         as="button"
                         css={{
+                            focus: {
+                                outline: "none"
+                            },
                             marginLeft: "$1",
                             display: "inline-block"
                         }}>
