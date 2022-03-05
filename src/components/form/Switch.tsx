@@ -1,6 +1,7 @@
 import * as PrimitiveSwitch from "@radix-ui/react-switch";
 
 import { VariantProps } from "@stitches/react";
+
 import { colorStyles } from "helpers";
 
 import { round } from "mixins";
