@@ -7,6 +7,7 @@ import { Root, Viewport, Scrollbar, Thumb, Corner } from "@radix-ui/react-scroll
 import { VariantProps } from "@stitches/react";
 
 import { stitches } from "stitches";
+
 import { colorStyles } from "helpers";
 
 
