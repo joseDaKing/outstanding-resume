@@ -46,6 +46,18 @@ export const Root = stitches.styled("button", formLargeContainer, round, {
                 boxShadow: "$md",
                 stateDisabled: {
                     color: "$washed10"
+                },
+                active: {
+                    opacity: "$90"
+                },
+                hover: {
+                    opacity: "$90"
+                },
+                focus: {
+                    outlineStyle: "solid",
+                    outlineWidth: "$2",
+                    outlineColor: "$neutral12",
+                    boxShadow: "$md"
                 }
             },
             text: {
@@ -105,18 +117,6 @@ export const Root = stitches.styled("button", formLargeContainer, round, {
                 backgroundColor: "$inverted",
                 color: colorName === "neutral" ? getColor("12") : getColor("11"),
                 boxShadow: "$sm",
-                active: {
-                    opacity: "$90"
-                },
-                hover: {
-                    opacity: "$90"
-                },
-                focus: {
-                    outlineStyle: "solid",
-                    outlineWidth: "$2",
-                    outlineColor: "$neutral12",
-                    boxShadow: "$md"
-                }
             })
         }),
         ...colorStyles({

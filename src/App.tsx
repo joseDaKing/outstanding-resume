@@ -1,8 +1,6 @@
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-
 import { Box, Stack, ScrollArea } from "components/layout";
 
-import { TextField, Switch } from "components/form";
+import { Switch, Checkbox } from "components/form";
 
 
 
@@ -12,24 +10,12 @@ function App() {
     screen
     alignCross="center"
     orientation="horizontal">
-      <ScrollArea color="neutral" css={{
+      <ScrollArea color="danger" css={{
         width: "$1__2",
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Stack orientation="vertical" full css={{
-          padding: "$6",
-          gap: "$12",
-        }}>
-          <TextField 
-          label="Label"
-          help="Help"
-          placeholder="Placeholder"/>
-
-          <Switch
-          label="Label"
-          help="Help"/>
-        </Stack>
+        
       </ScrollArea>
       
       
@@ -48,14 +34,12 @@ function App() {
           margin: "auto",
           width: "$1__2",
         }}>
-          <Stack orientation="vertical" full css={{
+          <Stack orientation="horizontal" full css={{
             padding: "$6",
             gap: "$12",
           }}>
-            <Switch
-            variant="inverted"
-            label="Label"
-            help="Help"/>
+            <Switch label="Label" help="Help" variant="inverted" color="primary"/>
+            <Checkbox label="Label" help="Help" variant="inverted" color="primary"/>
           </Stack>
         </Box>
       </Stack>

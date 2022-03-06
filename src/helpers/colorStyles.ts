@@ -36,7 +36,7 @@ export function colorStyles<T extends string>({ variant, styles}: ColorStylesCon
 
     return componentColors.map(color => {
 
-        const getColor: GetColor = (level, alpha = false) => `$${color}${alpha ? "A" : ""}${level}`;
+        const getColor: GetColor = (level, alpha = false) => `$color$${color}${alpha ? "A" : ""}${level}`;
         
         const css = styles(getColor, color)
     

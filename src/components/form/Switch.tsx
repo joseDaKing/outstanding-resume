@@ -1,4 +1,5 @@
 import { useId } from "@radix-ui/react-id";
+
 import * as PrimitiveSwitch from "@radix-ui/react-switch";
 
 import { VariantProps } from "@stitches/react";
@@ -29,8 +30,8 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
     transition: "$200",
     transitionProperty: "color",
     [`& ${StyledThumb}`]: {
-        size: "$$checkboxSize",
-        marginRight: "$$checkboxSize",
+        size: "$$switchSize",
+        marginRight: "$$switchSize",
         transition: "inherit",
         transitionProperty: "transform",
         stateToggled: {
@@ -41,17 +42,17 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
         size: {
             sm: {
                 [`& ${StyledThumb}`]: {
-                    $$checkboxSize: "$size$3_5",
+                    $$switchSize: "$size$3_5",
                 }
             },
             md: {
                 [`& ${StyledThumb}`]: {
-                    $$checkboxSize: "$size$4",
+                    $$switchSize: "$size$4",
                 }
             },
             lg: {
                 [`& ${StyledThumb}`]: {
-                    $$checkboxSize: "$size$4_5",
+                    $$switchSize: "$size$4_5",
                 }
             }
         },
@@ -74,6 +75,7 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
                 }
             },
             inverted: {
+                boxShadow: "$md",
                 [`& ${StyledThumb}`]: {
                     backgroundColor: "$inverted"
                 },
