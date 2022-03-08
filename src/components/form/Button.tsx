@@ -47,17 +47,19 @@ export const Root = stitches.styled("button", formLargeContainer, round, {
                 stateDisabled: {
                     color: "$washed10"
                 },
-                active: {
-                    opacity: "$90"
-                },
-                hover: {
-                    opacity: "$90"
-                },
-                focus: {
-                    outlineStyle: "solid",
-                    outlineWidth: "$2",
-                    outlineColor: "$neutral12",
-                    boxShadow: "$md"
+                stateUndisabled: {
+                    active: {
+                        opacity: "$90"
+                    },
+                    hover: {
+                        opacity: "$90"
+                    },
+                    focus: {
+                        outlineStyle: "solid",
+                        outlineWidth: "$2",
+                        outlineColor: "$neutral12",
+                        boxShadow: "$md"
+                    }
                 }
             },
             text: {

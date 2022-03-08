@@ -4,6 +4,10 @@ export * from "./Checkbox";
 
 export * from "./IconButton";
 
+export * from "./Label";
+
+export * from "./Slider";
+
 export * from "./Switch";
 
 export * from "./TextField";

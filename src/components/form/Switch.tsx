@@ -1,5 +1,3 @@
-import { useId } from "@radix-ui/react-id";
-
 import * as PrimitiveSwitch from "@radix-ui/react-switch";
 
 import { VariantProps } from "@stitches/react";
@@ -12,9 +10,7 @@ import { stitches } from "stitches";
 
 import { CSSProps } from "types";
 
-import { Stack } from "../layout";
-
-import { Label, LabelProps } from "./Label";
+import { ElementRef, forwardRef } from "react";
 
 
 
@@ -149,14 +145,12 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
 
 StyledRoot.displayName = "SwitchRoot";
 
-type SwithProps = Omit<PrimitiveSwitch.SwitchProps, "asChild"> & VariantProps<typeof StyledRoot> & LabelProps & CSSProps;
+type SwithProps = Omit<PrimitiveSwitch.SwitchProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
 
-export const Switch: React.FC<SwithProps> = props => {
+export const Switch = forwardRef<ElementRef<typeof PrimitiveSwitch.Root>, SwithProps>((props, ref) => {
     
     const { 
         css,
-        label,
-        help,
         size,
         color,
         variant,
@@ -169,36 +163,15 @@ export const Switch: React.FC<SwithProps> = props => {
         variant,
     }
 
-    const labelProps = {
-        color,
-        label,
-        help,
-        variant,
-        disabled: props.disabled
-    }
-
-    const id = useId();
-
     return (
-        <Stack
-        css={{
-            ...(css ?? {}),
-            gap: "$2_5"
-        }}
-        orientation="horizontal">
-            <Label 
-            htmlFor={id}
-            {...labelProps}/>
-
-            <StyledRoot
-            id={id}
-            {...htmlProps}
-            {...variantProps}>
-                <StyledThumb/>
-            </StyledRoot>
-        </Stack>
+        <StyledRoot
+        ref={ref}
+        {...htmlProps}
+        {...variantProps}>
+            <StyledThumb/>
+        </StyledRoot>
     );
-}
+});
 
 Switch.displayName = "Switch";
 

@@ -14,12 +14,20 @@ export const textSelection = stitches.css({
             success: {},
             warning: {},
             danger: {}
+        },
+        variants: {
+            inverted: {
+                selectionBackgroundColor: "black !important"
+            },
+            filled: {}
         }
     },
     defaultVariants: {
-        color: "primary"
+        color: "primary",
+        variants: "filled"
     },
     compoundVariants: colorStyles({
+        variant: "filled",
         styles: getColor => ({
             selectionBackgroundColor: getColor("5", true)
         })

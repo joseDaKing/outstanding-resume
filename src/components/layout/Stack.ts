@@ -12,6 +12,9 @@ export const Stack = stitches.styled(Box, {
         flexBasis: "auto"
     },
     variants: {
+        reverse: {
+            true: {}
+        },
         orientation: {
             horizontal: {
                 flexDirection: "row"
@@ -48,6 +51,22 @@ export const Stack = stitches.styled(Box, {
             }
         }
     },
+    compoundVariants: [
+        {
+            orientation: "horizontal",
+            reverse: true,
+            css: {
+                flexDirection: "row-reverse"
+            }
+        },
+        {
+            orientation: "vertical",
+            reverse: true,
+            css: {
+                flexDirection: "column-reverse"
+            }
+        }
+    ],
     defaultVariants: {
         orientation: "horizontal",
         alignMain: "center",

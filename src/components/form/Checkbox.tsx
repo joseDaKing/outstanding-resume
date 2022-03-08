@@ -4,17 +4,13 @@ import { stitches } from "stitches";
 
 import { CSSProps } from "types";
 
-import { Label, LabelProps } from "./Label";
-
 import { VariantProps } from "@stitches/react";
 
 import { colorStyles } from "helpers";
 
-import { Stack } from "../layout";
-
-import { useId } from "@radix-ui/react-id";
-
 import { CheckIcon } from "@radix-ui/react-icons";
+
+import { ElementRef, forwardRef } from "react";
 
 
 
@@ -55,24 +51,26 @@ const StyledRoot = stitches.styled(PrimitiveCheckbox.Root, {
             },
             inverted: {
                 boxShadow: "$md",
+                borderColor: "$inverted",
+                backgroundColor: "$inverted",
                 stateDisabled: {
                     [`& ${StyledIndicator}`]: {
                         color: "$washed10"
                     }
                 },
-                borderColor: "$inverted",
-                backgroundColor: "$inverted",
-                active: {
-                    opacity: "$90"
-                },
-                hover: {
-                    opacity: "$90"
-                },
-                focus: {
-                    outlineStyle: "solid",
-                    outlineWidth: "$2",
-                    outlineColor: "$neutral12",
-                    boxShadow: "$md"
+                stateUndisabled: {
+                    active: {
+                        opacity: "$90"
+                    },
+                    hover: {
+                        opacity: "$90"
+                    },
+                    focus: {
+                        outlineStyle: "solid",
+                        outlineWidth: "$2",
+                        outlineColor: "$neutral12",
+                        boxShadow: "$md"
+                    }
                 }
             }
         },
@@ -138,15 +136,13 @@ const StyledRoot = stitches.styled(PrimitiveCheckbox.Root, {
     ]
 });
 
-type CheckboxProps = Omit<PrimitiveCheckbox.CheckboxProps, "asChild"> & VariantProps<typeof StyledRoot> & LabelProps & CSSProps;
+type CheckboxProps = Omit<PrimitiveCheckbox.CheckboxProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
 
-export const Checkbox: React.FC<CheckboxProps> = props => {
+export const Checkbox = forwardRef<ElementRef<typeof PrimitiveCheckbox.Root>, CheckboxProps>((props, ref) => {
 
     const {
         size,
         color,
-        help,
-        label,
         css,
         variant,
         ...htmlProps
@@ -158,34 +154,15 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
         variant
     }
 
-    const labelProps = {
-        label,
-        help,
-        color,
-        variant
-    }
-
-    const id = useId();
-
     return (
-        <Stack
-        css={{
-            ...(css ?? {}),
-            gap: "$2_5"
-        }}
-        orientation="horizontal">
-            <Label 
-            htmlFor={id}
-            {...labelProps}/>
-
-            <StyledRoot 
-            {...variantProps} 
-            {...htmlProps}>
-                <StyledIndicator 
-                asChild>
-                    <CheckIcon/>
-                </StyledIndicator>
-            </StyledRoot>
-        </Stack>
+        <StyledRoot 
+        ref={ref}
+        {...variantProps} 
+        {...htmlProps}>
+            <StyledIndicator 
+            asChild>
+                <CheckIcon/>
+            </StyledIndicator>
+        </StyledRoot>
     );
-}
+});

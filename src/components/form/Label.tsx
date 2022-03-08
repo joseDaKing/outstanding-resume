@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { ReactElement, Children, forwardRef, isValidElement, cloneElement } from "react";
 
 import { stitches } from "stitches";
 
@@ -18,9 +18,13 @@ import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
 import { Tooltip } from "../overlays";
 
+import { Stack } from "../layout";
+
+import { useId } from "@radix-ui/react-id";
 
 
-const Root = stitches.styled("label", textSelection, {
+
+const StyledRoot = stitches.styled("label", textSelection, {
     fontFamily: "$primary",
     fontWeight: 400,
     cursor: "pointer",
@@ -68,40 +72,65 @@ const Root = stitches.styled("label", textSelection, {
     })
 });
 
-Root.displayName = "LabelRoot";
-
-export type LabelProps = VariantProps<typeof Root> & CSSProps & {
-    label?: string;
-    htmlFor?: string;
+export type LabelProps = VariantProps<typeof StyledRoot> & VariantProps<typeof Stack> & CSSProps & {
+    name: string;
     help?: string;
     disabled?: boolean;
+    children: ReactElement<any, any>;
 };
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
-    const { label, help, disabled, variant, color, ...htmlProps } = props;
+    const {
+        variant,
+        color,
+        css,
+        children,
+        reverse,
+        orientation,
+        alignMain,
+        alignCross,
+        wrap,
+        ...htmlProps
+    } = props;
 
     const variantProps = {
         variant,
         color
     }
 
+    console.log("variantProps: ", variantProps);
+
+    const stackProps = {
+        reverse,
+        orientation,
+        alignMain,
+        alignCross,
+        wrap
+    }
+
+    const id = useId();
+
     return (
-        <>
-            {label &&
-            <Root
-            ref={ref}
-            data-disabled={disabled ? "" : undefined}
+        <Stack
+        css={{
+            gap: "$4",
+            width: "fit-content",
+            ...(css ?? {}), 
+        }}
+        {...stackProps}>
+            <StyledRoot
+            {...htmlProps}
             {...variantProps}
-            {...htmlProps}>
-                <span>
-                    {label}
-                </span>
+            htmlFor={id}>
+                {props.name}
                 
-                {help && 
+                {props.help && 
                 <Tooltip>
-                    <Tooltip.Trigger asChild>
+                    <Tooltip.Trigger 
+                    asChild>
                         <Box
+                        disabled={props.disabled}
                         as="button"
                         css={{
                             focus: {
@@ -119,14 +148,20 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                     css={{
                         maxWidth: "$52"
                     }}>
-                        {help}
+                        {props.help}
                     </Tooltip.Content>
                 </Tooltip>}
-            </Root>}
-        </>
+            </StyledRoot>
+
+            {Children.map(children, element => {
+
+                if (isValidElement(element)) {
+
+                    return cloneElement(element, { id, ...variantProps } as any);
+                }
+
+                return element;
+            })}
+        </Stack>
     );
 });
-
-Label.displayName = "Label";
-
-Label.toString = () => Root.selector;

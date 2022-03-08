@@ -10,12 +10,6 @@ import { colorStyles } from "helpers";
 
 import { CSSProps } from "types";
 
-import { Label, LabelProps } from "./Label";
-
-import { Stack } from "../layout";
-
-import { useId } from "@radix-ui/react-id";
-
 
 
 const StyledInputContainer = stitches.styled("label", round, formLargeContainer, {
@@ -100,7 +94,7 @@ const StyledInput = stitches.styled("input", textSelection, {
 
 StyledInput.displayName = "TextFieldInput";
 
-type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & LabelProps & Omit<
+type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"
@@ -124,8 +118,8 @@ export const TextField = forwardRef<HTMLInputElement, TextfieldProps>((props, re
         size,
         color,
         css,
-        label,
-        help,
+        style,
+        className,
         ...htmlProps
     } = props;
 
@@ -134,42 +128,20 @@ export const TextField = forwardRef<HTMLInputElement, TextfieldProps>((props, re
         color
     }
 
-    const labelProps = {
-        color,
-        label,
-        help,
-        disabled: props.disabled
-    }
-
-    const id = useId();
-
     return (
-        <Stack
-        css={{
-            ...(css ?? {}),
-            gap: "$2_5"
-        }}
-        alignCross="start"
-        orientation="vertical">
-            <Label 
-            htmlFor={id}
-            css={{
-                marginLeft: "$2"
-            }}
-            {...labelProps}/>
-
-            <StyledInputContainer 
-            {...variantProps}
-            data-disabled={props.disabled ? "" : undefined}>
-                <StyledInputText>
-                    <StyledInput
-                    {...htmlProps}
-                    id={id}
-                    color={color}
-                    ref={ref}/>
-                </StyledInputText>
-            </StyledInputContainer>
-        </Stack>
+    
+        <StyledInputContainer 
+        {...variantProps}
+        style={style}
+        className={className}
+        data-disabled={props.disabled ? "" : undefined}>
+            <StyledInputText>
+                <StyledInput
+                {...htmlProps}
+                color={color}
+                ref={ref}/>
+            </StyledInputText>
+        </StyledInputContainer>
     );
 });
 

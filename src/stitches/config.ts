@@ -1262,10 +1262,10 @@ export const utils: Utils = {
         "&:not(:disabled,[data-disabled])": styles
     }),
     orientationHorizontal: styles => ({
-        "&[orientation='horizontal']": styles
+        "&[data-orientation='horizontal']": styles
     }),
     orientationVertical: styles => ({
-        "&[orientation='vertical']": styles
+        "&[data-orientation='vertical']": styles
     }),
     alignStart: styles => ({
         "&[data-align='start']": styles
