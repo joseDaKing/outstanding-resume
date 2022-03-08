@@ -24,13 +24,14 @@ import { useId } from "@radix-ui/react-id";
 
 
 
-const StyledRoot = stitches.styled("label", textSelection, {
+const StyledRoot = stitches.styled("label", {
     fontFamily: "$primary",
     fontWeight: 400,
     cursor: "pointer",
     display: "inline-flex",
     justifyContent: "center",
     alignItems: "center",
+    userSelect: "none",
     capSize: {
         fontSize: 14,
         fontMetrics
@@ -72,6 +73,8 @@ const StyledRoot = stitches.styled("label", textSelection, {
     })
 });
 
+StyledRoot.displayName = "StyledRoot";
+
 export type LabelProps = VariantProps<typeof StyledRoot> & VariantProps<typeof Stack> & CSSProps & {
     name: string;
     help?: string;
@@ -87,9 +90,9 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         css,
         children,
         reverse,
-        orientation,
-        alignMain,
-        alignCross,
+        orientation = "horizontal",
+        alignMain = orientation === "horizontal" ? "start" : "center",
+        alignCross = orientation === "horizontal" ? "center" : "start",
         wrap,
         ...htmlProps
     } = props;
@@ -98,9 +101,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         variant,
         color
     }
-
-    console.log("variantProps: ", variantProps);
-
+    
     const stackProps = {
         reverse,
         orientation,
@@ -114,14 +115,14 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
     return (
         <Stack
         css={{
-            gap: "$4",
-            width: "fit-content",
+            gap: "$2_5",
             ...(css ?? {}), 
         }}
         {...stackProps}>
             <StyledRoot
             {...htmlProps}
             {...variantProps}
+            data-disabled={props.disabled ? "" : undefined}
             htmlFor={id}>
                 {props.name}
                 
@@ -157,7 +158,11 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
                 if (isValidElement(element)) {
 
-                    return cloneElement(element, { id, ...variantProps } as any);
+                    return cloneElement(element, { 
+                        id, 
+                        disabled: props.disabled,
+                        ...variantProps 
+                    } as any);
                 }
 
                 return element;

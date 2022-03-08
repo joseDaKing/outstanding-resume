@@ -1,6 +1,6 @@
 import { Box, Stack, ScrollArea } from "components/layout";
 
-import { Label, Checkbox } from "components/form";
+import { Slider, Label, Switch } from "components/form";
 
 
 
@@ -16,14 +16,30 @@ function App() {
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Stack orientation="vertical" full css={{
+        <Stack orientation="vertical" alignCross="start" full css={{
           padding: "$6",
           paddingTop: "$16",
           gap: "$12",
         }}>
-          <Label name="Label" help="Help">
-            <Checkbox/>
-          </Label>
+          <Label
+          disabled
+          name="Label"
+          help="Help"
+          css={{
+            width: "100%"
+          }}>   
+            <Switch/>
+          </Label>  
+
+          <Label
+          disabled
+          name="Label"
+          help="Help"
+          css={{
+            width: "100%"
+          }}>   
+            <Slider defaultValue={[50]}/>
+          </Label>     
         </Stack>
       </ScrollArea>
       
@@ -37,14 +53,34 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
-        <Box css={{
-          margin: "auto",
-          width: "$1__2",
+        <Stack orientation="vertical" alignCross="start" full css={{
+          padding: "$6",
+          paddingTop: "$16",
+          gap: "$12",
+          margin: "auto"
         }}>
-          <Label name="Label" help="Help" variant="inverted">            
-            <Checkbox/>
-          </Label>
-        </Box>
+          <Label
+          disabled
+          variant="inverted"
+          name="Label"
+          help="Help"
+          css={{
+            width: "100%"
+          }}>   
+            <Switch/>
+          </Label>  
+
+          <Label
+          disabled
+          variant="inverted"
+          name="Label"
+          help="Help"
+          css={{
+            width: "100%"
+          }}>   
+            <Slider defaultValue={[50]}/>
+          </Label>     
+        </Stack>
       </Stack>
     </Stack>
   );
