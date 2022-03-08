@@ -140,9 +140,9 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                 {props.help && 
                 <Tooltip>
                     <Tooltip.Trigger 
+                    disabled={props.disabled}
                     asChild>
                         <Box
-                        disabled={props.disabled}
                         as="button"
                         css={{
                             focus: {

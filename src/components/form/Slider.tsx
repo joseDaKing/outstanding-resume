@@ -134,7 +134,7 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, {
     defaultVariants: {
         color: "primary",
         variant: "filled" ,
-        size: "sm"
+        size: "md"
     },
     compoundVariants: colorStyles({
         variant: "filled",
