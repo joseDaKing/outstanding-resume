@@ -111,12 +111,12 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, {
                             outlineWidth: "$4"
                         }
                     } 
-                },
+                }, 
                 stateDisabled: {
                     opacity: "$50",
                     [`& ${StyledTrack}`]: {
                         backgroundColor: "$washed12",
-                    },
+                    }
                 }
             },
             filled: {

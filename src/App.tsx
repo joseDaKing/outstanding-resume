@@ -22,7 +22,6 @@ function App() {
           gap: "$12",
         }}>
           <Label
-          disabled
           name="Label"
           help="Help"
           css={{
@@ -32,7 +31,6 @@ function App() {
           </Label>  
 
           <Label
-          disabled
           name="Label"
           help="Help"
           css={{
@@ -57,10 +55,8 @@ function App() {
           padding: "$6",
           paddingTop: "$16",
           gap: "$12",
-          margin: "auto"
         }}>
           <Label
-          disabled
           variant="inverted"
           name="Label"
           help="Help"
@@ -71,10 +67,9 @@ function App() {
           </Label>  
 
           <Label
-          disabled
-          variant="inverted"
           name="Label"
           help="Help"
+          variant="inverted"
           css={{
             width: "100%"
           }}>   

@@ -23,8 +23,31 @@ import { Stack } from "../layout";
 import { useId } from "@radix-ui/react-id";
 
 
+const StyledRoot = stitches.styled("div", {
+    gap: "$2_5",
+    display: "flex",
+    "& >*": {
+        flexGrow: 0,
+        flexShrink: 0,
+        flexBasis: "auto"
+    },
+    variants: {
+        orientation: {
+            horizontal: {
+                alignItems: "center"
+            },
+            vertical: {
+                alignItems: "start",
+                flexDirection: "column"
+            }
+        },
+    },
+    defaultVariants: {
+        orientation: "horizontal"
+    }
+})
 
-const StyledRoot = stitches.styled("label", {
+const StyledLabel = stitches.styled("label", {
     fontFamily: "$primary",
     fontWeight: 400,
     cursor: "pointer",
@@ -73,9 +96,9 @@ const StyledRoot = stitches.styled("label", {
     })
 });
 
-StyledRoot.displayName = "StyledRoot";
+StyledLabel.displayName = "StyledRoot";
 
-export type LabelProps = VariantProps<typeof StyledRoot> & VariantProps<typeof Stack> & CSSProps & {
+export type LabelProps = VariantProps<typeof StyledLabel> & VariantProps<typeof StyledRoot> & CSSProps & {
     name: string;
     help?: string;
     disabled?: boolean;
@@ -89,11 +112,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         color,
         css,
         children,
-        reverse,
-        orientation = "horizontal",
-        alignMain = orientation === "horizontal" ? "start" : "center",
-        alignCross = orientation === "horizontal" ? "center" : "start",
-        wrap,
+        orientation,
         ...htmlProps
     } = props;
 
@@ -102,24 +121,16 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         color
     }
     
-    const stackProps = {
-        reverse,
-        orientation,
-        alignMain,
-        alignCross,
-        wrap
-    }
+    const rootProps = { 
+        orientation 
+    };
 
     const id = useId();
 
     return (
-        <Stack
-        css={{
-            gap: "$2_5",
-            ...(css ?? {}), 
-        }}
-        {...stackProps}>
-            <StyledRoot
+        <StyledRoot
+        {...rootProps}>
+            <StyledLabel
             {...htmlProps}
             {...variantProps}
             data-disabled={props.disabled ? "" : undefined}
@@ -152,7 +163,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                         {props.help}
                     </Tooltip.Content>
                 </Tooltip>}
-            </StyledRoot>
+            </StyledLabel>
 
             {Children.map(children, element => {
 
@@ -167,6 +178,6 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
                 return element;
             })}
-        </Stack>
+        </StyledRoot>
     );
 });

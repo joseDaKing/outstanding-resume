@@ -71,7 +71,6 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
                 }
             },
             inverted: {
-                boxShadow: "$md",
                 [`& ${StyledThumb}`]: {
                     backgroundColor: "$inverted"
                 },
