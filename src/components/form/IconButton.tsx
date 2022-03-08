@@ -10,7 +10,7 @@ import * as Button from "./Button";
 
 
 
-const Root = stitches.styled(Button.Root, {
+const Root = stitches.styled(Button.StyledRoot, {
     display: "block",
     "&::before,&::after": {
         display: "none !important",
@@ -33,7 +33,7 @@ const Root = stitches.styled(Button.Root, {
     },
 });
 
-Root.displayName = "IconButtonRoot";
+Root.displayName = "StyledIconButtonRoot";
 
 const IconContainer = stitches.styled("span", {
     display: "block",
@@ -41,9 +41,9 @@ const IconContainer = stitches.styled("span", {
     margin: "auto"
 });
 
-IconContainer.displayName = "IconContainer";
+IconContainer.displayName = "StyledIconContainer";
 
-type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.Root> & CSSProps & {
+type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.StyledRoot> & CSSProps & {
     Icon: ComponentType<any>;
 };
 

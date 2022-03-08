@@ -49,13 +49,13 @@ const StyledInputContainer = stitches.styled("label", round, formLargeContainer,
     })
 });
 
-StyledInputContainer.displayName = "TextFieldRoot";
+StyledInputContainer.displayName = "StyledTextFieldRoot";
 
 const StyledInputText = stitches.styled("span", formLargeText, {
     overflow: "hidden"
 });
 
-StyledInputText.displayName = "TextFieldText";
+StyledInputText.displayName = "StyledTextFieldText";
 
 const StyledInput = stitches.styled("input", textSelection, {
     fontFamily: "inherit",
@@ -92,7 +92,7 @@ const StyledInput = stitches.styled("input", textSelection, {
     })
 });
 
-StyledInput.displayName = "TextFieldInput";
+StyledInput.displayName = "StyledTextFieldInput";
 
 type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omit<
     JSX.IntrinsicElements["input"], 

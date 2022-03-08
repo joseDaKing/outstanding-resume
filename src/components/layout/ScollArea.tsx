@@ -35,7 +35,7 @@ const StyledRoot = stitches.styled(Root, {
     })
 });
 
-StyledRoot.displayName = "ScrollAreaRoot";
+StyledRoot.displayName = "StyledScrollAreaRoot";
 
 const StyledViewport = stitches.styled(Viewport, {
     size: "$full",
@@ -43,7 +43,7 @@ const StyledViewport = stitches.styled(Viewport, {
     borderRadius: "inherit"
 });
 
-StyledViewport.displayName = "ScrollAreaViewport";
+StyledViewport.displayName = "StyledScrollAreaViewport";
 
 const StyledScrollbar = stitches.styled(Scrollbar, {
     display: "flex",
@@ -61,7 +61,7 @@ const StyledScrollbar = stitches.styled(Scrollbar, {
     }
 });
 
-StyledScrollbar.displayName = "ScrollAreaScrollbar";
+StyledScrollbar.displayName = "StyledScrollAreaScrollbar";
 
 const StyledThumb = stitches.styled(Thumb, {
     position: "relative",
@@ -82,13 +82,13 @@ const StyledThumb = stitches.styled(Thumb, {
     },
 });
 
-StyledThumb.displayName = "ScrollAreaThumb";
+StyledThumb.displayName = "StyledScrollAreaThumb";
 
 const StyledCorner = stitches.styled(Corner, {
     backgroundColor: "transparent"
 });
 
-StyledCorner.displayName = "ScrollCorner";
+StyledCorner.displayName = "StyledScrollCorner";
 
 type ScrollAreaProps = CSSProps & VariantProps<typeof StyledRoot>;
 

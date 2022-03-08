@@ -1,6 +1,6 @@
-import { Box, Stack, ScrollArea } from "components/layout";
+import { Collapsible, Stack, ScrollArea } from "components/layout";
 
-import { Slider, Label, Switch } from "components/form";
+import { Slider, Label } from "components/form";
 
 
 
@@ -21,23 +21,17 @@ function App() {
           paddingTop: "$16",
           gap: "$12",
         }}>
-          <Label
-          name="Label"
-          help="Help"
-          css={{
-            width: "100%"
-          }}>   
-            <Switch/>
-          </Label>  
 
-          <Label
-          name="Label"
-          help="Help"
-          css={{
-            width: "100%"
-          }}>   
-            <Slider defaultValue={[50]}/>
-          </Label>     
+          <Collapsible>
+            <Label
+            name="Label"
+            help="Help"
+            css={{
+              width: "100%"
+            }}>   
+              <Slider defaultValue={[50]}/>
+            </Label>
+          </Collapsible>
         </Stack>
       </ScrollArea>
       
@@ -51,31 +45,7 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
-        <Stack orientation="vertical" alignCross="start" full css={{
-          padding: "$6",
-          paddingTop: "$16",
-          gap: "$12",
-        }}>
-          <Label
-          variant="inverted"
-          name="Label"
-          help="Help"
-          css={{
-            width: "100%"
-          }}>   
-            <Switch/>
-          </Label>  
-
-          <Label
-          name="Label"
-          help="Help"
-          variant="inverted"
-          css={{
-            width: "100%"
-          }}>   
-            <Slider defaultValue={[50]}/>
-          </Label>     
-        </Stack>
+        
       </Stack>
     </Stack>
   );

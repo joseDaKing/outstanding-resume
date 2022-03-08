@@ -1,9 +1,10 @@
 import * as PrimitiveSlider from "@radix-ui/react-slider";
 
 import { VariantProps } from "@stitches/react";
+
 import { colorStyles } from "helpers";
 
-import { ElementRef, forwardRef, useEffect, useRef } from "react";
+import { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
 
@@ -24,7 +25,7 @@ const StyledTrack = stitches.styled(PrimitiveSlider.Track, {
     }
 });
 
-StyledTrack.displayName = "StyledTrack";
+StyledTrack.displayName = "StyledSliderTrack";
 
 const StyledRange = stitches.styled(PrimitiveSlider.Range, {
     position: "absolute",
@@ -37,7 +38,7 @@ const StyledRange = stitches.styled(PrimitiveSlider.Range, {
     }
 });
 
-StyledRange.displayName = "StyledRange";
+StyledRange.displayName = "StyledSliderRange";
 
 const StyledThumb = stitches.styled("button", {
     display: "block",
@@ -45,7 +46,7 @@ const StyledThumb = stitches.styled("button", {
     borderRadius: "$round",
 });
 
-StyledThumb.displayName = "StyledThumb";
+StyledThumb.displayName = "StyledSliderThumb";
 
 const StyledRoot = stitches.styled(PrimitiveSlider.Root, {
     position: "relative",
@@ -158,7 +159,7 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, {
     })
 });
 
-StyledRoot.displayName = "StyledRoot";
+StyledRoot.displayName = "StyledSliderRoot";
 
 type SliderProps = Omit<PrimitiveSlider.SliderProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
 

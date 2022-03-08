@@ -19,7 +19,7 @@ const StyledThumb = stitches.styled(PrimitiveSwitch.Thumb, {
     borderRadius: "inherit"
 });
 
-StyledThumb.displayName = "SwitchThumb";
+StyledThumb.displayName = "StyledSwitchThumb";
 
 const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
     padding: "$0_5",
@@ -142,7 +142,7 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
     })
 });
 
-StyledRoot.displayName = "SwitchRoot";
+StyledRoot.displayName = "StyledSwitchRoot";
 
 type SwithProps = Omit<PrimitiveSwitch.SwitchProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
 

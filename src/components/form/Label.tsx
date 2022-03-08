@@ -6,8 +6,6 @@ import fontMetrics from "@capsizecss/metrics/roboto";
 
 import { colorStyles } from "helpers";
 
-import { textSelection } from "mixins";
-
 import { VariantProps } from "@stitches/react";
 
 import { CSSProps } from "types";
@@ -17,8 +15,6 @@ import { Box } from "components/layout";
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
 import { Tooltip } from "../overlays";
-
-import { Stack } from "../layout";
 
 import { useId } from "@radix-ui/react-id";
 
@@ -45,7 +41,9 @@ const StyledRoot = stitches.styled("div", {
     defaultVariants: {
         orientation: "horizontal"
     }
-})
+});
+
+StyledRoot.displayName = "StyledLabelRoot";
 
 const StyledLabel = stitches.styled("label", {
     fontFamily: "$primary",
@@ -96,7 +94,7 @@ const StyledLabel = stitches.styled("label", {
     })
 });
 
-StyledLabel.displayName = "StyledRoot";
+StyledLabel.displayName = "StyledLabel";
 
 export type LabelProps = VariantProps<typeof StyledLabel> & VariantProps<typeof StyledRoot> & CSSProps & {
     name: string;

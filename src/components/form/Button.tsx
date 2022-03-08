@@ -6,17 +6,19 @@ import { VariantProps } from "@stitches/react";
 
 import { CSSProps, IconProps } from "types";
 
-import { round, formLargeContainer, formLargeText } from "mixins";
+import { round, formLargeContainer, formLargeText, textAlign } from "mixins";
 
 import { colorStyles } from "helpers";
 
 
 
-export const Text = stitches.styled("span", formLargeText, {});
+export const StyledText = stitches.styled("span", formLargeText, textAlign, {
+    width: "fit-content",
+});
 
-Text.displayName = "ButtonText";
+StyledText.displayName = "StyledButtonText";
 
-export const Root = stitches.styled("button", formLargeContainer, round, {
+export const StyledRoot = stitches.styled("button", formLargeContainer, round, {
     display: "block",
     userSelect: "none",
     variants: {
@@ -141,9 +143,9 @@ export const Root = stitches.styled("button", formLargeContainer, round, {
     ]
 });
 
-Root.displayName = "ButtonRoot";
+StyledRoot.displayName = "StyledButtonRoot";
 
-type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Root> & CSSProps & IconProps;
+type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledRoot> & CSSProps & IconProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, EndIcon, ...props }, ref) => {
 
@@ -172,11 +174,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
     }
 
     return (
-        <Root 
+        <StyledRoot 
         {...htmlProps} 
         {...styledProps}
         ref={ref}>
-            <Text>
+            <StyledText>
                 {StartIcon && 
                 <StartIcon/>}
 
@@ -187,11 +189,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
 
                 {EndIcon && 
                 <EndIcon/>}
-            </Text>
-        </Root>
+            </StyledText>
+        </StyledRoot>
     );
 });
 
 Button.displayName = "Button";
 
-Button.toString = () => Root.selector;
+Button.toString = () => StyledRoot.selector;
