@@ -6,14 +6,15 @@ import { Box } from "./Box";
 
 export const Stack = stitches.styled(Box, {
     display: "flex",
-    "& > *": {
-        flexGrow: 0,
-        flexShrink: 0,
-        flexBasis: "auto"
-    },
     variants: {
         reverse: {
             true: {}
+        },
+        block: {
+            true: {
+                flexShrink: 1,
+                width: "$full"
+            }
         },
         orientation: {
             horizontal: {

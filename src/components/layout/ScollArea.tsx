@@ -39,7 +39,7 @@ StyledRoot.displayName = "StyledScrollAreaRoot";
 
 const StyledViewport = stitches.styled(Viewport, {
     size: "$full",
-    paddingY: "$0_5",
+    padding: "$0_5",
     borderRadius: "inherit"
 });
 

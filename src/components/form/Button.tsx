@@ -10,15 +10,18 @@ import { round, formLargeContainer, formLargeText, textAlign } from "mixins";
 
 import { colorStyles } from "helpers";
 
+import { block } from "mixins";
 
 
-export const StyledText = stitches.styled("span", formLargeText, textAlign, {
-    width: "fit-content",
+
+export const StyledText = stitches.styled("span", formLargeText, {
+    display: "inline-block",
+    width: "fit-content"
 });
 
 StyledText.displayName = "StyledButtonText";
 
-export const StyledRoot = stitches.styled("button", formLargeContainer, round, {
+export const StyledRoot = stitches.styled("button", formLargeContainer, round, block, textAlign, {
     display: "block",
     userSelect: "none",
     variants: {
@@ -154,6 +157,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
         round,
         color,
         variant,
+        align = "center",
         ...htmlProps
     } = props;
 
@@ -161,6 +165,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, E
         size,
         round,
         color,
+        align,
         variant,
     };
 

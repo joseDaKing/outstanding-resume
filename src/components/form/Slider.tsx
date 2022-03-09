@@ -4,6 +4,8 @@ import { VariantProps } from "@stitches/react";
 
 import { colorStyles } from "helpers";
 
+import { block } from "mixins";
+
 import { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
@@ -48,7 +50,7 @@ const StyledThumb = stitches.styled("button", {
 
 StyledThumb.displayName = "StyledSliderThumb";
 
-const StyledRoot = stitches.styled(PrimitiveSlider.Root, {
+const StyledRoot = stitches.styled(PrimitiveSlider.Root, block, {
     position: "relative",
     display: "flex",
     alignItems: "center",

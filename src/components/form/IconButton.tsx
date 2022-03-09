@@ -8,9 +8,11 @@ import { CSSProps } from "types";
 
 import * as Button from "./Button";
 
+import { block } from "mixins";
 
 
-const Root = stitches.styled(Button.StyledRoot, {
+
+const StyledRoot = stitches.styled(Button.StyledRoot, block, {
     display: "block",
     "&::before,&::after": {
         display: "none !important",
@@ -33,15 +35,15 @@ const Root = stitches.styled(Button.StyledRoot, {
     },
 });
 
-Root.displayName = "StyledIconButtonRoot";
+StyledRoot.displayName = "StyledIconButtonRoot";
 
-const IconContainer = stitches.styled("span", {
+const StyledIconContainer = stitches.styled("span", {
     display: "block",
     width: "fit-content",
     margin: "auto"
 });
 
-IconContainer.displayName = "StyledIconContainer";
+StyledIconContainer.displayName = "StyledIconContainer";
 
 type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.StyledRoot> & CSSProps & {
     Icon: ComponentType<any>;
@@ -54,6 +56,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
         round,
         color,
         variant,
+        align = "center",
         ...htmlProps
     } = props;
 
@@ -62,20 +65,21 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
         round,
         color,
         variant,
+        align
     };
 
     return (
-        <Root 
+        <StyledRoot 
         {...htmlProps} 
         {...styledProps}
         ref={ref}>
-            <IconContainer>
+            <StyledIconContainer>
                 <Icon/>
-            </IconContainer>
-        </Root>
+            </StyledIconContainer>
+        </StyledRoot>
     );
 });
 
 IconButton.displayName = "IconButton";
 
-IconButton.toString = () => Root.selector;
+IconButton.toString = () => StyledRoot.selector;

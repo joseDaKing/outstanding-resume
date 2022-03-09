@@ -28,6 +28,7 @@ StyledRoot.displayName = "StyledCollapsibleRoot";
 
 const StyledContent = stitches.styled(PrimitiveCollapsible.Content, openCloseAnimation, {
     width: "100%",
+    paddingY: "$0_5"
 });
 
 StyledContent.displayName = "StyledCollapsibleContent";

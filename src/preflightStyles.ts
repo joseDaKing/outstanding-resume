@@ -3,6 +3,11 @@ import { stitches } from "stitches";
 
 
 export const preflightStyles = stitches.globalCss({
+    "*": {
+        flexGrow: 0,
+        flexShrink: 0,
+        flexBasis: "auto"
+    },
     "*,::before,::after": {
         boxSizing: "border-box",
         borderWidth: 0,

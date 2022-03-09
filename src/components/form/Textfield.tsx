@@ -10,9 +10,11 @@ import { colorStyles } from "helpers";
 
 import { CSSProps } from "types";
 
+import { block } from "mixins";
 
 
-const StyledInputContainer = stitches.styled("label", round, formLargeContainer, {
+
+const StyledRoot = stitches.styled("label", round, block, formLargeContainer, {
     display: "block",
     outlineWidth: "$1",
     outlineOffset: "-$borderWidth$1",
@@ -31,6 +33,21 @@ const StyledInputContainer = stitches.styled("label", round, formLargeContainer,
             success: {},
             warning: {},
             danger: {}
+        },
+        full: {
+            true: {
+
+            }
+        },
+        grow: {
+            true: {
+
+            }
+        },
+        shrink: {
+            true: {
+                
+            }
         }
     },
     defaultVariants: {
@@ -49,13 +66,13 @@ const StyledInputContainer = stitches.styled("label", round, formLargeContainer,
     })
 });
 
-StyledInputContainer.displayName = "StyledTextFieldRoot";
+StyledRoot.displayName = "StyledTextFieldRoot";
 
-const StyledInputText = stitches.styled("span", formLargeText, {
+const StyledInputContainer = stitches.styled("span", formLargeText, {
     overflow: "hidden"
 });
 
-StyledInputText.displayName = "StyledTextFieldText";
+StyledInputContainer.displayName = "StyledTextFieldText";
 
 const StyledInput = stitches.styled("input", textSelection, {
     fontFamily: "inherit",
@@ -94,7 +111,7 @@ const StyledInput = stitches.styled("input", textSelection, {
 
 StyledInput.displayName = "StyledTextFieldInput";
 
-type TextfieldProps = VariantProps<typeof StyledInputContainer> & CSSProps & Omit<
+type TextfieldProps = VariantProps<typeof StyledRoot> & CSSProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"
@@ -120,31 +137,33 @@ export const TextField = forwardRef<HTMLInputElement, TextfieldProps>((props, re
         css,
         style,
         className,
+        block,
         ...htmlProps
     } = props;
 
     const variantProps = {
         size,
-        color
+        color,
+        block
     }
 
     return (
     
-        <StyledInputContainer 
+        <StyledRoot 
         {...variantProps}
         style={style}
         className={className}
         data-disabled={props.disabled ? "" : undefined}>
-            <StyledInputText>
+            <StyledInputContainer>
                 <StyledInput
                 {...htmlProps}
                 color={color}
                 ref={ref}/>
-            </StyledInputText>
-        </StyledInputContainer>
+            </StyledInputContainer>
+        </StyledRoot>
     );
 });
 
 TextField.displayName = "TextField";
 
-TextField.toString = () => StyledInputContainer.selector;
+TextField.toString = () => StyledRoot.selector;

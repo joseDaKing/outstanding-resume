@@ -18,8 +18,11 @@ import { Tooltip } from "../overlays";
 
 import { useId } from "@radix-ui/react-id";
 
+import { block } from "mixins";
 
-const StyledRoot = stitches.styled("div", {
+
+
+const StyledRoot = stitches.styled("div", block, {
     gap: "$2_5",
     display: "flex",
     "& >*": {
@@ -111,22 +114,25 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         css,
         children,
         orientation,
+        block,
         ...htmlProps
     } = props;
 
     const variantProps = {
         variant,
-        color
+        color,
     }
     
     const rootProps = { 
-        orientation 
+        orientation,
+        block
     };
 
     const id = useId();
 
     return (
         <StyledRoot
+        css={css}
         {...rootProps}>
             <StyledLabel
             {...htmlProps}
@@ -167,10 +173,11 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
                 if (isValidElement(element)) {
 
-                    return cloneElement(element, { 
+                    return cloneElement(element, {
+                        ...variantProps,
                         id, 
-                        disabled: props.disabled,
-                        ...variantProps 
+                        block: true,
+                        disabled: props.disabled
                     } as any);
                 }
 

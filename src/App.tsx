@@ -1,6 +1,4 @@
-import { Collapsible, Stack, ScrollArea } from "components/layout";
-
-import { Slider, Label } from "components/form";
+import { Stack, ScrollArea } from "components/layout";
 
 
 
@@ -11,28 +9,13 @@ function App() {
     screen
     alignCross="center"
     orientation="horizontal">
-      <ScrollArea color="danger" css={{
+      <ScrollArea color="neutral" css={{
         width: "$1__2",
         height: "100%",
+        padding: "$8",
         backgroundColor: "$inverted",
       }}>
-        <Stack orientation="vertical" alignCross="start" full css={{
-          padding: "$6",
-          paddingTop: "$16",
-          gap: "$12",
-        }}>
-
-          <Collapsible>
-            <Label
-            name="Label"
-            help="Help"
-            css={{
-              width: "100%"
-            }}>   
-              <Slider defaultValue={[50]}/>
-            </Label>
-          </Collapsible>
-        </Stack>
+        
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{
