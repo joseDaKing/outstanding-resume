@@ -1,4 +1,6 @@
-import { Stack, ScrollArea } from "components/layout";
+import { Label, Slider } from "components/form";
+
+import { Stack, ScrollArea, Collapsible } from "components/layout";
 
 
 
@@ -15,7 +17,14 @@ function App() {
         padding: "$8",
         backgroundColor: "$inverted",
       }}>
-        
+        <Collapsible name="Vissa extra uppgifter">
+          <Label
+          
+          name="Label"
+          orientation="vertical">
+            <Slider/>
+          </Label>
+        </Collapsible>
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{

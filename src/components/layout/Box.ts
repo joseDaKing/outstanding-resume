@@ -1,3 +1,5 @@
+import { VariantProps } from "@stitches/react";
+
 import { stitches } from "stitches";
 
 
@@ -38,5 +40,7 @@ export const Box = stitches.styled("div", {
         }
     }
 });
+
+type BoxProps = VariantProps<typeof Box>;
 
 Box.displayName = "Box";

@@ -4,6 +4,8 @@ import fontMetrics from "@capsizecss/metrics/roboto";
 
 import { colorStyles } from "helpers";
 
+import { VariantProps } from "@stitches/react";
+
 
 
 export const SubTitle = stitches.styled("h2", {
@@ -33,5 +35,7 @@ export const SubTitle = stitches.styled("h2", {
         })
     })
 });
+
+export type SubTitleProps = VariantProps<typeof SubTitle>;
 
 SubTitle.displayName = "SubTitle";

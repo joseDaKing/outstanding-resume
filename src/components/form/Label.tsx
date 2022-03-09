@@ -176,7 +176,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                     return cloneElement(element, {
                         ...variantProps,
                         id, 
-                        block: true,
+                        block,
                         disabled: props.disabled
                     } as any);
                 }

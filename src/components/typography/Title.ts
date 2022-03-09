@@ -6,6 +6,8 @@ import { textSelection, textAlign } from "mixins";
 
 import { colorStyles } from "helpers";
 
+import { VariantProps } from "@stitches/react";
+
 
 
 export const Title = stitches.styled("h1", textSelection, textAlign, {
@@ -35,5 +37,7 @@ export const Title = stitches.styled("h1", textSelection, textAlign, {
         })
     })
 });
+
+export type TitleProps = VariantProps<typeof Title>;
 
 Title.displayName = "Title";

@@ -1,3 +1,5 @@
+import { VariantProps } from "@stitches/react";
+
 import { stitches } from "stitches";
 
 import { Box } from "./Box";
@@ -74,5 +76,7 @@ export const Stack = stitches.styled(Box, {
         alignCross: "center"
     }
 });
+
+type stackProps = VariantProps<typeof Stack>;
 
 Stack.displayName = "Stack";

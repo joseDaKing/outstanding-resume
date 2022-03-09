@@ -90,7 +90,7 @@ const StyledCorner = stitches.styled(Corner, {
 
 StyledCorner.displayName = "StyledScrollCorner";
 
-type ScrollAreaProps = CSSProps & VariantProps<typeof StyledRoot>;
+export type ScrollAreaProps = CSSProps & VariantProps<typeof StyledRoot>;
 
 export const ScrollArea: React.FC<ScrollAreaProps> = props => {
 

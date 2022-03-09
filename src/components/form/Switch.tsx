@@ -144,7 +144,7 @@ const StyledRoot = stitches.styled(PrimitiveSwitch.Root, round, {
 
 StyledRoot.displayName = "StyledSwitchRoot";
 
-type SwithProps = Omit<PrimitiveSwitch.SwitchProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
+export type SwithProps = Omit<PrimitiveSwitch.SwitchProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
 
 export const Switch = forwardRef<ElementRef<typeof PrimitiveSwitch.Root>, SwithProps>((props, ref) => {
     

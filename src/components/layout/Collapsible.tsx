@@ -1,20 +1,20 @@
-import { Children, ElementRef, forwardRef } from "react";
+import { ElementRef, forwardRef } from "react";
 
 import * as PrimitiveCollapsible from "@radix-ui/react-collapsible";
 
-import { Button } from "../form";
+import { Button, ButtonProps } from "../form/Button";
 
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
-import { stitches } from "stitches";
+import { stitches, ThemedCSS } from "stitches";
 
 import { Box } from "../layout";
 
 import { openCloseAnimation } from "mixins";
 
+import { CSSProps } from "types";
 
 
-type CollapsibleProps = Omit<PrimitiveCollapsible.CollapsibleProps, "asChild">;
 
 const StyledRoot = stitches.styled(PrimitiveCollapsible.Root, {
     display: "flex",
@@ -28,42 +28,67 @@ StyledRoot.displayName = "StyledCollapsibleRoot";
 
 const StyledContent = stitches.styled(PrimitiveCollapsible.Content, openCloseAnimation, {
     width: "100%",
-    paddingY: "$0_5"
+    padding: "$0_5"
 });
 
 StyledContent.displayName = "StyledCollapsibleContent";
 
-export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Root>, CollapsibleProps>(props => {
+const StyledTrigger = stitches.styled(Button, {
+    "& svg": {
+        transition: "$200",
+        transitionProperty: "transform",
+    },
+    stateToggled: {
+        "& svg": {
+            transformRotate: "$180"
+        }
+    }
+});
+
+export type CollapsibleProps = Omit<PrimitiveCollapsible.CollapsibleProps, "asChild"> & Pick<ButtonProps, "color" | "block"> & CSSProps & {
+    name: string;
+    space?: ThemedCSS["paddingTop"];
+};
+
+export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Root>, CollapsibleProps>((props, ref) => {
+
+    const { 
+        color,
+        block,
+        name,
+        children,
+        space = "$2",
+        ...htmlProps
+    } = props;
 
     return (
-        <StyledRoot>
-            <PrimitiveCollapsible.Trigger asChild>
-                <Button 
+        <StyledRoot 
+        {...htmlProps}
+        ref={ref}>
+            <PrimitiveCollapsible.Trigger 
+            asChild>
+                <StyledTrigger
                 size="sm" 
-                variant="text" 
-                EndIcon={ChevronDownIcon}
-                
-                css={{
-                   
-                    "& svg": {
-                        transition: "$200",
-                        transitionProperty: "transform",
-                    },
-                    stateToggled: {
-                        "& svg": {
-                            transformRotate: "$180"
-                        }
-                    }
-                }}>
-                    Vissa extra uppgifter
-                </Button>
+                variant="text"
+                block={block}
+                color={color}
+                align="start" 
+                EndIcon={ChevronDownIcon}>
+                    {name}
+                </StyledTrigger>
             </PrimitiveCollapsible.Trigger>
 
             <StyledContent>
-                
-
-                {props.children}
+                <Box
+                css={{
+                    paddingTop: space
+                }}/>
+                {children}
             </StyledContent>
         </StyledRoot>
     );
 });
+
+Collapsible.displayName = "Collapsible";
+
+Collapsible.toString = () => StyledRoot.selector;

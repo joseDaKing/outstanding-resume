@@ -105,7 +105,9 @@ type SubComponents = {
     Content: typeof TriggerContent;
 }
 
-export const Tooltip: React.FC<PrimitiveTooltip.TooltipProps> & SubComponents = props => {
+export type TooltipProps = PrimitiveTooltip.TooltipProps;
+
+export const Tooltip: React.FC<TooltipProps> & SubComponents = props => {
 
     return (
         <PrimitiveTooltip.Root>

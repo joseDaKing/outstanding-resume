@@ -45,7 +45,7 @@ const StyledIconContainer = stitches.styled("span", {
 
 StyledIconContainer.displayName = "StyledIconContainer";
 
-type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.StyledRoot> & CSSProps & {
+export type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.StyledRoot> & CSSProps & {
     Icon: ComponentType<any>;
 };
 

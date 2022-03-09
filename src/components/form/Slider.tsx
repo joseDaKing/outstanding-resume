@@ -18,13 +18,7 @@ const StyledTrack = stitches.styled(PrimitiveSlider.Track, {
     flexGrow: 1,
     flexShrink: 0,
     borderRadius: "$round",
-    cursor: "pointer",
-    orientationHorizontal: {
-        height: "$1",
-    },
-    orientationVertical: {
-        width: "$1",
-    }
+    height: "$1"
 });
 
 StyledTrack.displayName = "StyledSliderTrack";
@@ -32,19 +26,13 @@ StyledTrack.displayName = "StyledSliderTrack";
 const StyledRange = stitches.styled(PrimitiveSlider.Range, {
     position: "absolute",
     borderRadius: "inherit",
-    orientationHorizontal: {
-        height: "100%"
-    },
-    orientationVertical: {
-        width: "100%"
-    }
+    height: "$1"
 });
 
 StyledRange.displayName = "StyledSliderRange";
 
 const StyledThumb = stitches.styled("button", {
     display: "block",
-    cursor: "pointer",
     borderRadius: "$round",
 });
 
@@ -55,14 +43,9 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, block, {
     display: "flex",
     alignItems: "center",
     userSelect: "none",
-    orientationHorizontal: {
-        touchAction: "pan-x",
-        width: "$32",
-    },
-    orientationVertical: {
-        touchAction: "pan-y",
-        height: "$32",
-    },
+    touchAction: "pan-x",
+    width: "$32",
+    cursor: "pointer",
     stateDisabled: {        
         [`& ${StyledRange}, & ${StyledThumb}, & ${StyledTrack}`]: {
             cursor: "default"
@@ -80,16 +63,19 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, block, {
         },
         size: {
             sm: {
+                paddingY: "calc($3 / 2)",
                 [`& ${StyledThumb}`]: {
                     size: "$3",
                 }
             },
             md: {
+                paddingY: "calc($4 / 2)",
                 [`& ${StyledThumb}`]: {
                     size: "$4",
                 }
             },
             lg: {
+                paddingY: "calc($5 / 2)",
                 [`& ${StyledThumb}`]: {
                     size: "$5",
                 }
@@ -132,6 +118,11 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, block, {
                     },
                 },
             }
+        },
+        block: {
+            false: {
+                width: "$64 !important",
+            }
         }
     },
     defaultVariants: {
@@ -163,7 +154,7 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, block, {
 
 StyledRoot.displayName = "StyledSliderRoot";
 
-type SliderProps = Omit<PrimitiveSlider.SliderProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
+export type SliderProps = Omit<PrimitiveSlider.SliderProps, "asChild" | "orientation"> & VariantProps<typeof StyledRoot> & CSSProps;
 
 export const Slider = forwardRef<ElementRef<typeof PrimitiveSlider.Root>, SliderProps>((props, ref) => {
     
@@ -179,12 +170,14 @@ export const Slider = forwardRef<ElementRef<typeof PrimitiveSlider.Root>, Slider
         color
     }
 
-    const value = props.value ?? props.defaultValue ?? []; 
+    const value = props.value ?? props.defaultValue ?? [0]; 
 
     return (
         <StyledRoot
         ref={ref}
         {...htmlProps}
+        value={props.value}
+        defaultValue={props.defaultValue}
         {...variantProps}>
             <StyledTrack>
                 <StyledRange/>

@@ -111,7 +111,7 @@ const StyledInput = stitches.styled("input", textSelection, {
 
 StyledInput.displayName = "StyledTextFieldInput";
 
-type TextfieldProps = VariantProps<typeof StyledRoot> & CSSProps & Omit<
+export type TextFieldProps = VariantProps<typeof StyledRoot> & CSSProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"
@@ -129,7 +129,7 @@ type TextfieldProps = VariantProps<typeof StyledRoot> & CSSProps & Omit<
     );
 }
 
-export const TextField = forwardRef<HTMLInputElement, TextfieldProps>((props, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     
     const { 
         size,

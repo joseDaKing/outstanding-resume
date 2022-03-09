@@ -15,7 +15,7 @@ import { block } from "mixins";
 
 
 export const StyledText = stitches.styled("span", formLargeText, {
-    display: "inline-block",
+    display: "inline-flex",
     width: "fit-content"
 });
 
@@ -148,7 +148,7 @@ export const StyledRoot = stitches.styled("button", formLargeContainer, round, b
 
 StyledRoot.displayName = "StyledButtonRoot";
 
-type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledRoot> & CSSProps & IconProps;
+export type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledRoot> & CSSProps & IconProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, EndIcon, ...props }, ref) => {
 

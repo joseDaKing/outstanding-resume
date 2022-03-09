@@ -138,7 +138,7 @@ const StyledRoot = stitches.styled(PrimitiveCheckbox.Root, {
 
 StyledRoot.displayName = "StyledCheckboxRoot";
 
-type CheckboxProps = Omit<PrimitiveCheckbox.CheckboxProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
+export type CheckboxProps = Omit<PrimitiveCheckbox.CheckboxProps, "asChild"> & VariantProps<typeof StyledRoot> & CSSProps;
 
 export const Checkbox = forwardRef<ElementRef<typeof PrimitiveCheckbox.Root>, CheckboxProps>((props, ref) => {
 

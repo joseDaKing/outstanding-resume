@@ -1,4 +1,4 @@
-import { createStitches, CSS } from "@stitches/react";
+import { createStitches, CSS, CSSProperties } from "@stitches/react";
 
 import { media, theme, themeMap, utils } from "./config";
 
