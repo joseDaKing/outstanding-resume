@@ -1,4 +1,4 @@
-import React from "react"
+import { ElementRef } from "react"
 
 import * as PrimitiveTooltip from "@radix-ui/react-tooltip";
 
@@ -12,13 +12,17 @@ import fontMetrics from "@capsizecss/metrics/roboto";
 
 import { colorStyles } from "helpers";
 
+import { forwardRef } from "react";
 
 
-export const StyledTrigger = stitches.styled(PrimitiveTooltip.Trigger, {});
 
-export const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
+export const TooltipTrigger = stitches.styled(PrimitiveTooltip.Trigger, {});
 
-export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
+export type TooltipTriggerProps = PrimitiveTooltip.TooltipTriggerProps;
+
+const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
+
+const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
     padding: "$3",
     borderRadius: "$sm",
     color: "$inverted",
@@ -75,11 +79,11 @@ export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
     ]
 });
 
-type TooltipContentProps = VariantProps<typeof StyledContent> & PrimitiveTooltip.PopperContentProps & CSSProps & {
+export type TooltipContentProps = VariantProps<typeof StyledContent> & Omit<PrimitiveTooltip.PopperContentProps, "asChild"> & CSSProps & {
     children?: string | null;
 };
 
-const TriggerContent: React.FC<TooltipContentProps> = props => {
+export const TooltipContent = forwardRef<ElementRef<typeof PrimitiveTooltip.Content>, TooltipContentProps>(props => {
 
     
     return (
@@ -94,28 +98,19 @@ const TriggerContent: React.FC<TooltipContentProps> = props => {
             <StyledArrow/>
         </StyledContent>
     );
-}
+});
 
-TriggerContent.displayName = "TooltipTriggerContent";
+TooltipContent.displayName = "TooltipTriggerContent";
 
-TriggerContent.toString = () => StyledContent.selector;
+TooltipContent.toString = () => StyledContent.selector;
 
-type SubComponents = {
-    Trigger: typeof StyledTrigger;
-    Content: typeof TriggerContent;
-}
+export type TooltipProps = Omit<PrimitiveTooltip.TooltipProps, "asChild">;
 
-export type TooltipProps = PrimitiveTooltip.TooltipProps;
-
-export const Tooltip: React.FC<TooltipProps> & SubComponents = props => {
+export const Tooltip = forwardRef<ElementRef<typeof PrimitiveTooltip.Root>, TooltipProps>(props => {
 
     return (
         <PrimitiveTooltip.Root>
             {props.children}
         </PrimitiveTooltip.Root>
     );
-}
-
-Tooltip.Trigger = StyledTrigger;
-
-Tooltip.Content = TriggerContent;
+});

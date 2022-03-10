@@ -14,11 +14,13 @@ import { Box } from "components/layout";
 
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
-import { Tooltip } from "../overlays";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../overlays";
 
 import { useId } from "@radix-ui/react-id";
 
 import { block } from "mixins";
+
+import * as PrimitiveLabel from "@radix-ui/react-label";
 
 
 
@@ -48,7 +50,7 @@ const StyledRoot = stitches.styled("div", block, {
 
 StyledRoot.displayName = "StyledLabelRoot";
 
-const StyledLabel = stitches.styled("label", {
+const StyledLabel = stitches.styled(PrimitiveLabel.Root, {
     fontFamily: "$primary",
     fontWeight: 400,
     cursor: "pointer",
@@ -143,7 +145,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                 
                 {props.help && 
                 <Tooltip>
-                    <Tooltip.Trigger 
+                    <TooltipTrigger 
                     disabled={props.disabled}
                     asChild>
                         <Box
@@ -157,15 +159,15 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                         }}>
                             <QuestionMarkCircledIcon/>
                         </Box>
-                    </Tooltip.Trigger>
+                    </TooltipTrigger>
 
-                    <Tooltip.Content
+                    <TooltipContent
                     {...variantProps as any}
                     css={{
                         maxWidth: "$52"
                     }}>
                         {props.help}
-                    </Tooltip.Content>
+                    </TooltipContent>
                 </Tooltip>}
             </StyledLabel>
 

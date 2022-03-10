@@ -1,6 +1,6 @@
 import { Label, Slider, TextField } from "components/form";
 
-import { Stack, ScrollArea, Accordion } from "components/layout";
+import { Stack, ScrollArea, Accordion, AccordionItem } from "components/layout";
 
 
 
@@ -18,7 +18,7 @@ function App() {
         backgroundColor: "$inverted",
       }}>
         <Accordion type="multiple">
-          <Accordion.Item 
+          <AccordionItem 
           color="neutral"
           title="Title 1"
           subtitle="Subtitle 1"
@@ -26,9 +26,9 @@ function App() {
             <Label name="Label">
               <Slider/>
             </Label>
-          </Accordion.Item>
+          </AccordionItem>
           
-          <Accordion.Item 
+          <AccordionItem 
           color="neutral"
           title="Title 2"
           subtitle="Subtitle 2"
@@ -37,7 +37,7 @@ function App() {
             <Label name="Label">
               <TextField/>
             </Label>
-          </Accordion.Item>
+          </AccordionItem>
         </Accordion>
       </ScrollArea>
       

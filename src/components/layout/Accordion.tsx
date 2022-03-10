@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ElementRef, forwardRef } from "react";
 
 import * as PrimitiveAccordion from "@radix-ui/react-accordion";
 
@@ -59,7 +59,7 @@ const StyledContent = stitches.styled(PrimitiveAccordion.Content, openCloseAnima
 StyledContent.displayName = "StyledAccordionContent";
 
 const StyledItem = stitches.styled(PrimitiveAccordion.Item, {
-    backgroundColor: "$neutralA1",
+    backgroundColor: "$neutralA2",
     borderRadius: "$lg",
     transition: "$200",
     transitionProperty: "transform",
@@ -97,7 +97,7 @@ export type AccordionItemProps = Omit<PrimitiveAccordion.AccordionItemProps, "as
     subtitle?: string;
 }
 
-const AccordionItem: React.FC<AccordionItemProps> = props => {
+export const AccordionItem = forwardRef<ElementRef<typeof PrimitiveAccordion.Item>, AccordionItemProps>((props, ref) => {
 
     const {
         title,
@@ -108,7 +108,8 @@ const AccordionItem: React.FC<AccordionItemProps> = props => {
 
     return (
         <StyledItem
-        {...htmlProps}>
+        {...htmlProps}
+        ref={ref}>
             <PrimitiveAccordion.Header>
                 <StyledTrigger>
                     <Stack
@@ -141,22 +142,20 @@ const AccordionItem: React.FC<AccordionItemProps> = props => {
             </StyledContent>
         </StyledItem>
     );
-}
+});
 
 AccordionItem.toString = () => StyledRoot.selector;
 
 AccordionItem.displayName = "AccordionItem";
 
-type SubComponents = {
-    Item: typeof AccordionItem;
-}
+
 
 export type AccordionProps = React.RefAttributes<HTMLDivElement> & CSSProps & (
     Omit<PrimitiveAccordion.AccordionSingleProps," asChild">
     | Omit<PrimitiveAccordion.AccordionMultipleProps, "asChild">
 );
 
-export const Accordion: React.FC<AccordionProps> & SubComponents = props => {
+export const Accordion = forwardRef<ElementRef<typeof PrimitiveAccordion.Root>, AccordionProps>(props => {
 
     return (
         <StyledRoot
@@ -164,10 +163,8 @@ export const Accordion: React.FC<AccordionProps> & SubComponents = props => {
             {props.children}
         </StyledRoot>
     );
-}
+});
 
 Accordion.displayName = "Accordion";
 
 Accordion.toString = () => StyledRoot.selector;
-
-Accordion.Item = AccordionItem;
