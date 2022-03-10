@@ -1,6 +1,6 @@
-import { Label, Slider, TextField } from "components/form";
+import { Label, TextArea } from "components/form";
 
-import { Stack, ScrollArea, Accordion, AccordionItem } from "components/layout";
+import { Stack, ScrollArea } from "components/layout";
 
 
 
@@ -17,36 +17,13 @@ function App() {
         padding: "$8",
         backgroundColor: "$inverted",
       }}>
-        <Accordion type="multiple">
-          <AccordionItem 
-          color="neutral"
-          title="Title 1"
-          subtitle="Subtitle 1"
-          value="1">
-            <Label 
-            block
-            name="Label"
-            help="Help"
-            orientation="vertical">
-              <Slider/>
-            </Label>
-          </AccordionItem>
-          
-          <AccordionItem 
-          color="neutral"
-          title="Title 2"
-          subtitle="Subtitle 2"
-          value="2">
-            
-            <Label 
-            block
-            name="Label"
-            help="Help"
-            orientation="vertical">
-              <TextField/>
-            </Label>
-          </AccordionItem>
-        </Accordion>
+        <Label 
+        block
+        name="Label"
+        help="Help"
+        orientation="vertical">
+          <TextArea/>
+        </Label>
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{

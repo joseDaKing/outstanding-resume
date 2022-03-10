@@ -54,7 +54,7 @@ const StyledTrigger = stitches.styled(PrimitiveAccordion.Trigger, {
     padding: "$4",
     display: "block",
     width: "$full",
-    borderRadius: "$lg",
+    borderRadius: "$sm",
     focus: {
         outlineStyle: "solid",
         outlineWidth: "$2",
@@ -68,7 +68,7 @@ StyledContent.displayName = "StyledAccordionContent";
 
 const StyledItem = stitches.styled(PrimitiveAccordion.Item, {
     backgroundColor: "$neutralA2",
-    borderRadius: "$lg",
+    borderRadius: "$sm",
     transition: "$200",
     transitionProperty: "transform",
     "&:not(:first-child)": {

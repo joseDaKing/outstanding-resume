@@ -33,21 +33,6 @@ const StyledRoot = stitches.styled("label", round, block, formLargeContainer, {
             success: {},
             warning: {},
             danger: {}
-        },
-        full: {
-            true: {
-
-            }
-        },
-        grow: {
-            true: {
-
-            }
-        },
-        shrink: {
-            true: {
-                
-            }
         }
     },
     defaultVariants: {
