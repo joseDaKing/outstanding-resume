@@ -18,6 +18,14 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 
 
+const StyledIcon = stitches.styled(ChevronDownIcon, {
+    marginLeft: "auto",
+    transition: "$200",
+    transitionProperty: "transform",
+    size: "$6",
+    color: "$neutral12"
+});
+
 const StyledTitle = stitches.styled("div", {
     fontFamily: "$primary",
     fontWeight: 600,
@@ -66,15 +74,8 @@ const StyledItem = stitches.styled(PrimitiveAccordion.Item, {
     "&:not(:first-child)": {
         marginTop: "$4"
     },
-    "& svg": {
-        marginLeft: "auto",
-        transition: "$200",
-        transitionProperty: "transform",
-        size: "$6",
-        color: "$neutral12"
-    },
     stateToggled: {
-        "& svg": {
+        [`& ${StyledIcon}`]: {
             transformRotate: "$180",
         }
     },
@@ -125,7 +126,7 @@ export const AccordionItem = forwardRef<ElementRef<typeof PrimitiveAccordion.Ite
                             </StyledSubtitle>}
                         </Box>
 
-                        <ChevronDownIcon/>
+                        <StyledIcon/>
                     </Stack>
                 </StyledTrigger>
             </PrimitiveAccordion.Header>

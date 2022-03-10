@@ -24,14 +24,15 @@ import * as PrimitiveLabel from "@radix-ui/react-label";
 
 
 
+const StyledIcon = stitches.styled(QuestionMarkCircledIcon, {
+    size: 16,
+    color: "inherit"
+});
+
 const StyledRoot = stitches.styled("div", block, {
     gap: "$2_5",
     display: "flex",
-    "& >*": {
-        flexGrow: 0,
-        flexShrink: 0,
-        flexBasis: "auto"
-    },
+    
     variants: {
         orientation: {
             horizontal: {
@@ -149,6 +150,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                     disabled={props.disabled}
                     asChild>
                         <Box
+                        role="none"
                         as="button"
                         css={{
                             focus: {
@@ -157,7 +159,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
                             marginLeft: "$1",
                             display: "inline-block"
                         }}>
-                            <QuestionMarkCircledIcon/>
+                            <StyledIcon/>
                         </Box>
                     </TooltipTrigger>
 

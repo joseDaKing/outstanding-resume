@@ -23,7 +23,11 @@ function App() {
           title="Title 1"
           subtitle="Subtitle 1"
           value="1">
-            <Label name="Label">
+            <Label 
+            block
+            name="Label"
+            help="Help"
+            orientation="vertical">
               <Slider/>
             </Label>
           </AccordionItem>
@@ -34,7 +38,11 @@ function App() {
           subtitle="Subtitle 2"
           value="2">
             
-            <Label name="Label">
+            <Label 
+            block
+            name="Label"
+            help="Help"
+            orientation="vertical">
               <TextField/>
             </Label>
           </AccordionItem>
