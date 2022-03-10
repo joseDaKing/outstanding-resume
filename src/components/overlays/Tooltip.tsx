@@ -1,4 +1,4 @@
-import { ElementRef } from "react"
+import React, { ElementRef } from "react"
 
 import * as PrimitiveTooltip from "@radix-ui/react-tooltip";
 
@@ -106,11 +106,11 @@ TooltipContent.toString = () => StyledContent.selector;
 
 export type TooltipProps = Omit<PrimitiveTooltip.TooltipProps, "asChild">;
 
-export const Tooltip = forwardRef<ElementRef<typeof PrimitiveTooltip.Root>, TooltipProps>(props => {
+export const Tooltip: React.FC<TooltipProps> = props => {
 
     return (
         <PrimitiveTooltip.Root>
             {props.children}
         </PrimitiveTooltip.Root>
     );
-});
+}
