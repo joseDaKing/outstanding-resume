@@ -78,6 +78,10 @@ const varThemeMap = {
 const propertyThemeMap = {
     outlineWidth: "borderWidth",
     borderWidth: "borderWidth",
+    borderTopWidth: "borderWidth",
+    borderBottomWidth: "borderWidth",
+    borderLeftWidth: "borderWidth",
+    borderRightWidth: "borderWidth",
     transition: "transition",
     letterSpacing: "letterSpacing",
     opacity: "opacity",

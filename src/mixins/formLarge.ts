@@ -10,7 +10,6 @@ export const formLargeText = stitches.css({
     justifyContent: "center",
     gap: "inherit",
     fontFamily: "$primary",
-    textTransform: "uppercase",
     "& svg": {
         display: "inline-block"
     }

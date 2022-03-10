@@ -77,6 +77,6 @@ export const Stack = stitches.styled(Box, {
     }
 });
 
-type stackProps = VariantProps<typeof Stack>;
+export type stackProps = VariantProps<typeof Stack>;
 
 Stack.displayName = "Stack";

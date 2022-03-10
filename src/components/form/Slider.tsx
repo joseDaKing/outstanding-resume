@@ -121,6 +121,7 @@ const StyledRoot = stitches.styled(PrimitiveSlider.Root, block, {
         },
         block: {
             false: {
+                flexGrow: 1,
                 width: "$64 !important",
             }
         }

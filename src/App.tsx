@@ -1,6 +1,6 @@
-import { Label, Slider } from "components/form";
+import { Label, Slider, TextField } from "components/form";
 
-import { Stack, ScrollArea, Collapsible } from "components/layout";
+import { Stack, ScrollArea, Accordion } from "components/layout";
 
 
 
@@ -17,14 +17,28 @@ function App() {
         padding: "$8",
         backgroundColor: "$inverted",
       }}>
-        <Collapsible name="Vissa extra uppgifter">
-          <Label
+        <Accordion type="multiple">
+          <Accordion.Item 
+          color="neutral"
+          title="Title 1"
+          subtitle="Subtitle 1"
+          value="1">
+            <Label name="Label">
+              <Slider/>
+            </Label>
+          </Accordion.Item>
           
-          name="Label"
-          orientation="vertical">
-            <Slider/>
-          </Label>
-        </Collapsible>
+          <Accordion.Item 
+          color="neutral"
+          title="Title 2"
+          subtitle="Subtitle 2"
+          value="2">
+            
+            <Label name="Label">
+              <TextField/>
+            </Label>
+          </Accordion.Item>
+        </Accordion>
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{
