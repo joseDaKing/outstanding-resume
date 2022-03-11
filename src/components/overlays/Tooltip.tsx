@@ -16,9 +16,11 @@ import { forwardRef } from "react";
 
 
 
-export const TooltipTrigger = PrimitiveTooltip.Trigger;
+export { Tooltip, TooltipTrigger, } from "@radix-ui/react-tooltip";
 
-export type TooltipTriggerProps = PrimitiveTooltip.TooltipTriggerProps;
+export type { TooltipProps, TooltipTriggerProps, } from "@radix-ui/react-tooltip";
+
+
 
 const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
 
@@ -103,14 +105,3 @@ export const TooltipContent = forwardRef<ElementRef<typeof PrimitiveTooltip.Cont
 TooltipContent.displayName = "TooltipTriggerContent";
 
 TooltipContent.toString = () => StyledContent.selector;
-
-export type TooltipProps = Omit<PrimitiveTooltip.TooltipProps, "asChild">;
-
-export const Tooltip: React.FC<TooltipProps> = props => {
-
-    return (
-        <PrimitiveTooltip.Root>
-            {props.children}
-        </PrimitiveTooltip.Root>
-    );
-}
