@@ -16,7 +16,7 @@ import { forwardRef } from "react";
 
 
 
-export const TooltipTrigger = stitches.styled(PrimitiveTooltip.Trigger, {});
+export const TooltipTrigger = PrimitiveTooltip.Trigger;
 
 export type TooltipTriggerProps = PrimitiveTooltip.TooltipTriggerProps;
 
