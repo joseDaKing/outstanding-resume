@@ -1,4 +1,4 @@
-import React, { ElementRef } from "react"
+import { ElementRef } from "react"
 
 import * as PrimitiveTooltip from "@radix-ui/react-tooltip";
 
