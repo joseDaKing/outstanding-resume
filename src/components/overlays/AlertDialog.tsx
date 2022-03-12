@@ -6,31 +6,15 @@ import { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
 
-import { overlay, modalContent } from "mixins";
+import { overlay, modal } from "mixins";
 
 import { CSSProps } from "types";
 
-
-
-export { 
-    AlertDialogTrigger,
-    AlertDialog,
-    AlertDialogTitle,
-    AlertDialogDescription
-}
-from "@radix-ui/react-alert-dialog";
-
-export type { 
-    AlertDialogTriggerProps,
-    AlertDialogProps,
-    AlertDialogTitleProps,
-    AlertDialogDescriptionProps 
-} 
-from "@radix-ui/react-alert-dialog";
+import { ScrollArea, Box } from "components/layout";
 
 
 
-const StyledContent = stitches.styled(PrimitiveAlertDialog.Content, modalContent);
+const StyledContent = stitches.styled(PrimitiveAlertDialog.Content, modal);
 
 StyledContent.displayName = "StyledAlertDialogContent";
 
@@ -43,14 +27,23 @@ export type AlertDialogContentProps = Omit<PrimitiveAlertDialog.DialogContentPro
 export const AlertDialogContent = forwardRef<ElementRef<typeof StyledContent>, AlertDialogContentProps>((props, ref) => {
     return (
         <PrimitiveAlertDialog.Portal>
-            
-            <StyledOverlay/>
-
-            <StyledContent
-            {...props}
-            ref={ref}>
-                {props.children}
-            </StyledContent>
+            <StyledOverlay>
+                <StyledContent
+                {...props}
+                ref={ref}>
+                    <ScrollArea
+                    css={{
+                        height: "100%"
+                    }}>
+                        <Box
+                        css={{
+                            padding: "$8",
+                        }}>
+                            {props.children}
+                        </Box>
+                    </ScrollArea>
+                </StyledContent>
+            </StyledOverlay>
         </PrimitiveAlertDialog.Portal>
     );
 });
@@ -96,3 +89,21 @@ export const AlertDialogCancel = forwardRef<ElementRef<typeof PrimitiveAlertDial
 AlertDialogCancel.toString = Button.toString;
 
 AlertDialogCancel.displayName = "AlertDialogCancel";
+
+
+
+export { 
+    AlertDialogTrigger,
+    AlertDialog,
+    AlertDialogTitle,
+    AlertDialogDescription
+}
+from "@radix-ui/react-alert-dialog";
+
+export type { 
+    AlertDialogTriggerProps,
+    AlertDialogProps,
+    AlertDialogTitleProps,
+    AlertDialogDescriptionProps 
+} 
+from "@radix-ui/react-alert-dialog";

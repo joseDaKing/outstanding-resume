@@ -8,7 +8,7 @@ export * from "./openCloseAnimation";
 
 export * from "./overlay"
 
-export * from "./modalContent";
+export * from "./modal";
 
 export * from "./round";
 

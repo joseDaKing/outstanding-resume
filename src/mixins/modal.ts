@@ -4,8 +4,7 @@ import { fadeAnimation } from "./fadeAnimation";
 
 
 
-export const modalContent = stitches.css(fadeAnimation, {
-    padding: "$8",
+export const modal = stitches.css(fadeAnimation, {
     borderRadius: "$sm",
     backgroundColor: "$inverted",
     width: "$md",
@@ -14,5 +13,6 @@ export const modalContent = stitches.css(fadeAnimation, {
     left: "50%",
     transformTranslateX: "-50%",
     transformTranslateY: "-50%",
-    position: "fixed"
+    position: "fixed",
+    boxShadow: "$2xl"
 });

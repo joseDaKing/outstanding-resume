@@ -2,42 +2,17 @@ import React from "react";
 
 import { CSSProps } from "types";
 
-import { Root, Viewport, Scrollbar, Thumb, Corner } from "@radix-ui/react-scroll-area";
+import * as PrimitiveScrollArea from "@radix-ui/react-scroll-area";
 
 import { VariantProps } from "@stitches/react";
 
 import { stitches } from "stitches";
 
-import { colorStyles } from "helpers";
 
 
+const StyledRoot = stitches.styled(PrimitiveScrollArea.Root, {});
 
-const StyledRoot = stitches.styled(Root, {
-    overflow: "hidden",
-    variants: {
-        color: {
-            primary: {},
-            secondary: {},
-            neutral: {},
-            action: {},
-            success: {},
-            warning: {},
-            danger: {}
-        }
-    },
-    defaultVariants: {
-        color: "primary"
-    },
-    compoundVariants: colorStyles({
-        styles: getColor => ({
-            $$scrollbarColor: `$color${getColor("8", true)}`
-        })
-    })
-});
-
-StyledRoot.displayName = "StyledScrollAreaRoot";
-
-const StyledViewport = stitches.styled(Viewport, {
+const StyledViewport = stitches.styled(PrimitiveScrollArea.Viewport, {
     size: "$full",
     padding: "$0_5",
     borderRadius: "inherit"
@@ -45,7 +20,7 @@ const StyledViewport = stitches.styled(Viewport, {
 
 StyledViewport.displayName = "StyledScrollAreaViewport";
 
-const StyledScrollbar = stitches.styled(Scrollbar, {
+const StyledScrollbar = stitches.styled(PrimitiveScrollArea.Scrollbar, {
     display: "flex",
     touchAction: "none",
     userSelect: "none",
@@ -63,7 +38,7 @@ const StyledScrollbar = stitches.styled(Scrollbar, {
 
 StyledScrollbar.displayName = "StyledScrollAreaScrollbar";
 
-const StyledThumb = stitches.styled(Thumb, {
+const StyledThumb = stitches.styled(PrimitiveScrollArea.Thumb, {
     position: "relative",
     flex: 1,
     backgroundColor: "transparent",
@@ -75,7 +50,7 @@ const StyledThumb = stitches.styled(Thumb, {
         content: "''",
         transition: "$200",
         borderRadius: "$$scrollbarSize",
-        backgroundColor: "$$scrollbarColor",
+        backgroundColor: "$neutralA8",
         position: "absolute",
         transformTranslateY: "-$1__2",
         transformTranslateX: "-$1__2",
@@ -84,16 +59,16 @@ const StyledThumb = stitches.styled(Thumb, {
 
 StyledThumb.displayName = "StyledScrollAreaThumb";
 
-const StyledCorner = stitches.styled(Corner, {
+const StyledCorner = stitches.styled(PrimitiveScrollArea.Corner, {
     backgroundColor: "transparent"
 });
 
 StyledCorner.displayName = "StyledScrollCorner";
 
-export type ScrollAreaProps = CSSProps & VariantProps<typeof StyledRoot>;
+export type ScrollAreaProps = CSSProps;
 
 export const ScrollArea: React.FC<ScrollAreaProps> = props => {
-
+    
     return (
         <StyledRoot 
         {...props}>

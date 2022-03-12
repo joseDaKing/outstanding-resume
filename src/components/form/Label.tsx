@@ -14,7 +14,7 @@ import { Box } from "components/layout";
 
 import { QuestionMarkCircledIcon } from "@radix-ui/react-icons";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "../overlays";
+import { Tooltip, TooltipContent, TooltipTrigger } from "components/overlays";
 
 import { useId } from "@radix-ui/react-id";
 

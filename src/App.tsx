@@ -1,4 +1,4 @@
-import { Stack, ScrollArea } from "components/layout";
+import { Stack, ScrollArea, Box } from "components/layout";
 
 import { Button } from "components/form";
 
@@ -13,7 +13,7 @@ import {
 }
 from "components/overlays";
 
-import { Text, Title } from "components/typography";
+import { Title } from "components/typography";
 
 
 
@@ -24,62 +24,65 @@ function App() {
     screen
     alignCross="center"
     orientation="horizontal">
-      <ScrollArea color="neutral" css={{
+      <ScrollArea css={{
         width: "$1__2",
         height: "100%",
-        padding: "$8",
         backgroundColor: "$inverted",
       }}>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button>
-              open
-            </Button>
-          </AlertDialogTrigger>
+        <Box
+        css={{
+          padding: "$8",
+        }}>
+          <AlertDialog>
+            <AlertDialogTrigger 
+            asChild>
+              <Button>
+                open
+              </Button>
+            </AlertDialogTrigger>
 
-          <AlertDialogContent
-          css={{
-            width: "$md"
-          }}>
-            <Stack
-            full
-            orientation="vertical"
-            css={{
-              gap: "$8"
-            }}>
-              <AlertDialogTitle asChild>
-                <Title>
-                  Are you absolutely sure?
-                </Title>
-              </AlertDialogTitle>
-              
-              <AlertDialogDescription asChild>
-                <Text>
-                  This action cannot be undone. This will permanently delete your account and remove your data from our servers.
-                </Text>
-              </AlertDialogDescription>
-              <Stack
-              fullX
+            <AlertDialogContent>
+              <Box
               css={{
-                gap: "$6"
+                spaceY: "$8"
               }}>
-                <AlertDialogCancel
-                variant="ghost"
-                color="neutral"
-                block>
-                  Cancel
-                </AlertDialogCancel>
+                <AlertDialogTitle 
+                asChild>
+                  <Title>
+                    Are you absolutely sure?
+                  </Title>
+                </AlertDialogTitle>
+                
+                <AlertDialogDescription 
+                asChild>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogDescription>
+                
+                <Stack
+                fullX
+                css={{
+                  gap: "$6"
+                }}>
+                  <AlertDialogCancel
+                  variant="ghost"
+                  color="neutral"
+                  block>
+                    Cancel
+                  </AlertDialogCancel>
 
-                <AlertDialogAction
-                variant="ghost"
-                color="danger"
-                block>
-                  Yes, delete my account
-                </AlertDialogAction>
-              </Stack>
-            </Stack>
-          </AlertDialogContent>
-        </AlertDialog>
+                  <AlertDialogAction
+                  variant="ghost"
+                  color="danger"
+                  block>
+                    Yes, delete my account
+                  </AlertDialogAction>
+                </Stack>
+              </Box>
+            </AlertDialogContent>
+          </AlertDialog>
+        </Box>
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{
