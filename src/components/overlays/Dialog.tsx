@@ -1,0 +1,103 @@
+import * as PrimitiveDialog from "@radix-ui/react-dialog";
+
+import { IconButton, IconButtonProps } from "components/form";
+
+import { ElementRef, forwardRef } from "react";
+
+import { stitches } from "stitches";
+
+import { overlay, modal } from "mixins";
+
+import { CSSProps } from "types";
+
+import { ScrollArea, Box } from "components/layout";
+
+import { Cross1Icon } from "@radix-ui/react-icons";
+
+
+
+const DialogCloseButton = forwardRef<ElementRef<typeof PrimitiveDialog.Close>, IconButtonProps>((props, ref) => {
+    return (
+        <PrimitiveDialog.Close 
+        ref={ref}
+        asChild>
+            <IconButton
+            {...props}/>
+        </PrimitiveDialog.Close>
+    );
+});
+
+DialogCloseButton.toString = IconButton.toString;
+
+DialogCloseButton.displayName = "DialogCloseButton";
+
+
+
+const StyledContent = stitches.styled(PrimitiveDialog.Content, modal);
+
+StyledContent.displayName = "StyledDialogContent";
+
+const StyledOverlay = stitches.styled(PrimitiveDialog.Overlay, overlay);
+
+StyledOverlay.displayName = "StyledDialogOverlay";
+
+export type DialogContentProps = Omit<PrimitiveDialog.DialogContentProps, "asChild"> & CSSProps;
+
+export const DialogContent = forwardRef<ElementRef<typeof StyledContent>, DialogContentProps>((props, ref) => {
+    return (
+        <PrimitiveDialog.Portal>
+            <StyledOverlay>
+                <StyledContent
+                {...props}
+                ref={ref}>
+                    <ScrollArea
+                    css={{
+                        height: "100%"
+                    }}>
+                        <Box
+                        css={{
+                            position: "relative",
+                            padding: "$8",
+                        }}>
+                            <DialogCloseButton
+                            Icon={Cross1Icon}
+                            variant="text"
+                            size="sm"
+                            round
+                            css={{
+                                position: "absolute",
+                                right: "$1",
+                                top: "$1"
+                            }}/>
+                            {props.children}
+                        </Box>
+                    </ScrollArea>
+                </StyledContent>
+            </StyledOverlay>
+        </PrimitiveDialog.Portal>
+    );
+});
+
+DialogContent.toString = () => StyledContent.selector;
+
+DialogContent.displayName = "DialogContent"
+
+
+
+export { 
+    DialogTrigger,
+    Dialog,
+    DialogClose,
+    DialogTitle,
+    DialogDescription
+}
+from "@radix-ui/react-dialog";
+
+export type { 
+    DialogTriggerProps,
+    DialogProps,
+    DialogCloseProps,
+    DialogTitleProps,
+    DialogDescriptionProps 
+} 
+from "@radix-ui/react-dialog";

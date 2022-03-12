@@ -13,7 +13,7 @@ import {
 }
 from "components/overlays";
 
-import { Title } from "components/typography";
+import { Title, Text } from "components/typography";
 
 
 
@@ -55,9 +55,9 @@ function App() {
                 
                 <AlertDialogDescription 
                 asChild>
-                  <AlertDialogDescription>
+                  <Text>
                     This action cannot be undone. This will permanently delete your account and remove your data from our servers.
-                  </AlertDialogDescription>
+                  </Text>
                 </AlertDialogDescription>
                 
                 <Stack
