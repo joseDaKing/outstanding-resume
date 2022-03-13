@@ -1,4 +1,4 @@
-import { Button, Label, TextField } from "components/form";
+import { IconButton, Button, Label, TextField } from "components/form";
 
 import { Stack, ScrollArea } from "components/layout";
 
@@ -12,6 +12,7 @@ from "components/layout";
 
 import { Text } from "components/typography";
 
+import { PlusIcon } from "@radix-ui/react-icons";
 
 
 function App() {
@@ -31,17 +32,32 @@ function App() {
             padding: "$8"
           }}
           defaultValue="account">
-            <TabsList>
-              <TabsTrigger
-              value="account">
-                Account
-              </TabsTrigger>
+            <Stack 
+            alignMain="start"
+            alignCross="start">
+              <TabsList>
+                <TabsTrigger
+                value="account">
+                  Account
+                </TabsTrigger>
 
-              <TabsTrigger
-              value="password">
-                Password
-              </TabsTrigger>              
-            </TabsList>
+                <TabsTrigger
+                value="password">
+                  Password
+                </TabsTrigger>
+              </TabsList>
+
+              <IconButton
+              css={{
+                marginTop: "$2",
+                marginLeft: "$4"
+              }}
+              round
+              size="lg"
+              variant="text"
+              color="neutral"
+              Icon={PlusIcon}/>
+            </Stack>
             
             <TabsContent 
             value="account"

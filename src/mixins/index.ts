@@ -1,10 +1,10 @@
 export * from "./block";
 
-export * from "./fadeAnimation";
+export * from "./modalAnimation";
 
 export * from "./formLarge";
 
-export * from "./openCloseAnimation";
+export * from "./collapsibleAnimation";
 
 export * from "./overlay"
 

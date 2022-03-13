@@ -6,7 +6,7 @@ import { stitches } from "stitches";
 
 import { CSSProps } from "types";
 
-import { openCloseAnimation } from "mixins";
+import { collapsibleAnimation } from "mixins";
 
 import { Box } from "./Box";
 
@@ -62,7 +62,7 @@ const StyledTrigger = stitches.styled(PrimitiveAccordion.Trigger, {
     }
 });
 
-const StyledContent = stitches.styled(PrimitiveAccordion.Content, openCloseAnimation);
+const StyledContent = stitches.styled(PrimitiveAccordion.Content, collapsibleAnimation);
 
 StyledContent.displayName = "StyledAccordionContent";
 

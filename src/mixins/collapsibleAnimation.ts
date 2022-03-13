@@ -20,7 +20,7 @@ const closeKeyframes = stitches.keyframes({
     }
 });
 
-export const openCloseAnimation = stitches.css({
+export const collapsibleAnimation = stitches.css({
     overflow: "hidden",
     stateToggled: {
         animation: `${openKeyframes} 300ms ease-out forwards`

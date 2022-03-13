@@ -10,7 +10,7 @@ import { stitches, ThemedCSS } from "stitches";
 
 import { Box } from "../layout";
 
-import { openCloseAnimation } from "mixins";
+import { collapsibleAnimation } from "mixins";
 
 import { CSSProps } from "types";
 
@@ -26,7 +26,7 @@ const StyledRoot = stitches.styled(PrimitiveCollapsible.Root, {
 
 StyledRoot.displayName = "StyledCollapsibleRoot";
 
-const StyledContent = stitches.styled(PrimitiveCollapsible.Content, openCloseAnimation, {
+const StyledContent = stitches.styled(PrimitiveCollapsible.Content, collapsibleAnimation, {
     width: "100%",
     padding: "$0_5"
 });

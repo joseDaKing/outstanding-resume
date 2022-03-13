@@ -7,7 +7,12 @@ import * as PrimitiveTabs from "@radix-ui/react-tabs";
 import { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
+
 import { colorStyles } from "helpers";
+
+import { block } from "mixins";
+
+import { VariantProps } from "@stitches/react";
 
 
 
@@ -20,8 +25,7 @@ Tabs.displayName = "Tabs";
 
 
 
-const StyledTabsList = stitches.styled(PrimitiveTabs.List, {
-    width: "$full",
+const StyledTabsList = stitches.styled(PrimitiveTabs.List, block, {
     display: "flex",
     firstChildren: {
         borderTopLeftRadius: "$sm"
@@ -33,7 +37,7 @@ const StyledTabsList = stitches.styled(PrimitiveTabs.List, {
 
 StyledTabsList.displayName = "StyledTabsList";
 
-export type TabListProps = PrimitiveTabs.TabsListProps;
+export type TabListProps = PrimitiveTabs.TabsListProps & VariantProps<typeof StyledTabsList>;
 
 export const TabsList = forwardRef<ElementRef<typeof PrimitiveTabs.List>, TabListProps>((props, ref) => {
 

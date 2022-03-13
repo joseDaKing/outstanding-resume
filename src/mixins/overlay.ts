@@ -2,11 +2,11 @@ import { stitches } from "stitches";
 
 import { blackA } from "@radix-ui/colors";
 
-import { fadeAnimation } from "./fadeAnimation";
+import { modalAnimation } from "./modalAnimation";
 
 
 
-export const overlay = stitches.css(fadeAnimation, {
+export const overlay = stitches.css(modalAnimation, {
     inset: 0,
     position: "fixed",
     backdropBlur: "$md",

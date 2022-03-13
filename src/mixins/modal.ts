@@ -1,10 +1,10 @@
 import { stitches } from "stitches";
 
-import { fadeAnimation } from "./fadeAnimation";
+import { modalAnimation } from "./modalAnimation";
 
 
 
-export const modal = stitches.css(fadeAnimation, {
+export const modal = stitches.css(modalAnimation, {
     borderRadius: "$sm",
     backgroundColor: "$inverted",
     width: "$md",

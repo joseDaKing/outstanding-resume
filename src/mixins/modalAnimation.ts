@@ -20,7 +20,7 @@ const fadeOutKeyframes = stitches.keyframes({
     }
 });
 
-export const fadeAnimation = stitches.css({
+export const modalAnimation = stitches.css({
     stateToggled: {
         animation: `${fadeInKeyframes} 300ms ease-out forwards`
     },
