@@ -156,11 +156,12 @@ export type AccordionProps = React.RefAttributes<HTMLDivElement> & CSSProps & (
     | Omit<PrimitiveAccordion.AccordionMultipleProps, "asChild">
 );
 
-export const Accordion = forwardRef<ElementRef<typeof PrimitiveAccordion.Root>, AccordionProps>(props => {
+export const Accordion = forwardRef<ElementRef<typeof PrimitiveAccordion.Root>, AccordionProps>((props, ref) => {
 
     return (
         <StyledRoot
-        {...props}>
+        {...props}
+        ref={ref}>
             {props.children}
         </StyledRoot>
     );

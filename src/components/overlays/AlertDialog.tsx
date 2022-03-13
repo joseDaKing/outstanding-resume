@@ -1,7 +1,5 @@
 import * as PrimitiveAlertDialog from "@radix-ui/react-alert-dialog";
 
-import { Button, ButtonProps } from "components/form";
-
 import { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
@@ -54,46 +52,10 @@ AlertDialogContent.displayName = "AlertDialogContent"
 
 
 
-export const AlertDialogAction = forwardRef<ElementRef<typeof PrimitiveAlertDialog.Action>, ButtonProps>((props, ref) => {
-    return (
-        <PrimitiveAlertDialog.Action 
-        asChild>
-            <Button
-            {...props}
-            ref={ref}>
-                {props.children}
-            </Button>
-        </PrimitiveAlertDialog.Action>
-    );
-});
-
-AlertDialogAction.toString = Button.toString;
-
-AlertDialogAction.displayName = "AlertDialogAction";
-
-
-
-export const AlertDialogCancel = forwardRef<ElementRef<typeof PrimitiveAlertDialog.Cancel>, ButtonProps>((props, ref) => {
-    return (
-        <PrimitiveAlertDialog.Cancel 
-        ref={ref}
-        asChild>
-            <Button
-            {...props}>
-                Cancel
-            </Button>
-        </PrimitiveAlertDialog.Cancel>
-    );
-});
-
-AlertDialogCancel.toString = Button.toString;
-
-AlertDialogCancel.displayName = "AlertDialogCancel";
-
-
-
 export { 
     AlertDialogTrigger,
+    AlertDialogCancel,
+    AlertDialogAction,
     AlertDialog,
     AlertDialogTitle,
     AlertDialogDescription
@@ -102,6 +64,8 @@ from "@radix-ui/react-alert-dialog";
 
 export type { 
     AlertDialogTriggerProps,
+    AlertDialogCancelProps,
+    AlertDialogActionProps,
     AlertDialogProps,
     AlertDialogTitleProps,
     AlertDialogDescriptionProps 

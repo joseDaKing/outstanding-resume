@@ -1,19 +1,16 @@
-import { Stack, ScrollArea, Box } from "components/layout";
+import { Button, Label, TextField } from "components/form";
 
-import { Button } from "components/form";
+import { Stack, ScrollArea } from "components/layout";
 
 import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogTitle,
-  AlertDialogDescription
-}
-from "components/overlays";
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent
+} 
+from "components/layout";
 
-import { Title, Text } from "components/typography";
+import { Text } from "components/typography";
 
 
 
@@ -29,60 +26,96 @@ function App() {
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Box
-        css={{
-          padding: "$8",
-        }}>
-          <AlertDialog>
-            <AlertDialogTrigger 
-            asChild>
-              <Button>
-                open
-              </Button>
-            </AlertDialogTrigger>
+          <Tabs
+          css={{
+            padding: "$8"
+          }}
+          defaultValue="account">
+            <TabsList>
+              <TabsTrigger
+              value="account">
+                Account
+              </TabsTrigger>
 
-            <AlertDialogContent>
-              <Box
+              <TabsTrigger
+              value="password">
+                Password
+              </TabsTrigger>              
+            </TabsList>
+            
+            <TabsContent 
+            value="account"
+            css={{
+              spaceY: "$4"
+            }}>
+              <Text>
+                Make changes to your account here. Click save when you're done.
+              </Text>
+
+              <Label
+              block
+              name="Name"
+              orientation="vertical">
+                <TextField/>
+              </Label>
+
+              <Label
+              block
+              name="Username"
+              orientation="vertical">
+                <TextField/>
+              </Label>
+              
+              <Button
               css={{
-                spaceY: "$8"
-              }}>
-                <AlertDialogTitle 
-                asChild>
-                  <Title>
-                    Are you absolutely sure?
-                  </Title>
-                </AlertDialogTitle>
-                
-                <AlertDialogDescription 
-                asChild>
-                  <Text>
-                    This action cannot be undone. This will permanently delete your account and remove your data from our servers.
-                  </Text>
-                </AlertDialogDescription>
-                
-                <Stack
-                fullX
-                css={{
-                  gap: "$6"
-                }}>
-                  <AlertDialogCancel
-                  variant="ghost"
-                  color="neutral"
-                  block>
-                    Cancel
-                  </AlertDialogCancel>
+                marginRight: "auto"
+              }}
+              color="success"
+              variant="ghost">
+                Save Changes
+              </Button>
+            </TabsContent>
 
-                  <AlertDialogAction
-                  variant="ghost"
-                  color="danger"
-                  block>
-                    Yes, delete my account
-                  </AlertDialogAction>
-                </Stack>
-              </Box>
-            </AlertDialogContent>
-          </AlertDialog>
-        </Box>
+            <TabsContent 
+            value="password"
+            css={{
+              spaceY: "$4"
+            }}>
+              <Text>
+                Change your password here. After saving, you'll be logged out.
+              </Text>
+
+              <Label
+              block
+              orientation="vertical"
+              name="Current password">
+                <TextField/>
+              </Label>
+
+              <Label
+              block
+              orientation="vertical"
+              name="New password">
+                <TextField/>
+              </Label>
+
+              <Label
+              block
+              orientation="vertical"
+              name="Confirm password">
+                <TextField/>
+              </Label>
+
+              <Button
+              css={{
+                marginRight: "auto"
+              }}
+              color="success"
+              variant="ghost">
+                Save Changes
+              </Button>
+            </TabsContent>
+          </Tabs>
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{

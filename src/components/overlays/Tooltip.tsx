@@ -79,17 +79,15 @@ export type TooltipContentProps = VariantProps<typeof StyledContent> & Omit<Prim
     children?: string | null;
 };
 
-export const TooltipContent = forwardRef<ElementRef<typeof PrimitiveTooltip.Content>, TooltipContentProps>(props => {
-
+export const TooltipContent = forwardRef<ElementRef<typeof PrimitiveTooltip.Content>, TooltipContentProps>((props, ref) => {
     
     return (
         <StyledContent 
-        {...{
-            side: "top",
-            align: "center",
-            sideOffset: 6,
-            ...props,
-        }}>
+        {...props}
+        side="top"
+        align="center"
+        sideOffset={6}
+        ref={ref}>
             {props.children}
             <StyledArrow/>
         </StyledContent>

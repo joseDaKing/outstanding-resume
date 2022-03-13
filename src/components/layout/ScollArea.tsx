@@ -1,10 +1,10 @@
-import React from "react";
+import { ElementRef, forwardRef, useEffect, useRef } from "react";
 
 import { CSSProps } from "types";
 
 import * as PrimitiveScrollArea from "@radix-ui/react-scroll-area";
 
-import { VariantProps } from "@stitches/react";
+import mergeRefs from "react-merge-refs";
 
 import { stitches } from "stitches";
 
@@ -65,14 +65,30 @@ const StyledCorner = stitches.styled(PrimitiveScrollArea.Corner, {
 
 StyledCorner.displayName = "StyledScrollCorner";
 
-export type ScrollAreaProps = CSSProps;
+export type ScrollAreaProps = CSSProps & Omit<PrimitiveScrollArea.ScrollAreaProps, "asChild">;
 
-export const ScrollArea: React.FC<ScrollAreaProps> = props => {
+export const ScrollArea = forwardRef<ElementRef<typeof PrimitiveScrollArea.Root>, ScrollAreaProps>((props, outerRef) => {
     
+    const innerRef = useRef<ElementRef<typeof PrimitiveScrollArea.Root>|null>(null);
+
+    useEffect(() => {
+        if (innerRef.current) {
+
+            const element = ((innerRef.current.lastChild as HTMLElement).firstChild as HTMLElement);
+    
+            element.style["display"] = "block";
+        }
+    }, []);
+
     return (
-        <StyledRoot 
-        {...props}>
-            <StyledViewport>
+        <StyledRoot
+        {...props}
+        ref={mergeRefs([
+            innerRef,
+            outerRef
+        ])}>
+            <StyledViewport 
+            ref={outerRef}>
                 {props.children}
             </StyledViewport>
 
@@ -88,6 +104,6 @@ export const ScrollArea: React.FC<ScrollAreaProps> = props => {
             <StyledCorner/>
         </StyledRoot>
     );
-}
+})
 
 ScrollArea.toString = () => StyledRoot.selector;
