@@ -14,6 +14,8 @@ import { block } from "mixins";
 
 import { VariantProps } from "@stitches/react";
 
+import { CSSProps } from "types";
+
 
 
 export const Tabs = stitches.styled(PrimitiveTabs.Root, {
@@ -37,13 +39,14 @@ const StyledTabsList = stitches.styled(PrimitiveTabs.List, block, {
 
 StyledTabsList.displayName = "StyledTabsList";
 
-export type TabListProps = PrimitiveTabs.TabsListProps & VariantProps<typeof StyledTabsList>;
+export type TabListProps = PrimitiveTabs.TabsListProps & VariantProps<typeof StyledTabsList> & CSSProps;
 
-export const TabsList = forwardRef<ElementRef<typeof PrimitiveTabs.List>, TabListProps>((props, ref) => {
+export const TabsList = forwardRef<ElementRef<typeof PrimitiveTabs.List>, TabListProps>(({ css, ...props }, ref) => {
 
     return (
         <ScrollArea
         css={{
+            ...(css ?? {}),
             paddingBottom: "$2_5"
         }}>
             <StyledTabsList 
@@ -54,6 +57,10 @@ export const TabsList = forwardRef<ElementRef<typeof PrimitiveTabs.List>, TabLis
         </ScrollArea>
     );
 });
+
+TabsList.toString = () => StyledTabsList.selector;
+
+TabsList.displayName = "TabsList";
 
 
 export const TabsTrigger = stitches.styled(PrimitiveTabs.Trigger, {

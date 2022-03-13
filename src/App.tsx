@@ -1,6 +1,6 @@
 import { IconButton, Button, Label, TextField } from "components/form";
 
-import { Stack, ScrollArea } from "components/layout";
+import { Box, Stack, ScrollArea } from "components/layout";
 
 import {
   Tabs,
@@ -32,10 +32,12 @@ function App() {
             padding: "$8"
           }}
           defaultValue="account">
-            <Stack 
-            alignMain="start"
-            alignCross="start">
-              <TabsList>
+            
+            <Stack
+            alignCross="start"
+            alignMain="start">
+              <TabsList
+              block>
                 <TabsTrigger
                 value="account">
                   Account
@@ -49,8 +51,8 @@ function App() {
 
               <IconButton
               css={{
-                marginTop: "$2",
-                marginLeft: "$4"
+                marginLeft: "$4",
+                marginTop: "$2"
               }}
               round
               size="lg"
@@ -58,7 +60,7 @@ function App() {
               color="neutral"
               Icon={PlusIcon}/>
             </Stack>
-            
+
             <TabsContent 
             value="account"
             css={{
