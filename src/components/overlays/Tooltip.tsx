@@ -1,92 +1,39 @@
-import { ElementRef } from "react"
-
 import * as PrimitiveTooltip from "@radix-ui/react-tooltip";
 
 import { stitches } from "stitches";
 
 import { CSSProps } from "types";
 
-import { VariantProps } from "@stitches/react";
-
-import fontMetrics from "@capsizecss/metrics/roboto";
-
-import { colorStyles } from "helpers";
-
-import { forwardRef } from "react";
+import { forwardRef, ElementRef } from "react";
 
 
 
-const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
+export const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
 
-const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
-    padding: "$3",
+export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
     borderRadius: "$sm",
-    color: "$inverted",
-    fontFamily: "$primary",
-    fontWeight: 200,
-    capSize: {
-        fontSize: 14,
-        fontMetrics,
-        lineHeight: 1 as any
-    },
-    variants: {
-        color: {
-            primary: {},
-            secondary: {},
-            neutral: {},
-            action: {},
-            success: {},
-            warning: {},
-            danger: {}
-        },
-        variant: {
-            inverted: {
-                boxShadow: "$3xl",
-                backgroundColor: "$inverted",
-                [`& ${StyledArrow}`]: {
-                    fill: "$inverted",
-                }
-            },
-            filled: {
-                color: "$inverted"
-            }
-        }
-    },
-    defaultVariants: {
-        color: "primary",
-        variant: "filled"
-    },
-    compoundVariants: [
-        ...colorStyles({
-            variant: "filled",
-            styles: (getColor, colorName) => ({
-                backgroundColor: colorName === "neutral" ? getColor("12") : getColor("10"),
-                [`& ${StyledArrow}`]: {
-                    fill: colorName === "neutral" ? getColor("12") : getColor("10"),
-                },
-            })
-        }),
-        ...colorStyles({
-            variant: "inverted",
-            styles: (getColor, colorName) => ({
-                color: colorName === "neutral" ? getColor("12") : getColor("10"),
-            })
-        })
-    ]
+    backgroundColor: "$inverted",
+    outlineStyle: "solid",
+    outlineColor: "$neutral12",
+    outlineWidth: "$1",
+    boxShadow: "$lg",
+    paddingX: "$2",
+    paddingY: "$2_5",
+    [`& ${StyledArrow}`]: {
+        fill: "$neutral12"
+    }
 });
 
-export type TooltipContentProps = VariantProps<typeof StyledContent> & Omit<PrimitiveTooltip.PopperContentProps, "asChild"> & CSSProps & {
-    children?: string | null;
-};
+export type TooltipContentProps = Omit<PrimitiveTooltip.PopperContentProps, "asChild"> & CSSProps;
 
 export const TooltipContent = forwardRef<ElementRef<typeof PrimitiveTooltip.Content>, TooltipContentProps>((props, ref) => {
     
     return (
         <StyledContent 
-        {...props}
         side="top"
         align="center"
         sideOffset={6}
+        {...props}
         ref={ref}>
             {props.children}
             <StyledArrow/>

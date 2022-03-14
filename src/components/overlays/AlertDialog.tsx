@@ -31,7 +31,7 @@ export const AlertDialogContent = forwardRef<ElementRef<typeof StyledContent>, A
                 ref={ref}>
                     <ScrollArea
                     css={{
-                        height: "100%"
+                        height: "100%",
                     }}>
                         <Box
                         css={{

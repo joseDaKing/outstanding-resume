@@ -1,6 +1,17 @@
-import { IconButton, Button, Label, TextField } from "components/form";
+import { 
+  IconButton, 
+  Button, 
+  Label, 
+  TextField
+}
+from "components/form";
 
-import { Box, Stack, ScrollArea } from "components/layout";
+import { 
+  Box,
+  Stack, 
+  ScrollArea
+}
+from "components/layout";
 
 import {
   Tabs,
@@ -10,9 +21,20 @@ import {
 } 
 from "components/layout";
 
-import { Text } from "components/typography";
+import { Text, Title } from "components/typography";
 
 import { PlusIcon } from "@radix-ui/react-icons";
+
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogTrigger,
+  Popover, 
+  PopoverContent, 
+  PopoverTrigger 
+} 
+from "components/overlays";
+
 
 
 function App() {
@@ -49,16 +71,52 @@ function App() {
                 </TabsTrigger>
               </TabsList>
 
-              <IconButton
-              css={{
-                marginLeft: "$4",
-                marginTop: "$2"
-              }}
-              round
-              size="lg"
-              variant="text"
-              color="neutral"
-              Icon={PlusIcon}/>
+              <Popover>
+                <PopoverTrigger
+                asChild>
+                  <IconButton
+                  css={{
+                    marginLeft: "$4",
+                    marginTop: "$2"
+                  }}
+                  round
+                  size="lg"
+                  variant="text"
+                  color="neutral"
+                  Icon={PlusIcon}/>
+                </PopoverTrigger>
+
+                <PopoverContent
+                css={{
+                  height: 128
+                }}>
+                  <Box
+                  css={{
+                    spaceY: "$6"
+                  }}>
+                    <Label 
+                    block
+                    name="label"
+                    orientation="vertical">
+                      <TextField/>
+                    </Label>
+
+                    <Label 
+                    block
+                    name="label"
+                    orientation="vertical">
+                      <TextField/>
+                    </Label>
+
+                    <Label 
+                    block
+                    name="label"
+                    orientation="vertical">
+                      <TextField/>
+                    </Label>
+                  </Box>
+                </PopoverContent>
+              </Popover>
             </Stack>
 
             <TabsContent 
@@ -72,6 +130,7 @@ function App() {
 
               <Label
               block
+              help="Help"
               name="Name"
               orientation="vertical">
                 <TextField/>
@@ -84,14 +143,57 @@ function App() {
                 <TextField/>
               </Label>
               
-              <Button
-              css={{
-                marginRight: "auto"
-              }}
-              color="success"
-              variant="ghost">
-                Save Changes
-              </Button>
+              <Dialog>
+                <DialogTrigger
+                asChild>
+                  <Button
+                  css={{
+                    marginRight: "auto"
+                  }}
+                  color="success"
+                  variant="ghost">
+                    Save Changes
+                  </Button>
+                </DialogTrigger>
+
+                <DialogContent>
+                  <Box
+                  css={{
+                    spaceY: "$6"
+                  }}>
+                    <Title>
+                      Edit Profile
+                    </Title>
+
+                    <Text>
+                      Make changes to your profile here. Click save when you're done.
+                    </Text>
+
+                    <Label
+                    block
+                    name="Name"
+                    orientation="vertical">
+                      <TextField/>
+                    </Label>
+
+                    <Label
+                    block
+                    name="Username"
+                    orientation="vertical">
+                      <TextField/>
+                    </Label>
+
+                    <Button
+                    variant="ghost"
+                    color="success"
+                    css={{
+                      marginLeft: "auto"
+                    }}>
+                      Save Changes
+                    </Button>
+                  </Box>
+                </DialogContent>
+              </Dialog>
             </TabsContent>
 
             <TabsContent 

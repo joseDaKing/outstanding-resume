@@ -131,10 +131,10 @@ export const StyledRoot = stitches.styled("button", formLargeContainer, round, b
             styles: getColor => ({
                 color: getColor("11"),
                 active: {
-                    backgroundColor: getColor("5")
+                    backgroundColor: getColor("5", true)
                 },
                 hover: {
-                    backgroundColor: getColor("5")
+                    backgroundColor: getColor("5", true)
                 },
                 focus: {
                     outlineStyle: "solid",

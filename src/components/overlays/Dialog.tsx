@@ -1,6 +1,6 @@
 import * as PrimitiveDialog from "@radix-ui/react-dialog";
 
-import { IconButton, IconButtonProps } from "components/form";
+import { IconButton } from "components/form";
 
 import { ElementRef, forwardRef } from "react";
 
@@ -13,23 +13,6 @@ import { CSSProps } from "types";
 import { ScrollArea, Box } from "components/layout";
 
 import { Cross1Icon } from "@radix-ui/react-icons";
-
-
-
-const DialogCloseButton = forwardRef<ElementRef<typeof PrimitiveDialog.Close>, IconButtonProps>((props, ref) => {
-    return (
-        <PrimitiveDialog.Close 
-        ref={ref}
-        asChild>
-            <IconButton
-            {...props}/>
-        </PrimitiveDialog.Close>
-    );
-});
-
-DialogCloseButton.toString = IconButton.toString;
-
-DialogCloseButton.displayName = "DialogCloseButton";
 
 
 
@@ -52,23 +35,29 @@ export const DialogContent = forwardRef<ElementRef<typeof StyledContent>, Dialog
                 ref={ref}>
                     <ScrollArea
                     css={{
-                        height: "100%"
+                        height: "100%",
+                        position: "relative",
                     }}>
-                        <Box
-                        css={{
-                            position: "relative",
-                            padding: "$8",
-                        }}>
-                            <DialogCloseButton
+                        <PrimitiveDialog.Close 
+                        asChild>
+                            <IconButton
                             Icon={Cross1Icon}
                             variant="text"
                             size="sm"
                             round
                             css={{
                                 position: "absolute",
-                                right: "$1",
-                                top: "$1"
+                                right: "$3",
+                                top: "$3"
                             }}/>
+                        </PrimitiveDialog.Close>
+
+                        <Box
+                        css={{
+                            paddingY: "$8",
+                            paddingX: "$10",
+                        }}>
+                            
                             {props.children}
                         </Box>
                     </ScrollArea>

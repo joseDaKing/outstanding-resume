@@ -76,6 +76,7 @@ const varThemeMap = {
 } as any;
 
 const propertyThemeMap = {
+    zIndex: "zIndex",
     outlineWidth: "borderWidth",
     borderWidth: "borderWidth",
     borderTopWidth: "borderWidth",
