@@ -4,7 +4,7 @@ import { stitches } from "stitches";
 
 const slideInBottomKeyframes = stitches.keyframes({
     from: {
-        transform: "translateY($translate$8)",
+        transform: "translateY($$popoverAnimationSpace)",
         opacity: 0
     },
     to: {
@@ -15,7 +15,7 @@ const slideInBottomKeyframes = stitches.keyframes({
 
 const slideOutBottomKeyframes = stitches.keyframes({
     to: {
-        transform: "translateY($translate$8)",
+        transform: "translateY($$popoverAnimationSpace)",
         opacity: 0
     },
     from: {
@@ -26,7 +26,7 @@ const slideOutBottomKeyframes = stitches.keyframes({
 
 const slideInTopKeyframes = stitches.keyframes({
     from: {
-        transform: "translateY(-$translate$8)",
+        transform: "translateY(-$$popoverAnimationSpace)",
         opacity: 0
     },
     to: {
@@ -37,7 +37,7 @@ const slideInTopKeyframes = stitches.keyframes({
 
 const slideOutTopKeyframes = stitches.keyframes({
     to: {
-        transform: "translateY(-$translate$8)",
+        transform: "translateY(-$$popoverAnimationSpace)",
         opacity: 0
     },
     from: {
@@ -48,7 +48,7 @@ const slideOutTopKeyframes = stitches.keyframes({
 
 const slideInRightKeyframes = stitches.keyframes({
     from: {
-        transform: "translateX($translate$8)",
+        transform: "translateX($$popoverAnimationSpace)",
         opacity: 0
     },
     to: {
@@ -59,7 +59,7 @@ const slideInRightKeyframes = stitches.keyframes({
 
 const slideOutRightKeyframes = stitches.keyframes({
     to: {
-        transform: "translateX($translate$8)",
+        transform: "translateX($$popoverAnimationSpace)",
         opacity: 0
     },
     from: {
@@ -70,7 +70,7 @@ const slideOutRightKeyframes = stitches.keyframes({
 
 const slideInLeftKeyframes = stitches.keyframes({
     from: {
-        transform: "translateX(-$translate$8)",
+        transform: "translateX(-$$popoverAnimationSpace)",
         opacity: 0
     },
     to: {
@@ -94,6 +94,7 @@ export const popoverAnimation = stitches.css({
     animationDuration: "300ms",
     animationTimingFunction: "ease-out",
     animationFillMode: "forwards",
+    $$popoverAnimationSpace: "$translate$6",
     sideTop: {
         stateToggled: {
             animationName: slideInTopKeyframes.name

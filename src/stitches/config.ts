@@ -36,7 +36,6 @@ export const media = {
     sm: "@media (min-width: 512px)",
     vertical: "@media (orientation: vertical)",
     horizontal: "@media (orientation: horizontal)",
-
 };
 
 const varThemeMap = {
@@ -47,7 +46,7 @@ const varThemeMap = {
     $$filterBlur: "blur",
     $$filterBrightness: "brightness",
     $$filterContrast: "contrast",
-    $$filterDropShadow: "shadow",
+    $$filterDropShadow: "dropShadow",
     $$filterGrayscale: "grayscale",
     $$filterHueRotate: "hueRotate",
     $$filterInvert: "invert",
@@ -58,7 +57,7 @@ const varThemeMap = {
     $$backdropFilterBlur: "blur",
     $$backdropFilterBrightness: "brightness",
     $$backdropFilterContrast: "contrast",
-    $$backdropFilterDropShadow: "shadow",
+    $$backdropFilterDropShadow: "dropShadow",
     $$backdropFilterGrayscale: "grayscale",
     $$backdropFilterHueRotate: "hueRotate",
     $$backdropFilterInvert: "invert",

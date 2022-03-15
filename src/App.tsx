@@ -33,51 +33,51 @@ function App() {
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-          <Box
-          css={{
-            padding: "$32"
-          }}>
-            <Popover>
-              <PopoverTrigger
-              asChild>
-                <Button
-                variant="ghost"
-                css={{
-                  margin: "auto"
-                }}>
-                  Button
-                </Button>
-              </PopoverTrigger>
-
-              <PopoverContent
+        <Box
+        css={{
+          padding: "$32"
+        }}>
+          <Popover>
+            <PopoverTrigger
+            asChild>
+              <Button
+              variant="ghost"
               css={{
-                height: "$48"
+                margin: "auto"
               }}>
-                <Box
-                css={{
-                  spaceY: "$8"
-                }}>
-                  <Label 
-                  name="Label"
-                  orientation="vertical">
-                    <TextField/>
-                  </Label>
+                Button
+              </Button>
+            </PopoverTrigger>
 
-                  <Label 
-                  name="Label"
-                  orientation="vertical">
-                    <TextField/>
-                  </Label>
+            <PopoverContent
+            css={{
+              height: "$48"
+            }}>
+              <Box
+              css={{
+                spaceY: "$8"
+              }}>
+                <Label 
+                name="Label"
+                orientation="vertical">
+                  <TextField/>
+                </Label>
 
-                  <Label 
-                  name="Label"
-                  orientation="vertical">
-                    <TextField/>
-                  </Label>
-                </Box>
-              </PopoverContent>
-            </Popover>
-          </Box>
+                <Label 
+                name="Label"
+                orientation="vertical">
+                  <TextField/>
+                </Label>
+
+                <Label 
+                name="Label"
+                orientation="vertical">
+                  <TextField/>
+                </Label>
+              </Box>
+            </PopoverContent>
+          </Popover>
+        </Box>
       </ScrollArea>
       
       <Stack fullY alignMain="center" css={{
