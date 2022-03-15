@@ -13,14 +13,11 @@ export const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
 export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
     borderRadius: "$sm",
     backgroundColor: "$inverted",
-    outlineStyle: "solid",
-    outlineColor: "$neutral12",
-    outlineWidth: "$1",
-    boxShadow: "$lg",
+    filterDropShadow: "0px 0px 3px rgba(0 0 0 / 0.35)",
     paddingX: "$2",
     paddingY: "$2_5",
     [`& ${StyledArrow}`]: {
-        fill: "$neutral12"
+        fill: "$inverted"
     }
 });
 

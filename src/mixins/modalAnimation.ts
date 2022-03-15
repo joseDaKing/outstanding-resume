@@ -21,10 +21,13 @@ const fadeOutKeyframes = stitches.keyframes({
 });
 
 export const modalAnimation = stitches.css({
+    animationDuration: "300ms",
+    animationTimingFunction: "ease-out",
+    animationFillMode: "forwards",
     stateToggled: {
-        animation: `${fadeInKeyframes} 300ms ease-out forwards`
+        animationName: fadeInKeyframes.name
     },
     stateUntoggled: {
-        animation: `${fadeOutKeyframes} 300ms ease-out forwards`
+        animationName: fadeInKeyframes.name
     }
 });

@@ -22,10 +22,13 @@ const closeKeyframes = stitches.keyframes({
 
 export const collapsibleAnimation = stitches.css({
     overflow: "hidden",
+    animationDuration: "300ms",
+    animationTimingFunction: "ease-out",
+    animationFillMode: "forwards",
     stateToggled: {
-        animation: `${openKeyframes} 300ms ease-out forwards`
+        animationName: openKeyframes.name
     },
     stateUntoggled: {
-        animation: `${closeKeyframes} 300ms ease-out forwards`
+        animationName: closeKeyframes.name
     }
 });
