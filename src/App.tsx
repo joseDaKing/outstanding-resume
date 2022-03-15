@@ -49,10 +49,7 @@ function App() {
               </Button>
             </PopoverTrigger>
 
-            <PopoverContent
-            css={{
-              height: "$48"
-            }}>
+            <PopoverContent>
               <Box
               css={{
                 spaceY: "$8"
