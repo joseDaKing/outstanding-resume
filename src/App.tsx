@@ -13,7 +13,9 @@ import {
   DropdownSubMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-  DropdownMenuTriggerItem
+  DropdownMenuTriggerItem,
+  DropdownMenuSeperator,
+  DropdownMenuItemSlot
 } 
 from "components/overlays";
 
@@ -46,13 +48,19 @@ function App() {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent>
-              <DropdownMenuItem disabled description="⇧+⌘+N">
+              <DropdownMenuItem>
                 Item 1
+
+                <DropdownMenuItemSlot>
+                  ⇧+⌘+N
+                </DropdownMenuItemSlot>
               </DropdownMenuItem>
 
-              <DropdownMenuItem disabled>
+              <DropdownMenuItem>
                 Item 2
               </DropdownMenuItem>
+
+              <DropdownMenuSeperator/>
 
               <DropdownMenu>
                 <DropdownMenuTriggerItem>

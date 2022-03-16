@@ -3,6 +3,7 @@ import fontMetrics from "@capsizecss/metrics/roboto";
 import { colorStyles } from "helpers";
 
 import { stitches } from "stitches";
+
 import { dropdownSubMenuAnimation } from "./dropdownSubMenuAnimation";
 
 import { popoverContent } from "./popover";
@@ -45,7 +46,10 @@ export const dropdownItemText = stitches.css({
     alignItems: "center",
 });
 
-export const dropdownSeperator = stitches.css({});
+export const dropdownSeperator = stitches.css({
+    height: 1,
+    margin: 5
+});
 
 const baseDropdownContent = stitches.css(popoverContent, {
     minWidth: "$64",
@@ -65,6 +69,9 @@ const baseDropdownContent = stitches.css(popoverContent, {
     },
     compoundVariants: colorStyles({
         styles: (getColor, colorName) => ({
+            [`& ${dropdownSeperator.selector}`]: {
+                backgroundColor: getColor("6")
+            },
             [`& ${dropdownItem.selector}`]: {
                 stateUndisabled: {
                     focus: {

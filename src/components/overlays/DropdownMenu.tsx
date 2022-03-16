@@ -32,9 +32,9 @@ DropdownMenuSeperator.displayName = "DropdownMenuSeperator";
 
 const DropdownMenuIcon = stitches.styled(ChevronRightIcon, dropdownIcon);
 
-const StyledItemDescription = stitches.styled("div", dropdownDescription);
+export const DropdownMenuItemSlot = stitches.styled("div", dropdownDescription);
 
-StyledItemDescription.displayName = "StyledDropdownMenuItemDescription";
+DropdownMenuItemSlot.displayName = "DropdownMenuItemSlot";
 
 
 
@@ -51,9 +51,7 @@ export const DropdownMenuTriggerItem = forwardRef<ElementRef<typeof PrimitiveDro
         {...props}
         ref={ref}>
             <StyledItemText>
-                <span>
-                    {props.children}
-                </span>
+                {props.children}
 
                 <DropdownMenuIcon/>
             </StyledItemText>
@@ -69,11 +67,9 @@ DropdownMenuTriggerItem.displayName = "DropdownMenuTriggerItem";
 
 const StyledItem = stitches.styled(PrimitiveDropdownMenu.Item, dropdownItem);
 
-type DropdownMenuItemProps = Omit<PrimitiveDropdownMenu.MenuItemProps, "asChild"> & CSSProps & {
-    description?: string;
-};
+type DropdownMenuItemProps = Omit<PrimitiveDropdownMenu.MenuItemProps, "asChild"> & CSSProps;
 
-export const DropdownMenuItem = forwardRef<ElementRef<typeof PrimitiveDropdownMenu.Item>, DropdownMenuItemProps>(({ description, ...props }, ref) => {
+export const DropdownMenuItem = forwardRef<ElementRef<typeof PrimitiveDropdownMenu.Item>, DropdownMenuItemProps>((props, ref) => {
 
     return (
         <StyledItem
@@ -81,11 +77,6 @@ export const DropdownMenuItem = forwardRef<ElementRef<typeof PrimitiveDropdownMe
         ref={ref}>
             <StyledItemText>
                 {props.children}
-                
-                {description &&
-                <StyledItemDescription>
-                    {description}    
-                </StyledItemDescription>}
             </StyledItemText>
         </StyledItem>
     );
