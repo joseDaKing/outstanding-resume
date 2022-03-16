@@ -13,7 +13,7 @@ import {
     dropdownIcon,
     dropdownItem,
     dropdownSeperator,
-    dropdownDescription,
+    dropdownSlot,
     dropdownItemText,
 } 
 from "mixins";
@@ -32,7 +32,7 @@ DropdownMenuSeperator.displayName = "DropdownMenuSeperator";
 
 const DropdownMenuIcon = stitches.styled(ChevronRightIcon, dropdownIcon);
 
-export const DropdownMenuItemSlot = stitches.styled("div", dropdownDescription);
+export const DropdownMenuItemSlot = stitches.styled("div", dropdownSlot);
 
 DropdownMenuItemSlot.displayName = "DropdownMenuItemSlot";
 

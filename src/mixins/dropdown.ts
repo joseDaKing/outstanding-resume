@@ -17,7 +17,7 @@ export const dropdownIcon = stitches.css({
     marginLeft: "auto"
 });
 
-export const dropdownDescription = stitches.css({
+export const dropdownSlot = stitches.css({
     marginLeft: "auto",
     color: "$neutral11"
 });
@@ -27,21 +27,22 @@ export const dropdownItem = stitches.css({
     paddingY: "$2",
     borderRadius: "$sm",
     fontFamily: "$primary",
+    cursor: "pointer",
     capSize: {
         fontSize: 15,
         fontMetrics,
     },
-    cursor: "pointer",
     stateDisabled: {
         cursor: "default",
         color: "$washed8 !important",
-        [`& ${dropdownIcon.selector}, & ${dropdownDescription.selector}`]: {
+        [`& ${dropdownIcon.selector}, & ${dropdownSlot.selector}`]: {
             color: "$washed8 !important",
         }
     }
 });
 
 export const dropdownItemText = stitches.css({
+    gap: "$8",
     display: "flex",
     alignItems: "center",
 });
@@ -52,7 +53,6 @@ export const dropdownSeperator = stitches.css({
 });
 
 const baseDropdownContent = stitches.css(popoverContent, {
-    minWidth: "$64",
     variants: {
         color: {
             primary: {},
@@ -78,7 +78,7 @@ const baseDropdownContent = stitches.css(popoverContent, {
                         outline: "none",
                         color: "$inverted",
                         backgroundColor: colorName === "neutral" ? getColor("12") : getColor("10"),
-                        [`& ${dropdownDescription.selector}`]: {
+                        [`& ${dropdownSlot.selector}`]: {
                             color: "$inverted"
                         },
                     },

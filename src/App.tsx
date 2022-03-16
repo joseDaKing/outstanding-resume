@@ -37,7 +37,6 @@ function App() {
         css={{
           padding: "$32"
         }}>
-          
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" css={{
@@ -50,10 +49,6 @@ function App() {
             <DropdownMenuContent>
               <DropdownMenuItem>
                 Item 1
-
-                <DropdownMenuItemSlot>
-                  ⇧+⌘+N
-                </DropdownMenuItemSlot>
               </DropdownMenuItem>
 
               <DropdownMenuItem>
@@ -76,6 +71,8 @@ function App() {
                     Item 5
                   </DropdownMenuItem>
 
+                  <DropdownMenuSeperator/>
+                  
                   <DropdownMenu>
                     <DropdownMenuTriggerItem>
                       Item 6
@@ -99,11 +96,10 @@ function App() {
               </DropdownMenu>
             </DropdownMenuContent>
           </DropdownMenu>
-            
         </Box>
       </ScrollArea>
       
-      <Stack fullY alignMain="center" css={{
+      <Stack fullY alignMain="end" css={{
         width: "$1__2",
         padding: "$8",
         boxShadow: "$md",
