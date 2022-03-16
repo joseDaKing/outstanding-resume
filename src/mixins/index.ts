@@ -18,7 +18,7 @@ export * from "./modal";
 
 export * from "./round";
 
-export  * from "./dropdownSubMenuAnimation";
+export  * from "./fadeAnimation";
 
 export * from "./textAlign";
 

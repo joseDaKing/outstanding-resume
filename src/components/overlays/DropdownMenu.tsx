@@ -9,12 +9,13 @@ import { CSSProps } from "types";
 import {    
     popoverArrow, 
     dropdownContent,
-    dropdownSubContent,
     dropdownIcon,
     dropdownItem,
     dropdownSeperator,
     dropdownSlot,
     dropdownItemText,
+    fadeAnimation,
+    popoverAnimation,
 } 
 from "mixins";
 
@@ -94,7 +95,7 @@ StyledArrow.displayName = "StyledDropdownMenuArrow";
 
 
 
-const StyledContent = stitches.styled(PrimitiveDropdownMenu.Content, dropdownContent);
+const StyledContent = stitches.styled(PrimitiveDropdownMenu.Content, dropdownContent, popoverAnimation);
 
 StyledContent.displayName = "StyledDropdownMenuContent";
 
@@ -121,7 +122,7 @@ DropdownMenuContent.toString = () => StyledContent.selector;
 
 
 
-const StyledSubContent = stitches.styled(PrimitiveDropdownMenu.Content, dropdownSubContent);
+const StyledSubContent = stitches.styled(PrimitiveDropdownMenu.Content, dropdownContent, fadeAnimation);
 
 StyledSubContent.displayName = "StyledDropdownMenuContent";
 

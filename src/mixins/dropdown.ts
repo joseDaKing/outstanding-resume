@@ -4,7 +4,7 @@ import { colorStyles } from "helpers";
 
 import { stitches } from "stitches";
 
-import { dropdownSubMenuAnimation } from "./dropdownSubMenuAnimation";
+import { fadeAnimation } from "./fadeAnimation";
 
 import { popoverContent } from "./popover";
 
@@ -52,7 +52,7 @@ export const dropdownSeperator = stitches.css({
     margin: 5
 });
 
-const baseDropdownContent = stitches.css(popoverContent, {
+export const dropdownContent = stitches.css(popoverContent, {
     variants: {
         color: {
             primary: {},
@@ -88,7 +88,3 @@ const baseDropdownContent = stitches.css(popoverContent, {
         })
     })
 });
-
-export const dropdownContent = stitches.css(baseDropdownContent, popoverAnimation);
-
-export const dropdownSubContent = stitches.css(baseDropdownContent, dropdownSubMenuAnimation);

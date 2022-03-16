@@ -49,6 +49,9 @@ function App() {
             <DropdownMenuContent>
               <DropdownMenuItem>
                 Item 1
+                <DropdownMenuItemSlot>
+                  Abra
+                </DropdownMenuItemSlot>
               </DropdownMenuItem>
 
               <DropdownMenuItem>

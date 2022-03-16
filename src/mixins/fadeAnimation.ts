@@ -20,7 +20,7 @@ const fadeOutKeyframes = stitches.keyframes({
     }
 });
 
-export const dropdownSubMenuAnimation = stitches.css({
+export const fadeAnimation = stitches.css({
     animationDuration: "225ms",
     animationTimingFunction: "ease-out",
     animationFillMode: "forwards",
