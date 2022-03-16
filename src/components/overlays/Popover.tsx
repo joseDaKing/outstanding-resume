@@ -4,8 +4,6 @@ import { forwardRef, ElementRef } from "react";
 
 import { CSSProps } from "types";
 
-import { StyledArrow, StyledContent as StyledTooltipContent } from "components/overlays/Tooltip";
-
 import { Box, ScrollArea } from "components/layout";
 
 import { IconButton } from "components/form";
@@ -14,30 +12,31 @@ import { Cross1Icon } from "@radix-ui/react-icons";
 
 import { stitches } from "stitches";
 
-import { popoverAnimation } from "mixins";
+import { popoverAnimation, popoverArrow, popoverContent } from "mixins";
 
 
 
-const StyledContent = stitches.styled(StyledTooltipContent, popoverAnimation);
+const StyledContent = stitches.styled(PrimitivePopover.Content, popoverAnimation, popoverContent, {
+    padding: 0,
+});
+
+StyledContent.displayName = "StyledPopoverContent";
+
+const StyledArrow = stitches.styled(PrimitivePopover.Arrow, popoverArrow);
+
+StyledArrow.displayName = "StyledPopoverArrow";
 
 export type PopoverContentProps = Omit<PrimitivePopover.PopperContentProps, "asChild"> & CSSProps;
 
 export const PopoverContent = forwardRef<ElementRef<typeof PrimitivePopover.Content>, PopoverContentProps>((props, ref) => {
-    
-    const { css = {} , ...htmlProps } = props;
 
     return (
         <StyledContent 
         side="top"
         align="center"
         sideOffset={6}
-        {...htmlProps}
-        as={PrimitivePopover.Content}
-        ref={ref}
-        css={{
-            padding: 0,
-            ...css,
-        }}>
+        {...props}
+        ref={ref}>
             <ScrollArea
             css={{
                 height: "100%",

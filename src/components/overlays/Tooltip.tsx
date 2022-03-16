@@ -6,20 +6,13 @@ import { CSSProps } from "types";
 
 import { forwardRef, ElementRef } from "react";
 
+import { popoverContent, popoverArrow } from "mixins";
 
 
-export const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, {});
 
-export const StyledContent = stitches.styled(PrimitiveTooltip.Content, {
-    borderRadius: "$sm",
-    backgroundColor: "$inverted",
-    filter: "drop-shadow(0 4px 6px rgb(0 0 0 / 0.15)) drop-shadow(0px -2px 4px rgb(0 0 0 / 0.15))",
-    paddingX: "$2",
-    paddingY: "$2_5",
-    [`& ${StyledArrow}`]: {
-        fill: "$inverted"
-    }
-});
+const StyledContent = stitches.styled(PrimitiveTooltip.Content, popoverContent);
+
+const StyledArrow = stitches.styled(PrimitiveTooltip.Arrow, popoverArrow);
 
 export type TooltipContentProps = Omit<PrimitiveTooltip.PopperContentProps, "asChild"> & CSSProps;
 

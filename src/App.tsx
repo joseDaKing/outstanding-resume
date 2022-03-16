@@ -1,9 +1,4 @@
-import {
-  Button,
-  Label,
-  TextField
-}
-from "components/form";
+import { Button } from "components/form";
 
 import { 
   Box,
@@ -13,9 +8,12 @@ import {
 from "components/layout";
 
 import { 
-  Popover, 
-  PopoverContent, 
-  PopoverTrigger 
+  DropdownMenu, 
+  DropdownMenuContent,
+  DropdownSubMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuTriggerItem
 } 
 from "components/overlays";
 
@@ -37,43 +35,63 @@ function App() {
         css={{
           padding: "$32"
         }}>
-          <Popover>
-            <PopoverTrigger
-            asChild>
-              <Button
-              variant="ghost"
-              css={{
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" css={{
                 margin: "auto"
               }}>
                 Button
               </Button>
-            </PopoverTrigger>
+            </DropdownMenuTrigger>
 
-            <PopoverContent>
-              <Box
-              css={{
-                spaceY: "$8"
-              }}>
-                <Label 
-                name="Label"
-                orientation="vertical">
-                  <TextField/>
-                </Label>
+            <DropdownMenuContent>
+              <DropdownMenuItem disabled description="⇧+⌘+N">
+                Item 1
+              </DropdownMenuItem>
 
-                <Label 
-                name="Label"
-                orientation="vertical">
-                  <TextField/>
-                </Label>
+              <DropdownMenuItem disabled>
+                Item 2
+              </DropdownMenuItem>
 
-                <Label 
-                name="Label"
-                orientation="vertical">
-                  <TextField/>
-                </Label>
-              </Box>
-            </PopoverContent>
-          </Popover>
+              <DropdownMenu>
+                <DropdownMenuTriggerItem>
+                  Item 3
+                </DropdownMenuTriggerItem>
+
+                <DropdownSubMenuContent>
+                  <DropdownMenuItem>
+                    Item 4
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem>
+                    Item 5
+                  </DropdownMenuItem>
+
+                  <DropdownMenu>
+                    <DropdownMenuTriggerItem>
+                      Item 6
+                    </DropdownMenuTriggerItem>
+
+                    <DropdownSubMenuContent>
+                      <DropdownMenuItem>
+                        Item 7
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem>
+                        Item 8
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem>
+                        Item 9
+                      </DropdownMenuItem>
+                    </DropdownSubMenuContent>
+                  </DropdownMenu>
+                </DropdownSubMenuContent>
+              </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+            
         </Box>
       </ScrollArea>
       

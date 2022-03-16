@@ -81,7 +81,7 @@ const slideInLeftKeyframes = stitches.keyframes({
 
 const slideOutLeftKeyframes = stitches.keyframes({
     to: {
-        transform: "translateX(-$translate$8)",
+        transform: "translateX(-$$popoverAnimationSpace)",
         opacity: 0
     },
     from: {
@@ -91,10 +91,10 @@ const slideOutLeftKeyframes = stitches.keyframes({
 });
 
 export const popoverAnimation = stitches.css({
-    animationDuration: "300ms",
+    animationDuration: "225ms",
     animationTimingFunction: "ease-out",
     animationFillMode: "forwards",
-    $$popoverAnimationSpace: "$translate$6",
+    $$popoverAnimationSpace: "$translate$3",
     sideTop: {
         stateToggled: {
             animationName: slideInTopKeyframes.name
