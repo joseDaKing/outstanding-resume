@@ -22,4 +22,6 @@ export  * from "./fadeAnimation";
 
 export * from "./textAlign";
 
+export * from "./textField";
+
 export * from "./textSelection";

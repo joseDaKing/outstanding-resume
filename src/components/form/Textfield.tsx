@@ -4,99 +4,25 @@ import { stitches } from "stitches";
 
 import { VariantProps } from "@stitches/react";
 
-import { formLargeText, formLargeContainer, round, textSelection } from "mixins";
+import { textFieldContainer, textFieldTextContainer, textFieldText } from "mixins";
 
-import { colorStyles } from "helpers";
-
-import { CSSProps } from "types";
-
-import { block } from "mixins";
+import { CSSProps, IconProps } from "types";
 
 
 
-const StyledRoot = stitches.styled("label", round, block, formLargeContainer, {
-    display: "block",
-    outlineWidth: "$1",
-    outlineOffset: "-$borderWidth$1",
-    cursor: "text",
-    stateDisabled: {
-        cursor: "default",
-        outlineColor: "$washed8",
-        color: "$washed10",
-    },
-    variants: {
-        color: {
-            primary: {},
-            secondary: {},
-            neutral: {},
-            action: {},
-            success: {},
-            warning: {},
-            danger: {}
-        }
-    },
-    defaultVariants: {
-        color: "primary"
-    },
-    compoundVariants: colorStyles({
-        styles: (getColor, colorName) => ({
-            outlineStyle: "solid",
-            outlineColor: colorName === "neutral" ? getColor("12") : getColor("11"),
-            focusWithin: {
-                outlineWidth: "$2",
-                outlineColor: colorName === "neutral" ? getColor("11") : getColor("10"),
-            },
-            color: colorName === "neutral" ? getColor("12") : getColor("11"),
-        })
-    })
-});
+const TextFieldContainer = stitches.styled("label", textFieldContainer);
 
-StyledRoot.displayName = "StyledTextFieldRoot";
+TextFieldContainer.displayName = "TextFieldContainer";
 
-const StyledInputContainer = stitches.styled("span", formLargeText, {
-    overflow: "hidden"
-});
+const TextFieldTextContainer = stitches.styled("span", textFieldTextContainer);
 
-StyledInputContainer.displayName = "StyledTextFieldText";
+TextFieldTextContainer.displayName = "TextFieldTextContainer";
 
-const StyledInput = stitches.styled("input", textSelection, {
-    fontFamily: "inherit",
-    fontSize: "inherit",
-    fontWeight: "inherit",
-    backgroundColor: "transparent",
-    width: "100%", 
-    focusVisible: {
-        outline: "none"
-    },
-    stateDisabled: {
-        color: "$washed11",
-        placeholderColor: "$washed8 !important"
-    },
-    variants: {
-        color: {
-            primary: {},
-            secondary: {},
-            neutral: {},
-            action: {},
-            success: {},
-            warning: {},
-            danger: {}
-        }
-    },
-    defaultVariants: {
-        color: "primary"
-    },
-    compoundVariants: colorStyles({
-        styles: (getColor, colorName) => ({
-            color: colorName === "neutral" ? getColor("12") : getColor("11"),
-            placeholderColor: colorName === "neutral" ? getColor("9") : getColor("8")
-        })
-    })
-});
+const TextFieldText = stitches.styled("input", textFieldText);
 
-StyledInput.displayName = "StyledTextFieldInput";
+TextFieldText.displayName = "TextFieldText";
 
-export type TextFieldProps = VariantProps<typeof StyledRoot> & CSSProps & Omit<
+export type TextFieldProps = VariantProps<typeof TextFieldContainer> & CSSProps & IconProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"
@@ -123,6 +49,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         style,
         className,
         block,
+        StartIcon,
+        EndIcon,
         ...htmlProps
     } = props;
 
@@ -133,22 +61,27 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
     }
 
     return (
-    
-        <StyledRoot 
+        <TextFieldContainer 
         {...variantProps}
         style={style}
         className={className}
         data-disabled={props.disabled ? "" : undefined}>
-            <StyledInputContainer>
-                <StyledInput
+            <TextFieldTextContainer>
+                {StartIcon && 
+                <StartIcon/>}
+
+                <TextFieldText
                 {...htmlProps}
                 color={color}
                 ref={ref}/>
-            </StyledInputContainer>
-        </StyledRoot>
+
+                {EndIcon && 
+                <EndIcon/>}
+            </TextFieldTextContainer>
+        </TextFieldContainer>
     );
 });
 
 TextField.displayName = "TextField";
 
-TextField.toString = () => StyledRoot.selector;
+TextField.toString = () => TextFieldTextContainer.selector;

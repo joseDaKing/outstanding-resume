@@ -11,7 +11,7 @@ export const formLargeText = stitches.css({
     gap: "inherit",
     fontFamily: "$primary",
     "& svg": {
-        display: "inline-block"
+        display: "block"
     }
 });
 
@@ -30,7 +30,7 @@ export const formLargeContainer = stitches.css({
                     gap: "$2"
                 },
                 "& svg": {
-                    size: 13,
+                    size: 15,
                 },
             },
             md: {
@@ -44,7 +44,7 @@ export const formLargeContainer = stitches.css({
                     gap: "$2_5"
                 },
                 "& svg": {
-                    size: 14,
+                    size: 16,
                 },
             },
             lg: {
@@ -58,7 +58,7 @@ export const formLargeContainer = stitches.css({
                     gap: "$3"
                 },
                 "& svg": {
-                    size: 15,
+                    size: 17,
                 },
             },
         }

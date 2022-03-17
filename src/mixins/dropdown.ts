@@ -4,11 +4,7 @@ import { colorStyles } from "helpers";
 
 import { stitches } from "stitches";
 
-import { fadeAnimation } from "./fadeAnimation";
-
 import { popoverContent } from "./popover";
-
-import { popoverAnimation } from "./popoverAnimation";
 
 
 

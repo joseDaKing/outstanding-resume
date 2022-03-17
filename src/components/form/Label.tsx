@@ -1,4 +1,4 @@
-import { ReactElement, Children, forwardRef, isValidElement, cloneElement } from "react";
+import { Children, forwardRef, isValidElement, cloneElement } from "react";
 
 import { stitches } from "stitches";
 
@@ -102,12 +102,17 @@ const StyledLabel = stitches.styled(PrimitiveLabel.Root, {
 
 StyledLabel.displayName = "StyledLabel";
 
-export type LabelProps = VariantProps<typeof StyledLabel> & VariantProps<typeof StyledRoot> & CSSProps & {
-    name: string;
-    help?: string;
-    disabled?: boolean;
-    children: ReactElement<any, any>;
-};
+export type LabelProps = (
+    Omit<PrimitiveLabel.LabelProps, "asChild">
+    & VariantProps<typeof StyledLabel>
+    & VariantProps<typeof StyledRoot>
+    & CSSProps
+    & {
+        name: string;
+        help?: string;
+        disabled?: boolean;
+    }
+);
 
 export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
@@ -118,6 +123,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         children,
         orientation,
         block,
+        id: htmlId,
         ...htmlProps
     } = props;
 
@@ -131,7 +137,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         block
     };
 
-    const id = useId();
+    let id = useId();
 
     return (
         <StyledRoot
@@ -139,7 +145,6 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
         {...rootProps}>
             <StyledLabel
             {...htmlProps}
-            {...variantProps}
             data-disabled={props.disabled ? "" : undefined}
             htmlFor={id}>
                 {props.name}

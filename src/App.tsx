@@ -1,10 +1,10 @@
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import {
+import { 
   Label,
   Select,
   SelectItem,
-  SelectSeperator
-}
+  TextArea,
+  TextField
+} 
 from "components/form";
 
 import { 
@@ -30,16 +30,40 @@ function App() {
       }}>
         <Box
         css={{
-          padding: "$32"
+          padding: "$8",
+          spaceY: "$8"
         }}>
-          <Label name="Label">
-            <Select defaultValue="none">
-              <SelectItem value="none"/>
-              
-              {Array(22).fill(0).map((_, index) => (
-                <SelectItem value={`apple-${index + 1}`}/>
-              ))}
-            </Select>
+          <Stack
+          css={{
+            gap: "$4"
+          }}>
+            <Label
+            block
+            name="Label"
+            help="Help"
+            orientation="vertical">
+              <Select defaultValue="value-1" size="lg">
+                {Array(10).fill("").map((_, index) => (
+                  <SelectItem value={`value-${index + 1}`}/>
+                ))}
+              </Select>
+            </Label>
+
+            <Label
+            block
+            name="Label"
+            help="Help"
+            orientation="vertical">
+              <TextField size="lg"/>
+            </Label>
+          </Stack>
+
+          <Label
+          block
+          name="Label"
+          help="Help"
+          orientation="vertical">
+            <TextArea size="lg"/>
           </Label>
         </Box>
       </ScrollArea>

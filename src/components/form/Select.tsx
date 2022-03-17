@@ -1,4 +1,4 @@
-import React, { ElementRef, forwardRef } from "react";
+import { ElementRef, forwardRef } from "react";
 
 import * as PrimitiveSelect from "@radix-ui/react-select";
 
@@ -13,8 +13,13 @@ import {
     dropdownSeperator,
     dropdownItemText,
     popoverAnimation,
+    textFieldContainer, 
+    textFieldTextContainer, 
+    textFieldText
 } 
 from "mixins";
+
+import { VariantProps } from "@stitches/react";
 
 
 
@@ -82,7 +87,25 @@ const ScrollButton = stitches.styled(PrimitiveSelect.ScrollUpButton, dropdownIte
 
 
 
-type SelectProps = Omit<PrimitiveSelect.SelectTriggerProps, "asChild"> & PrimitiveSelect.SelectProps;
+const TextFieldContainer = stitches.styled(PrimitiveSelect.Trigger, textFieldContainer);
+
+TextFieldContainer.displayName = "TextFieldContainer";
+
+const TextFieldTextContainer = stitches.styled("span", textFieldTextContainer);
+
+TextFieldTextContainer.displayName = "TextFieldTextContainer";
+
+const TextFieldText = stitches.styled(PrimitiveSelect.Value, textFieldText);
+
+TextFieldText.displayName = "TextFieldText";
+
+
+
+type SelectProps = (
+    Omit<PrimitiveSelect.SelectTriggerProps, "asChild"> 
+    & VariantProps<typeof TextFieldContainer>
+    & PrimitiveSelect.SelectProps 
+);
 
 export const Select = forwardRef<ElementRef<typeof PrimitiveSelect.Trigger>, SelectProps>((props, ref) => {
 
@@ -112,12 +135,19 @@ export const Select = forwardRef<ElementRef<typeof PrimitiveSelect.Trigger>, Sel
     return (
         <PrimitiveSelect.Root 
         {...rootProps}>
-            <PrimitiveSelect.Trigger 
+            <TextFieldContainer 
             {...htmlProps}
             ref={ref}>
-                <PrimitiveSelect.Value/>
-                <PrimitiveSelect.Icon/>
-            </PrimitiveSelect.Trigger>
+                <TextFieldTextContainer>
+                    <TextFieldText/>
+                    <PrimitiveSelect.Icon asChild>
+                        <ChevronDownIcon
+                        style={{
+                            marginLeft: "auto"
+                        }}/>
+                    </PrimitiveSelect.Icon>
+                </TextFieldTextContainer>
+            </TextFieldContainer>
 
             <StyledContent>
                 <ScrollButton>
