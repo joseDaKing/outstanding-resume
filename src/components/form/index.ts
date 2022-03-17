@@ -8,6 +8,8 @@ export * from "./IconButton";
 
 export * from "./Label";
 
+export * from "./Select";
+
 export * from "./Slider";
 
 export * from "./Switch";

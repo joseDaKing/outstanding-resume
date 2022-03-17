@@ -1,4 +1,11 @@
-import { Button } from "components/form";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import {
+  Label,
+  Select,
+  SelectItem,
+  SelectSeperator
+}
+from "components/form";
 
 import { 
   Box,
@@ -6,18 +13,6 @@ import {
   ScrollArea
 }
 from "components/layout";
-
-import { 
-  DropdownMenu, 
-  DropdownMenuContent,
-  DropdownSubMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuItem,
-  DropdownMenuTriggerItem,
-  DropdownMenuSeperator,
-  DropdownMenuItemSlot
-} 
-from "components/overlays";
 
 
 
@@ -37,72 +32,19 @@ function App() {
         css={{
           padding: "$32"
         }}>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" css={{
-                margin: "auto"
-              }}>
-                Button
-              </Button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                Item 1
-                <DropdownMenuItemSlot>
-                  Abra
-                </DropdownMenuItemSlot>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem>
-                Item 2
-              </DropdownMenuItem>
-
-              <DropdownMenuSeperator/>
-
-              <DropdownMenu>
-                <DropdownMenuTriggerItem>
-                  Item 3
-                </DropdownMenuTriggerItem>
-
-                <DropdownSubMenuContent>
-                  <DropdownMenuItem>
-                    Item 4
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem>
-                    Item 5
-                  </DropdownMenuItem>
-
-                  <DropdownMenuSeperator/>
-                  
-                  <DropdownMenu>
-                    <DropdownMenuTriggerItem>
-                      Item 6
-                    </DropdownMenuTriggerItem>
-
-                    <DropdownSubMenuContent>
-                      <DropdownMenuItem>
-                        Item 7
-                      </DropdownMenuItem>
-
-                      <DropdownMenuItem>
-                        Item 8
-                      </DropdownMenuItem>
-
-                      <DropdownMenuItem>
-                        Item 9
-                      </DropdownMenuItem>
-                    </DropdownSubMenuContent>
-                  </DropdownMenu>
-                </DropdownSubMenuContent>
-              </DropdownMenu>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Label name="Label">
+            <Select defaultValue="none">
+              <SelectItem value="none"/>
+              
+              {Array(22).fill(0).map((_, index) => (
+                <SelectItem value={`apple-${index + 1}`}/>
+              ))}
+            </Select>
+          </Label>
         </Box>
       </ScrollArea>
       
-      <Stack fullY alignMain="end" css={{
+      <Stack fullY alignMain="center" css={{
         width: "$1__2",
         padding: "$8",
         boxShadow: "$md",
@@ -112,7 +54,6 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
-        
       </Stack>
     </Stack>
   );

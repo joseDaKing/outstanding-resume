@@ -6,7 +6,7 @@ import { stitches } from "stitches";
 
 import { CSSProps } from "types";
 
-import {    
+import {
     popoverArrow, 
     dropdownContent,
     dropdownIcon,
