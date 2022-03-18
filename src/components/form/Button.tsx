@@ -148,7 +148,9 @@ export const StyledRoot = stitches.styled("button", formLargeContainer, round, b
 
 StyledRoot.displayName = "StyledButtonRoot";
 
-export type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof StyledRoot> & CSSProps & IconProps;
+export type ButtonVariantProps = VariantProps<typeof StyledRoot>;
+
+export type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & ButtonVariantProps & CSSProps & IconProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, EndIcon, ...props }, ref) => {
 

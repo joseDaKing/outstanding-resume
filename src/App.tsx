@@ -1,9 +1,16 @@
 import { 
+  Button,
+  ButtonGroup
+}
+from "components/form";
+
+import { 
   Box,
   Stack, 
   ScrollArea
 }
 from "components/layout";
+
 
 
 
@@ -24,7 +31,19 @@ function App() {
           padding: "$8",
           spaceY: "$8"
         }}>
-          
+          <ButtonGroup block variant="ghost" size="lg">
+            <Button>
+              Abra
+            </Button>
+
+            <Button>
+              Abra
+            </Button>
+
+            <Button>
+              Abra
+            </Button>
+          </ButtonGroup>
         </Box>
       </ScrollArea>
       
