@@ -42,9 +42,11 @@ function App() {
             name="Label"
             help="Help"
             orientation="vertical">
-              <Select defaultValue="value-1" size="lg">
+              <Select defaultValue="value-1">
                 {Array(10).fill("").map((_, index) => (
-                  <SelectItem value={`value-${index + 1}`}/>
+                  <SelectItem 
+                  key={index}
+                  value={`value-${index + 1}`}/>
                 ))}
               </Select>
             </Label>
@@ -54,7 +56,7 @@ function App() {
             name="Label"
             help="Help"
             orientation="vertical">
-              <TextField size="lg"/>
+              <TextField/>
             </Label>
           </Stack>
 
@@ -63,7 +65,7 @@ function App() {
           name="Label"
           help="Help"
           orientation="vertical">
-            <TextArea size="lg"/>
+            <TextArea/>
           </Label>
         </Box>
       </ScrollArea>

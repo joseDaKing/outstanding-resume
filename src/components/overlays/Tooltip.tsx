@@ -35,7 +35,11 @@ TooltipContent.displayName = "TooltipTriggerContent";
 
 TooltipContent.toString = () => StyledContent.selector;
 
-
+export const TooltipText = stitches.styled("span", {
+    fontFamily: "$primary",
+    fontSize: 15,
+    color: "$neutral12"
+});
 
 export { Tooltip, TooltipTrigger, } from "@radix-ui/react-tooltip";
 
