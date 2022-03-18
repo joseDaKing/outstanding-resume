@@ -87,7 +87,9 @@ const ScrollButton = stitches.styled(PrimitiveSelect.ScrollUpButton, dropdownIte
 
 
 
-const TextFieldContainer = stitches.styled(PrimitiveSelect.Trigger, textFieldContainer);
+const TextFieldContainer = stitches.styled(PrimitiveSelect.Trigger, textFieldContainer, {
+    cursor: "pointer"
+});
 
 TextFieldContainer.displayName = "TextFieldContainer";
 

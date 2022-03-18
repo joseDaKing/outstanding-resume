@@ -1,13 +1,4 @@
 import { 
-  Label,
-  Select,
-  SelectItem,
-  TextArea,
-  TextField
-} 
-from "components/form";
-
-import { 
   Box,
   Stack, 
   ScrollArea
@@ -33,40 +24,7 @@ function App() {
           padding: "$8",
           spaceY: "$8"
         }}>
-          <Stack
-          css={{
-            gap: "$4"
-          }}>
-            <Label
-            block
-            name="Label"
-            help="Help"
-            orientation="vertical">
-              <Select defaultValue="value-1">
-                {Array(10).fill("").map((_, index) => (
-                  <SelectItem 
-                  key={index}
-                  value={`value-${index + 1}`}/>
-                ))}
-              </Select>
-            </Label>
-
-            <Label
-            block
-            name="Label"
-            help="Help"
-            orientation="vertical">
-              <TextField/>
-            </Label>
-          </Stack>
-
-          <Label
-          block
-          name="Label"
-          help="Help"
-          orientation="vertical">
-            <TextArea/>
-          </Label>
+          
         </Box>
       </ScrollArea>
       
@@ -80,6 +38,7 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
+        
       </Stack>
     </Stack>
   );

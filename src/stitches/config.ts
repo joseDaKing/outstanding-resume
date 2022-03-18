@@ -853,7 +853,10 @@ type Utils = {
     focusWithin:(styles: ThemedCSS) => {};
     focusVisible: (styles: ThemedCSS) => {};
     orientationHorizontal: (styles: ThemedCSS) => {},
-    orientationVertical: (styles: ThemedCSS) => {}
+    orientationVertical: (styles: ThemedCSS) => {},
+    swipeMove: (value: ThemedCSS) => {},
+    swipeCancel: (value: ThemedCSS) => {},
+    swipeEnd: (value: ThemedCSS) => {},
 }
 
 type ThemedCSS = CSS<Stitches<"", typeof media, typeof theme, typeof themeMap, Utils>["config"]>;
@@ -1314,5 +1317,14 @@ export const utils: Utils = {
         "@media (hover: hover)": {
             "&:focus-visible": styles
         }
-    })
+    }),
+    swipeMove: value => ({
+        "&[data-swipe='move']": value,
+    }),
+    swipeCancel: value => ({
+        "&[data-swipe='cancel']": value,
+    }),
+    swipeEnd: value => ({
+        "&[data-swipe='end']": value,
+    }),
 }
