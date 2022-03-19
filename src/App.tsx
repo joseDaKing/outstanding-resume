@@ -1,5 +1,6 @@
-import { 
-  Button,
+import {
+  Toggle,
+  IconButton,
   ButtonGroup
 }
 from "components/form";
@@ -11,6 +12,7 @@ import {
 }
 from "components/layout";
 
+import { PlusIcon } from "@radix-ui/react-icons";
 
 
 
@@ -31,18 +33,19 @@ function App() {
           padding: "$8",
           spaceY: "$8"
         }}>
-          <ButtonGroup block variant="ghost" size="lg">
-            <Button>
-              Abra
-            </Button>
+          <ButtonGroup
+          css={{
+            margin: "auto"
+          }}
+          size="lg">
+            <IconButton
+            Icon={PlusIcon}/>
 
-            <Button>
-              Abra
-            </Button>
+            <IconButton
+            Icon={PlusIcon}/>
 
-            <Button>
-              Abra
-            </Button>
+            <IconButton
+            Icon={PlusIcon}/>
           </ButtonGroup>
         </Box>
       </ScrollArea>
@@ -57,7 +60,18 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
-        
+        <ButtonGroup
+        size="lg"
+        variant="inverted">
+          <IconButton
+          Icon={PlusIcon}/>
+
+          <IconButton
+          Icon={PlusIcon}/>
+
+          <IconButton
+          Icon={PlusIcon}/>
+        </ButtonGroup>
       </Stack>
     </Stack>
   );

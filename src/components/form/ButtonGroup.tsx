@@ -1,10 +1,10 @@
-import { block } from "mixins";
+import { buttonGroup } from "mixins";
 
 import { cloneElement, forwardRef, isValidElement } from "react";
 
 import { stitches } from "stitches";
 
-import { Button, ButtonVariantProps } from "./Button";
+import { ButtonVariantProps } from "./Button";
 
 import { Children } from "react";
 
@@ -12,25 +12,7 @@ import { CSSProps } from "types";
 
 
 
-const StyledButtonGroup = stitches.styled("div", block, {
-    display: "flex",
-    [`& > ${Button}`]: {
-        position: "relative",
-        "&:first-child": {
-            borderRightRadius: "0px",
-        },
-        "&:last-child": {
-            borderLeftRadius: "0px",
-        },
-        "&:not(:first-child):not(:last-child)": {
-            borderRadius: "0px"
-        },
-        zIndex: 0,
-        focus: {
-            zIndex: 1
-        }
-    }
-});
+const StyledButtonGroup = stitches.styled("div", buttonGroup);
 
 StyledButtonGroup.displayName = "StyledButtonGroup";
 

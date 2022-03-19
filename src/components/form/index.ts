@@ -2,11 +2,15 @@ export { Button } from "./Button";
 
 export type { ButtonProps } from "./Button";
 
+export * from "./IconButton";
+
 export * from "./ButtonGroup";
 
-export * from "./Checkbox";
+export * from "./IconToggle";
 
-export * from "./IconButton";
+export * from "./Toggle";
+
+export * from "./Checkbox";
 
 export * from "./Label";
 

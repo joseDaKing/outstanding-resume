@@ -1,18 +1,18 @@
-import { ComponentType, forwardRef } from "react";
-
-import { stitches } from "stitches";
+import * as PrimitiveToggle from "@radix-ui/react-toggle";
 
 import { VariantProps } from "@stitches/react";
 
-import { CSSProps } from "types";
-
-import * as Button from "./Button";
-
 import { iconButtonContainer, iconButtonIconContainer } from "mixins";
 
+import { forwardRef, ElementRef } from "react";
+
+import { stitches } from "stitches";
+
+import { CSSProps, IconProps } from "types";
 
 
-const StyledRoot = stitches.styled("button", iconButtonContainer);
+
+const StyledRoot = stitches.styled(PrimitiveToggle.Root, iconButtonContainer);
 
 StyledRoot.displayName = "StyledIconButtonRoot";
 
@@ -20,11 +20,11 @@ const StyledIconContainer = stitches.styled("span", iconButtonIconContainer);
 
 StyledIconContainer.displayName = "StyledIconContainer";
 
-export type IconButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & VariantProps<typeof Button.StyledRoot> & CSSProps & {
-    Icon: ComponentType<any>;
+export type IconToggleProps = VariantProps<typeof StyledRoot> & Omit<PrimitiveToggle.ToggleProps, "asChild"> & CSSProps & IconProps & {
+    Icon: React.ComponentType<any>;
 };
 
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon, ...props }, ref) => {
+export const IconToggle = forwardRef<ElementRef<typeof PrimitiveToggle.Root>, IconToggleProps>(({ Icon, ...props}, ref) => {
 
     const { 
         size,
@@ -55,6 +55,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({ Icon
     );
 });
 
-IconButton.displayName = "IconButton";
+IconToggle.displayName = "IconToggle";
 
-IconButton.toString = () => StyledRoot.selector;
+IconToggle.toString = () => StyledRoot.selector;
