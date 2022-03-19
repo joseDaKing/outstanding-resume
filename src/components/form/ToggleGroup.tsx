@@ -14,8 +14,6 @@ import * as PrimitiveToggleGroup from "@radix-ui/react-toggle-group";
 
 
 
-
-
 const StyledToggleGroup = stitches.styled(PrimitiveToggleGroup.Root, buttonGroup);
 
 StyledToggleGroup.displayName = "StyledButtonGroup";

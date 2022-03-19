@@ -8,6 +8,8 @@ export * from "./ButtonGroup";
 
 export * from "./IconToggle";
 
+export * from "./ToggleGroup";
+
 export * from "./Toggle";
 
 export * from "./Checkbox";

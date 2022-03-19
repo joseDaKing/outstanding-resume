@@ -1,7 +1,7 @@
 import {
-  Toggle,
-  IconButton,
-  ButtonGroup
+  IconToggle,
+  ToggleGroup,
+  ToggleGroupItem,
 }
 from "components/form";
 
@@ -33,20 +33,7 @@ function App() {
           padding: "$8",
           spaceY: "$8"
         }}>
-          <ButtonGroup
-          css={{
-            margin: "auto"
-          }}
-          size="lg">
-            <IconButton
-            Icon={PlusIcon}/>
-
-            <IconButton
-            Icon={PlusIcon}/>
-
-            <IconButton
-            Icon={PlusIcon}/>
-          </ButtonGroup>
+          
         </Box>
       </ScrollArea>
       
@@ -60,18 +47,28 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
-        <ButtonGroup
-        size="lg"
-        variant="inverted">
-          <IconButton
-          Icon={PlusIcon}/>
+        <ToggleGroup
+        type="multiple"
+        css={{
+          margin: "auto"
+        }}
+        variant="inverted"
+        size="lg">
+          <ToggleGroupItem value="1" asChild>
+            <IconToggle
+            Icon={PlusIcon}/>
+          </ToggleGroupItem>
 
-          <IconButton
-          Icon={PlusIcon}/>
+          <ToggleGroupItem value="2" asChild>
+            <IconToggle
+            Icon={PlusIcon}/>
+          </ToggleGroupItem>
 
-          <IconButton
-          Icon={PlusIcon}/>
-        </ButtonGroup>
+          <ToggleGroupItem value="3" asChild>
+            <IconToggle
+            Icon={PlusIcon}/>
+          </ToggleGroupItem>
+        </ToggleGroup>
       </Stack>
     </Stack>
   );
