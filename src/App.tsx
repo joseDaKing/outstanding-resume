@@ -1,10 +1,3 @@
-import {
-  IconToggle,
-  ToggleGroup,
-  ToggleGroupItem,
-}
-from "components/form";
-
 import { 
   Box,
   Stack, 
@@ -12,11 +5,18 @@ import {
 }
 from "components/layout";
 
-import { PlusIcon } from "@radix-ui/react-icons";
+import { Button, Calendar, CalendarState } from "components/form";
+
+import { useState } from "react";
 
 
 
 function App() {
+
+  const [state, setState] = useState<CalendarState>({
+    active: "year",
+    date: new Date("2017 08")
+  })
 
   return (
     <Stack 
@@ -33,7 +33,17 @@ function App() {
           padding: "$8",
           spaceY: "$8"
         }}>
-          
+
+          <Button onClick={() => setState({
+            active: "month",
+            date: new Date("2017 08")
+          })}>
+            change  
+          </Button>          
+
+          <Calendar
+          value={state}
+          onValueChange={setState}/>
         </Box>
       </ScrollArea>
       
@@ -47,28 +57,7 @@ function App() {
         gradientTo: "$secondary9" ,
         position: "relative",
       }}>
-        <ToggleGroup
-        type="multiple"
-        css={{
-          margin: "auto"
-        }}
-        variant="inverted"
-        size="lg">
-          <ToggleGroupItem value="1" asChild>
-            <IconToggle
-            Icon={PlusIcon}/>
-          </ToggleGroupItem>
-
-          <ToggleGroupItem value="2" asChild>
-            <IconToggle
-            Icon={PlusIcon}/>
-          </ToggleGroupItem>
-
-          <ToggleGroupItem value="3" asChild>
-            <IconToggle
-            Icon={PlusIcon}/>
-          </ToggleGroupItem>
-        </ToggleGroup>
+        
       </Stack>
     </Stack>
   );

@@ -40,7 +40,14 @@ export const buttonContainer = stitches.css(formLargeContainer, round, block, te
             ghost: {
                 stateDisabled: {
                     color: "$washed9",
-                    backgroundColor: "$washed4"
+                    backgroundColor: "$washed4 !important"
+                }
+            },
+            text: {
+                backgroundColor: "transparent",
+                stateDisabled: {
+                    color: "$washed9",
+                    backgroundColor: "$washed4 !important"
                 }
             },
             inverted: {
@@ -66,13 +73,6 @@ export const buttonContainer = stitches.css(formLargeContainer, round, block, te
                     }
                 }
             },
-            text: {
-                backgroundColor: "transparent",
-                stateDisabled: {
-                    color: "$washed9",
-                    backgroundColor: "$washed4"
-                }
-            }
         }
     },
     defaultVariants: {

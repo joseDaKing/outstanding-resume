@@ -2,6 +2,8 @@ export { Button } from "./Button";
 
 export type { ButtonProps } from "./Button";
 
+export * from "./Calendar";
+
 export * from "./IconButton";
 
 export * from "./ButtonGroup";
