@@ -12,6 +12,8 @@ import * as PrimitiveToggleGroup from "@radix-ui/react-toggle-group";
 
 import { useValue } from "helpers";
 
+import dayjs from "dayjs.config";
+
 
 
 const StyledCalendarRoot = stitches.styled(PrimitiveToggleGroup.Root, {
@@ -45,20 +47,7 @@ StyledCalendarBody.displayName = "StyledCalendarBody";
 
 
 
-const months = [
-    "jan", 
-    "feb", 
-    "mar", 
-    "apr", 
-    "maj",
-    "jun",
-    "jul",
-    "aug",
-    "sep",
-    "okt",
-    "nov",
-    "dec"
-];
+const months = dayjs.monthsShort();
 
 export type CalendarState = {
     active: "month" | "year";
@@ -70,28 +59,6 @@ export type CalendarProps = Omit<PrimitiveToggleGroup.ToggleGroupSingleProps, "v
     value?: CalendarState;
     onValueChange?: (state: CalendarState) => void;
 }
-
-type CalendarStateAction = (state: CalendarState) => CalendarState;
-
-const createSetMonthAction: (value: string) => CalendarStateAction = value => prevState => {
-
-    if (value === "year") {
-
-        return {
-            ...prevState,
-            active: "year"
-        };
-    }
-
-    const newDate = new Date(prevState.date);
-
-    newDate.setMonth(Number(value));
-
-    return {
-        date: newDate,
-        active: "month"
-    };
-};
 
 export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>, CalendarProps>(({ 
     value, 
