@@ -26,7 +26,10 @@ function App() {
           padding: "$8",
           spaceY: "$8"
         }}>
-          <Calendar/>
+          <Calendar css={{
+            width: "$xs",
+            margin: "auto"
+          }}/>
         </Box>
       </ScrollArea>
       

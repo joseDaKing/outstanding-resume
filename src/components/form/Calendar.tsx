@@ -14,6 +14,8 @@ import { useValue } from "helpers";
 
 import dayjs from "dayjs.config";
 
+import { CSSProps } from "types";
+
 
 
 const StyledCalendarRoot = stitches.styled(PrimitiveToggleGroup.Root, {
@@ -54,7 +56,7 @@ export type CalendarState = {
     date: Date;
 }
 
-export type CalendarProps = Omit<PrimitiveToggleGroup.ToggleGroupSingleProps, "value" | "defaultValue" | "type" | "onValueChange"> & {
+export type CalendarProps = Omit<PrimitiveToggleGroup.ToggleGroupSingleProps, "value" | "defaultValue" | "type" | "onValueChange"> & CSSProps & {
     defaultValue?: CalendarState;
     value?: CalendarState;
     onValueChange?: (state: CalendarState) => void;
