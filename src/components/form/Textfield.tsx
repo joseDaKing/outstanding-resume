@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 
 import { stitches } from "stitches";
 
@@ -7,6 +7,8 @@ import { VariantProps } from "@stitches/react";
 import { textFieldContainer, textFieldTextContainer, textFieldText } from "mixins";
 
 import { CSSProps, IconProps } from "types";
+
+import mergeRefs from "react-merge-refs";
 
 
 
@@ -30,6 +32,7 @@ export type TextFieldProps = VariantProps<typeof TextFieldContainer> & CSSProps 
     | "defaultChecked"
     | "size"
     | "onChange"
+    | "onClick"
 > & {
     type?: (
         "email" 
@@ -40,9 +43,10 @@ export type TextFieldProps = VariantProps<typeof TextFieldContainer> & CSSProps 
         | "tel"
     );
     onValueChange?: (value: string) => void;
+    onClick?: (event: React.MouseEvent<HTMLLabelElement>) => void;
 }
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, outerRef) => {
     
     const { 
         size,
@@ -53,6 +57,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         block,
         StartIcon,
         EndIcon,
+        onClick,
         onValueChange,
         ...htmlProps
     } = props;
@@ -71,9 +76,25 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         }
     }
 
+    const ref = useRef<HTMLInputElement|null>(null);
+
+    const onClickHandler = (event: React.MouseEvent<HTMLLabelElement>) => {
+
+        if (ref.current) {
+
+            ref.current.focus();
+        }
+
+        if (onClick) {
+         
+            onClick(event);
+        }
+    }
+
     return (
         <TextFieldContainer 
         {...variantProps}
+        onClick={onClickHandler}
         style={style}
         className={className}
         data-disabled={props.disabled ? "" : undefined}>
@@ -84,7 +105,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
                 <TextFieldText
                 {...htmlProps}
                 color={color}
-                ref={ref}
+                ref={mergeRefs([ref, outerRef])}
                 onChange={onChangeHandler}/>
 
                 {EndIcon && 

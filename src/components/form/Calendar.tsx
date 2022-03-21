@@ -43,8 +43,7 @@ const StyledCalendarBody = stitches.styled("div", {
     gridTemplateRows: "repeat(3, 1fr)",
     display: "grid",
     width: "100%",
-    gap: "$4",
-    rowGap: "$2"
+    gap: "$2",
 });
 
 StyledCalendarBody.displayName = "StyledCalendarBody";
@@ -62,22 +61,24 @@ export type CalendarProps = Omit<PrimitiveToggleGroup.ToggleGroupSingleProps, "v
     defaultValue?: CalendarState;
     value?: CalendarState;
     onValueChange?: (state: CalendarState) => void;
+    onClick?: () => void;
 }
+
+const initialState: CalendarState = {
+    active: "year",
+    date: new Date()
+};
 
 export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>, CalendarProps>(({ 
     value, 
     defaultValue, 
+    onClick = () => {},
     onValueChange: onChange, 
     ...props
 }, ref) => {
 
-    const initialValue: CalendarState = {
-        active: "year",
-        date: new Date()
-    };
-
     const [ state, setState ] = useValue({
-        initialValue,
+        initialValue: initialState,
         value,
         defaultValue,
         onValueChange: onChange
@@ -133,6 +134,8 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
 
             event.preventDefault();
         }
+
+        onClick();
     }
 
     const createMonthClickHandler = (month: number) => (event: React.MouseEvent) => {
@@ -141,6 +144,8 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
 
             event.preventDefault();
         }
+
+        onClick();
     }
 
     return (
