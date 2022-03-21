@@ -5,7 +5,7 @@ import {
 }
 from "components/layout";
 
-import { Calendar } from "components/form";
+import { DatePicker } from "components/form";
 
 
 
@@ -21,15 +21,15 @@ function App() {
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Box
-        css={{
-          padding: "$8",
-          spaceY: "$8"
+        <Box css={{
+          padding: "$8"
         }}>
-          <Calendar css={{
-            width: "$xs",
-            margin: "auto"
-          }}/>
+          <Box css={{
+            margin: "auto",
+            width: "fit-content"
+          }}>
+            <DatePicker/>
+          </Box>
         </Box>
       </ScrollArea>
       

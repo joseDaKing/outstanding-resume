@@ -29,6 +29,7 @@ export type TextFieldProps = VariantProps<typeof TextFieldContainer> & CSSProps 
     | "checked"
     | "defaultChecked"
     | "size"
+    | "onChange"
 > & {
     type?: (
         "email" 
@@ -38,6 +39,7 @@ export type TextFieldProps = VariantProps<typeof TextFieldContainer> & CSSProps 
         | "search"
         | "tel"
     );
+    onValueChange?: (value: string) => void;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
@@ -51,6 +53,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         block,
         StartIcon,
         EndIcon,
+        onValueChange,
         ...htmlProps
     } = props;
 
@@ -58,6 +61,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
         size,
         color,
         block
+    }
+
+    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        if (onValueChange) {
+
+            onValueChange(event.currentTarget.value);
+        }
     }
 
     return (
@@ -73,7 +84,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, re
                 <TextFieldText
                 {...htmlProps}
                 color={color}
-                ref={ref}/>
+                ref={ref}
+                onChange={onChangeHandler}/>
 
                 {EndIcon && 
                 <EndIcon/>}

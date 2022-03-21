@@ -16,6 +16,8 @@ import dayjs from "dayjs.config";
 
 import { CSSProps } from "types";
 
+import { PopoverClose } from "@radix-ui/react-popover";
+
 
 
 const StyledCalendarRoot = stitches.styled(PrimitiveToggleGroup.Root, {
