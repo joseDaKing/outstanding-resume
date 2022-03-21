@@ -28,4 +28,6 @@ export * from "./Switch";
 
 export * from "./TextArea";
 
-export * from "./TextField";
+export { TextField } from "./TextField";
+
+export type { TextFieldProps } from "./TextField";

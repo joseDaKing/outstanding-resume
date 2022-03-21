@@ -24,7 +24,9 @@ const TextFieldText = stitches.styled("input", textFieldText);
 
 TextFieldText.displayName = "TextFieldText";
 
-export type TextFieldProps = VariantProps<typeof TextFieldContainer> & CSSProps & IconProps & Omit<
+export type TextFieldVariantProps = VariantProps<typeof TextFieldContainer>;
+
+export type TextFieldProps = TextFieldVariantProps & CSSProps & IconProps & Omit<
     JSX.IntrinsicElements["input"], 
     "type" 
     | "ref"

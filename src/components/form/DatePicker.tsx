@@ -1,4 +1,4 @@
-import { TextField } from "./TextField";
+import { TextField, TextFieldVariantProps } from "./TextField";
 
 import { Calendar, CalendarState } from "./Calendar";
 
@@ -8,7 +8,7 @@ import { stitches } from "stitches";
 
 import { popoverAnimation, popoverContent } from "mixins";
 
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 
 import { CalendarIcon } from "@radix-ui/react-icons";
 
@@ -25,9 +25,57 @@ const initialState: CalendarState = {
     date: new Date()   
 }
 
-export const DatePicker = () => {
+export type DatePickerState = CalendarState | null;
 
-    const [ isOpen, setIsOpen ] = useState(false);
+export type DatePickerProps = Omit<JSX.IntrinsicElements["input"], "onChange" | "ref" | "type"> & TextFieldVariantProps & {
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    value?: DatePickerState;
+    defaultValue?: DatePickerState;
+    onValueChange?: (value: DatePickerState) => void;
+}
+
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) => {
+
+    const {
+        size,
+        color,
+        open,
+        defaultOpen,
+        onOpenChange,
+        value,
+        defaultValue,
+        onValueChange,
+        ...htmlProps
+    } = props;
+
+    const variantProps = {
+        size,
+        color
+    }
+
+    const valueProps = {
+        value,
+        defaultValue,
+        onValueChange,
+    }
+
+    const [calendarState, setCalendarState] = useValue<CalendarState | null>({
+        initialValue: null,
+        ...valueProps
+    });
+
+    const openProps = {
+        value: open,
+        defaultValue: defaultOpen,
+        onValueChange: onOpenChange,
+    }
+
+    const [ isOpen, setIsOpen ] = useValue({
+        initialValue: false,
+        ...openProps
+    });
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
 
@@ -37,15 +85,13 @@ export const DatePicker = () => {
         }
     }
 
-    const close = () => setIsOpen(false);
+    const closeHandler = () => setIsOpen(false);
 
-    const open = () => setIsOpen(true);
+    const openHandler = () => setIsOpen(true);
 
     const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault();
 
     const [inputState, setInputState] = useState("");
-
-    const [calendarState, setCalendarState] = useState(initialState);
 
     useOnChange(() => {
 
@@ -69,7 +115,7 @@ export const DatePicker = () => {
 
     useOnChange(() => {
 
-        const newState = calendarStateToStr(calendarState)
+        const newState = calendarStateToStr(calendarState ?? initialState)
 
         const currentState = inputState;
         
@@ -88,11 +134,14 @@ export const DatePicker = () => {
             tabIndex={-1}
             onClick={onClickHandler}>
                 <TextField
+                {...htmlProps}
+                {...variantProps}
+                ref={ref}
                 placeholder="MM / YYYY"
                 value={inputState}
                 onValueChange={setInputState}
-                onFocus={open}
-                onClick={open}
+                onFocus={openHandler}
+                onClick={openHandler}
                 StartIcon={CalendarIcon}
                 onKeyDown={onKeyDownHandler}/>
             </PopoverTrigger>
@@ -103,13 +152,13 @@ export const DatePicker = () => {
             align="start"
             sideOffset={6}>
                 <Calendar
-                onClick={close}
-                value={calendarState}
+                onClick={closeHandler}
+                value={calendarState ?? initialState}
                 onValueChange={setCalendarState}/>
             </StyledContent>
         </Popover>
     );
-}
+});
 
 function balance(value: string): string {
 
