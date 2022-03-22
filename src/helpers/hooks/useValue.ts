@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useOnChange } from "./useOnChange";
 
@@ -24,17 +24,7 @@ export function useValue<T>({
     onValueChange = () => {} 
 }: UseValueConfig<T>): UseValueState<T> {
 
-    const [internalState, setInternalState] = useState(value ?? defaultValue ?? initialValue);
-
-    useOnChange(() => {
-
-        if (value) {
-
-            setInternalState(value);
-        }
-    }, [
-        JSON.stringify(value)
-    ]);
+    const [internalState, setInternalState] = useState(defaultValue ?? initialValue);
 
     useOnChange(() => {
         
@@ -47,7 +37,7 @@ export function useValue<T>({
     ]);
 
     return [
-        internalState,
+        value ? value : internalState,
         (state) => {
 
             if (value) {
@@ -58,7 +48,7 @@ export function useValue<T>({
                 }
                 else {
 
-                    onValueChange(value);
+                    onValueChange(state);
                 }
             }
             else {

@@ -8,7 +8,7 @@ import { stitches } from "stitches";
 
 import { popoverAnimation, popoverContent } from "mixins";
 
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 
 import { CalendarIcon } from "@radix-ui/react-icons";
 
@@ -20,6 +20,8 @@ import { useOnChange, useValue } from "helpers";
 
 const StyledContent = stitches.styled(PopoverContent, popoverAnimation, popoverContent);
 
+StyledContent.displayName = "StyledDatePickerContent"; 
+
 const initialState: CalendarState = {
     active: "year",
     date: new Date()   
@@ -27,7 +29,7 @@ const initialState: CalendarState = {
 
 export type DatePickerState = CalendarState | null;
 
-export type DatePickerProps = Omit<JSX.IntrinsicElements["input"], "onChange" | "ref" | "type"> & TextFieldVariantProps & {
+export type DatePickerProps = Omit<JSX.IntrinsicElements["input"], "onChange" | "ref" | "type" | "value" | "defaultValue"> & TextFieldVariantProps & {
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange?: (open: boolean) => void;
@@ -77,20 +79,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
         ...openProps
     });
 
-    const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-
-        if (event.key === "Enter") {
-
-            setIsOpen(false);
-        }
-    }
-
-    const closeHandler = () => setIsOpen(false);
-
-    const openHandler = () => setIsOpen(true);
-
-    const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault();
-
     const [inputState, setInputState] = useState("");
 
     useOnChange(() => {
@@ -108,23 +96,43 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
             setCalendarState({
                 active: "year",
                 date: new Date(inputState)
-            })
+            });
         }
 
     }, [inputState]);
 
-    useOnChange(() => {
+    useEffect(() => {
 
-        const newState = calendarStateToStr(calendarState ?? initialState)
+        if (calendarState) {
 
-        const currentState = inputState;
-        
-        if (newState.toLowerCase() !== balance(currentState.toLowerCase())) {
-        
-            setInputState(newState);
+            const newState = calendarStateToStr(calendarState);
+
+            const currentState = inputState;
+            
+            if (newState.toLowerCase() !== standarize(currentState.toLowerCase())) {
+            
+                setInputState(newState);
+            }
         }
+    }, [
+        calendarState?.active,
+        calendarState?.date.getFullYear(),
+        calendarState?.date.getMonth(),
+    ]);
 
-    }, [JSON.stringify(calendarState)]);
+    const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+
+        if (event.key === "Enter") {
+
+            setIsOpen(false);
+        }
+    }
+
+    const closeHandler = () => setIsOpen(false);
+
+    const openHandler = () => setIsOpen(true);
+
+    const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault();
 
     return (
         <Popover
@@ -154,13 +162,18 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
                 <Calendar
                 onClick={closeHandler}
                 value={calendarState ?? initialState}
-                onValueChange={setCalendarState}/>
+                onValueChange={value => {
+
+                    setCalendarState(value);
+                }}/>
             </StyledContent>
         </Popover>
     );
 });
 
-function balance(value: string): string {
+DatePicker.displayName = "DatePicker";
+
+function standarize(value: string): string {
 
     const [month, year] = value.trim().replace(/\s{2,}/g, " ").split(",");
 
