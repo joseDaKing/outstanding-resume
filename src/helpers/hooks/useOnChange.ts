@@ -8,6 +8,7 @@ export function useOnChange(cb: OnChangeCB, dependencies: any[]) {
 
     const isMountedRef = useRef(false);
 
+    /* eslint-disable */
     useEffect(() => {
 
         if (isMountedRef.current) {
@@ -22,4 +23,5 @@ export function useOnChange(cb: OnChangeCB, dependencies: any[]) {
 
         isMountedRef.current = true;
     }, dependencies);
+    /* eslint-enable */
 }

@@ -101,6 +101,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
 
     }, [inputState]);
 
+    /* eslint-disable */
     useEffect(() => {
 
         if (calendarState) {
@@ -119,6 +120,8 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
         calendarState?.date.getFullYear(),
         calendarState?.date.getMonth(),
     ]);
+
+    /* eslint-enable */
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
 

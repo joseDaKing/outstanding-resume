@@ -28,6 +28,6 @@ export const modalAnimation = stitches.css({
         animationName: fadeInKeyframes.name
     },
     stateUntoggled: {
-        animationName: fadeInKeyframes.name
+        animationName: fadeOutKeyframes.name
     }
 });

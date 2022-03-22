@@ -4,8 +4,6 @@ import { popoverContent } from "mixins";
 
 import { stitches, ThemedCSS } from "stitches";
 
-import { CSSProps } from "types";
-
 
 
 const VIEWPORT_PADDING: ThemedCSS["padding"] = "$8"

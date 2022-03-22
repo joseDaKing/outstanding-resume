@@ -13,8 +13,6 @@ import { Text } from "components/typography";
 
 import dayjs from "dayjs.config";
 
-import { useEffect } from "react";
-
 
 
 function App() {
@@ -53,8 +51,7 @@ function App() {
               {dayjs.monthsShort().concat([])[state?.date.getMonth() ?? 0]} - {state?.date.getFullYear()}
             </Text>
 
-            <DatePicker
-            />
+            <DatePicker/>
           </Box>
         </Box>
       </ScrollArea>

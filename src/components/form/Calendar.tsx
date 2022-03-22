@@ -1,4 +1,4 @@
-import React, { ElementRef, forwardRef, useState } from "react";
+import React, { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
 
@@ -15,8 +15,6 @@ import { useValue } from "helpers";
 import dayjs from "dayjs.config";
 
 import { CSSProps } from "types";
-
-import { PopoverClose } from "@radix-ui/react-popover";
 
 
 
