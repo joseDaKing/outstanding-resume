@@ -4,11 +4,14 @@ import { useOnChange } from "./useOnChange";
 
 
 
-export type UseValueConfig<T> = {
-    initialValue: T;
+export type UseValueProps<T> = {
     value?: T;
     defaultValue?: T;
     onValueChange?: (value: T) => void;
+}
+
+export type UseValueConfig<T> = UseValueProps<T> & {
+    initialValue: T;
 }
 
 export type UseValueSetStateAction<T> = (value: T) => T;

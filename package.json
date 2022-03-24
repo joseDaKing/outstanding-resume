@@ -66,8 +66,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "type-fest": "^2.12.0"
   }
 }

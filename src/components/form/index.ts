@@ -4,7 +4,9 @@ export type { ButtonProps } from "./Button";
 
 export * from "./DatePicker";
 
-export * from "./Calendar";
+export { Calendar } from "./Calendar";
+
+export type { CalendarProps } from "./Calendar";
 
 export * from "./IconButton";
 

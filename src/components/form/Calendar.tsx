@@ -10,7 +10,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 
 import * as PrimitiveToggleGroup from "@radix-ui/react-toggle-group";
 
-import { useValue } from "helpers";
+import { useValue, UseValueProps } from "helpers";
 
 import dayjs from "dayjs.config";
 
@@ -50,78 +50,58 @@ StyledCalendarBody.displayName = "StyledCalendarBody";
 
 const months = dayjs.monthsShort();
 
+const currentDate = new Date();
+
 export type CalendarState = {
-    active: "month" | "year";
-    date: Date;
+    active?: "month" | "year";
+    year?: number;
+    month?: number;
 }
 
-export type CalendarProps = Omit<PrimitiveToggleGroup.ToggleGroupSingleProps, "value" | "defaultValue" | "type" | "onValueChange"> & CSSProps & {
-    defaultValue?: CalendarState;
-    value?: CalendarState;
-    onValueChange?: (state: CalendarState) => void;
-    onClick?: () => void;
-}
-
-const initialState: CalendarState = {
-    active: "year",
-    date: new Date()
-};
+export type CalendarProps = (
+    Omit<
+        PrimitiveToggleGroup.ToggleGroupSingleProps, 
+        "value" 
+        | "defaultValue" 
+        | "type" 
+        | "onValueChange"
+    > 
+    & CSSProps 
+    & UseValueProps<CalendarState>
+    & { onClick?: () => void; }
+)
 
 export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>, CalendarProps>(({ 
     value, 
-    defaultValue, 
-    onClick = () => {},
+    defaultValue,
     onValueChange: onChange, 
+    onClick = () => {},
     ...props
 }, ref) => {
 
-    const [ state, setState ] = useValue({
-        initialValue: initialState,
+    const [ state, setState ] = useValue<CalendarState>({
+        initialValue: {
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth()
+        },
         value,
         defaultValue,
-        onValueChange: onChange
-    });
-
-    const incrementYearHandler = () => setState(prevState => {
-
-        const newDate = new Date(prevState.date);
-    
-        newDate.setFullYear(newDate.getFullYear() + 1);
-    
-        return {
-            ...prevState,
-            date: newDate
-        };
-    });
-
-    const decrementYearHandler = () => setState(prevState => {
-
-        const newDate = new Date(prevState.date);
-    
-        newDate.setFullYear(newDate.getFullYear() - 1);
-    
-        return {
-            ...prevState,
-            date: newDate
-        };
-    });
+        onValueChange: onChange,
+    })
 
     const onValueChange = (value: string) => setState(prevState => {
 
         if (value === "year") {
-    
+            
             return {
                 ...prevState,
                 active: "year"
             };
         }
-    
-        const newDate = new Date(prevState.date);
-    
-        newDate.setMonth(Number(value));
-    
+
         return {
-            date: newDate,
+            ...prevState,
+            month: Number(value),
             active: "month"
         };
     });
@@ -138,7 +118,8 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
 
     const createMonthClickHandler = (month: number) => (event: React.MouseEvent) => {
 
-        if (state.active === "month" && state.date.getMonth() === month) {
+        
+        if (state.active === "month" && state.month === month) {
 
             event.preventDefault();
         }
@@ -146,16 +127,38 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
         onClick();
     }
 
+    const incrementYear = () => setState(prevState => ({
+        ...prevState,
+        year: (prevState.year ?? currentDate.getFullYear()) + 1
+    }));
+
+    const decrementYear = () => setState(prevState => ({
+        ...prevState,
+        year: (prevState.year ?? currentDate.getFullYear()) - 1
+    }));
+
+    let toggleValue: string | undefined = undefined;
+
+    if (state.active === "year") {
+
+        toggleValue = "year";
+    }
+
+    if (state.active === "month") {
+
+        toggleValue = state.month?.toString();
+    }    
+
     return (
         <StyledCalendarRoot
         {...props}
         ref={ref}
         type="single"
-        value={state.active === "year" ? "year" : state.date.getMonth().toString()}
+        value={toggleValue}
         onValueChange={onValueChange}>
             <StyledCalendarHead>
                 <IconButton
-                onClick={decrementYearHandler}
+                onClick={decrementYear}
                 round
                 variant="text"
                 Icon={ChevronLeftIcon}
@@ -172,12 +175,12 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
                     css={{
                         margin: "auto"
                     }}>
-                        {state.date.getFullYear()}
+                        {state.year ?? currentDate.getFullYear()}
                     </Toggle>
                 </PrimitiveToggleGroup.Item>
 
                 <IconButton 
-                onClick={incrementYearHandler}
+                onClick={incrementYear}
                 round
                 variant="text"
                 Icon={ChevronRightIcon}
@@ -187,19 +190,22 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
             </StyledCalendarHead>
 
             <StyledCalendarBody>
-                {months.map((month, monthIndex) => (
-                    <PrimitiveToggleGroup.Item
-                    key={month}
-                    value={monthIndex.toString()} 
-                    asChild>
-                        <Toggle 
-                        onClick={createMonthClickHandler(monthIndex)}
-                        variant="text"
-                        block>
-                            {month}
-                        </Toggle>
-                    </PrimitiveToggleGroup.Item>
-                ))}
+                {months.map((month, monthIndex) => {
+
+                    return (
+                        <PrimitiveToggleGroup.Item
+                        key={month}
+                        value={monthIndex.toString()} 
+                        asChild>
+                            <Toggle 
+                            onClick={createMonthClickHandler(monthIndex)}
+                            variant="text"
+                            block>
+                                {month}
+                            </Toggle>
+                        </PrimitiveToggleGroup.Item>
+                    );
+                })}
             </StyledCalendarBody>
         </StyledCalendarRoot>
     );

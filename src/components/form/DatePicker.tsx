@@ -22,20 +22,13 @@ const StyledContent = stitches.styled(PopoverContent, popoverAnimation, popoverC
 
 StyledContent.displayName = "StyledDatePickerContent"; 
 
-const initialState: CalendarState = {
-    active: "year",
-    date: new Date()   
-}
-
-export type DatePickerState = CalendarState | null;
-
 export type DatePickerProps = Omit<JSX.IntrinsicElements["input"], "onChange" | "ref" | "type" | "value" | "defaultValue"> & TextFieldVariantProps & {
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange?: (open: boolean) => void;
-    value?: DatePickerState;
-    defaultValue?: DatePickerState;
-    onValueChange?: (value: DatePickerState) => void;
+    value?: CalendarState;
+    defaultValue?: CalendarState;
+    onValueChange?: (value: CalendarState) => void;
 }
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) => {
@@ -57,45 +50,43 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
         color
     }
 
-    const valueProps = {
+    const [calendarState, setCalendarState] = useValue({
+        initialValue: {},
         value,
         defaultValue,
         onValueChange,
-    }
-
-    const [calendarState, setCalendarState] = useValue<CalendarState | null>({
-        initialValue: null,
-        ...valueProps
-    });
-
-    const openProps = {
-        value: open,
-        defaultValue: defaultOpen,
-        onValueChange: onOpenChange,
-    }
-
-    const [ isOpen, setIsOpen ] = useValue({
-        initialValue: false,
-        ...openProps
     });
 
     const [inputState, setInputState] = useState("");
 
+    const [ isOpen, setIsOpen ] = useValue({
+        initialValue: false,
+        value: open,
+        defaultValue: defaultOpen,
+        onValueChange: onOpenChange,
+    });
+
     useOnChange(() => {
+
+        const newDate = new Date(inputState)
+
+        const value = {
+            month: newDate.getMonth(),
+            year: newDate.getFullYear()
+        }
 
         if (isValidMonthDateStr(inputState)) {
 
             setCalendarState({
                 active: "month",
-                date: new Date(inputState)
+                ...value
             });
         }
-
         if (isValidYearDateStr(inputState)) {
 
             setCalendarState({
                 active: "year",
-                date: new Date(inputState)
+                ...value
             });
         }
 
@@ -104,23 +95,20 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
     /* eslint-disable */
     useEffect(() => {
 
-        if (calendarState) {
+        if (calendarState.active) {
 
-            const newState = calendarStateToStr(calendarState);
+            const newState = calendarStateToStr(calendarState); 
+
+            console.log(newState);
 
             const currentState = inputState;
             
-            if (newState.toLowerCase() !== standarize(currentState.toLowerCase())) {
-            
+            if (standarize(newState) !== standarize(currentState)) {
+
                 setInputState(newState);
             }
         }
-    }, [
-        calendarState?.active,
-        calendarState?.date.getFullYear(),
-        calendarState?.date.getMonth(),
-    ]);
-
+    }, [ JSON.stringify(calendarState) ]);
     /* eslint-enable */
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -164,15 +152,14 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
             sideOffset={6}>
                 <Calendar
                 onClick={closeHandler}
-                value={calendarState ?? initialState}
-                onValueChange={value => {
-
-                    setCalendarState(value);
-                }}/>
+                value={calendarState}
+                onValueChange={setCalendarState}/>
             </StyledContent>
         </Popover>
     );
 });
+
+DatePicker.toString = () => StyledContent.selector;
 
 DatePicker.displayName = "DatePicker";
 
@@ -185,7 +172,7 @@ function standarize(value: string): string {
         return month;
     }
 
-    return [month.trim(), year.trim()].join(", ");
+    return [month.trim(), year.trim()].join(", ").toLowerCase();
 }
 
 const isValidYearDateStrRegex = new RegExp(`^((\\s*)([0-9]{4,5})(\\s*))$`, "i");
@@ -204,10 +191,16 @@ function isValidMonthDateStr(value: string): boolean {
 
 function calendarStateToStr(state: CalendarState): string {
 
+    let date = dayjs();
+
+    date = date.year(state.year ?? date.year());
+
+    date = date.month(state.month ?? date.month());
+
     if (state.active === "year") {
 
-        return dayjs(state.date).format("YYYY");
+        return date.format("YYYY");
     }
 
-    return dayjs(state.date).format("MMM, YYYY");
+    return date.format("MMM, YYYY");
 }

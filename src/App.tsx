@@ -5,22 +5,11 @@ import {
 }
 from "components/layout";
 
-import { Button, DatePicker, DatePickerState } from "components/form";
-
-import { useState } from "react";
-
-import { Text } from "components/typography";
-
-import dayjs from "dayjs.config";
+import { DatePicker } from "components/form";
 
 
 
 function App() {
-
-  const [state, setState] = useState<DatePickerState>({
-    active: "month",
-    date: new Date("mar, 2001")
-  });
 
   return (
     <Stack 
@@ -40,17 +29,6 @@ function App() {
             margin: "auto",
             width: "fit-content"
           }}>
-            <Button onClick={() => setState({
-              active: "year",
-              date: new Date("2015")
-            })}>
-              Change
-            </Button>
-
-            <Text align="center">
-              {dayjs.monthsShort().concat([])[state?.date.getMonth() ?? 0]} - {state?.date.getFullYear()}
-            </Text>
-
             <DatePicker/>
           </Box>
         </Box>
