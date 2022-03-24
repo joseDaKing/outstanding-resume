@@ -109,17 +109,15 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
     });
 
     const yearClickHandler = (event: React.MouseEvent) => {
-
         if (state.active === "year") {
 
             event.preventDefault();
         }
-
+        
         onClick();
     }
 
     const createMonthClickHandler = (month: number) => (event: React.MouseEvent) => {
-
         
         if (state.active === "month" && state.month === month) {
 

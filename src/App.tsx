@@ -5,7 +5,7 @@ import {
 }
 from "components/layout";
 
-import { DatePicker } from "components/form";
+import { DatePickerRange } from "components/form";
 
 
 
@@ -22,9 +22,10 @@ function App() {
         backgroundColor: "$inverted",
       }}>
         <Box css={{
-          padding: "$8"
+          padding: "$8",
+          spaceY: "$4"
         }}>
-          <DatePicker/>
+          <DatePickerRange block/>
         </Box>
       </ScrollArea>
       

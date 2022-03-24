@@ -31,7 +31,7 @@ export function useValue<T>({
 
     useOnChange(() => {
         
-        if (!value && onValueChange) {
+        if (value === undefined && onValueChange) {
 
             onValueChange(internalState);
         }
@@ -43,7 +43,7 @@ export function useValue<T>({
         value ? value : internalState,
         (state) => {
 
-            if (value) {
+            if (value !== undefined) {
 
                 if (typeof state === "function") {
 

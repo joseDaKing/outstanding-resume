@@ -115,8 +115,6 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
 
             const newState = calendarStateToStr(calendarState); 
 
-            console.log(newState);
-
             const currentState = inputState;
             
             if (standarize(newState) !== standarize(currentState)) {
