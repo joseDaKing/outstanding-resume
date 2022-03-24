@@ -1,12 +1,12 @@
 import { TextField, TextFieldVariantProps } from "./TextField";
 
-import { Calendar, CalendarState } from "./Calendar";
+import { Calendar, CalendarProps, CalendarState } from "./Calendar";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 
 import { stitches } from "stitches";
 
-import { popoverAnimation, popoverContent } from "mixins";
+import { block, popoverAnimation, popoverContent } from "mixins";
 
 import React, { forwardRef, useEffect, useState } from "react";
 
@@ -22,20 +22,35 @@ const StyledContent = stitches.styled(PopoverContent, popoverAnimation, popoverC
 
 StyledContent.displayName = "StyledDatePickerContent"; 
 
-export type DatePickerProps = Omit<JSX.IntrinsicElements["input"], "onChange" | "ref" | "type" | "value" | "defaultValue"> & TextFieldVariantProps & {
-    open?: boolean;
-    defaultOpen?: boolean;
-    onOpenChange?: (open: boolean) => void;
-    value?: CalendarState;
-    defaultValue?: CalendarState;
-    onValueChange?: (value: CalendarState) => void;
-}
+const StyledTrigger = stitches.styled(PopoverTrigger, block);
+
+StyledTrigger.displayName = "StyledDatePickerTrigger";
+
+export type DatePickerProps = (
+    Pick<CalendarProps, "color">
+    & Omit<
+        JSX.IntrinsicElements["input"], 
+        "onChange" 
+        | "ref" 
+        | "type" 
+        | "value" 
+        | "defaultValue"
+    > & TextFieldVariantProps & {
+        open?: boolean;
+        defaultOpen?: boolean;
+        onOpenChange?: (open: boolean) => void;
+        value?: CalendarState;
+        defaultValue?: CalendarState;
+        onValueChange?: (value: CalendarState) => void;
+    }
+);
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) => {
 
     const {
         size,
         color,
+        block,
         open,
         defaultOpen,
         onOpenChange,
@@ -47,6 +62,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
 
     const variantProps = {
         size,
+        block,
         color
     }
 
@@ -129,7 +145,8 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
         <Popover
         open={isOpen}
         onOpenChange={setIsOpen}>
-            <PopoverTrigger 
+            <StyledTrigger
+            block={block}
             tabIndex={-1}
             onClick={onClickHandler}>
                 <TextField
@@ -143,7 +160,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
                 onClick={openHandler}
                 StartIcon={CalendarIcon}
                 onKeyDown={onKeyDownHandler}/>
-            </PopoverTrigger>
+            </StyledTrigger>
 
             <StyledContent
             onOpenAutoFocus={event => event.preventDefault()}
@@ -151,6 +168,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
             align="start"
             sideOffset={6}>
                 <Calendar
+                color={color}
                 onClick={closeHandler}
                 value={calendarState}
                 onValueChange={setCalendarState}/>

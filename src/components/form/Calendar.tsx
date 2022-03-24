@@ -2,7 +2,7 @@ import React, { ElementRef, forwardRef } from "react";
 
 import { stitches } from "stitches";
 
-import { Toggle } from "./Toggle";
+import { ToggleProps, Toggle } from "./Toggle";
 
 import { IconButton } from "./IconButton";
 
@@ -66,13 +66,15 @@ export type CalendarProps = (
         | "type" 
         | "onValueChange"
     > 
+    & Pick<ToggleProps, "color">
     & CSSProps 
     & UseValueProps<CalendarState>
     & { onClick?: () => void; }
 )
 
 export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>, CalendarProps>(({ 
-    value, 
+    color,
+    value,
     defaultValue,
     onValueChange: onChange, 
     onClick = () => {},
@@ -158,6 +160,7 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
         onValueChange={onValueChange}>
             <StyledCalendarHead>
                 <IconButton
+                color={color}
                 onClick={decrementYear}
                 round
                 variant="text"
@@ -170,6 +173,7 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
                 value="year" 
                 asChild>
                     <Toggle
+                    color={color}
                     onClick={yearClickHandler}
                     variant="text"
                     css={{
@@ -179,7 +183,8 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
                     </Toggle>
                 </PrimitiveToggleGroup.Item>
 
-                <IconButton 
+                <IconButton
+                color={color}
                 onClick={incrementYear}
                 round
                 variant="text"
@@ -190,22 +195,20 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
             </StyledCalendarHead>
 
             <StyledCalendarBody>
-                {months.map((month, monthIndex) => {
-
-                    return (
-                        <PrimitiveToggleGroup.Item
-                        key={month}
-                        value={monthIndex.toString()} 
-                        asChild>
-                            <Toggle 
-                            onClick={createMonthClickHandler(monthIndex)}
-                            variant="text"
-                            block>
-                                {month}
-                            </Toggle>
-                        </PrimitiveToggleGroup.Item>
-                    );
-                })}
+                {months.map((month, monthIndex) => (
+                    <PrimitiveToggleGroup.Item
+                    key={month}
+                    value={monthIndex.toString()} 
+                    asChild>
+                        <Toggle
+                        color={color}
+                        onClick={createMonthClickHandler(monthIndex)}
+                        variant="text"
+                        block>
+                            {month}
+                        </Toggle>
+                    </PrimitiveToggleGroup.Item>
+                ))}
             </StyledCalendarBody>
         </StyledCalendarRoot>
     );

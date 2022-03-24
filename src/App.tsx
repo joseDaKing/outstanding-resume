@@ -24,13 +24,7 @@ function App() {
         <Box css={{
           padding: "$8"
         }}>
-          <Box css={{
-            spaceY: "$8",
-            margin: "auto",
-            width: "fit-content"
-          }}>
-            <DatePicker/>
-          </Box>
+          <DatePicker/>
         </Box>
       </ScrollArea>
       
