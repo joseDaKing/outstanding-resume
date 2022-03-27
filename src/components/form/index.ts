@@ -30,6 +30,8 @@ export * from "./Switch";
 
 export * from "./TextArea";
 
+export * from "./RichTextEditor";
+
 export { TextField } from "./TextField";
 
 export type { TextFieldProps } from "./TextField";

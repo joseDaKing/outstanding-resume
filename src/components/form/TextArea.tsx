@@ -8,14 +8,14 @@ import { stitches } from "stitches";
 
 
 
-const StyledTextArea = stitches.styled("textarea", textFieldContainer, textFieldTextContainer, textFieldText, {
+const StyledRoot = stitches.styled("textarea", textFieldContainer, textFieldTextContainer, textFieldText, {
     minHeight: "$64",
     overflowY: "scroll"
 });
 
-StyledTextArea.displayName = "StyledTextArea";
+StyledRoot.displayName = "StyledTextArea";
 
-export type TextAreaProps = Omit<JSX.IntrinsicElements["textarea"], "onChange" | "ref"> & VariantProps<typeof StyledTextArea> & {
+export type TextAreaProps = Omit<JSX.IntrinsicElements["textarea"], "onChange" | "ref"> & VariantProps<typeof StyledRoot> & {
     onValueChange?: (value: string) => void;
 };
 
@@ -30,7 +30,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({ onValu
     }
 
     return (
-        <StyledTextArea
+        <StyledRoot
         {...props}
         onChange={onChangeHandler}
         ref={ref}/>

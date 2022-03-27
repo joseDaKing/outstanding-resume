@@ -5,7 +5,7 @@ import {
 }
 from "components/layout";
 
-import { DatePickerRange } from "components/form";
+import { RichTextEditor } from "components/form";
 
 
 
@@ -25,7 +25,7 @@ function App() {
           padding: "$8",
           spaceY: "$4"
         }}>
-          <DatePickerRange block/>
+          <RichTextEditor/>
         </Box>
       </ScrollArea>
       
