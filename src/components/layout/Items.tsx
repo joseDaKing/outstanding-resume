@@ -251,7 +251,15 @@ export const Item = forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
 
     const sortableProps = useSortable({ 
         id: value,
-        animateLayoutChanges: defaultAnimateLayoutChanges
+        animateLayoutChanges: args => {
+            
+            if (args.isSorting || args.wasDragging) {
+            
+                return defaultAnimateLayoutChanges(args);
+            }
+              
+            return true;
+        }
     });
 
     const {
