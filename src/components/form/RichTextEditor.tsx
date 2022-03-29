@@ -187,13 +187,8 @@ const richTextEditorController = (editor: Editor) => {
     const isActive = (): boolean => {
 
       const marks = Editor.marks(editor);
-  
-      if (!marks) {
-  
-        return false;
-      }
-      
-      return !!marks[type];
+            
+      return !!marks && !!marks[type];
     };
 
     const set = (value: boolean): void => {

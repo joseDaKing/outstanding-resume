@@ -20,7 +20,7 @@ export type UseValueSetState<T> = (value: T | UseValueSetStateAction<T>) => void
 
 export type UseValueState<T> = [ T, UseValueSetState<T> ];
 
-export function useValue<T>({ 
+export function useValue<T>({
     initialValue,
     defaultValue,
     value,
@@ -31,7 +31,7 @@ export function useValue<T>({
 
     useOnChange(() => {
         
-        if (value === undefined && onValueChange) {
+        if (value !== undefined && onValueChange) {
 
             onValueChange(internalState);
         }

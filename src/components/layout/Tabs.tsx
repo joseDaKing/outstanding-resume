@@ -39,9 +39,9 @@ const StyledTabsList = stitches.styled(PrimitiveTabs.List, block, {
 
 StyledTabsList.displayName = "StyledTabsList";
 
-export type TabListProps = PrimitiveTabs.TabsListProps & VariantProps<typeof StyledTabsList> & CSSProps;
+export type TabsListProps = PrimitiveTabs.TabsListProps & VariantProps<typeof StyledTabsList> & CSSProps;
 
-export const TabsList = forwardRef<ElementRef<typeof PrimitiveTabs.List>, TabListProps>(({ css, ...props }, ref) => {
+export const TabsList = forwardRef<ElementRef<typeof PrimitiveTabs.List>, TabsListProps>(({ css, ...props }, ref) => {
 
     return (
         <ScrollArea

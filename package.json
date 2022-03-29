@@ -5,6 +5,9 @@
   "dependencies": {
     "@capsizecss/core": "^3.0.0",
     "@capsizecss/metrics": "^0.1.0",
+    "@dnd-kit/core": "^5.0.3",
+    "@dnd-kit/modifiers": "^5.0.0",
+    "@dnd-kit/sortable": "^6.0.1",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-accordion": "^0.1.6",
     "@radix-ui/react-alert-dialog": "^0.1.7",

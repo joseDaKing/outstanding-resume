@@ -1,20 +1,22 @@
 import { 
   Box,
   Stack, 
-  ScrollArea
+  ScrollArea,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
 }
 from "components/layout";
-
-import { RichTextEditor } from "components/form";
 
 
 
 function App() {
-
+  
   return (
     <Stack 
     screen
-    alignCross="center"
+    alignCross="start"
     orientation="horizontal">
       <ScrollArea css={{
         width: "$1__2",
@@ -25,7 +27,24 @@ function App() {
           padding: "$8",
           spaceY: "$4"
         }}>
-          <RichTextEditor/>
+          <Tabs>
+            <TabsList block>
+              {Array(3).fill("").map((_, index) => (
+                <TabsTrigger 
+                key={index}
+                value={index.toString()}>
+                  {index+1}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {Array(3).fill("").map((_, index) => (
+              <TabsContent
+              key={index}
+              value={index.toString()}>
+                {index+1}
+              </TabsContent>
+            ))}
+          </Tabs>
         </Box>
       </ScrollArea>
       

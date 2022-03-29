@@ -30,7 +30,7 @@ const StyledTitle = stitches.styled("div", {
     fontFamily: "$primary",
     fontWeight: 600,
     capSize: {
-        fontSize: 16,
+        fontSize: 18,
         fontMetrics
     }
 });
@@ -42,7 +42,7 @@ const StyledSubtitle = stitches.styled("div", {
     marginTop: "$2",
     fontWeight: 500,
     capSize: {
-        fontSize: 14,
+        fontSize: 16,
         fontMetrics
     }
 });
@@ -67,7 +67,7 @@ const StyledContent = stitches.styled(PrimitiveAccordion.Content, collapsibleAni
 StyledContent.displayName = "StyledAccordionContent";
 
 const StyledItem = stitches.styled(PrimitiveAccordion.Item, {
-    backgroundColor: "$neutralA2",
+    backgroundColor: "$neutral2",
     borderRadius: "$sm",
     transition: "$200",
     transitionProperty: "transform",
@@ -103,7 +103,6 @@ export const AccordionItem = forwardRef<ElementRef<typeof PrimitiveAccordion.Ite
     const {
         title,
         subtitle,
-        css,
         ...htmlProps
     } = props;
 
@@ -133,9 +132,7 @@ export const AccordionItem = forwardRef<ElementRef<typeof PrimitiveAccordion.Ite
             <StyledContent>
                 <Box 
                 css={{
-                    ...(css ?? {}),
                     width: "100%",
-                    
                     padding: "$4",
                 }}>
                     {props.children}
