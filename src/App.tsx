@@ -2,8 +2,6 @@ import {
   Box,
   Stack, 
   ScrollArea,
-  Accordion,
-  AccordionItem,
   Items,
   Item,
   DragOverlay,
@@ -11,8 +9,6 @@ import {
   RemoveHandler
 }
 from "components/layout";
-
-import { useRef, useState } from "react";
 
 import { stitches } from "stitches";
 
@@ -23,7 +19,7 @@ const StyledItem = stitches.styled(Item, {
   zIndex: "$0",
   display: "flex",
   alignItems: "center",
-  "&[data-state='dragging']": {
+  stateDragging: {
     opacity: 0
   }
 });
@@ -51,18 +47,6 @@ const StyledDragOverlay = stitches.styled(DragOverlay, {
 
 function App() {
 
-  const [ items, setItems ] = useState(
-    Array(6)
-    .fill("")
-    .map((_, index) => ({ 
-      id: (index + 1).toString() 
-    }))
-  );
-
-  const [active, setActive] = useState("");
-
-  const activeItem = useRef("");
-  
   return (
     <Stack 
     screen
@@ -77,38 +61,28 @@ function App() {
           padding: "$8",
           spaceY: "$4"
         }}>
-          <Accordion
-          collapsible
-          value={active}
-          onValueChange={setActive}
-          type="single">
-            <Items
-            defaultValue={items}
-            render={({ id }) => (
-              <StyledItem
-              value={id}>
-                <StyledDragHandler>
-                  {id}
-                </StyledDragHandler>
-                
-                <AccordionItem
-                value={id}
-                title="Title"
-                subtitle="Subtitle"
-                css={{
-                  flexShrink: 1,
-                  marginX: "$4",
-                  width: "$full"
-                }}>
-                  Content
-                </AccordionItem>
-                
-                <StyledRemoveHandler/>
-              </StyledItem> 
-            )}>
-              <StyledDragOverlay/>
-            </Items>
-          </Accordion>
+          <Items
+          defaultValue={Array(4).fill("").map((_, index) => ({ id: index.toString() }))}
+          render={({ id }) => (
+            <StyledItem
+            value={id}>
+              <StyledDragHandler>
+                {id}
+              </StyledDragHandler>
+
+              <Box
+              css={{
+                padding: "$12",
+                borderRadius: "$sm",
+                backgroundColor: "$neutral4",
+                margin: "auto"
+              }}/>
+
+              <StyledRemoveHandler/>
+            </StyledItem> 
+          )}>
+            <StyledDragOverlay/>
+          </Items>
         </Box>
       </ScrollArea>
       

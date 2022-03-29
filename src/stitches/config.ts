@@ -840,6 +840,9 @@ type Utils = {
     stateUntoggled: (styles: ThemedCSS) => {},
     stateDisabled: (styles: ThemedCSS) => {},
     stateUndisabled: (styles: ThemedCSS) => {},
+    stateDragging: (styles: ThemedCSS) => {},
+    stateSorting: (styles: ThemedCSS) => {},
+    stateOver: (styles: ThemedCSS) => {},
     alignStart: (styles: ThemedCSS) => {},
     alignCenter: (styles: ThemedCSS) => {},
     alignEnd: (styles: ThemedCSS) => {},
@@ -1267,6 +1270,15 @@ export const utils: Utils = {
     }),
     stateUndisabled: styles => ({
         "&:not(:disabled,[data-disabled])": styles
+    }),
+    stateDragging: styles => ({
+        "&[data-state='dragging']": styles
+    }),
+    stateOver: styles => ({
+        "&[data-state='over']": styles
+    }),
+    stateSorting: styles => ({
+        "&[data-state='sorting']": styles
     }),
     orientationHorizontal: styles => ({
         "&[data-orientation='horizontal']": styles
