@@ -1,6 +1,7 @@
 import * as PrimitiveToggle from "@radix-ui/react-toggle";
 
 import { VariantProps } from "@stitches/react";
+import { useValue, UseValueProps } from "helpers";
 
 import { iconButtonContainer, iconButtonIconContainer } from "mixins";
 
@@ -20,13 +21,29 @@ const StyledIconContainer = stitches.styled("span", iconButtonIconContainer);
 
 StyledIconContainer.displayName = "StyledIconContainer";
 
-export type IconToggleProps = VariantProps<typeof StyledRoot> & Omit<PrimitiveToggle.ToggleProps, "asChild"> & CSSProps & IconProps & {
-    Icon: React.ComponentType<any>;
-};
+export type IconToggleProps = (
+    VariantProps<typeof StyledRoot> 
+    & UseValueProps<boolean>
+    & Omit<
+        PrimitiveToggle.ToggleProps, 
+        "asChild" 
+        | "value" 
+        | "defaultValue"
+        | "onChange"
+    > 
+    & CSSProps 
+    & IconProps 
+    & {
+        Icon: React.ComponentType<any>;
+    }
+);
 
 export const IconToggle = forwardRef<ElementRef<typeof PrimitiveToggle.Root>, IconToggleProps>(({ Icon, ...props}, ref) => {
 
     const { 
+        value,
+        defaultValue,
+        onValueChange,
         size,
         round,
         color,
@@ -43,10 +60,19 @@ export const IconToggle = forwardRef<ElementRef<typeof PrimitiveToggle.Root>, Ic
         align
     };
 
+    const [ state,  setState ] = useValue({
+        initialValue: false,
+        value,
+        defaultValue,
+        onValueChange,
+    });
+
     return (
         <StyledRoot 
         {...htmlProps} 
         {...styledProps}
+        pressed={state}
+        onPressedChange={setState}
         ref={ref}>
             <StyledIconContainer>
                 <Icon/>

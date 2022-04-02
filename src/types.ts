@@ -14,3 +14,7 @@ export interface IconProps {
 }
 
 export type FCGeneric<T> = <K extends T>(props: PropsWithChildren<K>) => ReactElement | null;
+
+export type AsChildProps = {
+    asChild?: boolean;
+}

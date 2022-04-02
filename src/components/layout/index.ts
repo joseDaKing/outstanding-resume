@@ -4,7 +4,7 @@ export * from "./Box";
 
 export * from "./Collapsible";
 
-export * from "./Items";
+export * from "./List";
 
 export * from "./ScollArea";
 

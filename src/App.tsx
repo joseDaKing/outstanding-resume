@@ -2,48 +2,13 @@ import {
   Box,
   Stack, 
   ScrollArea,
-  Items,
-  Item,
-  DragOverlay,
-  DragHandler,
-  RemoveHandler
+  ListItem
 }
 from "components/layout";
 
-import { stitches } from "stitches";
+import { List } from "components/layout";
 
 
-
-const StyledItem = stitches.styled(Item, {
-  position: "relative",
-  zIndex: "$0",
-  display: "flex",
-  alignItems: "center",
-  stateDragging: {
-    opacity: 0
-  }
-});
-
-const StyledDragHandler = stitches.styled(DragHandler, {
-  size: "$6",
-  textAlign: "center",
-  borderRadius: "$sm",
-  backgroundColor: "$action8",
-});
-
-const StyledRemoveHandler = stitches.styled(RemoveHandler, {
-  size: "$6",
-  borderRadius: "$sm",
-  backgroundColor: "$danger10",
-});
-
-const StyledDragOverlay = stitches.styled(DragOverlay, {
-  overflow: "hidden",
-  zIndex: "$1",
-  position: "relative",
-  filterDropShadow: "0px 0px 16px rgba(0 0 0 / 0.35)",
-  opacity: "$85"
-});
 
 function App() {
 
@@ -58,31 +23,41 @@ function App() {
         backgroundColor: "$inverted",
       }}>
         <Box css={{
-          padding: "$8",
+          padding: "$10",
+          paddingX: "$12",
           spaceY: "$4"
         }}>
-          <Items
-          defaultValue={Array(4).fill("").map((_, index) => ({ id: index.toString() }))}
-          render={({ id }) => (
-            <StyledItem
-            value={id}>
-              <StyledDragHandler>
-                {id}
-              </StyledDragHandler>
-
-              <Box
-              css={{
-                padding: "$12",
-                borderRadius: "$sm",
-                backgroundColor: "$neutral4",
-                margin: "auto"
-              }}/>
-
-              <StyledRemoveHandler/>
-            </StyledItem> 
-          )}>
-            <StyledDragOverlay/>
-          </Items>
+          <List 
+          defaultValue={Array(3).fill("").map((_, i) => ({
+            id: String.fromCharCode("A".charCodeAt(0) + i)
+          }))}>
+            {({ id }) => (
+              <ListItem
+              deletable
+              value={id}>
+                <Box
+                css={{
+                  margin: "auto",
+                  height: "$32",
+                  borderRadius: "$sm",
+                  backgroundColor: (
+                    id === "A" ? 
+                      "$action10"
+                    : id === "B" ?
+                      "$danger10"
+                    : "$warning10" 
+                  ),
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}>
+                  <span>
+                    {id}
+                  </span> 
+                </Box>
+              </ListItem>
+            )}
+          </List>
         </Box>
       </ScrollArea>
       
