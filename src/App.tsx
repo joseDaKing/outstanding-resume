@@ -1,3 +1,7 @@
+import { PlusIcon } from "@radix-ui/react-icons";
+
+import { Button } from "components/form";
+
 import { 
   Box,
   Stack, 
@@ -7,6 +11,10 @@ import {
 from "components/layout";
 
 import { List } from "components/layout";
+
+import { ListItemType, useItemsController } from "helpers";
+
+import { useState } from "react";
 
 
 
@@ -30,7 +38,13 @@ const Item: React.FC = props => {
   );
 }
 
+let i = 1;
+
 function App() {
+
+  const [state, setState] = useState<ListItemType[]>(Array(4).fill("").map((_,i) => ({ id: i.toString() })));
+
+  const itemsController = useItemsController([ state, setState]); 
 
   return (
     <Stack 
@@ -42,15 +56,16 @@ function App() {
         height: "100%",
         backgroundColor: "$inverted",
       }}>
-        <Box css={{
+        
+        <Box
+        css={{
           padding: "$10",
           paddingX: "$12",
           spaceY: "$4"
         }}>
           <List 
-          defaultValue={Array(3).fill("").map((_, i) => ({
-            id: String.fromCharCode("A".charCodeAt(0) + i)
-          }))}>
+          value={state}
+          onValueChange={setState}>
             {({ id }) => (
               <ListItem
               deletable
@@ -61,6 +76,21 @@ function App() {
               </ListItem>
             )}
           </List>
+          
+          <Button
+          variant="ghost"
+          onClick={() => {
+
+            itemsController.remove("2")
+
+            i++;
+          }}
+          StartIcon={PlusIcon}
+          css={{
+            marginTop: "$16"
+          }}>
+            Add a new item
+          </Button>
         </Box>
       </ScrollArea>
       

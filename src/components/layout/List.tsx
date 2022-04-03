@@ -11,7 +11,6 @@ import {
     DragOverlay,
     defaultDropAnimation,
     useDndContext,
-    MeasuringStrategy,
 } 
 from "@dnd-kit/core";
 
@@ -27,8 +26,7 @@ import {
     useSortable,
     SortableContext,
     sortableKeyboardCoordinates,
-    verticalListSortingStrategy,
-    defaultAnimateLayoutChanges
+    verticalListSortingStrategy
 } 
 from "@dnd-kit/sortable";
 
@@ -41,6 +39,8 @@ import {
 from "components/form";
 
 import { 
+    ListItemType,
+    useItemsController,
     useValue, 
     UseValueProps
 }
@@ -64,8 +64,6 @@ from "@radix-ui/react-icons";
 import { Box } from "../layout";
 
 
-
-export type ListItemType = { id: string; };
 
 export type ListProps<T extends ListItemType> = (
     UseValueProps<T[]> 
@@ -105,12 +103,16 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
         })
     );
 
-    const [ state, setState ] = useValue({
+    const stateValue = useValue({
         initialValue: [],
         value,
         defaultValue,
         onValueChange
     });
+
+    const itemsController = useItemsController(stateValue);
+
+    const [ state, setState ] = stateValue;
 
     const [ activeId, setActiveId ] = useState<string|null>(null);
 
@@ -146,11 +148,11 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
         }
     }
 
-    const activeIndex = state.findIndex(item => item.id === activeId);
+    const activeIndex = itemsController.findPosition(activeId);
 
-    const activeItem = state[activeIndex];
+    const activeItem = itemsController.find(activeId);
 
-    const remove = (id: string) => () => setState(prevState => prevState.filter(item => item.id !== id))
+    const removeHandler = (item: T) => () => itemsController.remove(item);
 
     return (
         <DndContext
@@ -161,11 +163,6 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
         onDragMove={onDragMove}
         onDragOver={onDragOver}
         onDragCancel={onDragCancel}
-        measuring={{
-            droppable: {
-                strategy: MeasuringStrategy.Always
-            }
-        }}
         modifiers={[
             restrictToFirstScrollableAncestor,
             restrictToVerticalAxis,
@@ -178,7 +175,7 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
                 {state.map((item, index) => (
                     <ListRemoveHandlerContext.Provider
                     key={item.id}
-                    value={remove(item.id)}>
+                    value={removeHandler(item)}>
                         <ListItemContainer 
                         value={item.id}>
                             <Renderer
@@ -218,16 +215,7 @@ type ListItemContainerProps = {
 const ListItemContainer: React.FC<ListItemContainerProps> = props => {
 
     const sortableProps = useSortable({
-        id: props.value,
-        animateLayoutChanges: args => {
-            
-            if (args.isSorting || args.wasDragging) {
-             
-                return defaultAnimateLayoutChanges(args);
-            }
-            
-            return true;
-        }
+        id: props.value
     });
    
     const style: React.CSSProperties = {
