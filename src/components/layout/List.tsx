@@ -11,6 +11,7 @@ import {
     DragOverlay,
     defaultDropAnimation,
     useDndContext,
+    MeasuringStrategy,
 } 
 from "@dnd-kit/core";
 
@@ -26,7 +27,8 @@ import {
     useSortable,
     SortableContext,
     sortableKeyboardCoordinates,
-    verticalListSortingStrategy
+    verticalListSortingStrategy,
+    defaultAnimateLayoutChanges
 } 
 from "@dnd-kit/sortable";
 
@@ -48,7 +50,7 @@ import {
     createContext, 
     PropsWithChildren, 
     useContext, 
-    useRef, 
+    useEffect, 
     useState 
 }
 from "react";
@@ -159,6 +161,11 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
         onDragMove={onDragMove}
         onDragOver={onDragOver}
         onDragCancel={onDragCancel}
+        measuring={{
+            droppable: {
+                strategy: MeasuringStrategy.Always
+            }
+        }}
         modifiers={[
             restrictToFirstScrollableAncestor,
             restrictToVerticalAxis,
@@ -170,9 +177,9 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
             items={state}>
                 {state.map((item, index) => (
                     <ListRemoveHandlerContext.Provider
+                    key={item.id}
                     value={remove(item.id)}>
                         <ListItemContainer 
-                        key={index}
                         value={item.id}>
                             <Renderer
                             {...item}
@@ -211,7 +218,16 @@ type ListItemContainerProps = {
 const ListItemContainer: React.FC<ListItemContainerProps> = props => {
 
     const sortableProps = useSortable({
-        id: props.value
+        id: props.value,
+        animateLayoutChanges: args => {
+            
+            if (args.isSorting || args.wasDragging) {
+             
+                return defaultAnimateLayoutChanges(args);
+            }
+            
+            return true;
+        }
     });
    
     const style: React.CSSProperties = {
@@ -225,8 +241,8 @@ const ListItemContainer: React.FC<ListItemContainerProps> = props => {
             <Box
             style={style}
             css={{
-                position: "relative",
                 zIndex: "$10",
+                position: "relative",
                 opacity: sortableProps.isDragging ? 0 : 1
             }}
             ref={sortableProps.setNodeRef}>
@@ -252,13 +268,24 @@ export const ListItem: React.FC<ListItemProps> = props => {
 
     const remove = useContext(ListRemoveHandlerContext);
 
-    const toggleRef = useRef<HTMLButtonElement|null>(null);
+    useEffect(() => {
+
+        if (isActive) {
+
+            document.body.style.cursor = "grab"
+        }
+        else {
+
+            document.body.style.cursor = "inherit";
+        }
+
+    }, [isActive]);
 
     return (
         <Box
         css={{
             position: "relative",
-            opacity: isActive ? "$80" : 1,
+            opacity: isActive ? 0.5 : 1,
             [`& > .list-button`]: {
                 transition: "$200",
                 opacity: isActive ? 1 : 0,
@@ -277,14 +304,17 @@ export const ListItem: React.FC<ListItemProps> = props => {
                 left: 0,
                 padding: "$2",
                 transformTranslateX: "-100%",
+                cursor: "grab"
             }}>
                 <IconToggle
                 {...listeners}
                 {...attributes}
-                ref={toggleRef}
                 variant="text"
                 Icon={DragHandleDots1Icon}
-                value={isActive}/>
+                value={isActive}
+                css={{
+                    cursor: "inherit"
+                }}/>
             </Box>
 
             <div>

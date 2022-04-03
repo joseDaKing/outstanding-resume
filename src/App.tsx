@@ -10,6 +10,26 @@ import { List } from "components/layout";
 
 
 
+const Item: React.FC = props => {
+
+  return (
+    <Box
+    css={{
+      margin: "auto",
+      height: "$16",
+      borderRadius: "$sm",
+      backgroundColor: "$warning10",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+      <span>
+        {props.children}
+      </span> 
+    </Box>
+  );
+}
+
 function App() {
 
   return (
@@ -35,26 +55,9 @@ function App() {
               <ListItem
               deletable
               value={id}>
-                <Box
-                css={{
-                  margin: "auto",
-                  height: "$32",
-                  borderRadius: "$sm",
-                  backgroundColor: (
-                    id === "A" ? 
-                      "$action10"
-                    : id === "B" ?
-                      "$danger10"
-                    : "$warning10" 
-                  ),
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}>
-                  <span>
-                    {id}
-                  </span> 
-                </Box>
+                <Item>
+                  {id}
+                </Item>
               </ListItem>
             )}
           </List>
