@@ -1,3 +1,5 @@
+export * from "./useItems";
+
 export * from "./useItemsController";
 
 export * from "./useOnChange";
