@@ -2,6 +2,8 @@ export { Button } from "./Button";
 
 export type { ButtonProps } from "./Button";
 
+export * from "./EditText";
+
 export * from "./DatePicker";
 
 export * from "./DatePickerRange";
