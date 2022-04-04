@@ -14,6 +14,9 @@ import { IconButton } from "./IconButton";
 
 import { Pencil1Icon, ResetIcon } from "@radix-ui/react-icons";
 
+import { VariantProps } from "@stitches/react";
+
+
 
 const EditTextContainer = stitches.styled("span", {
     all: "inherit",
@@ -102,12 +105,13 @@ const EditTextMeasure = stitches.styled("span", {
 
 EditTextMeasure.displayName = "EditTextMeasure";
 
-
 const EditTextInputContainer = stitches.styled("span", {
     all: "inherit",
     position: "relative",
     borderStyle: "none"
 });
+
+EditTextInputContainer.displayName = "EditTextInputContainer";
 
 const EditTextInputIconContainer = stitches.styled("span", {
     position: "absolute",
@@ -120,6 +124,8 @@ const EditTextInputIconContainer = stitches.styled("span", {
     gap: "$1",
 });
 
+EditTextInputIconContainer.displayName = "EditTextInputIconContainer";
+
 
 
 type EditTextProps = (
@@ -128,9 +134,12 @@ type EditTextProps = (
     & Omit<
         JSX.IntrinsicElements["input"],
         "value"
+        | "ref"
         | "defaultValue"
         | "onChange"
+        | "color"
     >
+    & VariantProps<typeof EditTextContainer>
     & {
         resetable?: string;
     }
@@ -196,6 +205,7 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         <EditTextContainer 
         css={css}>
             <EditTextInputContainer>
+                {/* @ts-ignore */}
                 <EditTextInput
                 {...htmlProps}
                 ref={mergeRefs([
@@ -208,6 +218,8 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
                 {!props.disabled &&
                 <EditTextInputIconContainer>
                     <IconButton
+                    size="lg"
+                    color={props.color}
                     round
                     variant="text"
                     Icon={Pencil1Icon}
@@ -218,6 +230,8 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
 
                     {resetable && resetable !== state &&
                     <IconButton
+                    size="lg"
+                    color={props.color}
                     round
                     variant="text"
                     Icon={ResetIcon}

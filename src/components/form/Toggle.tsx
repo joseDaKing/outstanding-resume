@@ -20,7 +20,7 @@ const StyledText = stitches.styled("span", buttonText);
 
 StyledText.displayName = "StyledToggleText";
 
-export type ToggleProps = VariantProps<typeof StyledRoot> & Omit<PrimitiveToggle.ToggleProps, "asChild"> & CSSProps & IconProps;
+export type ToggleProps = VariantProps<typeof StyledRoot> & Omit<PrimitiveToggle.ToggleProps, "asChild" | "color"> & CSSProps & IconProps;
 
 export const Toggle = forwardRef<ElementRef<typeof PrimitiveToggle.Root>, ToggleProps>(({ StartIcon, EndIcon, ...props}, ref) => {
 

@@ -5,15 +5,18 @@ import {
 }
 from "components/layout";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { SubTitle } from "components/typography";
+import { Title } from "components/typography";
+import { EditText } from "components/form";
 
 
 
 function App() {
 
-  const [ state, setState ] = useState("Kontaktuppgifter");
+  const initialState = "Kontaktuppgifter";
+
+  const [ state, setState ] = useState(initialState);
 
   return (
     <Stack 
@@ -32,7 +35,12 @@ function App() {
           paddingX: "$12",
           spaceY: "$16"
         }}>
-          
+          <Title>
+            <EditText
+            value={state}
+            onValueChange={setState}
+            resetable={initialState}/>
+          </Title>
         </Box>
       </ScrollArea>
       

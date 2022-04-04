@@ -1,6 +1,7 @@
 import * as PrimitiveToggle from "@radix-ui/react-toggle";
 
 import { VariantProps } from "@stitches/react";
+
 import { useValue, UseValueProps } from "helpers";
 
 import { iconButtonContainer, iconButtonIconContainer } from "mixins";
@@ -30,6 +31,7 @@ export type IconToggleProps = (
         | "value" 
         | "defaultValue"
         | "onChange"
+        | "color"
     > 
     & CSSProps 
     & IconProps 

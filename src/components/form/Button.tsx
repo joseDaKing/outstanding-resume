@@ -20,7 +20,7 @@ StyledRoot.displayName = "StyledButtonRoot";
 
 export type ButtonVariantProps = VariantProps<typeof StyledRoot>;
 
-export type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> & ButtonVariantProps & CSSProps & IconProps;
+export type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref" | "color"> & ButtonVariantProps & CSSProps & IconProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ StartIcon, EndIcon, ...props }, ref) => {
 
