@@ -65,6 +65,14 @@ export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Roo
         <StyledRoot 
         {...htmlProps}
         ref={ref}>
+            <StyledContent>
+                {children}
+                <Box
+                css={{
+                    paddingTop: space
+                }}/>
+            </StyledContent>
+            
             <PrimitiveCollapsible.Trigger 
             asChild>
                 <StyledTrigger
@@ -77,14 +85,6 @@ export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Roo
                     {name}
                 </StyledTrigger>
             </PrimitiveCollapsible.Trigger>
-
-            <StyledContent>
-                <Box
-                css={{
-                    paddingTop: space
-                }}/>
-                {children}
-            </StyledContent>
         </StyledRoot>
     );
 });

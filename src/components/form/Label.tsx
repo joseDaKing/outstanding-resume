@@ -170,9 +170,18 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>((props, ref) => {
 
                     <TooltipContent
                     css={{
-                        maxWidth: "$52"
+                        maxWidth: "$56"
                     }}>
-                        {props.help}
+                        <Box
+                        css={{
+                            fontFamily: "$primary",
+                            capSize: {
+                                fontMetrics,
+                                fontSize: 14
+                            }
+                        }}>
+                            {props.help}
+                        </Box>
                     </TooltipContent>
                 </Tooltip>}
             </StyledLabel>

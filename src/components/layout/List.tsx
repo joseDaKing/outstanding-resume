@@ -1,36 +1,54 @@
-import {
-    DndContext,
-    DndContextProps, 
-    DragEndEvent, 
-    DragStartEvent,
-    closestCenter,
-    KeyboardSensor,
-    PointerSensor,
-    useSensor,
+import { 
+    useSortable, 
+    SortableContext,
+    sortableKeyboardCoordinates, 
+    verticalListSortingStrategy,
+    arrayMove,
+}
+from "@dnd-kit/sortable";
+
+import { 
+    closestCenter, 
+    DndContext, 
+    KeyboardSensor, 
+    PointerSensor, 
+    useSensor, 
     useSensors,
+    DndContextProps,
     DragOverlay,
-    defaultDropAnimation,
-    useDndContext,
-} 
+    useDndContext
+}
 from "@dnd-kit/core";
 
 import { 
     restrictToFirstScrollableAncestor, 
-    restrictToVerticalAxis,
-    restrictToWindowEdges
+    restrictToVerticalAxis
 }
 from "@dnd-kit/modifiers";
 
-import {
-    arrayMove,
-    useSortable,
-    SortableContext,
-    sortableKeyboardCoordinates,
-    verticalListSortingStrategy
-} 
-from "@dnd-kit/sortable";
-
 import { CSS } from "@dnd-kit/utilities";
+
+import { 
+    createContext, 
+    Ref, 
+    useContext, 
+    forwardRef, 
+    useState
+} 
+from "react";
+
+import { 
+    ListItemType, 
+    useValue, 
+    UseValueProps
+}
+from "helpers";
+
+import mergeRefs from "react-merge-refs";
+
+import { CSSProps } from "types";
+
+import { Box } from "./Box";
 
 import { 
     IconButton, 
@@ -39,86 +57,224 @@ import {
 from "components/form";
 
 import { 
-    ListItemType,
-    useItemsController,
-    useValue, 
-    UseValueProps
-}
-from "helpers";
-
-import { 
-    createContext, 
-    PropsWithChildren, 
-    useContext, 
-    useEffect, 
-    useState 
-}
-from "react";
-
-import { 
     DragHandleDots1Icon, 
-    TrashIcon 
+    TrashIcon
 }
 from "@radix-ui/react-icons";
 
-import { Box } from "../layout";
+import { stitches, ThemedCSS } from "stitches";
 
 
 
-export type ListProps<T extends ListItemType> = (
+type ListContextType = { 
+    remove?: () => void;
+};
+
+const ListContext = createContext<ListContextType>({});
+
+
+
+type ListItemContextType = {
+    isDragging?: boolean;
+    listenerProps?: any;
+    removeProps?: any;
+}
+
+const ListItemContext = createContext<ListItemContextType>({});
+
+
+
+export type ListItemHandlerProps = Omit<JSX.IntrinsicElements["button"], "ref"> & CSSProps;
+
+export const ListItemDragHandler = forwardRef<HTMLButtonElement>((props, ref) => {
+
+    const {
+        isDragging = false,
+        listenerProps = {}
+    } = useContext(ListItemContext)
+
+    return (
+        <IconToggle
+        {...listenerProps}
+        variant="text"
+        value={isDragging}
+        Icon={DragHandleDots1Icon}/>
+    );
+});
+
+export const ListItemRemoveHandler = forwardRef<HTMLButtonElement, ListItemHandlerProps>((props, ref) => {
+
+    const { removeProps = {} } = useContext(ListItemContext);
+
+    return (
+        <IconButton
+        {...removeProps}
+        color="danger"
+        variant="text"
+        Icon={TrashIcon}/>
+    );
+});
+
+const ListItemHandlerContainer = stitches.styled("div", {
+    position: "absolute",
+    top: 0,
+    opacity: 0,
+    transition: "$150",
+    transitionProperty: "opacity",
+    variants: {
+        side: {
+            left: {
+                left: 0,
+                transformTranslateX: "-$full",
+                paddingRight: "$2"
+            },
+            right: {
+                right: 0,
+                transformTranslateX: "$full",
+                paddingLeft: "$2"
+            }
+        }
+    }
+});
+
+ListItemHandlerContainer.displayName = "ListItemHandlerContainer";
+
+
+
+const StyleListItemContent = stitches.styled("div", {
+    position: "relative",
+    hover: {
+        [`& > ${ListItemHandlerContainer}`]: {
+            opacity: 1
+        }   
+    },
+    focusWithin: {
+        [`& > ${ListItemHandlerContainer}`]: {
+            opacity: 1
+        }   
+    }
+});
+
+StyleListItemContent.displayName = "StyleListItemContent";
+
+export type ListItemContentProps = Omit<JSX.IntrinsicElements["div"], "ref"> & CSSProps & {
+    value: string;
+};
+
+export const ListItemContent = forwardRef<HTMLDivElement, ListItemContentProps>((props, ref) => {
+
+    return (
+        <StyleListItemContent
+        {...props}
+        ref={ref}>
+            <ListItemHandlerContainer
+            side="left">
+                <ListItemDragHandler/>
+            </ListItemHandlerContainer>
+
+            {props.children}
+
+            <ListItemHandlerContainer
+            side="right">
+                <ListItemRemoveHandler/>
+            </ListItemHandlerContainer>
+        </StyleListItemContent>
+    );
+});
+
+
+
+const ListItem: React.FC<ListItemType> = props => {
+
+    const sortableProps = useSortable({
+        id: props.id
+    });
+
+    const style = {
+        transform: CSS.Transform.toString(sortableProps.transform),
+        transition: sortableProps.transition,
+        transitionProperty: "transform, opacity"
+    };
+
+    const { remove = () => {} } = useContext(ListContext);
+
+    return (
+        <Box 
+        style={style}
+        ref={sortableProps.setNodeRef} 
+        css={{
+            zIndex: "$0",
+            position: "relative",
+            opacity: sortableProps.isDragging ? 0 : 1,
+        }}>
+            <ListItemContext.Provider
+            value={{
+                removeProps: {
+                    onClick: remove,
+                },
+                isDragging: sortableProps.isDragging,
+                listenerProps: {
+                    ...sortableProps.listeners,
+                    ...sortableProps.attributes
+                },                
+            }}>
+                {props.children}
+            </ListItemContext.Provider>
+        </Box>
+    );
+};
+
+type ListItemRenderer<T> = (item: T, index: number, array: T[]) => React.ReactNode;
+
+type ListProps<T> = (
     UseValueProps<T[]> 
     & Pick<
         DndContextProps,
-        | "onDragStart"
+        "onDragCancel"
+        | "onDragEnd"
         | "onDragMove"
         | "onDragOver"
-        | "onDragEnd"
-        | "onDragCancel"
-    > 
+        | "onDragStart"
+    >
     & {
-        children: React.FC<T & { index: number; }>;
+        space?: ThemedCSS["paddingBottom"];
+        children: ListItemRenderer<T>;
     }
 );
 
-const ListRemoveHandlerContext = createContext<() => void>(() => {});
-
-export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<T>>) {
-
-    const {
-        children: Renderer,
-        value,
-        defaultValue,
-        onValueChange,
-        onDragStart,
-        onDragMove,
-        onDragOver,
-        onDragEnd,
-        onDragCancel,
-    } = props;
+export function List<T extends ListItemType>(props: ListProps<T>) {
 
     const sensors = useSensors(
         useSensor(PointerSensor),
         useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
+            coordinateGetter: sortableKeyboardCoordinates
         })
     );
 
-    const stateValue = useValue({
+    const {
+        space,
+        onDragCancel,
+        onDragEnd,
+        onDragMove,
+        onDragOver,
+        onDragStart,
+        value,
+        defaultValue,
+        onValueChange
+    } = props;
+
+    const [ state, setState ] = useValue({
         initialValue: [],
         value,
         defaultValue,
         onValueChange
     });
 
-    const itemsController = useItemsController(stateValue);
+    const [ active, setActive ] = useState<string>("");
 
-    const [ state, setState ] = stateValue;
+    const onDragStartHandler: DndContextProps["onDragStart"] = event => {
 
-    const [ activeId, setActiveId ] = useState<string|null>(null);
-
-    const dragStartHandler = (event: DragStartEvent) => {
-
-        setActiveId(event.active.id);
+        setActive(event.active.id);
 
         if (onDragStart) {
 
@@ -126,212 +282,93 @@ export function List<T extends ListItemType>(props: PropsWithChildren<ListProps<
         }
     }
 
-    const dragEndHandler = (event: DragEndEvent) => {
+    const onDragEndHandler: DndContextProps["onDragEnd"] = event => {
+        
+        setActive("");
 
-        setActiveId(null);
+        const { active, over } = event;
+
+        if (over && active.id !== over.id) {
+        
+            setState(state => {
+                
+                const oldIndex = state.findIndex(({ id }) => id === active.id);
+                
+                const newIndex = state.findIndex(({ id }) => id === over.id);
+                
+                return arrayMove(state, oldIndex, newIndex);
+            });
+        }
 
         if (onDragEnd) {
 
             onDragEnd(event);
         }
+    } 
 
-        if (event.active.id !== event.over?.id) {
+    const activeItem = state.find(({ id }) => id === active);
 
-            setState(prevState => {
+    const activeIndex = state.findIndex(({ id }) => id === active);
 
-                const prevIndex = prevState.findIndex(item => item.id === event.active?.id);
-
-                const newIndex = prevState.findIndex(item => item.id === event.over?.id);
-
-                return arrayMove(prevState, prevIndex, newIndex);
-            });
-        }
-    }
-
-    const activeIndex = itemsController.findPosition(activeId);
-
-    const activeItem = itemsController.find(activeId);
-
-    const removeHandler = (item: T) => () => itemsController.remove(item);
+    const createRemove = (id: string) => () =>setState(prevState => prevState.filter(item => item.id !== id));
 
     return (
         <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
-        onDragStart={dragStartHandler}
-        onDragEnd={dragEndHandler}
+        modifiers={[
+            restrictToVerticalAxis,
+            restrictToFirstScrollableAncestor
+        ]}
+        onDragCancel={onDragCancel}
+        onDragEnd={onDragEndHandler}
         onDragMove={onDragMove}
         onDragOver={onDragOver}
-        onDragCancel={onDragCancel}
-        modifiers={[
-            restrictToFirstScrollableAncestor,
-            restrictToVerticalAxis,
-            restrictToWindowEdges
-        ]}>
-            
-            <SortableContext 
-            strategy={verticalListSortingStrategy}
-            items={state}>
-                {state.map((item, index) => (
-                    <ListRemoveHandlerContext.Provider
+        onDragStart={onDragStartHandler}>
+            <SortableContext
+            items={state}
+            strategy={verticalListSortingStrategy}>
+                {state.map((item, index, array) => (
+                    <ListContext.Provider
                     key={item.id}
-                    value={removeHandler(item)}>
-                        <ListItemContainer 
-                        value={item.id}>
-                            <Renderer
-                            {...item}
-                            index={index}/>
-                        </ListItemContainer>
-                    </ListRemoveHandlerContext.Provider>
+                    value={{
+                        remove: createRemove(item.id)
+                    }}>
+                        {index !== 0 &&
+                        <Box
+                        css={{
+                            paddingBottom: space
+                        }}/>}
+
+                        <ListItem 
+                        id={item.id}>
+                            {props.children(item, index, array)}
+                        </ListItem>
+                    </ListContext.Provider>
                 ))}
             </SortableContext>
 
-            <Box 
-            as={DragOverlay}
-            dropAnimation={defaultDropAnimation}
-            css={{
-                position: "relative",
-                zIndex: "$0",
-                transition: "$200",
-                transitionProperty: "opacity"
-            }}>
+            <DragOverlay>
                 {activeItem &&
-                <Renderer
-                {...activeItem}
-                index={activeIndex}/>}
-            </Box>
+                <ListItemContext.Provider
+                value={{
+                    isDragging: true
+                }}>
+                    <Box
+                    css={{
+                        opacity: 0.7,
+                        zIndex: "$10",
+                        position: "relative",
+                        [`& ${StyleListItemContent}`]: {
+                            [`& > ${ListItemHandlerContainer}`]: {
+                                opacity: 1
+                            }
+                        }
+                    }}>
+                        {props.children(activeItem, activeIndex, state)}
+                    </Box>
+                </ListItemContext.Provider>}
+            </DragOverlay>
         </DndContext>
     );
-}
-
-
-
-const ListItemContainerContext = createContext<ReturnType<typeof useSortable>|null>(null);
-
-type ListItemContainerProps = {
-    value: string;
-}
-
-const ListItemContainer: React.FC<ListItemContainerProps> = props => {
-
-    const sortableProps = useSortable({
-        id: props.value
-    });
-   
-    const style: React.CSSProperties = {
-        transform: CSS.Transform.toString(sortableProps.transform),
-        transition: sortableProps.transition,
-    };
-
-    return (
-        <ListItemContainerContext.Provider
-        value={sortableProps}>
-            <Box
-            style={style}
-            css={{
-                zIndex: "$10",
-                position: "relative",
-                opacity: sortableProps.isDragging ? 0 : 1
-            }}
-            ref={sortableProps.setNodeRef}>
-                {props.children}
-            </Box>
-        </ListItemContainerContext.Provider>
-    );
-}
-
-
-
-export type ListItemProps = ListItemContainerProps & {
-    deletable?: boolean;
-}
-
-export const ListItem: React.FC<ListItemProps> = props => {
-
-    const sortableProps = useContext(ListItemContainerContext);
-
-    const isActive = useIsActive(props.value);
-
-    const { attributes, listeners } = sortableProps ?? {};
-
-    const remove = useContext(ListRemoveHandlerContext);
-
-    useEffect(() => {
-
-        if (isActive) {
-
-            document.body.style.cursor = "grab"
-        }
-        else {
-
-            document.body.style.cursor = "inherit";
-        }
-
-    }, [isActive]);
-
-    return (
-        <Box
-        css={{
-            position: "relative",
-            opacity: isActive ? 0.5 : 1,
-            [`& > .list-button`]: {
-                transition: "$200",
-                opacity: isActive ? 1 : 0,
-                position: "absolute",
-                top: 0
-            },
-            [`&:hover,&:focus-within`]: {
-                [`& > .list-button`]: {
-                    opacity: 1
-                }
-            }
-        }}>
-            <Box
-            className="list-button"
-            css={{
-                left: 0,
-                padding: "$2",
-                transformTranslateX: "-100%",
-                cursor: "grab"
-            }}>
-                <IconToggle
-                {...listeners}
-                {...attributes}
-                variant="text"
-                Icon={DragHandleDots1Icon}
-                value={isActive}
-                css={{
-                    cursor: "inherit"
-                }}/>
-            </Box>
-
-            <div>
-                {props.children} {isActive}
-            </div>
-
-            {props.deletable &&
-            <Box
-            className="list-button"
-            css={{
-                right: 0,
-                padding: "$2",
-                transformTranslateX: "100%",
-            }}>
-                <IconButton
-                onClick={remove}
-                variant="text"
-                color="danger"
-                Icon={TrashIcon}/>
-            </Box>}
-        </Box>
-    );
-}
-
-function useIsActive(id: string): boolean {
-
-    const context = useDndContext();
-
-    const isDragging = context.active?.id === id;
-
-    return isDragging;
 }

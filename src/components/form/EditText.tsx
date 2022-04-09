@@ -33,6 +33,8 @@ const EditTextContainer = stitches.styled("span", {
     borderBottomColor: "transparent",
     transition: "$200",
     transitionProperty: "color",
+    padding: 0,
+    margin: 0,
     variants: {
         color: {
             primary: {
@@ -201,6 +203,16 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         }
     }
 
+    const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+
+        if (event.key === "Enter" || event.key === "Escape") {
+
+            console.log(event.currentTarget.tabIndex)
+
+            event.currentTarget.blur();
+        }
+    }
+
     return (
         <EditTextContainer 
         css={css}>
@@ -213,12 +225,12 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
                     ref
                 ])}
                 value={state}
+                onKeyDown={onKeyDownHandler}
                 onChange={onChangeHandler}/>
 
                 {!props.disabled &&
                 <EditTextInputIconContainer>
                     <IconButton
-                    size="lg"
                     color={props.color}
                     round
                     variant="text"
@@ -230,7 +242,6 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
 
                     {resetable && resetable !== state &&
                     <IconButton
-                    size="lg"
                     color={props.color}
                     round
                     variant="text"

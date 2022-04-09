@@ -26,6 +26,8 @@ const StyledIcon = stitches.styled(ChevronDownIcon, {
     color: "$neutral12"
 });
 
+StyledIcon.displayName = "StyledAccordionIcon";
+
 const StyledTitle = stitches.styled("div", {
     fontFamily: "$primary",
     fontWeight: 600,
@@ -89,9 +91,7 @@ const StyledItem = stitches.styled(PrimitiveAccordion.Item, {
 
 StyledItem.displayName = "StyledAccordionItem";
 
-const StyledRoot = stitches.styled(PrimitiveAccordion.Root, {});
 
-StyledRoot.displayName = "StyledAccordionRoot";
 
 export type AccordionItemProps = Omit<PrimitiveAccordion.AccordionItemProps, "asChild"> & CSSProps & {
     title: string;
@@ -142,7 +142,7 @@ export const AccordionItem = forwardRef<ElementRef<typeof PrimitiveAccordion.Ite
     );
 });
 
-AccordionItem.toString = () => StyledRoot.selector;
+AccordionItem.toString = () => StyledItem.selector;
 
 AccordionItem.displayName = "AccordionItem";
 
@@ -153,17 +153,4 @@ export type AccordionProps = React.RefAttributes<HTMLDivElement> & CSSProps & (
     | Omit<PrimitiveAccordion.AccordionMultipleProps, "asChild">
 );
 
-export const Accordion = forwardRef<ElementRef<typeof PrimitiveAccordion.Root>, AccordionProps>((props, ref) => {
-
-    return (
-        <StyledRoot
-        {...props}
-        ref={ref}>
-            {props.children}
-        </StyledRoot>
-    );
-});
-
-Accordion.displayName = "Accordion";
-
-Accordion.toString = () => StyledRoot.selector;
+export { Accordion } from "@radix-ui/react-accordion"
