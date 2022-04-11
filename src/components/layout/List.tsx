@@ -28,13 +28,10 @@ from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
 
 import { 
-    createContext, 
-    Ref, 
+    createContext,
     useContext, 
     forwardRef, 
-    useState,
-    RefObject,
-    PropsWithChildren
+    useState
 } 
 from "react";
 
@@ -44,8 +41,6 @@ import {
     UseValueProps
 }
 from "helpers";
-
-import mergeRefs from "react-merge-refs";
 
 import { CSSProps } from "types";
 
@@ -87,7 +82,7 @@ const ListItemContext = createContext<ListItemContextType>({});
 
 export type ListItemHandlerProps = Omit<JSX.IntrinsicElements["button"], "ref"> & CSSProps;
 
-export const ListItemDragHandler = forwardRef<HTMLButtonElement>((props, ref) => {
+export const ListItemDragHandler = forwardRef<HTMLButtonElement, ListItemHandlerProps>((props, ref) => {
 
     const {
         isDragging = false,
@@ -96,7 +91,9 @@ export const ListItemDragHandler = forwardRef<HTMLButtonElement>((props, ref) =>
 
     return (
         <IconToggle
+        {...props}
         {...listenerProps}
+        ref={ref}
         variant="text"
         value={isDragging}
         Icon={DragHandleDots1Icon}/>
@@ -109,7 +106,9 @@ export const ListItemRemoveHandler = forwardRef<HTMLButtonElement, ListItemHandl
 
     return (
         <IconButton
+        {...props}
         {...removeProps}
+        ref={ref}
         color="danger"
         variant="text"
         Icon={TrashIcon}/>
@@ -201,6 +200,7 @@ const ListItem: React.FC<ListItemType> = props => {
 
     return (
         <Box 
+        ref={sortableProps.setNodeRef}
         style={style}
         css={{
             zIndex: "$0",
@@ -237,7 +237,6 @@ type ListProps<T> = (
         | "onDragStart"
     >
     & {
-        containerRef?: Ref<HTMLElement>;
         space?: ThemedCSS["paddingBottom"];
         children: ListItemRenderer<T>;
     }
@@ -255,7 +254,6 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
     const {
         space,
         onDragCancel,
-        containerRef: ref,
         onDragEnd,
         onDragMove,
         onDragOver,
@@ -290,13 +288,13 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
 
         const { active, over } = event;
 
-        if (over && active.id !== over.id) {
+        if (active.id !== over?.id) {
         
             setState(state => {
                 
                 const oldIndex = state.findIndex(({ id }) => id === active.id);
                 
-                const newIndex = state.findIndex(({ id }) => id === over.id);
+                const newIndex = state.findIndex(({ id }) => id === over?.id);
                 
                 return arrayMove(state, oldIndex, newIndex);
             });
@@ -319,19 +317,18 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
         sensors={sensors}
         collisionDetection={closestCenter}
         modifiers={[
-            restrictToVerticalAxis,
-            restrictToFirstScrollableAncestor
+           restrictToVerticalAxis,
+           restrictToFirstScrollableAncestor
         ]}
-        onDragCancel={onDragCancel}
+        onDragStart={onDragStartHandler}
         onDragEnd={onDragEndHandler}
         onDragMove={onDragMove}
         onDragOver={onDragOver}
-        onDragStart={onDragStartHandler}>
+        onDragCancel={onDragCancel}>
             <SortableContext
             items={state}
             strategy={verticalListSortingStrategy}>
-                <Box
-                ref={ref as any}>
+                <Box>
                     {state.map((item, index, array) => (
                         <ListContext.Provider
                         key={item.id}
