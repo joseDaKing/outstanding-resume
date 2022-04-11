@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Box } from "components/layout";
 
 import {  
@@ -24,9 +22,7 @@ export const ProfessionalExperience: React.FC = () => {
             css={{
                 marginBottom: "$8"
             }}>
-                <EditText
-                resetable="Yrkeserfarenhet"
-                defaultValue="Yrkeserfarenhet"/>
+                <EditText/>
             </SubTitle>
 
             <Text
@@ -36,7 +32,9 @@ export const ProfessionalExperience: React.FC = () => {
                 Skriv 2-3 tydliga meningar om din allmänna erfarenhet
             </Text>
 
-            <TextArea block/>
+            <TextArea 
+            block
+            placeholder="t.ex passionerad naturkunskapslärare med > 8 års erfarenhet och följande meriter"/>
         </Box>
     );
 }

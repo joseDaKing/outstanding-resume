@@ -45,7 +45,7 @@ const StyledTrigger = stitches.styled(Button, {
     }
 });
 
-export type CollapsibleProps = Omit<PrimitiveCollapsible.CollapsibleProps, "asChild"> & Pick<ButtonProps, "color" | "block"> & CSSProps & {
+export type CollapsibleProps = Omit<PrimitiveCollapsible.CollapsibleProps, "asChild"> & Pick<ButtonProps, "color" | "block" | "size"> & CSSProps & {
     name: string;
     space?: ThemedCSS["paddingTop"];
 };
@@ -56,6 +56,7 @@ export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Roo
         color,
         block,
         name,
+        size,
         children,
         space = "$2",
         ...htmlProps
@@ -76,7 +77,7 @@ export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Roo
             <PrimitiveCollapsible.Trigger 
             asChild>
                 <StyledTrigger
-                size="sm" 
+                size={size}
                 variant="text"
                 block={block}
                 color={color}

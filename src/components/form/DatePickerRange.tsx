@@ -14,6 +14,7 @@ import { CSSProps } from "types";
 
 import { CalendarState } from "./Calendar";
 import { useValue } from "helpers";
+import { TextFieldVariantProps } from "./TextField";
 
 
 
@@ -24,16 +25,17 @@ const StyledRoot = stitches.styled("div", block, {
 
 StyledRoot.displayName = "StyledDatePickerRangeRoot";
 
-type DatePickerRangeState = {
+export type DatePickerRangeState = {
     start?: CalendarState;
     end?: CalendarState
 }
 
 type DatePickerRangeProps = (
     VariantProps<typeof StyledRoot> 
+    & TextFieldVariantProps
     & Pick<ButtonProps, "color"> 
     & CSSProps 
-    & Omit<JSX.IntrinsicElements["div"], "ref">
+    & Omit<JSX.IntrinsicElements["div"], "ref" | "value" | "defaultValue" | "onChange">
     & {
         value?: DatePickerRangeState;
         defaultValue?: DatePickerRangeState;
@@ -52,6 +54,7 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = props => {
     const { 
         color,
         block,
+        size,
         value,
         defaultValue,
         onValueChange,
@@ -105,6 +108,8 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = props => {
         {...htmlProps}
         block={block}>
             <DatePicker
+            // @ts-ignore
+            size={size}
             open={startOpenState}
             onOpenChange={setStartOpenState}
             value={state.start}
@@ -112,6 +117,8 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = props => {
             {...variantProps}/>
             
             <DatePicker
+            // @ts-ignore
+            size={size}
             open={endOpenState}
             onOpenChange={setEndOpenState}
             value={state.end}

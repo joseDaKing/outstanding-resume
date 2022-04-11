@@ -28,6 +28,7 @@ StyledTrigger.displayName = "StyledDatePickerTrigger";
 
 export type DatePickerProps = (
     Pick<CalendarProps, "color">
+    & TextFieldVariantProps
     & Omit<
         JSX.IntrinsicElements["input"], 
         "onChange" 
@@ -35,6 +36,7 @@ export type DatePickerProps = (
         | "type" 
         | "value" 
         | "defaultValue"
+        | "size"
     > & TextFieldVariantProps & {
         open?: boolean;
         defaultOpen?: boolean;

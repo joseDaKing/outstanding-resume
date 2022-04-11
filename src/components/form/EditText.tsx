@@ -195,7 +195,11 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         inputRef.current.focus();
     }
 
+    const editButtonRef = useRef<HTMLButtonElement|null>(null);
+
     const onResetHandler = () => {
+
+        editButtonRef.current?.focus();
 
         if (resetable) {
 
@@ -231,6 +235,7 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
                 {!props.disabled &&
                 <EditTextInputIconContainer>
                     <IconButton
+                    ref={editButtonRef}
                     color={props.color}
                     round
                     variant="text"

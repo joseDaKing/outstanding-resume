@@ -15,8 +15,7 @@ import {
     useSensor, 
     useSensors,
     DndContextProps,
-    DragOverlay,
-    useDndContext
+    DragOverlay
 }
 from "@dnd-kit/core";
 
@@ -33,7 +32,9 @@ import {
     Ref, 
     useContext, 
     forwardRef, 
-    useState
+    useState,
+    RefObject,
+    PropsWithChildren
 } 
 from "react";
 
@@ -158,10 +159,11 @@ const StyleListItemContent = stitches.styled("div", {
 StyleListItemContent.displayName = "StyleListItemContent";
 
 export type ListItemContentProps = Omit<JSX.IntrinsicElements["div"], "ref"> & CSSProps & {
+    removeable?: boolean; 
     value: string;
 };
 
-export const ListItemContent = forwardRef<HTMLDivElement, ListItemContentProps>((props, ref) => {
+export const ListItemContent = forwardRef<HTMLDivElement, ListItemContentProps>(({ removeable, ...props }, ref) => {
 
     return (
         <StyleListItemContent
@@ -174,10 +176,11 @@ export const ListItemContent = forwardRef<HTMLDivElement, ListItemContentProps>(
 
             {props.children}
 
+            {removeable &&
             <ListItemHandlerContainer
             side="right">
                 <ListItemRemoveHandler/>
-            </ListItemHandlerContainer>
+            </ListItemHandlerContainer>}
         </StyleListItemContent>
     );
 });
@@ -192,8 +195,6 @@ const ListItem: React.FC<ListItemType> = props => {
 
     const style = {
         transform: CSS.Transform.toString(sortableProps.transform),
-        transition: sortableProps.transition,
-        transitionProperty: "transform, opacity"
     };
 
     const { remove = () => {} } = useContext(ListContext);
@@ -201,7 +202,6 @@ const ListItem: React.FC<ListItemType> = props => {
     return (
         <Box 
         style={style}
-        ref={sortableProps.setNodeRef} 
         css={{
             zIndex: "$0",
             position: "relative",
@@ -237,6 +237,7 @@ type ListProps<T> = (
         | "onDragStart"
     >
     & {
+        containerRef?: Ref<HTMLElement>;
         space?: ThemedCSS["paddingBottom"];
         children: ListItemRenderer<T>;
     }
@@ -254,6 +255,7 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
     const {
         space,
         onDragCancel,
+        containerRef: ref,
         onDragEnd,
         onDragMove,
         onDragOver,
@@ -328,24 +330,27 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
             <SortableContext
             items={state}
             strategy={verticalListSortingStrategy}>
-                {state.map((item, index, array) => (
-                    <ListContext.Provider
-                    key={item.id}
-                    value={{
-                        remove: createRemove(item.id)
-                    }}>
-                        {index !== 0 &&
-                        <Box
-                        css={{
-                            paddingBottom: space
-                        }}/>}
+                <Box
+                ref={ref as any}>
+                    {state.map((item, index, array) => (
+                        <ListContext.Provider
+                        key={item.id}
+                        value={{
+                            remove: createRemove(item.id)
+                        }}>
+                            {index !== 0 &&
+                            <Box
+                            css={{
+                                paddingBottom: space
+                            }}/>}
 
-                        <ListItem 
-                        id={item.id}>
-                            {props.children(item, index, array)}
-                        </ListItem>
-                    </ListContext.Provider>
-                ))}
+                            <ListItem 
+                            id={item.id}>
+                                {props.children(item, index, array)}
+                            </ListItem>
+                        </ListContext.Provider>
+                    ))}
+                </Box>
             </SortableContext>
 
             <DragOverlay>

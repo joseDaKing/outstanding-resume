@@ -1,5 +1,3 @@
-import React from "react";
-
 import { 
     Box,
     Stack, 
@@ -23,16 +21,15 @@ import { ThemedCSS } from "stitches";
 export const ContactInformation: React.FC = () => {
 
     const gap: ThemedCSS["gap"] = "$6";
-
+    
     return (
+
         <Box>
             <SubTitle
             css={{
                 marginBottom: "$8"
             }}>
-                <EditText
-                resetable="Kontaktuppgifter"
-                defaultValue="Kontaktuppgifter"/>
+                <EditText/>
             </SubTitle>
 
             <Stack
@@ -83,6 +80,7 @@ export const ContactInformation: React.FC = () => {
                 </Stack>
 
                 <Collapsible
+                size="lg"
                 space="$6"
                 name="Vissa extra uppgifter">
                     <Stack 

@@ -42,6 +42,7 @@
     "@types/react-dom": "^17.0.11",
     "dayjs": "^1.11.0",
     "html-entities": "^2.3.3",
+    "jotai": "^1.6.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-flip-toolkit": "^7.0.13",

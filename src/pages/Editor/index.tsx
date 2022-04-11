@@ -1,17 +1,22 @@
 import { 
     Box,
-    Stack, 
+    Stack,
     ScrollArea,
-    List,
-    ListItemDragHandler,
-    ListItemRemoveHandler,
-    ListItemContent
+    Accordion
 }
 from "components/layout";
+
+import { useState } from "react";
+
+import * as Parts from "./parts";
+
+import { AccordionController } from "./AccordionController";
 
 
 
 export const Editor: React.FC = () => {
+
+    const [ activeAccordion, setActiveAccordion ] = useState("");
 
     return (
         <Stack 
@@ -23,29 +28,36 @@ export const Editor: React.FC = () => {
                 height: "100%",
                 backgroundColor: "$inverted",
             }}>
-                <Box
-                css={{
-                    padding: "$10",
-                    paddingX: "$14",
-                    spaceY: "$16"
-                }}>
-                    <Box>
-                        <List
-                        space="$8"
-                        defaultValue={Array(8).fill("").map((_, i) => ({ id: (i + 1).toString() }))}>
-                            {(({ id }) => (
-                                <ListItemContent
-                                value={id}
-                                css={{
-                                    padding: "$4",
-                                    backgroundColor: "$neutral4"
-                                }}>
-                                    {id}
-                                </ListItemContent>
-                            ))}
-                        </List>
-                    </Box>
-                </Box>
+                <Accordion
+                value={activeAccordion}
+                onValueChange={setActiveAccordion}
+                collapsible
+                type="single">
+                    <AccordionController.Provider
+                    value={{
+                        active: activeAccordion,
+                        setActive: setActiveAccordion
+                    }}>
+                        <Box
+                        css={{
+                            padding: "$10",
+                            paddingX: "$14",
+                            spaceY: "$16"
+                        }}>
+                            <Parts.ContactInformation/>
+
+                            <Parts.ProfessionalExperience/>
+
+                            <Parts.WorkExperience/>
+
+                            <Parts.Education/>
+
+                            <Parts.Links/>
+
+                            <Parts.Skills/>
+                        </Box>
+                    </AccordionController.Provider>
+                </Accordion>
             </ScrollArea>
         
             <Stack fullY alignMain="center" css={{
