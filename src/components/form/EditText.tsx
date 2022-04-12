@@ -143,6 +143,7 @@ type EditTextProps = (
     >
     & VariantProps<typeof EditTextContainer>
     & {
+        leftSlot?: React.ReactNode; 
         resetable?: string;
     }
 );
@@ -155,6 +156,7 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         resetable,
         defaultValue,
         onValueChange,
+        leftSlot,
         ...htmlProps
     } = props;
 

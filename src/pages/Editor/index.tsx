@@ -6,17 +6,45 @@ import {
 }
 from "components/layout";
 
-import { useState } from "react";
+import * as Parts from "./sections";
 
-import * as Parts from "./parts";
+import { List } from "components/layout";
 
-import { AccordionController } from "./AccordionController";
+import { 
+    useAppDispatch,
+    useAppSelector
+}
+from "state";
+
+import { 
+    sectionOrder, 
+    workExperience,
+    education,
+    links,
+    skills
+}
+from "state/slices";
+
+import { ListItemType } from "helpers";
 
 
 
 export const Editor: React.FC = () => {
 
-    const [ activeAccordion, setActiveAccordion ] = useState("");
+    const sectionOrderState = useAppSelector(store => store.sectionOrder.items);
+
+    const sectionItems = sectionOrderState.map(section => ({ 
+        id: section
+    }));
+
+    const dispatch = useAppDispatch();
+
+    const onValueChangeHandler = (items: ListItemType[]) => {
+                            
+        const newSectionOrder = items.map(({ id }) => id);
+
+        dispatch(sectionOrder.actions.changeItems(newSectionOrder));
+    }
 
     return (
         <Stack 
@@ -29,34 +57,48 @@ export const Editor: React.FC = () => {
                 backgroundColor: "$inverted",
             }}>
                 <Accordion
-                value={activeAccordion}
-                onValueChange={setActiveAccordion}
                 collapsible
                 type="single">
-                    <AccordionController.Provider
-                    value={{
-                        active: activeAccordion,
-                        setActive: setActiveAccordion
+                    <Box
+                    css={{
+                        padding: "$10",
+                        paddingX: "$14",
                     }}>
                         <Box
                         css={{
-                            padding: "$10",
-                            paddingX: "$14",
-                            spaceY: "$16"
+                            marginBottom: "$16"
                         }}>
                             <Parts.ContactInformation/>
-
-                            <Parts.ProfessionalExperience/>
-
-                            <Parts.WorkExperience/>
-
-                            <Parts.Education/>
-
-                            <Parts.Links/>
-
-                            <Parts.Skills/>
                         </Box>
-                    </AccordionController.Provider>
+
+                        <Box
+                        css={{
+                            marginBottom: "$16"
+                        }}>
+                            <Parts.ProfessionalExperience/>
+                        </Box>
+
+                        <List
+                        space="$16"
+                        value={sectionItems}
+                        onValueChange={onValueChangeHandler}>
+                            {({ id }) => (
+                                <>
+                                    {id === workExperience.name &&
+                                    <Parts.WorkExperience/>}
+
+                                    {id === education.name &&
+                                    <Parts.Education/>}
+
+                                    {id === links.name &&
+                                    <Parts.Links/>}
+
+                                    {id === skills.name &&
+                                    <Parts.Skills/>}
+                                </>
+                            )}
+                        </List>
+                    </Box>
                 </Accordion>
             </ScrollArea>
         

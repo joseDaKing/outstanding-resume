@@ -12,7 +12,7 @@ import { CheckIcon } from "@radix-ui/react-icons";
 
 import { ElementRef, forwardRef } from "react";
 
-type a = PrimitiveCheckbox.CheckboxProps
+
 
 const StyledIndicator = stitches.styled(PrimitiveCheckbox.Indicator, {});
 

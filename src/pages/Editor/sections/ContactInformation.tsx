@@ -16,20 +16,35 @@ import { SubTitle } from "components/typography";
 
 import { ThemedCSS } from "stitches";
 
+import { useAppDispatch, useAppSelector } from "state";
 
+import { contactInformation } from "state/slices";
+
+
+
+const initialContactInformation = contactInformation.getInitialState();
 
 export const ContactInformation: React.FC = () => {
 
     const gap: ThemedCSS["gap"] = "$6";
-    
-    return (
 
-        <Box>
+    const dispatch = useAppDispatch();
+
+    const contactInformationState = useAppSelector(store => store.contactInformation);
+
+    return (
+        <Box
+        css={{
+            backgroundColor: "$inverted",
+        }}>
             <SubTitle
             css={{
                 marginBottom: "$8"
             }}>
-                <EditText/>
+                <EditText
+                resetable={initialContactInformation.sectionTitle}
+                value={contactInformationState.sectionTitle}
+                onValueChange={value => dispatch(contactInformation.actions.setSectionTitle(value))}/>
             </SubTitle>
 
             <Stack
@@ -51,7 +66,9 @@ export const ContactInformation: React.FC = () => {
                     help={`Lägg till en titel som "Senior marknadsförare" eller "Försäljningsansvarig som kort beskriver din övergripande erfarenhet eller den typ av roll du söker."`}>
                         <TextField
                         size="lg"
-                        placeholder="t.ex lärare"/>
+                        placeholder="t.ex lärare"
+                        value={contactInformationState.jobTitle}
+                        onValueChange={value => dispatch(contactInformation.actions.setJobTitle(value))}/>
                     </Label>
                 </Stack>
 
@@ -67,7 +84,9 @@ export const ContactInformation: React.FC = () => {
                     name="Förnamn"
                     orientation="vertical">
                         <TextField
-                        size="lg"/>
+                        size="lg"
+                        value={contactInformationState.firstName}
+                        onValueChange={value => dispatch(contactInformation.actions.setFirstName(value))}/>
                     </Label>
 
                     <Label
@@ -75,7 +94,9 @@ export const ContactInformation: React.FC = () => {
                     name="Efternamn"
                     orientation="vertical">
                         <TextField
-                        size="lg"/>
+                        size="lg"
+                        value={contactInformationState.lastName}
+                        onValueChange={value => dispatch(contactInformation.actions.setLastName(value))}/>
                     </Label>
                 </Stack>
 
@@ -101,7 +122,9 @@ export const ContactInformation: React.FC = () => {
                             orientation="vertical">
                                 <TextField
                                 autoFocus
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.email}
+                                onValueChange={value => dispatch(contactInformation.actions.setEmail(value))}/>
                             </Label>
 
                             <Label
@@ -109,7 +132,9 @@ export const ContactInformation: React.FC = () => {
                             name="Telefon"
                             orientation="vertical">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.mobileNumber}
+                                onValueChange={value => dispatch(contactInformation.actions.setMobileNumber(value))}/>
                             </Label>
                         </Stack>
 
@@ -125,7 +150,9 @@ export const ContactInformation: React.FC = () => {
                             name="Land"
                             orientation="vertical">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.country}
+                                onValueChange={value => dispatch(contactInformation.actions.setCountry(value))}/>
                             </Label>
 
                             <Label
@@ -133,7 +160,9 @@ export const ContactInformation: React.FC = () => {
                             name="Stad"
                             orientation="vertical">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.city}
+                                onValueChange={value => dispatch(contactInformation.actions.setCity(value))}/>
                             </Label>
                         </Stack>
 
@@ -149,7 +178,9 @@ export const ContactInformation: React.FC = () => {
                             name="Adress"
                             orientation="vertical">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.address}
+                                onValueChange={value => dispatch(contactInformation.actions.setAddress(value))}/>
                             </Label>
 
                             <Label
@@ -157,7 +188,9 @@ export const ContactInformation: React.FC = () => {
                             name="Postnummer"
                             orientation="vertical">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.zipCode}
+                                onValueChange={value => dispatch(contactInformation.actions.setZipCode(value))}/>
                             </Label>
                         </Stack>
 
@@ -174,7 +207,9 @@ export const ContactInformation: React.FC = () => {
                             orientation="vertical"
                             help="Lägg till denna del om ditt yrke kräver en vis typ av körkort. Lämna anars fältet tomt.">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.driverLicense}
+                                onValueChange={value => dispatch(contactInformation.actions.setDriverLicense(value))}/>
                             </Label>
 
                             <Label
@@ -183,7 +218,9 @@ export const ContactInformation: React.FC = () => {
                             orientation="vertical"
                             help="Lägg bara till din nationalitet om det är ett relevant krav för tjänsten. I de flesta fall kan du lämna det tomt.">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.nationality}
+                                onValueChange={value => dispatch(contactInformation.actions.setNationality(value))}/>
                             </Label>
                         </Stack>
 
@@ -199,7 +236,9 @@ export const ContactInformation: React.FC = () => {
                             name="Födelseort"
                             orientation="vertical">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.birthPlace}
+                                onValueChange={value => dispatch(contactInformation.actions.setBirthPlace(value))}/>
                             </Label>
 
                             <Label
@@ -208,7 +247,9 @@ export const ContactInformation: React.FC = () => {
                             orientation="vertical"
                             help="Lägg bara till det födelsedatum om det är ett relevant krav för tjänsten. I de flesta fall kan du lämna fältet tomt.">
                                 <TextField
-                                size="lg"/>
+                                size="lg"
+                                value={contactInformationState.birthDate}
+                                onValueChange={value => dispatch(contactInformation.actions.setBirthDate(value))}/>
                             </Label>
                         </Stack>
                     </Stack>

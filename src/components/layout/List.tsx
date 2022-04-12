@@ -19,9 +19,9 @@ import {
 }
 from "@dnd-kit/core";
 
-import { 
-    restrictToFirstScrollableAncestor, 
-    restrictToVerticalAxis
+import {  
+    restrictToVerticalAxis,
+    restrictToParentElement
 }
 from "@dnd-kit/modifiers";
 
@@ -77,6 +77,13 @@ type ListItemContextType = {
 }
 
 const ListItemContext = createContext<ListItemContextType>({});
+
+export const useIsDragging = () => {
+
+    const listItemContext = useContext(ListItemContext);
+
+    return !!listItemContext.isDragging;
+}
 
 
 
@@ -159,7 +166,6 @@ StyleListItemContent.displayName = "StyleListItemContent";
 
 export type ListItemContentProps = Omit<JSX.IntrinsicElements["div"], "ref"> & CSSProps & {
     removeable?: boolean; 
-    value: string;
 };
 
 export const ListItemContent = forwardRef<HTMLDivElement, ListItemContentProps>(({ removeable, ...props }, ref) => {
@@ -194,33 +200,34 @@ const ListItem: React.FC<ListItemType> = props => {
 
     const style = {
         transform: CSS.Transform.toString(sortableProps.transform),
-    };
+        transition: sortableProps.transition
+    }; 
 
     const { remove = () => {} } = useContext(ListContext);
 
     return (
-        <Box 
-        ref={sortableProps.setNodeRef}
-        style={style}
-        css={{
-            zIndex: "$0",
-            position: "relative",
-            opacity: sortableProps.isDragging ? 0 : 1,
+        <ListItemContext.Provider
+        value={{
+            removeProps: {
+                onClick: remove,
+            },
+            isDragging: sortableProps.isDragging,
+            listenerProps: {
+                ...sortableProps.listeners,
+                ...sortableProps.attributes
+            },                
         }}>
-            <ListItemContext.Provider
-            value={{
-                removeProps: {
-                    onClick: remove,
-                },
-                isDragging: sortableProps.isDragging,
-                listenerProps: {
-                    ...sortableProps.listeners,
-                    ...sortableProps.attributes
-                },                
+            <Box 
+            ref={sortableProps.setNodeRef}
+            style={style}
+            css={{
+                zIndex: "$0",
+                position: "relative",
+                opacity: sortableProps.isDragging ? 0 : 1,
             }}>
                 {props.children}
-            </ListItemContext.Provider>
-        </Box>
+            </Box>
+        </ListItemContext.Provider>
     );
 };
 
@@ -317,8 +324,8 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
         sensors={sensors}
         collisionDetection={closestCenter}
         modifiers={[
-           restrictToVerticalAxis,
-           restrictToFirstScrollableAncestor
+            restrictToVerticalAxis,
+            restrictToParentElement
         ]}
         onDragStart={onDragStartHandler}
         onDragEnd={onDragEndHandler}
@@ -338,9 +345,10 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
                             {index !== 0 &&
                             <Box
                             css={{
-                                paddingBottom: space
+                                marginBottom: space,
+                                backgroundColor: "red"
                             }}/>}
-
+                            
                             <ListItem 
                             id={item.id}>
                                 {props.children(item, index, array)}

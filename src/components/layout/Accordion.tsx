@@ -73,9 +73,6 @@ const StyledItem = stitches.styled(PrimitiveAccordion.Item, {
     borderRadius: "$sm",
     transition: "$200",
     transitionProperty: "transform",
-    "&:not(:first-child)": {
-        marginTop: "$4"
-    },
     stateToggled: {
         [`& ${StyledIcon}`]: {
             transformRotate: "$180",
