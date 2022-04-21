@@ -2,8 +2,10 @@ import {
     Box, 
     List, 
     Stack,
+    AccordionItem,
     ListItemContent,
-    AccordionItem
+    ListItemDragHandler,
+    ListItemRemoveHandler
 } 
 from "components/layout";
 
@@ -31,21 +33,19 @@ import {
 } 
 from "state";
 
-import { workExperience } from "state/slices";
-
-import { ListItemDragHandler } from "components/layout";
+import { interships } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
 
 
 
-const initialWorkExperience = workExperience.getInitialState();
+const initialInterhsips = interships.getInitialState();
 
-export const WorkExperience: React.FC = () => {
+export const Interhships: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const workExperienceState = useAppSelector(store => store.workExperience);
+    const intershipsState = useAppSelector(store => store.interships);
 
     return (
         <Box
@@ -60,9 +60,10 @@ export const WorkExperience: React.FC = () => {
             }}>
                 <EditText
                 leftSlot={<ListItemDragHandler/>}
-                resetable={initialWorkExperience.sectionTitle}
-                value={workExperienceState.sectionTitle}
-                onValueChange={value => dispatch(workExperience.actions.setSectionTitle(value))}/>
+                rightSlot={<ListItemRemoveHandler/>}
+                resetable={initialInterhsips.sectionTitle}
+                value={intershipsState.sectionTitle}
+                onValueChange={value => dispatch(interships.actions.setSectionTitle(value))}/>
             </SubTitle>
 
             <Text
@@ -73,11 +74,11 @@ export const WorkExperience: React.FC = () => {
             </Text>
             
             <ItemsContainer
-            items={workExperienceState.items}>
+            items={intershipsState.items}>
                 <List 
                 space="$6"
-                value={workExperienceState.items}
-                onValueChange={items => dispatch(workExperience.actions.changeItems(items))}>
+                value={intershipsState.items}
+                onValueChange={items => dispatch(interships.actions.changeItems(items))}>
                     {item => {
 
                         let title = "(Ej specificerat)";
@@ -117,7 +118,7 @@ export const WorkExperience: React.FC = () => {
                                                 <TextField
                                                 size="lg"
                                                 value={item.jobTitle}
-                                                onValueChange={jobTitle => dispatch(workExperience.actions.updateItem([
+                                                onValueChange={jobTitle => dispatch(interships.actions.updateItem([
                                                     item.id,
                                                     { jobTitle }
                                                 ]))}/>
@@ -130,7 +131,7 @@ export const WorkExperience: React.FC = () => {
                                                 <TextField
                                                 size="lg"
                                                 value={item.employer}
-                                                onValueChange={employer => dispatch(workExperience.actions.updateItem([
+                                                onValueChange={employer => dispatch(interships.actions.updateItem([
                                                     item.id,
                                                     { employer, }
                                                 ]))}/>
@@ -149,7 +150,7 @@ export const WorkExperience: React.FC = () => {
                                                 <DatePickerRange
                                                 size="lg"
                                                 value={item.date}
-                                                onValueChange={date => dispatch(workExperience.actions.updateItem([
+                                                onValueChange={date => dispatch(interships.actions.updateItem([
                                                     item.id,
                                                     { date }
                                                 ]))}/>
@@ -162,7 +163,7 @@ export const WorkExperience: React.FC = () => {
                                                 <TextField
                                                 size="lg"
                                                 value={item.city}
-                                                onValueChange={city => dispatch(workExperience.actions.updateItem([
+                                                onValueChange={city => dispatch(interships.actions.updateItem([
                                                     item.id,
                                                     { city }
                                                 ]))}/>
@@ -176,7 +177,7 @@ export const WorkExperience: React.FC = () => {
                                             <TextArea
                                             size="lg"
                                             value={item.description}
-                                            onValueChange={description => dispatch(workExperience.actions.updateItem([
+                                            onValueChange={description => dispatch(interships.actions.updateItem([
                                                 item.id,
                                                 { description }
                                             ]))}/>
@@ -194,7 +195,7 @@ export const WorkExperience: React.FC = () => {
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(workExperience.actions.addItem())}
+            onClick={() => dispatch(interships.actions.addItem())}
             StartIcon={PlusIcon}>
                 Lägg till jobb
             </Button>

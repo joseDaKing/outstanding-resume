@@ -100,6 +100,7 @@ export const ListItemDragHandler = forwardRef<HTMLButtonElement, ListItemHandler
         <IconToggle
         {...props}
         {...listenerProps}
+        round
         ref={ref}
         variant="text"
         value={isDragging}
@@ -115,6 +116,7 @@ export const ListItemRemoveHandler = forwardRef<HTMLButtonElement, ListItemHandl
         <IconButton
         {...props}
         {...removeProps}
+        round
         ref={ref}
         color="danger"
         variant="text"

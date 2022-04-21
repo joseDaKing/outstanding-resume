@@ -9,7 +9,13 @@ import {
     education,
     links,
     skills,
-    sectionOrder
+    sections,
+    languages,
+    interships,
+    courses,
+    references,
+    hobbies,
+    extraAcivities
 }
 from "./slices";
 
@@ -23,7 +29,13 @@ export const store = configureStore({
         education: education.reducer,
         links: links.reducer,
         skills: skills.reducer,
-        sectionOrder: sectionOrder.reducer
+        sections: sections.reducer,
+        languages: languages.reducer,
+        interships: interships.reducer,
+        courses: courses.reducer,
+        references: references.reducer,
+        hobbies: hobbies.reducer,
+        extraActivities: extraAcivities.reducer
     }
 });
 

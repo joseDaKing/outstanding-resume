@@ -33,6 +33,7 @@ import {
 from "state";
 
 import { education } from "state/slices";
+
 import { ItemsContainer } from "../ItemsContainer";
 
 
@@ -51,18 +52,12 @@ export const Education: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative"
         }}>
-            <ListItemDragHandler
-            css={{
-                position: "absolute",
-                top: "-$2",
-                left: "-$10",
-            }}/>
-
             <SubTitle
             css={{
                 marginBottom: "$8"
             }}>
                 <EditText
+                leftSlot={<ListItemDragHandler/>}
                 resetable={initialEducation.sectionTitle}
                 value={educationState.sectionTitle}
                 onValueChange={value => dispatch(education.actions.setSectionTitle(value))}/>

@@ -50,18 +50,12 @@ export const Links: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative"
         }}>
-            <ListItemDragHandler
-            css={{
-                position: "absolute",
-                top: "-$2",
-                left: "-$10",
-            }}/>
-
             <SubTitle
             css={{
                 marginBottom: "$8"
             }}>
                 <EditText
+                leftSlot={<ListItemDragHandler/>}
                 resetable={initialLinks.sectionTitle}
                 value={linksState.sectionTitle}
                 onValueChange={value => dispatch(links.actions.setSectionTitle(value))}/>

@@ -5,6 +5,7 @@ import { VariantProps } from "@stitches/react";
 import React, { forwardRef } from "react";
 
 import { stitches } from "stitches";
+import { CSSProps } from "types";
 
 
 
@@ -15,7 +16,7 @@ const StyledRoot = stitches.styled("textarea", textFieldContainer, textFieldText
 
 StyledRoot.displayName = "StyledTextArea";
 
-export type TextAreaProps = Omit<JSX.IntrinsicElements["textarea"], "onChange" | "ref"> & VariantProps<typeof StyledRoot> & {
+export type TextAreaProps = Omit<JSX.IntrinsicElements["textarea"], "onChange" | "ref"> & VariantProps<typeof StyledRoot> & CSSProps & {
     onValueChange?: (value: string) => void;
 };
 

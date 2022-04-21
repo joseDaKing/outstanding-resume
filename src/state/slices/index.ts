@@ -10,4 +10,16 @@ export * from "./links";
 
 export * from "./skills";
 
-export * from "./sectionOrder";
+export * from "./sections";
+
+export * from "./languages";
+
+export * from "./interships";
+
+export * from "./courses";
+
+export * from "./references";
+
+export * from "./hobbies";
+
+export * from "./extraActivities";

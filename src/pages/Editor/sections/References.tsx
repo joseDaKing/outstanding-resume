@@ -2,18 +2,19 @@ import {
     Box, 
     List, 
     Stack,
+    AccordionItem,
     ListItemContent,
-    AccordionItem
+    ListItemDragHandler,
+    ListItemRemoveHandler
 } 
 from "components/layout";
 
 import {  
     Button,
-    DatePickerRange,
     EditText,
     Label,
-    TextArea,
-    TextField
+    TextField,
+    Switch
 } 
 from "components/form";
 
@@ -31,21 +32,19 @@ import {
 } 
 from "state";
 
-import { workExperience } from "state/slices";
-
-import { ListItemDragHandler } from "components/layout";
+import { references } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
 
 
 
-const initialWorkExperience = workExperience.getInitialState();
+const initialReferences = references.getInitialState();
 
-export const WorkExperience: React.FC = () => {
+export const References: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const workExperienceState = useAppSelector(store => store.workExperience);
+    const referencesState = useAppSelector(store => store.references);
 
     return (
         <Box
@@ -60,9 +59,10 @@ export const WorkExperience: React.FC = () => {
             }}>
                 <EditText
                 leftSlot={<ListItemDragHandler/>}
-                resetable={initialWorkExperience.sectionTitle}
-                value={workExperienceState.sectionTitle}
-                onValueChange={value => dispatch(workExperience.actions.setSectionTitle(value))}/>
+                rightSlot={<ListItemRemoveHandler/>}
+                resetable={initialReferences.sectionTitle}
+                value={referencesState.sectionTitle}
+                onValueChange={value => dispatch(references.actions.setSectionTitle(value))}/>
             </SubTitle>
 
             <Text
@@ -71,28 +71,38 @@ export const WorkExperience: React.FC = () => {
             }}>
                 Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
             </Text>
+
+            <Label
+            name="Dölj erfarenhetsnivå"
+            css={{
+                marginBottom: "$6"
+            }}>
+                <Switch
+                checked={referencesState.isHidingReferences}
+                onCheckedChange={value => dispatch(references.actions.setIsHidingReferences(value))}/>
+            </Label>
             
             <ItemsContainer
-            items={workExperienceState.items}>
+            items={referencesState.items}>
                 <List 
                 space="$6"
-                value={workExperienceState.items}
-                onValueChange={items => dispatch(workExperience.actions.changeItems(items))}>
+                value={referencesState.items}
+                onValueChange={items => dispatch(references.actions.changeItems(items))}>
                     {item => {
 
                         let title = "(Ej specificerat)";
 
-                        if (item.jobTitle && item.employer) {
+                        if (item.nameOfTheReferenced && item.company) {
 
-                            title = `${item.jobTitle}, ${item.employer}`;
+                            title = `${item.nameOfTheReferenced}, ${item.company}`;
                         }
-                        else if (item.jobTitle) {
+                        else if (item.nameOfTheReferenced) {
 
-                            title = item.jobTitle;
+                            title = item.nameOfTheReferenced;
                         }
-                        else if (item.employer) {
+                        else if (item.company) {
 
-                            title = item.employer;
+                            title = item.company;
                         }
 
                         return (
@@ -112,27 +122,27 @@ export const WorkExperience: React.FC = () => {
                                         }}>
                                             <Label
                                             block
-                                            name="Jobbtitel"
+                                            name="Referentens fullständiga namn"
                                             orientation="vertical">
                                                 <TextField
                                                 size="lg"
-                                                value={item.jobTitle}
-                                                onValueChange={jobTitle => dispatch(workExperience.actions.updateItem([
+                                                value={item.nameOfTheReferenced}
+                                                onValueChange={value => dispatch(references.actions.updateItem([
                                                     item.id,
-                                                    { jobTitle }
+                                                    { nameOfTheReferenced: value }
                                                 ]))}/>
                                             </Label>
 
                                             <Label
                                             block
-                                            name="Arbetsgivare"
+                                            name="Företag"
                                             orientation="vertical">
                                                 <TextField
                                                 size="lg"
-                                                value={item.employer}
-                                                onValueChange={employer => dispatch(workExperience.actions.updateItem([
+                                                value={item.company}
+                                                onValueChange={value => dispatch(references.actions.updateItem([
                                                     item.id,
-                                                    { employer, }
+                                                    { company: value }
                                                 ]))}/>
                                             </Label>
                                         </Stack>
@@ -144,43 +154,30 @@ export const WorkExperience: React.FC = () => {
                                         }}>
                                             <Label
                                             block
-                                            name="Datum"
+                                            name="Telefon"
                                             orientation="vertical">
-                                                <DatePickerRange
+                                                <TextField
                                                 size="lg"
-                                                value={item.date}
-                                                onValueChange={date => dispatch(workExperience.actions.updateItem([
+                                                value={item.mobileNumber}
+                                                onValueChange={value => dispatch(references.actions.updateItem([
                                                     item.id,
-                                                    { date }
+                                                    { mobileNumber: value }
                                                 ]))}/>
                                             </Label>
 
                                             <Label
                                             block
-                                            name="Stad"
+                                            name="E-post"
                                             orientation="vertical">
                                                 <TextField
                                                 size="lg"
-                                                value={item.city}
-                                                onValueChange={city => dispatch(workExperience.actions.updateItem([
+                                                value={item.email}
+                                                onValueChange={value => dispatch(references.actions.updateItem([
                                                     item.id,
-                                                    { city }
+                                                    { email: value }
                                                 ]))}/>
                                             </Label>
                                         </Stack>
-
-                                        <Label
-                                        block
-                                        name="Beskrivning"
-                                        orientation="vertical">
-                                            <TextArea
-                                            size="lg"
-                                            value={item.description}
-                                            onValueChange={description => dispatch(workExperience.actions.updateItem([
-                                                item.id,
-                                                { description }
-                                            ]))}/>
-                                        </Label>
                                     </Box>
                                 </AccordionItem>
                             </ListItemContent>
@@ -194,7 +191,7 @@ export const WorkExperience: React.FC = () => {
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(workExperience.actions.addItem())}
+            onClick={() => dispatch(references.actions.addItem())}
             StartIcon={PlusIcon}>
                 Lägg till jobb
             </Button>

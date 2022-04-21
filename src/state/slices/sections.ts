@@ -10,8 +10,8 @@ import { links } from "./links";
 
 
 
-export const sectionOrder = createSlice({
-    name: "sectionOrder",
+export const sections = createSlice({
+    name: "sections",
     initialState: {
         items: [
             workExperience.name,
@@ -25,5 +25,12 @@ export const sectionOrder = createSlice({
 
             state.items = items;
         },
+        addItem: (state, { payload: section }: PayloadAction<string>) => {
+
+            if (!state.items.includes(section)) {
+
+                state.items.push(section);
+            }
+        }
     }
 });

@@ -60,18 +60,12 @@ export const Skills: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative"
         }}>
-            <ListItemDragHandler
-            css={{
-                position: "absolute",
-                top: "-$2",
-                left: "-$10",
-            }}/>
-
             <SubTitle
             css={{
                 marginBottom: "$8"
             }}>
                 <EditText
+                leftSlot={<ListItemDragHandler/>}
                 resetable={initialSkills.sectionTitle}
                 value={skillsState.sectionTitle}
                 onValueChange={value => dispatch(skills.actions.setSectionTitle(value))}/>
@@ -129,7 +123,7 @@ export const Skills: React.FC = () => {
                                     name={`Nivå - ${skillLevelLabels[item.level]}`}
                                     orientation="vertical">
                                         <Slider
-                                        max={5}
+                                        max={4}
                                         size="lg"
                                         value={[item.level]}
                                         onValueChange={([value]) => dispatch(skills.actions.updateItem([

@@ -6,7 +6,7 @@ import {
 }
 from "components/layout";
 
-import * as Parts from "./sections";
+import * as Sections from "./sections";
 
 import { List } from "components/layout";
 
@@ -17,11 +17,17 @@ import {
 from "state";
 
 import { 
-    sectionOrder, 
+    sections, 
     workExperience,
     education,
     links,
-    skills
+    skills,
+    languages,
+    hobbies,
+    extraAcivities,
+    references,
+    interships,
+    courses
 }
 from "state/slices";
 
@@ -31,7 +37,7 @@ import { ListItemType } from "helpers";
 
 export const Editor: React.FC = () => {
 
-    const sectionOrderState = useAppSelector(store => store.sectionOrder.items);
+    const sectionOrderState = useAppSelector(store => store.sections.items);
 
     const sectionItems = sectionOrderState.map(section => ({ 
         id: section
@@ -43,7 +49,7 @@ export const Editor: React.FC = () => {
                             
         const newSectionOrder = items.map(({ id }) => id);
 
-        dispatch(sectionOrder.actions.changeItems(newSectionOrder));
+        dispatch(sections.actions.changeItems(newSectionOrder));
     }
 
     return (
@@ -68,14 +74,14 @@ export const Editor: React.FC = () => {
                         css={{
                             marginBottom: "$16"
                         }}>
-                            <Parts.ContactInformation/>
+                            <Sections.ContactInformation/>
                         </Box>
 
                         <Box
                         css={{
                             marginBottom: "$16"
                         }}>
-                            <Parts.ProfessionalExperience/>
+                            <Sections.ProfessionalExperience/>
                         </Box>
 
                         <List
@@ -85,21 +91,41 @@ export const Editor: React.FC = () => {
                             {({ id }) => (
                                 <>
                                     {id === workExperience.name &&
-                                    <Parts.WorkExperience/>}
+                                    <Sections.WorkExperience/>}
 
                                     {id === education.name &&
-                                    <Parts.Education/>}
+                                    <Sections.Education/>}
 
                                     {id === links.name &&
-                                    <Parts.Links/>}
+                                    <Sections.Links/>}
 
                                     {id === skills.name &&
-                                    <Parts.Skills/>}
+                                    <Sections.Skills/>}
+
+                                    {id === languages.name &&
+                                    <Sections.Languages/>}
+
+                                    {id === hobbies.name &&
+                                    <Sections.Hobbies/>}
+
+                                    {id === extraAcivities.name &&
+                                    <Sections.ExtraActivities/>}
+
+                                    {id === references.name &&
+                                    <Sections.References/>}
+
+                                    {id === courses.name &&
+                                    <Sections.Courses/>}
+
+                                    {id === interships.name &&
+                                    <Sections.Interhships/>}
                                 </>
                             )}
                         </List>
                     </Box>
                 </Accordion>
+                
+                <Sections.AddNewSections/>
             </ScrollArea>
         
             <Stack fullY alignMain="center" css={{

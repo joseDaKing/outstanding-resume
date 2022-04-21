@@ -47,7 +47,7 @@ export const buttonContainer = stitches.css(formLargeContainer, round, block, te
                 backgroundColor: "transparent",
                 stateDisabled: {
                     color: "$washed9",
-                    backgroundColor: "$washed4 !important"
+                    backgroundColor: "transparent !important"
                 }
             },
             inverted: {

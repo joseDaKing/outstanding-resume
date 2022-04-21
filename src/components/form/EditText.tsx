@@ -18,14 +18,37 @@ import { VariantProps } from "@stitches/react";
 
 
 
+const EditTextInputIconContainer = stitches.styled("span", {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    width: 0,
+    gap: "$1",
+    variants: {
+        side: {
+            left: {
+                left: 0,
+                flexDirection: "row-reverse"
+            },
+            right: {
+                right: 0,
+            }
+        }
+    }
+});
+
+EditTextInputIconContainer.displayName = "EditTextInputIconContainer";
+
 const EditTextContainer = stitches.styled("span", {
     all: "inherit",
     display: "inline-block",
     position: "relative",
-    [`& ${IconButton}`]: {
+    [`& ${EditTextInputIconContainer}`]: {
         opacity: 0
     },
-    [`&:hover ${IconButton}, &:focus-within ${IconButton},`]: {
+    [`&:hover ${EditTextInputIconContainer}, &:focus-within ${EditTextInputIconContainer}`]: {
         opacity: 1
     },
     borderBottomWidth: "$2",
@@ -115,19 +138,6 @@ const EditTextInputContainer = stitches.styled("span", {
 
 EditTextInputContainer.displayName = "EditTextInputContainer";
 
-const EditTextInputIconContainer = stitches.styled("span", {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    display: "flex",
-    alignItems: "center",
-    width: 0,
-    gap: "$1",
-});
-
-EditTextInputIconContainer.displayName = "EditTextInputIconContainer";
-
 
 
 type EditTextProps = (
@@ -144,6 +154,7 @@ type EditTextProps = (
     & VariantProps<typeof EditTextContainer>
     & {
         leftSlot?: React.ReactNode; 
+        rightSlot?: React.ReactNode;
         resetable?: string;
     }
 );
@@ -157,6 +168,7 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         defaultValue,
         onValueChange,
         leftSlot,
+        rightSlot,
         ...htmlProps
     } = props;
 
@@ -223,6 +235,13 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         <EditTextContainer 
         css={css}>
             <EditTextInputContainer>
+                {!props.disabled && leftSlot &&
+                <EditTextInputIconContainer
+                side="left">
+                    <div/>
+                    {leftSlot}
+                </EditTextInputIconContainer>}
+
                 {/* @ts-ignore */}
                 <EditTextInput
                 {...htmlProps}
@@ -235,16 +254,17 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
                 onChange={onChangeHandler}/>
 
                 {!props.disabled &&
-                <EditTextInputIconContainer>
+                <EditTextInputIconContainer
+                side="right">
+
+                    <div/>
+
                     <IconButton
                     ref={editButtonRef}
                     color={props.color}
                     round
                     variant="text"
                     Icon={Pencil1Icon}
-                    css={{
-                        marginLeft: "$1_5"
-                    }}
                     onClick={onEditHandler}/>
 
                     {resetable && resetable !== state &&
@@ -254,6 +274,8 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
                     variant="text"
                     Icon={ResetIcon}
                     onClick={onResetHandler}/>}
+
+                    {rightSlot}
                 </EditTextInputIconContainer>}
             </EditTextInputContainer>
             
