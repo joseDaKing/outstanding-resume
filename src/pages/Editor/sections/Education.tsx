@@ -194,7 +194,7 @@ export const Education: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(education.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till jobb
+                Lägg till utbildning
             </Button>
         </Box>
     );

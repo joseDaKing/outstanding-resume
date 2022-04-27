@@ -182,7 +182,7 @@ export const References: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(references.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till jobb
+                Lägg till referens
             </Button>
         </Box>
     );

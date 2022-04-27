@@ -132,7 +132,7 @@ export const Languages: React.FC = () => {
             variant="ghost"
             StartIcon={PlusIcon}
             onClick={() => dispatch(languages.actions.addItem())}>
-                Lägg till jobb
+                Lägg till språk
             </Button>
         </Box>
     );

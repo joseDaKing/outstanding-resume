@@ -20,6 +20,50 @@ type LevelSectionsProps<T> = {
     items: T[];
 }
 
+const Row: React.FC = props => {
+
+    return (
+        <View
+        style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            margin: "8pt",
+            flexWrap: "nowrap",
+            justifyContent: "flex-start"
+        }}>
+            {props.children}      
+        </View>
+    );
+}
+
+type ColProps = {
+    hasNextElement: boolean;
+}
+
+const Col: React.FC<ColProps> = props => {
+
+    return (
+        <View
+        style={{
+            width: "50%"
+        }}>
+            <View
+            style={{
+                width: "80%"
+            }}>
+                {props.children}
+            </View>
+            
+            {props.hasNextElement &&
+            <View
+            style={{
+                width: "40%"
+            }}/>}
+        </View>
+    );
+}
+
 export function LevelSections<T extends ListItemType>(props: LevelSectionsProps<T>) {
     
     const {
@@ -33,6 +77,36 @@ export function LevelSections<T extends ListItemType>(props: LevelSectionsProps<
 
     const filteredItems = items.filter(filterItems);
 
+    const groupedItems = gorupArrayInto(filteredItems, 2);
+
+    const [firstItem, ...restItems] = groupedItems;
+
+    const itemRenderer = (item: T, index: number, array: T[]) => {
+
+        const { level, name } = itemToLevel(item);
+
+        const hasNextElement = !!array[index+1];
+
+        return (
+            <Col
+            key={item.id}
+            hasNextElement={hasNextElement}>
+                <LevelItem
+                hideLevel={hideLevel}
+                level={level}
+                maxLevel={maxLevel}>
+                    {name}
+                </LevelItem>
+            </Col>
+        );
+    };
+
+    const colRenderer = (group: T[]) => (
+        <Row key={group.map(({ id }) => id).join("-")}>
+            {group.map(itemRenderer)}
+        </Row>
+    )
+
     return (
         <>
             {filteredItems.length !== 0 &&
@@ -41,57 +115,17 @@ export function LevelSections<T extends ListItemType>(props: LevelSectionsProps<
                 paddingVertical: "17pt",
             }}>
                 {!!sectionTitle &&
-                <SectionTitle>
-                    {sectionTitle}
-                </SectionTitle>}
+                <View
+                wrap={false}>
+                    <SectionTitle>
+                        {sectionTitle}
+                    </SectionTitle>
+
+                    {colRenderer(firstItem)}
+                </View>}
 
                 <View>
-                    {gorupArrayInto(filteredItems, 2).map(group => (
-                        <View
-                        key={group.map(({ id }) => id).join("-")}
-                        style={{
-                            width: "100%",
-                            display: "flex",
-                            flexDirection: "row",
-                            margin: "8pt",
-                            flexWrap: "nowrap",
-                            justifyContent: "flex-start"
-                        }}>
-                            {group.map((item, index, array) => {
-
-                                const { level, name } = itemToLevel(item);
-
-                                const hasNextElement = !!array[index+1];
-
-                                console.log(hasNextElement);
-
-                                return (
-                                    <View
-                                    style={{
-                                        width: "50%"
-                                    }}>
-                                        <View
-                                        key={item.id}
-                                        style={{
-                                            width: "80%"
-                                        }}>
-                                            <LevelItem
-                                            hideLevel={hideLevel}
-                                            level={level}
-                                            maxLevel={maxLevel}>
-                                                {name}
-                                            </LevelItem>
-                                        </View>
-                                        {hasNextElement &&
-                                        <View
-                                        style={{
-                                            width: "40%"
-                                        }}/>}
-                                    </View>
-                                );
-                            })}
-                        </View>
-                    ))}
+                    {restItems.map(colRenderer)}
                 </View>
             </View>}
         </>

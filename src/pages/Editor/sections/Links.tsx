@@ -124,7 +124,7 @@ export const Links: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(links.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till jobb
+                Lägg till länk
             </Button>
         </Box>
     );

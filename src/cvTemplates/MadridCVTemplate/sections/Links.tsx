@@ -8,7 +8,7 @@ import { Link, SectionTitle } from "../components";
 
 export const Links: React.FC<RootState["links"]> = ({ items, sectionTitle }) => {
 
-    const filteredItems = items.filter(({ url }) => !!url);
+    const filteredItems = items.filter(({ label, url }) => !!url && !!label);
 
     return (
         <>

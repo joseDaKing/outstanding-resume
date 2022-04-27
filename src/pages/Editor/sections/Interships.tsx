@@ -186,7 +186,7 @@ export const Interhships: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(interships.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till jobb
+                Lägg till praktik
             </Button>
         </Box>
     );

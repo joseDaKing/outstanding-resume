@@ -13,6 +13,7 @@ import { Box } from "../layout";
 import { collapsibleAnimation } from "mixins";
 
 import { CSSProps } from "types";
+import { lineClamp } from "helpers";
 
 
 
@@ -83,7 +84,7 @@ export const Collapsible = forwardRef<ElementRef<typeof PrimitiveCollapsible.Roo
                 color={color}
                 align="start" 
                 EndIcon={ChevronDownIcon}>
-                    {name}
+                    {lineClamp(name, 30)}
                 </StyledTrigger>
             </PrimitiveCollapsible.Trigger>
         </StyledRoot>

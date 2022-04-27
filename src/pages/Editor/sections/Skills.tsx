@@ -145,7 +145,7 @@ export const Skills: React.FC = () => {
             variant="ghost"
             StartIcon={PlusIcon}
             onClick={() => dispatch(skills.actions.addItem())}>
-                Lägg till jobb
+                Lägg till färdighet
             </Button>
         </Box>
     );

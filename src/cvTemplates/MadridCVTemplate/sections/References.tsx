@@ -11,26 +11,29 @@ import { ItemsSection } from "../components";
 export const References: React.FC<RootState["references"]> = state => {
 
     return (
-        <ItemsSection
-        items={state.items}
-        sectionTitle={state.sectionTitle}
-        itemFilterer={({ nameOfTheReferenced }) => !!nameOfTheReferenced}
-        itemRenderer={({ 
-            nameOfTheReferenced,
-            company,
-            email,
-            mobileNumber
-        }) => ({
-            title: mergeText(
-                ", ",
+        <>
+            {!state.isHidingReferences &&
+            <ItemsSection
+            items={state.items}
+            sectionTitle={state.sectionTitle}
+            itemFilterer={({ nameOfTheReferenced }) => !!nameOfTheReferenced}
+            itemRenderer={({ 
                 nameOfTheReferenced,
-                company
-            ),
-            text: mergeText(
-                " | ",
+                company,
                 email,
                 mobileNumber
-            )
-        })}/>
+            }) => ({
+                title: mergeText(
+                    ", ",
+                    nameOfTheReferenced,
+                    company
+                ),
+                text: mergeText(
+                    " | ",
+                    email,
+                    mobileNumber
+                )
+            })}/>}
+        </>
     );
 }

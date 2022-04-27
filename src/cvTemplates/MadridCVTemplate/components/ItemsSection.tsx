@@ -30,9 +30,7 @@ export function ItemsSection<T extends ListItemType>({
 
     const filteredItems = items.filter(itemFilterer);
 
-    const firstItem = filteredItems[0];
-
-    const restItems = filteredItems.slice(1);
+    const [ firstItem, ...restItems ] = filteredItems;
 
     const itemRenderer = (item: T, index: number) => {
 

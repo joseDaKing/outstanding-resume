@@ -186,7 +186,7 @@ export const ExtraActivities: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(extraActivities.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till jobb
+                Lägg till extra aktivitet
             </Button>
         </Box>
     );

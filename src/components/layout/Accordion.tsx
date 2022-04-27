@@ -15,6 +15,7 @@ import fontMetrics from "@capsizecss/metrics/roboto";
 import { Stack } from "./Stack";
 
 import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { lineClamp } from "helpers";
 
 
 
@@ -113,12 +114,12 @@ export const AccordionItem = forwardRef<ElementRef<typeof PrimitiveAccordion.Ite
                     alignMain="start">
                         <Box>
                             <StyledTitle>
-                                {title}
+                                {lineClamp(title, 30)}
                             </StyledTitle>
 
                             {subtitle &&
                             <StyledSubtitle>
-                                {subtitle}
+                                {lineClamp(subtitle, 30)}
                             </StyledSubtitle>}
                         </Box>
 
