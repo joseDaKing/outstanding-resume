@@ -12,18 +12,22 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { store } from "state";
 
+import { BrowserRouter } from 'react-router-dom';
+
 
 
 document.body.className = preflightStyles();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ReduxProvider 
-    store={store}>
-      <App/>
-    </ReduxProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+            <ReduxProvider 
+            store={store}>
+                <App/>
+            </ReduxProvider>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

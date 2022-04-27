@@ -19,11 +19,7 @@ import {
 } 
 from "components/form";
 
-import {
-    Text,
-    SubTitle
-}
-from "components/typography";
+import { SubTitle } from "components/typography";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 
@@ -33,13 +29,13 @@ import {
 } 
 from "state";
 
-import { extraAcivities } from "state/slices";
+import { extraActivities } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
 
 
 
-const initialExtraActivities = extraAcivities.getInitialState();
+const initialExtraActivities = extraActivities.getInitialState();
 
 export const ExtraActivities: React.FC = () => {
 
@@ -63,22 +59,15 @@ export const ExtraActivities: React.FC = () => {
                 rightSlot={<ListItemRemoveHandler/>}
                 resetable={initialExtraActivities.sectionTitle}
                 value={extraActivitiesState.sectionTitle}
-                onValueChange={value => dispatch(extraAcivities.actions.setSectionTitle(value))}/>
+                onValueChange={value => dispatch(extraActivities.actions.setSectionTitle(value))}/>
             </SubTitle>
-
-            <Text
-            css={{
-                marginBottom: "$6"
-            }}>
-                Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
-            </Text>
             
             <ItemsContainer
             items={extraActivitiesState.items}>
                 <List 
                 space="$6"
                 value={extraActivitiesState.items}
-                onValueChange={items => dispatch(extraAcivities.actions.changeItems(items))}>
+                onValueChange={items => dispatch(extraActivities.actions.changeItems(items))}>
                     {item => {
 
                         let title = "(Ej specificerat)";
@@ -118,7 +107,7 @@ export const ExtraActivities: React.FC = () => {
                                                 <TextField
                                                 size="lg"
                                                 value={item.jobTitle}
-                                                onValueChange={jobTitle => dispatch(extraAcivities.actions.updateItem([
+                                                onValueChange={jobTitle => dispatch(extraActivities.actions.updateItem([
                                                     item.id,
                                                     { jobTitle }
                                                 ]))}/>
@@ -131,7 +120,7 @@ export const ExtraActivities: React.FC = () => {
                                                 <TextField
                                                 size="lg"
                                                 value={item.employer}
-                                                onValueChange={employer => dispatch(extraAcivities.actions.updateItem([
+                                                onValueChange={employer => dispatch(extraActivities.actions.updateItem([
                                                     item.id,
                                                     { employer, }
                                                 ]))}/>
@@ -150,7 +139,7 @@ export const ExtraActivities: React.FC = () => {
                                                 <DatePickerRange
                                                 size="lg"
                                                 value={item.date}
-                                                onValueChange={date => dispatch(extraAcivities.actions.updateItem([
+                                                onValueChange={date => dispatch(extraActivities.actions.updateItem([
                                                     item.id,
                                                     { date }
                                                 ]))}/>
@@ -163,7 +152,7 @@ export const ExtraActivities: React.FC = () => {
                                                 <TextField
                                                 size="lg"
                                                 value={item.city}
-                                                onValueChange={city => dispatch(extraAcivities.actions.updateItem([
+                                                onValueChange={city => dispatch(extraActivities.actions.updateItem([
                                                     item.id,
                                                     { city }
                                                 ]))}/>
@@ -177,7 +166,7 @@ export const ExtraActivities: React.FC = () => {
                                             <TextArea
                                             size="lg"
                                             value={item.description}
-                                            onValueChange={description => dispatch(extraAcivities.actions.updateItem([
+                                            onValueChange={description => dispatch(extraActivities.actions.updateItem([
                                                 item.id,
                                                 { description }
                                             ]))}/>
@@ -195,7 +184,7 @@ export const ExtraActivities: React.FC = () => {
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(extraAcivities.actions.addItem())}
+            onClick={() => dispatch(extraActivities.actions.addItem())}
             StartIcon={PlusIcon}>
                 Lägg till jobb
             </Button>

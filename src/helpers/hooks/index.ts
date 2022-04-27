@@ -1,3 +1,5 @@
+export * from "./useGetFileName";
+
 export * from "./useItems";
 
 export * from "./useItemsController";

@@ -121,7 +121,6 @@ export const ContactInformation: React.FC = () => {
                             name="E-post"
                             orientation="vertical">
                                 <TextField
-                                autoFocus
                                 size="lg"
                                 value={contactInformationState.email}
                                 onValueChange={value => dispatch(contactInformation.actions.setEmail(value))}/>

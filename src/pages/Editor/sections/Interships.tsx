@@ -19,11 +19,7 @@ import {
 } 
 from "components/form";
 
-import {
-    Text,
-    SubTitle
-}
-from "components/typography";
+import { SubTitle } from "components/typography";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 
@@ -65,13 +61,6 @@ export const Interhships: React.FC = () => {
                 value={intershipsState.sectionTitle}
                 onValueChange={value => dispatch(interships.actions.setSectionTitle(value))}/>
             </SubTitle>
-
-            <Text
-            css={{
-                marginBottom: "$6"
-            }}>
-                Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
-            </Text>
             
             <ItemsContainer
             items={intershipsState.items}>

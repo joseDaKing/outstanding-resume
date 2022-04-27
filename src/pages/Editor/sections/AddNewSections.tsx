@@ -13,11 +13,12 @@ from "state";
 import { 
     sections,
     languages,
-    extraAcivities,
+    extraActivities,
     hobbies,
     references,
     courses,
-    interships
+    interships,
+    Sections
 }
 from "state/slices";
 
@@ -31,7 +32,7 @@ export const AddNewSections: React.FC = () => {
 
     const sectionsItems = useAppSelector(store => store.sections.items);
 
-    const createSectionDataGroup = (name: string, label: string) => ({
+    const createSectionDataGroup = (name: Sections, label: string) => ({
         [name]: {
             label,
             disabled: sectionsItems.includes(name),
@@ -40,7 +41,7 @@ export const AddNewSections: React.FC = () => {
     });
 
     const sectionData = {
-        ...createSectionDataGroup(extraAcivities.name, "Extra aktiviteter"),
+        ...createSectionDataGroup(extraActivities.name, "Extra aktiviteter"),
         ...createSectionDataGroup(hobbies.name, "Hobbies"),
         ...createSectionDataGroup(references.name, "Referenser"),
         ...createSectionDataGroup(courses.name, "Kurser"),
@@ -67,6 +68,7 @@ export const AddNewSections: React.FC = () => {
             alignMain="start">
                 {intoGroups(Object.values(sectionData)).map(group => (
                     <Stack
+                    key={JSON.stringify(group)}
                     css={{ 
                         gap,
                         width: "$1__2"
@@ -75,6 +77,7 @@ export const AddNewSections: React.FC = () => {
                     orientation="vertical">
                         {group.map(item => (
                             <Button
+                            key={item.label}
                             onClick={item.addSectionHandler}
                             disabled={item.disabled}
                             align="start"

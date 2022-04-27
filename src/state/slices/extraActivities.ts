@@ -42,8 +42,8 @@ const initialExtraActivities = {
     items: [] as ExtraActivityItem[]
 }
 
-export const extraAcivities = createSlice({
-    name: "extraAcivities",
+export const extraActivities = createSlice({
+    name: "extraActivities",
     initialState: initialExtraActivities,
     reducers: {
         setSectionTitle: setSectionTitle(),

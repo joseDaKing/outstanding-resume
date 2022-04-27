@@ -14,7 +14,6 @@ import {
     DatePickerRange,
     EditText,
     Label,
-    TextArea,
     TextField
 } 
 from "components/form";

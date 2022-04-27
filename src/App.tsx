@@ -1,12 +1,33 @@
-import { Editor } from "pages/Editor";
+import { 
+    Editor,
+    Preview
+}
+from "pages";
+
+import { Route, Routes } from "react-router-dom";
 
 
+const App = () => {
+    
+    return (
+        <Routes>
+            <Route
+            path="/"
+            element={<Editor/>}/>
 
-function App() {
+            <Route
+            path="preview"
+            element={<Preview/>}/>
 
-  return (
-    <Editor/>
-  );
+            <Route
+            path="*"
+            element={
+                <div>
+                    Page Not Found
+                </div>
+            }/>
+        </Routes>
+    );
 }
 
 export default App;

@@ -75,12 +75,7 @@ export const Education: React.FC = () => {
                 <List
                 space="$6"
                 value={educationState.items}
-                onValueChange={items => {
-                    
-                    console.log(items.map(item =>item.school).join(", "));
-
-                    dispatch(education.actions.changeItems(items))
-                }}>
+                onValueChange={items => dispatch(education.actions.changeItems(items))}>
                     {item => {
                         
                         let title = "(Ej specificerat)";

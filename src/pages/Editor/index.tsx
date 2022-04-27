@@ -2,13 +2,12 @@ import {
     Box,
     Stack,
     ScrollArea,
-    Accordion
+    Accordion,
+    List
 }
 from "components/layout";
 
 import * as Sections from "./sections";
-
-import { List } from "components/layout";
 
 import { 
     useAppDispatch,
@@ -24,14 +23,21 @@ import {
     skills,
     languages,
     hobbies,
-    extraAcivities,
+    extraActivities,
     references,
     interships,
-    courses
+    courses,
+    Sections as SectionsType
 }
 from "state/slices";
 
-import { ListItemType } from "helpers";
+import { ListItemType, useGetFileName } from "helpers";
+
+import { PDFDownloadButton, PDFView } from "components/pdf";
+
+import { MadridCVTemplate } from "cvTemplates";
+
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -49,15 +55,24 @@ export const Editor: React.FC = () => {
                             
         const newSectionOrder = items.map(({ id }) => id);
 
-        dispatch(sections.actions.changeItems(newSectionOrder));
+        dispatch(sections.actions.changeItems(newSectionOrder as SectionsType[]));
     }
+
+    const navigate = useNavigate();
+
+    const onClikcHandler = () => navigate("/preview");
+
+    const state = useAppSelector(state => state);
+    
+    const downloadName = useGetFileName();
 
     return (
         <Stack 
         screen
         alignCross="start"
         orientation="horizontal">
-            <ScrollArea css={{
+            <ScrollArea 
+            css={{
                 width: "$1__2",
                 height: "100%",
                 backgroundColor: "$inverted",
@@ -108,7 +123,7 @@ export const Editor: React.FC = () => {
                                     {id === hobbies.name &&
                                     <Sections.Hobbies/>}
 
-                                    {id === extraAcivities.name &&
+                                    {id === extraActivities.name &&
                                     <Sections.ExtraActivities/>}
 
                                     {id === references.name &&
@@ -128,17 +143,35 @@ export const Editor: React.FC = () => {
                 <Sections.AddNewSections/>
             </ScrollArea>
         
-            <Stack fullY alignMain="center" css={{
+            <Stack 
+            fullY
+            orientation="vertical"
+            alignMain="center" 
+            css={{
+                gap: "$4",
                 width: "$1__2",
-                padding: "$8",
-                boxShadow: "$md",
-                backgroundColor: "$inverted",
+                padding: "$8", 
                 gradientDirection: "45deg",
                 gradientFrom: "$primary9",
                 gradientTo: "$secondary9" ,
                 position: "relative",
             }}>
-                
+                <Box
+                css={{
+                    width: "52.5%",
+                }}>
+                    <PDFView
+                    onClick={onClikcHandler}
+                    state={state}
+                    Document={MadridCVTemplate}
+                    scale={0.75}/>
+                </Box>
+
+                <PDFDownloadButton
+                variant="inverted"
+                downloadName={downloadName}
+                state={state}
+                Document={MadridCVTemplate}/>
             </Stack>
         </Stack>
     );

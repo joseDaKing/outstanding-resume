@@ -15,7 +15,7 @@ import {
     courses,
     references,
     hobbies,
-    extraAcivities
+    extraActivities
 }
 from "./slices";
 
@@ -35,7 +35,7 @@ export const store = configureStore({
         courses: courses.reducer,
         references: references.reducer,
         hobbies: hobbies.reducer,
-        extraActivities: extraAcivities.reducer
+        extraActivities: extraActivities.reducer
     }
 });
 
