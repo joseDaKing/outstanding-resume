@@ -32,6 +32,8 @@ import { references, RefrenceItem } from "state/slices";
 
 import { ItemsContainer } from "../../ItemsContainer";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialReferences = references.getInitialState();
@@ -58,78 +60,80 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={title}
-            value={props.id}>
-                <Box
-                css={{
-                    spaceY: "$6"
-                }}>
-                    <Stack
-                    fullX
+            <ItemContainer>
+                <AccordionItem
+                title={title}
+                value={props.id}>
+                    <Box
                     css={{
-                        gap: "$6"
+                        spaceY: "$6"
                     }}>
-                        <Label
-                        block
-                        name="Referentens fullständiga namn"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.nameOfTheReferenced}
-                            onValueChange={value => dispatch(references.actions.updateItem([
-                                props.id,
-                                { nameOfTheReferenced: value }
-                            ]))}/>
-                        </Label>
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Referentens fullständiga namn"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.nameOfTheReferenced}
+                                onValueChange={value => dispatch(references.actions.updateItem([
+                                    props.id,
+                                    { nameOfTheReferenced: value }
+                                ]))}/>
+                            </Label>
 
-                        <Label
-                        block
-                        name="Företag"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.company}
-                            onValueChange={value => dispatch(references.actions.updateItem([
-                                props.id,
-                                { company: value }
-                            ]))}/>
-                        </Label>
-                    </Stack>
+                            <Label
+                            block
+                            name="Företag"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.company}
+                                onValueChange={value => dispatch(references.actions.updateItem([
+                                    props.id,
+                                    { company: value }
+                                ]))}/>
+                            </Label>
+                        </Stack>
 
-                    <Stack
-                    fullX
-                    css={{
-                        gap: "$6"
-                    }}>
-                        <Label
-                        block
-                        name="Telefon"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.mobileNumber}
-                            onValueChange={value => dispatch(references.actions.updateItem([
-                                props.id,
-                                { mobileNumber: value }
-                            ]))}/>
-                        </Label>
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Telefon"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.mobileNumber}
+                                onValueChange={value => dispatch(references.actions.updateItem([
+                                    props.id,
+                                    { mobileNumber: value }
+                                ]))}/>
+                            </Label>
 
-                        <Label
-                        block
-                        name="E-post"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.email}
-                            onValueChange={value => dispatch(references.actions.updateItem([
-                                props.id,
-                                { email: value }
-                            ]))}/>
-                        </Label>
-                    </Stack>
-                </Box>
-            </AccordionItem>
+                            <Label
+                            block
+                            name="E-post"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.email}
+                                onValueChange={value => dispatch(references.actions.updateItem([
+                                    props.id,
+                                    { email: value }
+                                ]))}/>
+                            </Label>
+                        </Stack>
+                    </Box>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     );
 }

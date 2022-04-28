@@ -36,6 +36,8 @@ import { ItemsContainer } from "../../ItemsContainer";
 
 import { useDispatch } from "react-redux";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialLinks = links.getInitialState();
@@ -47,41 +49,43 @@ const LinksListItem: React.FC<LinkItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={props.label || "Etikett"}
-            value={props.id}>
-                <Stack
-                fullX
-                css={{
-                    gap: "$6"
-                }}>
-                    <Label
-                    block
-                    name="Etikett"
-                    orientation="vertical">
-                        <TextField
-                        size="lg"
-                        value={props.label}
-                        onValueChange={value => dispatch(links.actions.updateItem([
-                            props.id,
-                            { label: value }
-                        ]))}/>
-                    </Label>
+            <ItemContainer>
+                <AccordionItem
+                title={props.label || "Etikett"}
+                value={props.id}>
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Etikett"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.label}
+                            onValueChange={value => dispatch(links.actions.updateItem([
+                                props.id,
+                                { label: value }
+                            ]))}/>
+                        </Label>
 
-                    <Label
-                    block
-                    name="Länk"
-                    orientation="vertical">
-                        <TextField
-                        size="lg"
-                        value={props.url}
-                        onValueChange={value => dispatch(links.actions.updateItem([
-                            props.id,
-                            { url: value }
-                        ]))}/>
-                    </Label>
-                </Stack>
-            </AccordionItem>
+                        <Label
+                        block
+                        name="Länk"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.url}
+                            onValueChange={value => dispatch(links.actions.updateItem([
+                                props.id,
+                                { url: value }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     )
 }

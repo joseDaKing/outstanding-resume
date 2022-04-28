@@ -33,6 +33,8 @@ import { extraActivities, ExtraActivityItem } from "state/slices";
 
 import { ItemsContainer } from "../../ItemsContainer";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialExtraActivities = extraActivities.getInitialState();
@@ -59,91 +61,93 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={title}
-            value={props.id}>
-                <Box
-                css={{
-                    spaceY: "$6"
-                }}>
-                    <Stack
-                    fullX
+            <ItemContainer>
+                <AccordionItem
+                title={title}
+                value={props.id}>
+                    <Box
                     css={{
-                        gap: "$6"
+                        spaceY: "$6"
                     }}>
-                        <Label
-                        block
-                        name="Jobbtitel"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.jobTitle}
-                            onValueChange={jobTitle => dispatch(extraActivities.actions.updateItem([
-                                props.id,
-                                { jobTitle }
-                            ]))}/>
-                        </Label>
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Jobbtitel"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.jobTitle}
+                                onValueChange={jobTitle => dispatch(extraActivities.actions.updateItem([
+                                    props.id,
+                                    { jobTitle }
+                                ]))}/>
+                            </Label>
+
+                            <Label
+                            block
+                            name="Arbetsgivare"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.employer}
+                                onValueChange={employer => dispatch(extraActivities.actions.updateItem([
+                                    props.id,
+                                    { employer, }
+                                ]))}/>
+                            </Label>
+                        </Stack>
+
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Datum"
+                            orientation="vertical">
+                                <DatePickerRange
+                                size="lg"
+                                value={props.date}
+                                onValueChange={date => dispatch(extraActivities.actions.updateItem([
+                                    props.id,
+                                    { date }
+                                ]))}/>
+                            </Label>
+
+                            <Label
+                            block
+                            name="Stad"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.city}
+                                onValueChange={city => dispatch(extraActivities.actions.updateItem([
+                                    props.id,
+                                    { city }
+                                ]))}/>
+                            </Label>
+                        </Stack>
 
                         <Label
                         block
-                        name="Arbetsgivare"
+                        name="Beskrivning"
                         orientation="vertical">
-                            <TextField
+                            <TextArea
                             size="lg"
-                            value={props.employer}
-                            onValueChange={employer => dispatch(extraActivities.actions.updateItem([
+                            value={props.description}
+                            onValueChange={description => dispatch(extraActivities.actions.updateItem([
                                 props.id,
-                                { employer, }
+                                { description }
                             ]))}/>
                         </Label>
-                    </Stack>
-
-                    <Stack
-                    fullX
-                    css={{
-                        gap: "$6"
-                    }}>
-                        <Label
-                        block
-                        name="Datum"
-                        orientation="vertical">
-                            <DatePickerRange
-                            size="lg"
-                            value={props.date}
-                            onValueChange={date => dispatch(extraActivities.actions.updateItem([
-                                props.id,
-                                { date }
-                            ]))}/>
-                        </Label>
-
-                        <Label
-                        block
-                        name="Stad"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.city}
-                            onValueChange={city => dispatch(extraActivities.actions.updateItem([
-                                props.id,
-                                { city }
-                            ]))}/>
-                        </Label>
-                    </Stack>
-
-                    <Label
-                    block
-                    name="Beskrivning"
-                    orientation="vertical">
-                        <TextArea
-                        size="lg"
-                        value={props.description}
-                        onValueChange={description => dispatch(extraActivities.actions.updateItem([
-                            props.id,
-                            { description }
-                        ]))}/>
-                    </Label>
-                </Box>
-            </AccordionItem>
+                    </Box>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     );
 }

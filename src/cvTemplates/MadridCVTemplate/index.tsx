@@ -36,7 +36,7 @@ export const MadridCVTemplate: React.FC<RootState> = state => {
 
                 <View>
                     {state.sections.items.map(section => (
-                        <SortableSections 
+                        <SortableSections
                         section={section}
                         state={state}/>
                     ))}

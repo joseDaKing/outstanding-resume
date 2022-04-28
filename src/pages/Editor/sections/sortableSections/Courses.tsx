@@ -32,6 +32,8 @@ import { CourseItem, courses } from "state/slices";
 
 import { ItemsContainer } from "../../ItemsContainer";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialCourses = courses.getInitialState();
@@ -58,62 +60,64 @@ const CoursesListItem: React.FC<CourseItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={title}
-            value={props.id}>
-                <Box
-                css={{
-                    spaceY: "$6"
-                }}>
-                    <Stack
-                    fullX
+            <ItemContainer>
+                <AccordionItem
+                title={title}
+                value={props.id}>
+                    <Box
                     css={{
-                        gap: "$6"
+                        spaceY: "$6"
                     }}>
-                        <Label
-                        block
-                        name="Kurs"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.name}
-                            onValueChange={value => dispatch(courses.actions.updateItem([
-                                props.id,
-                                { name: value }
-                            ]))}/>
-                        </Label>
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Kurs"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.name}
+                                onValueChange={value => dispatch(courses.actions.updateItem([
+                                    props.id,
+                                    { name: value }
+                                ]))}/>
+                            </Label>
+
+                            <Label
+                            block
+                            name="Arbetsgivare"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.institution}
+                                onValueChange={value => dispatch(courses.actions.updateItem([
+                                    props.id,
+                                    { institution: value }
+                                ]))}/>
+                            </Label>
+                        </Stack>
 
                         <Label
                         block
-                        name="Arbetsgivare"
-                        orientation="vertical">
-                            <TextField
+                        name="Datum"
+                        orientation="vertical"
+                        css={{
+                            width: "$1__2"
+                        }}>
+                            <DatePickerRange
                             size="lg"
-                            value={props.institution}
+                            value={props.date}
                             onValueChange={value => dispatch(courses.actions.updateItem([
                                 props.id,
-                                { institution: value }
+                                { date: value }
                             ]))}/>
                         </Label>
-                    </Stack>
-
-                    <Label
-                    block
-                    name="Datum"
-                    orientation="vertical"
-                    css={{
-                        width: "$1__2"
-                    }}>
-                        <DatePickerRange
-                        size="lg"
-                        value={props.date}
-                        onValueChange={value => dispatch(courses.actions.updateItem([
-                            props.id,
-                            { date: value }
-                        ]))}/>
-                    </Label>
-                </Box>
-            </AccordionItem>
+                    </Box>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     );
 }

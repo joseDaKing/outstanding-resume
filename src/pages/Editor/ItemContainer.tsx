@@ -1,12 +1,8 @@
-import { Box, useIsDragging } from "components/layout";
+import { Box, useIsDragging } from "components/layout"
 
 
 
-type ItemsContainerProps = {
-    items: any[];
-}
-
-export const ItemsContainer: React.FC<ItemsContainerProps> = props => {    
+export const ItemContainer: React.FC = props => {
 
     const isDragging = useIsDragging();
 
@@ -30,10 +26,7 @@ export const ItemsContainer: React.FC<ItemsContainerProps> = props => {
 
         maskImage = "linear-gradient(black, transparent)";
 
-        if (props.items.length !== 0) {
-
-            height = "$16";
-        }
+        height = "$14";
     }
 
     return (
@@ -41,9 +34,9 @@ export const ItemsContainer: React.FC<ItemsContainerProps> = props => {
         css={{
             marginBottom,
             overflow,
-            height,
             maskMode,
-            maskImage
+            maskImage,
+            height
         }}>
             {props.children}
         </Box>

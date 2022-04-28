@@ -33,6 +33,8 @@ import { LanguageItem, languages } from "state/slices";
 
 import { ItemsContainer } from "../../ItemsContainer";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialLanguages = languages.getInitialState();
@@ -53,46 +55,48 @@ const LanguagesListItem: React.FC<LanguageItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={props.language || "(Ej specificerat)"}
-            value={props.id}>
-                <Stack
-                fullX
-                css={{
-                    gap: "$6"
-                }}>
-                    <Label
-                    block
-                    name="Språk"
-                    orientation="vertical">
-                        <TextField
-                        size="lg"
-                        value={props.language}
-                        onValueChange={value => dispatch(languages.actions.updateItem([
-                            props.id,
-                            { language: value }
-                        ]))}/>
-                    </Label>
-    
-                    <Label
-                    block
-                    name="Nivå"
-                    orientation="vertical">
-                        <Select
-                        value={languageLevelLabels[props.level]}
-                        onValueChange={value => dispatch(languages.actions.updateItem([
-                            props.id,
-                            { level: languageLevelLabels.indexOf(value) }
-                        ]))}
-                        size="lg">
-                            {languageLevelLabels.map(item => (
-                                <SelectItem 
-                                value={item}/>
-                            ))}
-                        </Select>
-                    </Label>
-                </Stack>
-            </AccordionItem>
+            <ItemContainer>
+                <AccordionItem
+                title={props.language || "(Ej specificerat)"}
+                value={props.id}>
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Språk"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.language}
+                            onValueChange={value => dispatch(languages.actions.updateItem([
+                                props.id,
+                                { language: value }
+                            ]))}/>
+                        </Label>
+        
+                        <Label
+                        block
+                        name="Nivå"
+                        orientation="vertical">
+                            <Select
+                            value={languageLevelLabels[props.level]}
+                            onValueChange={value => dispatch(languages.actions.updateItem([
+                                props.id,
+                                { level: languageLevelLabels.indexOf(value) }
+                            ]))}
+                            size="lg">
+                                {languageLevelLabels.map(item => (
+                                    <SelectItem 
+                                    value={item}/>
+                                ))}
+                            </Select>
+                        </Label>
+                    </Stack>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     );
 }

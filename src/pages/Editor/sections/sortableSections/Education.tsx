@@ -36,6 +36,8 @@ import { education, EducationItem } from "state/slices";
 
 import { ItemsContainer } from "../../ItemsContainer";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialEducation = education.getInitialState();
@@ -62,91 +64,93 @@ const EducationListItem: React.FC<EducationItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={title}
-            value={props.id}>
-                <Box 
-                css={{
-                    spaceY: "$6"
-                }}>
-                    <Stack
-                    fullX
+            <ItemContainer>
+                <AccordionItem
+                title={title}
+                value={props.id}>
+                    <Box 
                     css={{
-                        gap: "$6"
+                        spaceY: "$6"
                     }}>
-                        <Label
-                        block
-                        name="Examen"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.exam}
-                            onValueChange={value => dispatch(education.actions.updateItem([
-                                props.id,
-                                { exam: value }
-                            ]))}/>
-                        </Label>
-                        
-                        <Label
-                        block
-                        name="Skola"
-                        orientation="vertical">
-                            <TextField
-                            size="lg"
-                            value={props.school}
-                            onValueChange={value => dispatch(education.actions.updateItem([
-                                props.id,
-                                { school: value }
-                            ]))}/>
-                        </Label>
-                    </Stack>
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Examen"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.exam}
+                                onValueChange={value => dispatch(education.actions.updateItem([
+                                    props.id,
+                                    { exam: value }
+                                ]))}/>
+                            </Label>
+                            
+                            <Label
+                            block
+                            name="Skola"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.school}
+                                onValueChange={value => dispatch(education.actions.updateItem([
+                                    props.id,
+                                    { school: value }
+                                ]))}/>
+                            </Label>
+                        </Stack>
 
-                    <Stack
-                    fullX
-                    css={{
-                        gap: "$6"
-                    }}>
-                        <Label
-                        block
-                        name="Datum"
-                        orientation="vertical">
-                            <DatePickerRange
-                            size="lg"
-                            value={props.date}
-                            onValueChange={value => dispatch(education.actions.updateItem([
-                                props.id,
-                                { date: value }
-                            ]))}/>
-                        </Label>
+                        <Stack
+                        fullX
+                        css={{
+                            gap: "$6"
+                        }}>
+                            <Label
+                            block
+                            name="Datum"
+                            orientation="vertical">
+                                <DatePickerRange
+                                size="lg"
+                                value={props.date}
+                                onValueChange={value => dispatch(education.actions.updateItem([
+                                    props.id,
+                                    { date: value }
+                                ]))}/>
+                            </Label>
+
+                            <Label
+                            block
+                            name="Stad"
+                            orientation="vertical">
+                                <TextField
+                                size="lg"
+                                value={props.city}
+                                onValueChange={value => dispatch(education.actions.updateItem([
+                                    props.id,
+                                    { city: value }
+                                ]))}/>
+                            </Label>
+                        </Stack>
 
                         <Label
                         block
-                        name="Stad"
+                        name="Beskrivning"
                         orientation="vertical">
-                            <TextField
+                            <TextArea
                             size="lg"
-                            value={props.city}
+                            value={props.description}
                             onValueChange={value => dispatch(education.actions.updateItem([
                                 props.id,
-                                { city: value }
+                                { description: value }
                             ]))}/>
                         </Label>
-                    </Stack>
-
-                    <Label
-                    block
-                    name="Beskrivning"
-                    orientation="vertical">
-                        <TextArea
-                        size="lg"
-                        value={props.description}
-                        onValueChange={value => dispatch(education.actions.updateItem([
-                            props.id,
-                            { description: value }
-                        ]))}/>
-                    </Label>
-                </Box>
-            </AccordionItem>
+                    </Box>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     );
 }

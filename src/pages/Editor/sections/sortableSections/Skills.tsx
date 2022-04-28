@@ -36,6 +36,8 @@ import { SkillItem, skills } from "state/slices";
 
 import { ItemsContainer } from "../../ItemsContainer";
 
+import { ItemContainer } from "../../ItemContainer";
+
 
 
 const initialSkills = skills.getInitialState();
@@ -55,42 +57,44 @@ const SkillListItem: React.FC<SkillItem> = props => {
     return (
         <ListItemContent
         removeable>
-            <AccordionItem
-            title={props.name || "(Ej specificerat)"}
-            value={props.id}>
-                <Stack
-                fullX
-                css={{
-                    gap: "$6"
-                }}>
-                    <Label
-                    block
-                    name="Färdighet"
-                    orientation="vertical">
-                        <TextField
-                        size="lg"
-                        value={props.name}
-                        onValueChange={value => dispatch(skills.actions.updateItem([
-                            props.id,
-                            { name: value }
-                        ]))}/>
-                    </Label>
+            <ItemContainer>
+                <AccordionItem
+                title={props.name || "(Ej specificerat)"}
+                value={props.id}>
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Färdighet"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.name}
+                            onValueChange={value => dispatch(skills.actions.updateItem([
+                                props.id,
+                                { name: value }
+                            ]))}/>
+                        </Label>
 
-                    <Label
-                    block
-                    name={`Nivå - ${skillLevelLabels[props.level]}`}
-                    orientation="vertical">
-                        <Slider
-                        max={4}
-                        size="lg"
-                        value={[props.level]}
-                        onValueChange={([value]) => dispatch(skills.actions.updateItem([
-                            props.id,
-                            { level: value }
-                        ]))}/>
-                    </Label>
-                </Stack>
-            </AccordionItem>
+                        <Label
+                        block
+                        name={`Nivå - ${skillLevelLabels[props.level]}`}
+                        orientation="vertical">
+                            <Slider
+                            max={4}
+                            size="lg"
+                            value={[props.level]}
+                            onValueChange={([value]) => dispatch(skills.actions.updateItem([
+                                props.id,
+                                { level: value }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+                </AccordionItem>
+            </ItemContainer>
         </ListItemContent>
     );
 }
