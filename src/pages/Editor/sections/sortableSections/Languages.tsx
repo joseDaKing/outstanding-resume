@@ -31,7 +31,7 @@ from "state";
 
 import { LanguageItem, languages } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 

@@ -11,10 +11,11 @@ from "components/layout";
 
 import {  
     Button,
+    DatePickerRange,
     EditText,
     Label,
-    TextField,
-    Switch
+    TextArea,
+    TextField
 } 
 from "components/form";
 
@@ -28,31 +29,31 @@ import {
 } 
 from "state";
 
-import { references, RefrenceItem } from "state/slices";
+import { extraActivities, ExtraActivityItem } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 
-const initialReferences = references.getInitialState();
+const initialExtraActivities = extraActivities.getInitialState();
 
-const ReferencesListItem: React.FC<RefrenceItem> = props => {
+const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
 
     const dispatch = useAppDispatch();
 
     let title = "(Ej specificerat)";
 
-    if (props.nameOfTheReferenced && props.company) {
+    if (props.jobTitle && props.employer) {
 
-        title = `${props.nameOfTheReferenced}, ${props.company}`;
+        title = `${props.jobTitle}, ${props.employer}`;
     }
-    else if (props.nameOfTheReferenced) {
+    else if (props.jobTitle) {
 
-        title = props.nameOfTheReferenced;
+        title = props.jobTitle;
     }
-    else if (props.company) {
+    else if (props.employer) {
 
-        title = props.company;
+        title = props.employer;
     }
 
     return (
@@ -72,27 +73,27 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Referentens fullständiga namn"
+                        name="Jobbtitel"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.nameOfTheReferenced}
-                            onValueChange={value => dispatch(references.actions.updateItem([
+                            value={props.jobTitle}
+                            onValueChange={jobTitle => dispatch(extraActivities.actions.updateItem([
                                 props.id,
-                                { nameOfTheReferenced: value }
+                                { jobTitle }
                             ]))}/>
                         </Label>
 
                         <Label
                         block
-                        name="Företag"
+                        name="Arbetsgivare"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.company}
-                            onValueChange={value => dispatch(references.actions.updateItem([
+                            value={props.employer}
+                            onValueChange={employer => dispatch(extraActivities.actions.updateItem([
                                 props.id,
-                                { company: value }
+                                { employer, }
                             ]))}/>
                         </Label>
                     </Stack>
@@ -104,41 +105,54 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Telefon"
+                        name="Datum"
                         orientation="vertical">
-                            <TextField
+                            <DatePickerRange
                             size="lg"
-                            value={props.mobileNumber}
-                            onValueChange={value => dispatch(references.actions.updateItem([
+                            value={props.date}
+                            onValueChange={date => dispatch(extraActivities.actions.updateItem([
                                 props.id,
-                                { mobileNumber: value }
+                                { date }
                             ]))}/>
                         </Label>
 
                         <Label
                         block
-                        name="E-post"
+                        name="Stad"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.email}
-                            onValueChange={value => dispatch(references.actions.updateItem([
+                            value={props.city}
+                            onValueChange={city => dispatch(extraActivities.actions.updateItem([
                                 props.id,
-                                { email: value }
+                                { city }
                             ]))}/>
                         </Label>
                     </Stack>
+
+                    <Label
+                    block
+                    name="Beskrivning"
+                    orientation="vertical">
+                        <TextArea
+                        size="lg"
+                        value={props.description}
+                        onValueChange={description => dispatch(extraActivities.actions.updateItem([
+                            props.id,
+                            { description }
+                        ]))}/>
+                    </Label>
                 </Box>
             </AccordionItem>
         </ListItemContent>
     );
 }
 
-const ReferencesList: React.FC = () => {
+const ExtraActivitiesList: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const items = useAppSelector(store => store.references.items);
+    const items = useAppSelector(store => store.extraActivities.items);
 
     return (
         <ItemsContainer
@@ -146,18 +160,18 @@ const ReferencesList: React.FC = () => {
             <List 
             space="$6"
             value={items}
-            onValueChange={items => dispatch(references.actions.changeItems(items))}>
-                {item => <ReferencesListItem {...item}/>}
+            onValueChange={items => dispatch(extraActivities.actions.changeItems(items))}>
+                {item => <ExtraActivitiesListItem {...item}/>}
             </List>
         </ItemsContainer>
-    )
+    );
 }
 
-const ReferencesHead: React.FC = () => {
+const ExtraActivitiesHead: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const sectionTitle = useAppSelector(store => store.references.sectionTitle);
+    const sectionTitle = useAppSelector(store => store.extraActivities.sectionTitle);
 
     return (
         <SubTitle
@@ -168,56 +182,35 @@ const ReferencesHead: React.FC = () => {
             <EditText
             leftSlot={<ListItemDragHandler/>}
             rightSlot={<ListItemRemoveHandler/>}
-            resetable={initialReferences.sectionTitle}
+            resetable={initialExtraActivities.sectionTitle}
             value={sectionTitle}
-            onValueChange={value => dispatch(references.actions.setSectionTitle(value))}/>
+            onValueChange={value => dispatch(extraActivities.actions.setSectionTitle(value))}/>
         </SubTitle>
     );
 }
 
-const ReferencesBody: React.FC = () => {
+export const ExtraActivities: React.FC = () => {
 
     const dispatch = useAppDispatch();
-
-    const isHidingReferences = useAppSelector(store => store.references.isHidingReferences);
-
-    return (
-        <Label
-        name="Jag vill dölja referenser och bara lämna ut dem på begäran"
-        css={{
-            marginBottom: "$6"
-        }}>
-            <Switch
-            checked={isHidingReferences}
-            onCheckedChange={value => dispatch(references.actions.setIsHidingReferences(value))}/>
-        </Label>
-    );
-}
-
-export const References: React.FC = () => {
-
-    const dispatch = useAppDispatch();
-
+    
     return (
         <Box
         css={{
             backgroundColor: "$inverted",
             position: "relative",
         }}>
-            <ReferencesHead/>
-
-            <ReferencesBody/>
-
-            <ReferencesList/>
+            <ExtraActivitiesHead/>
+            
+            <ExtraActivitiesList/>
 
             <Button
             block
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(references.actions.addItem())}
+            onClick={() => dispatch(extraActivities.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till referens
+                Lägg till extra aktivitet
             </Button>
         </Box>
     );

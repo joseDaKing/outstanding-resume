@@ -30,7 +30,7 @@ from "state";
 
 import { CourseItem, courses } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 

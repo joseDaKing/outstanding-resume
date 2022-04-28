@@ -320,7 +320,7 @@ export function List<T extends ListItemType>(props: ListProps<T>) {
     const activeIndex = state.findIndex(({ id }) => id === active);
 
     const createRemove = (id: string) => () => setState(prevState => prevState.filter(item => item.id !== id));
-
+        
     return (
         <DndContext
         sensors={sensors}

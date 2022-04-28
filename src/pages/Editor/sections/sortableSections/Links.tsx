@@ -32,7 +32,7 @@ from "state";
 
 import { LinkItem, links } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 import { useDispatch } from "react-redux";
 

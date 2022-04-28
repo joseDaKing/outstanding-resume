@@ -35,7 +35,7 @@ import { workExperience, WorkExperienceItem } from "state/slices";
 
 import { ListItemDragHandler } from "components/layout";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 

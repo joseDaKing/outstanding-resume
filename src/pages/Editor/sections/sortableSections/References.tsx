@@ -11,11 +11,10 @@ from "components/layout";
 
 import {  
     Button,
-    DatePickerRange,
     EditText,
     Label,
-    TextArea,
-    TextField
+    TextField,
+    Switch
 } 
 from "components/form";
 
@@ -29,31 +28,31 @@ import {
 } 
 from "state";
 
-import { InternshipItem, interships } from "state/slices";
+import { references, RefrenceItem } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 
-const initialInterhsips = interships.getInitialState();
+const initialReferences = references.getInitialState();
 
-const InternshipsListItem: React.FC<InternshipItem> = props => {
+const ReferencesListItem: React.FC<RefrenceItem> = props => {
 
     const dispatch = useAppDispatch();
 
     let title = "(Ej specificerat)";
 
-    if (props.jobTitle && props.employer) {
+    if (props.nameOfTheReferenced && props.company) {
 
-        title = `${props.jobTitle}, ${props.employer}`;
+        title = `${props.nameOfTheReferenced}, ${props.company}`;
     }
-    else if (props.jobTitle) {
+    else if (props.nameOfTheReferenced) {
 
-        title = props.jobTitle;
+        title = props.nameOfTheReferenced;
     }
-    else if (props.employer) {
+    else if (props.company) {
 
-        title = props.employer;
+        title = props.company;
     }
 
     return (
@@ -73,27 +72,27 @@ const InternshipsListItem: React.FC<InternshipItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Jobbtitel"
+                        name="Referentens fullständiga namn"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.jobTitle}
-                            onValueChange={jobTitle => dispatch(interships.actions.updateItem([
+                            value={props.nameOfTheReferenced}
+                            onValueChange={value => dispatch(references.actions.updateItem([
                                 props.id,
-                                { jobTitle }
+                                { nameOfTheReferenced: value }
                             ]))}/>
                         </Label>
 
                         <Label
                         block
-                        name="Arbetsgivare"
+                        name="Företag"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.employer}
-                            onValueChange={employer => dispatch(interships.actions.updateItem([
+                            value={props.company}
+                            onValueChange={value => dispatch(references.actions.updateItem([
                                 props.id,
-                                { employer, }
+                                { company: value }
                             ]))}/>
                         </Label>
                     </Stack>
@@ -105,54 +104,41 @@ const InternshipsListItem: React.FC<InternshipItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Datum"
+                        name="Telefon"
                         orientation="vertical">
-                            <DatePickerRange
+                            <TextField
                             size="lg"
-                            value={props.date}
-                            onValueChange={date => dispatch(interships.actions.updateItem([
+                            value={props.mobileNumber}
+                            onValueChange={value => dispatch(references.actions.updateItem([
                                 props.id,
-                                { date }
+                                { mobileNumber: value }
                             ]))}/>
                         </Label>
 
                         <Label
                         block
-                        name="Stad"
+                        name="E-post"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.city}
-                            onValueChange={city => dispatch(interships.actions.updateItem([
+                            value={props.email}
+                            onValueChange={value => dispatch(references.actions.updateItem([
                                 props.id,
-                                { city }
+                                { email: value }
                             ]))}/>
                         </Label>
                     </Stack>
-
-                    <Label
-                    block
-                    name="Beskrivning"
-                    orientation="vertical">
-                        <TextArea
-                        size="lg"
-                        value={props.description}
-                        onValueChange={description => dispatch(interships.actions.updateItem([
-                            props.id,
-                            { description }
-                        ]))}/>
-                    </Label>
                 </Box>
             </AccordionItem>
         </ListItemContent>
     );
 }
 
-const IntershipsList: React.FC = () => {
-
-    const items = useAppSelector(store => store.interships.items);
+const ReferencesList: React.FC = () => {
 
     const dispatch = useAppDispatch();
+
+    const items = useAppSelector(store => store.references.items);
 
     return (
         <ItemsContainer
@@ -160,18 +146,18 @@ const IntershipsList: React.FC = () => {
             <List 
             space="$6"
             value={items}
-            onValueChange={items => dispatch(interships.actions.changeItems(items))}>
-                {item => <InternshipsListItem {...item}/>}
+            onValueChange={items => dispatch(references.actions.changeItems(items))}>
+                {item => <ReferencesListItem {...item}/>}
             </List>
         </ItemsContainer>
-    );
+    )
 }
 
-const InternshipsHeader: React.FC = () => {
+const ReferencesHead: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const sectionTitle = useAppSelector(store => store.interships.sectionTitle);
+    const sectionTitle = useAppSelector(store => store.references.sectionTitle);
 
     return (
         <SubTitle
@@ -182,14 +168,33 @@ const InternshipsHeader: React.FC = () => {
             <EditText
             leftSlot={<ListItemDragHandler/>}
             rightSlot={<ListItemRemoveHandler/>}
-            resetable={initialInterhsips.sectionTitle}
+            resetable={initialReferences.sectionTitle}
             value={sectionTitle}
-            onValueChange={value => dispatch(interships.actions.setSectionTitle(value))}/>
+            onValueChange={value => dispatch(references.actions.setSectionTitle(value))}/>
         </SubTitle>
     );
 }
 
-export const Interhships: React.FC = () => {
+const ReferencesBody: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const isHidingReferences = useAppSelector(store => store.references.isHidingReferences);
+
+    return (
+        <Label
+        name="Jag vill dölja referenser och bara lämna ut dem på begäran"
+        css={{
+            marginBottom: "$6"
+        }}>
+            <Switch
+            checked={isHidingReferences}
+            onCheckedChange={value => dispatch(references.actions.setIsHidingReferences(value))}/>
+        </Label>
+    );
+}
+
+export const References: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
@@ -199,18 +204,20 @@ export const Interhships: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative",
         }}>
-            <InternshipsHeader/>
-            
-            <IntershipsList/>
+            <ReferencesHead/>
+
+            <ReferencesBody/>
+
+            <ReferencesList/>
 
             <Button
             block
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(interships.actions.addItem())}
+            onClick={() => dispatch(references.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till praktik
+                Lägg till referens
             </Button>
         </Box>
     );

@@ -2,10 +2,9 @@ import {
     Box, 
     List, 
     Stack,
-    AccordionItem,
     ListItemContent,
-    ListItemDragHandler,
-    ListItemRemoveHandler
+    AccordionItem,
+    ListItemDragHandler
 } 
 from "components/layout";
 
@@ -19,7 +18,11 @@ import {
 } 
 from "components/form";
 
-import { SubTitle } from "components/typography";
+import {
+    Text,
+    SubTitle
+}
+from "components/typography";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 
@@ -29,31 +32,31 @@ import {
 } 
 from "state";
 
-import { extraActivities, ExtraActivityItem } from "state/slices";
+import { education, EducationItem } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 
-const initialExtraActivities = extraActivities.getInitialState();
+const initialEducation = education.getInitialState();
 
-const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
-
+const EducationListItem: React.FC<EducationItem> = props => {
+    
     const dispatch = useAppDispatch();
-
+    
     let title = "(Ej specificerat)";
 
-    if (props.jobTitle && props.employer) {
+    if (props.school && props.exam) {
 
-        title = `${props.jobTitle}, ${props.employer}`;
+        title = `${props.school}, ${props.exam}`;
     }
-    else if (props.jobTitle) {
+    else if (props.school) {
 
-        title = props.jobTitle;
+        title = props.school;
     }
-    else if (props.employer) {
+    else if (props.exam) {
 
-        title = props.employer;
+        title = props.exam;
     }
 
     return (
@@ -62,7 +65,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
             <AccordionItem
             title={title}
             value={props.id}>
-                <Box
+                <Box 
                 css={{
                     spaceY: "$6"
                 }}>
@@ -73,27 +76,27 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Jobbtitel"
+                        name="Examen"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.jobTitle}
-                            onValueChange={jobTitle => dispatch(extraActivities.actions.updateItem([
+                            value={props.exam}
+                            onValueChange={value => dispatch(education.actions.updateItem([
                                 props.id,
-                                { jobTitle }
+                                { exam: value }
                             ]))}/>
                         </Label>
-
+                        
                         <Label
                         block
-                        name="Arbetsgivare"
+                        name="Skola"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.employer}
-                            onValueChange={employer => dispatch(extraActivities.actions.updateItem([
+                            value={props.school}
+                            onValueChange={value => dispatch(education.actions.updateItem([
                                 props.id,
-                                { employer, }
+                                { school: value }
                             ]))}/>
                         </Label>
                     </Stack>
@@ -110,9 +113,9 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
                             <DatePickerRange
                             size="lg"
                             value={props.date}
-                            onValueChange={date => dispatch(extraActivities.actions.updateItem([
+                            onValueChange={value => dispatch(education.actions.updateItem([
                                 props.id,
-                                { date }
+                                { date: value }
                             ]))}/>
                         </Label>
 
@@ -123,9 +126,9 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
                             <TextField
                             size="lg"
                             value={props.city}
-                            onValueChange={city => dispatch(extraActivities.actions.updateItem([
+                            onValueChange={value => dispatch(education.actions.updateItem([
                                 props.id,
-                                { city }
+                                { city: value }
                             ]))}/>
                         </Label>
                     </Stack>
@@ -137,9 +140,9 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
                         <TextArea
                         size="lg"
                         value={props.description}
-                        onValueChange={description => dispatch(extraActivities.actions.updateItem([
+                        onValueChange={value => dispatch(education.actions.updateItem([
                             props.id,
-                            { description }
+                            { description: value }
                         ]))}/>
                     </Label>
                 </Box>
@@ -148,71 +151,74 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
     );
 }
 
-const ExtraActivitiesList: React.FC = () => {
-
+const EducationList: React.FC = () => {
+    
     const dispatch = useAppDispatch();
 
-    const items = useAppSelector(store => store.extraActivities.items);
+    const items = useAppSelector(store => store.education.items);
 
     return (
         <ItemsContainer
         items={items}>
-            <List 
+            <List
             space="$6"
             value={items}
-            onValueChange={items => dispatch(extraActivities.actions.changeItems(items))}>
-                {item => <ExtraActivitiesListItem {...item}/>}
+            onValueChange={items => dispatch(education.actions.changeItems(items))}>
+                {item => <EducationListItem {...item}/>}
             </List>
         </ItemsContainer>
     );
 }
 
-const ExtraActivitiesHead: React.FC = () => {
+const EducationHead: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const sectionTitle = useAppSelector(store => store.extraActivities.sectionTitle);
+    const sectionTitle = useAppSelector(store => store.education.sectionTitle);
 
     return (
         <SubTitle
         css={{
-            marginBottom: "$8",
-            position: "relative"
+            marginBottom: "$8"
         }}>
             <EditText
             leftSlot={<ListItemDragHandler/>}
-            rightSlot={<ListItemRemoveHandler/>}
-            resetable={initialExtraActivities.sectionTitle}
+            resetable={initialEducation.sectionTitle}
             value={sectionTitle}
-            onValueChange={value => dispatch(extraActivities.actions.setSectionTitle(value))}/>
+            onValueChange={value => dispatch(education.actions.setSectionTitle(value))}/>
         </SubTitle>
     );
 }
 
-export const ExtraActivities: React.FC = () => {
+export const Education: React.FC = () => {
 
     const dispatch = useAppDispatch();
-
-    const extraActivitiesState = useAppSelector(store => store.extraActivities);
-
+    
     return (
         <Box
         css={{
             backgroundColor: "$inverted",
-            position: "relative",
+            position: "relative"
         }}>
-            <ExtraActivitiesHead/>
-            
-            <ExtraActivitiesList/>
+            <EducationHead/>
 
+            <Text
+            css={{
+                marginBottom: "$6"
+            }}>
+                Om så är  relevant, lägg till dina senaste utbildningsresultat och datum här
+            </Text>
+
+            <EducationList/>
+            
             <Button
             block
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(extraActivities.actions.addItem())}
+            onClick={() => dispatch(education.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till extra aktivitet
+                Lägg till utbildning
             </Button>
         </Box>
     );

@@ -55,11 +55,7 @@ const ProfessionalExperienceBody: React.FC = () => {
 }
 
 export const ProfessionalExperience: React.FC = () => {
-
-    const dispatch = useAppDispatch();
-
-    const professionalExperienceState = useAppSelector(store => store.professionalExperience);
-
+    
     return (
         <Box
         css={{

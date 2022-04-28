@@ -2,9 +2,10 @@ import {
     Box, 
     List, 
     Stack,
-    ListItemContent,
     AccordionItem,
-    ListItemDragHandler
+    ListItemContent,
+    ListItemDragHandler,
+    ListItemRemoveHandler
 } 
 from "components/layout";
 
@@ -18,11 +19,7 @@ import {
 } 
 from "components/form";
 
-import {
-    Text,
-    SubTitle
-}
-from "components/typography";
+import { SubTitle } from "components/typography";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 
@@ -32,31 +29,31 @@ import {
 } 
 from "state";
 
-import { education, EducationItem } from "state/slices";
+import { InternshipItem, interships } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 
-const initialEducation = education.getInitialState();
+const initialInterhsips = interships.getInitialState();
 
-const EducationListItem: React.FC<EducationItem> = props => {
-    
+const InternshipsListItem: React.FC<InternshipItem> = props => {
+
     const dispatch = useAppDispatch();
-    
+
     let title = "(Ej specificerat)";
 
-    if (props.school && props.exam) {
+    if (props.jobTitle && props.employer) {
 
-        title = `${props.school}, ${props.exam}`;
+        title = `${props.jobTitle}, ${props.employer}`;
     }
-    else if (props.school) {
+    else if (props.jobTitle) {
 
-        title = props.school;
+        title = props.jobTitle;
     }
-    else if (props.exam) {
+    else if (props.employer) {
 
-        title = props.exam;
+        title = props.employer;
     }
 
     return (
@@ -65,7 +62,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
             <AccordionItem
             title={title}
             value={props.id}>
-                <Box 
+                <Box
                 css={{
                     spaceY: "$6"
                 }}>
@@ -76,27 +73,27 @@ const EducationListItem: React.FC<EducationItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Skola"
+                        name="Jobbtitel"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.school}
-                            onValueChange={value => dispatch(education.actions.updateItem([
+                            value={props.jobTitle}
+                            onValueChange={jobTitle => dispatch(interships.actions.updateItem([
                                 props.id,
-                                { school: value }
+                                { jobTitle }
                             ]))}/>
                         </Label>
 
                         <Label
                         block
-                        name="Examen"
+                        name="Arbetsgivare"
                         orientation="vertical">
                             <TextField
                             size="lg"
-                            value={props.exam}
-                            onValueChange={value => dispatch(education.actions.updateItem([
+                            value={props.employer}
+                            onValueChange={employer => dispatch(interships.actions.updateItem([
                                 props.id,
-                                { exam: value }
+                                { employer, }
                             ]))}/>
                         </Label>
                     </Stack>
@@ -113,9 +110,9 @@ const EducationListItem: React.FC<EducationItem> = props => {
                             <DatePickerRange
                             size="lg"
                             value={props.date}
-                            onValueChange={value => dispatch(education.actions.updateItem([
+                            onValueChange={date => dispatch(interships.actions.updateItem([
                                 props.id,
-                                { date: value }
+                                { date }
                             ]))}/>
                         </Label>
 
@@ -126,9 +123,9 @@ const EducationListItem: React.FC<EducationItem> = props => {
                             <TextField
                             size="lg"
                             value={props.city}
-                            onValueChange={value => dispatch(education.actions.updateItem([
+                            onValueChange={city => dispatch(interships.actions.updateItem([
                                 props.id,
-                                { city: value }
+                                { city }
                             ]))}/>
                         </Label>
                     </Stack>
@@ -140,9 +137,9 @@ const EducationListItem: React.FC<EducationItem> = props => {
                         <TextArea
                         size="lg"
                         value={props.description}
-                        onValueChange={value => dispatch(education.actions.updateItem([
+                        onValueChange={description => dispatch(interships.actions.updateItem([
                             props.id,
-                            { description: value }
+                            { description }
                         ]))}/>
                     </Label>
                 </Box>
@@ -151,74 +148,69 @@ const EducationListItem: React.FC<EducationItem> = props => {
     );
 }
 
-const EducationList: React.FC = () => {
-    
-    const dispatch = useAppDispatch();
+const IntershipsList: React.FC = () => {
 
-    const items = useAppSelector(store => store.education.items);
+    const items = useAppSelector(store => store.interships.items);
+
+    const dispatch = useAppDispatch();
 
     return (
         <ItemsContainer
         items={items}>
-            <List
+            <List 
             space="$6"
             value={items}
-            onValueChange={items => dispatch(education.actions.changeItems(items))}>
-                {item => <EducationListItem {...item}/>}
+            onValueChange={items => dispatch(interships.actions.changeItems(items))}>
+                {item => <InternshipsListItem {...item}/>}
             </List>
         </ItemsContainer>
     );
 }
 
-const EducationHead: React.FC = () => {
+const InternshipsHeader: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const sectionTitle = useAppSelector(store => store.education.sectionTitle);
+    const sectionTitle = useAppSelector(store => store.interships.sectionTitle);
 
     return (
         <SubTitle
         css={{
-            marginBottom: "$8"
+            marginBottom: "$8",
+            position: "relative"
         }}>
             <EditText
             leftSlot={<ListItemDragHandler/>}
-            resetable={initialEducation.sectionTitle}
+            rightSlot={<ListItemRemoveHandler/>}
+            resetable={initialInterhsips.sectionTitle}
             value={sectionTitle}
-            onValueChange={value => dispatch(education.actions.setSectionTitle(value))}/>
+            onValueChange={value => dispatch(interships.actions.setSectionTitle(value))}/>
         </SubTitle>
     );
 }
 
-export const Education: React.FC = () => {
+export const Interhships: React.FC = () => {
 
     const dispatch = useAppDispatch();
-    
+
     return (
         <Box
         css={{
             backgroundColor: "$inverted",
-            position: "relative"
+            position: "relative",
         }}>
-            <EducationHead/>
-
-            <Text
-            css={{
-                marginBottom: "$6"
-            }}>
-                Om så är  relevant, lägg till dina senaste utbildningsresultat och datum här
-            </Text>
-
-            <EducationList/>
+            <InternshipsHeader/>
             
+            <IntershipsList/>
+
             <Button
             block
             size="lg"
             align="start"
             variant="ghost"
-            onClick={() => dispatch(education.actions.addItem())}
+            onClick={() => dispatch(interships.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till utbildning
+                Lägg till praktik
             </Button>
         </Box>
     );

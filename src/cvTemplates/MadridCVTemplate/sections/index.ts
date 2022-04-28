@@ -17,3 +17,5 @@ export * from "./Links";
 export * from "./Skills";
 
 export * from "./Languages";
+
+export * from "./SortableSections";

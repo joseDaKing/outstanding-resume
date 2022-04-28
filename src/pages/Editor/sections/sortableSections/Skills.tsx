@@ -34,7 +34,7 @@ from "state";
 
 import { SkillItem, skills } from "state/slices";
 
-import { ItemsContainer } from "../ItemsContainer";
+import { ItemsContainer } from "../../ItemsContainer";
 
 
 
@@ -156,9 +156,7 @@ const SkillsBody: React.FC = () => {
 export const Skills: React.FC = () => {
 
     const dispatch = useAppDispatch();
-
-    const skillsState = useAppSelector(store => store.skills);
-
+    
     return (
         <Box
         css={{

@@ -22,6 +22,21 @@ export type EducationItem = ListItemType & {
     date: DatePickerRangeState;
 }
 
+const initialItem: Omit<EducationItem, "id"> = {
+    school: "",
+    exam: "",
+    city: "",
+    description: "",
+    date: {
+        start: {
+            year: new Date().getFullYear()
+        },
+        end: {
+            year: new Date().getFullYear()
+        }
+    }
+};
+
 const initialEducation = {
     sectionTitle: "Utbildning",
     items: [] as EducationItem[]
@@ -32,20 +47,7 @@ export const education = createSlice({
     initialState: initialEducation,
     reducers: {
         setSectionTitle: setSectionTitle(),
-        addItem: addItem({
-            school: "",
-            exam: "",
-            city: "",
-            description: "",
-            date: {
-                start: {
-                    year: new Date().getFullYear()
-                },
-                end: {
-                    year: new Date().getFullYear()
-                }
-            }
-        }),
+        addItem: addItem(initialItem),
         changeItems: changeItems(),
         updateItem: updateItem()
     }

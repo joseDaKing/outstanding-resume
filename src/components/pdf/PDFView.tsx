@@ -29,8 +29,7 @@ type PDFViewProps = {
     scale?: number
 }
 
-export const PDFView: React.FC<PDFViewProps> = props => {
-
+const PDFView: React.FC<PDFViewProps> = props => {
     const { 
         scale, 
         Document: PDFDocument, 
@@ -42,13 +41,13 @@ export const PDFView: React.FC<PDFViewProps> = props => {
 
     const [ pageNumber, setPageNumber ] = useState(1);
 
-    const [ serializeDebouncedState ] = useDebounce(JSON.stringify(state), 600);
+    // const [ serializeDebouncedState ] = useDebounce(JSON.stringify(state), 600);
 
-    const debouncedState: RootState = JSON.parse(serializeDebouncedState);
+    // const debouncedState: RootState = JSON.parse(serializeDebouncedState);
 
     const [ instance, update ] = usePDF({ document: <PDFDocument {...state}/> });
 
-    useOnChange(update, [ PDFDocument, JSON.stringify(state) ]);
+    useOnChange(update, [ JSON.stringify(state) ]);
 
     const prevPage = () => setPageNumber(prevPageNumber => {
 
@@ -185,13 +184,12 @@ export const PDFView: React.FC<PDFViewProps> = props => {
     );
 }
 
-/*
+
 const MemoPDFView = memo(PDFView, (currentProps, previousProps) => {
 
-    return true;
+    return false;
 });
 
 export {
     MemoPDFView as PDFView
 }
-*/
