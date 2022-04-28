@@ -6,4 +6,4 @@ export * from "./mergeText";
 
 export * from "./groupArrayInto";
 
-export * from "./lineClamp"
+export * from "./lineClamp";

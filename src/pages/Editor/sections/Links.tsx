@@ -30,19 +30,104 @@ import {
 } 
 from "state";
 
-import { links } from "state/slices";
+import { LinkItem, links } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
+
+import { useDispatch } from "react-redux";
 
 
 
 const initialLinks = links.getInitialState();
 
-export const Links: React.FC = () => {
+const LinksListItem: React.FC<LinkItem> = props => {
+
+    const dispatch = useDispatch();
+
+    return (
+        <ListItemContent
+        removeable>
+            <AccordionItem
+            title={props.label || "Etikett"}
+            value={props.id}>
+                <Stack
+                fullX
+                css={{
+                    gap: "$6"
+                }}>
+                    <Label
+                    block
+                    name="Etikett"
+                    orientation="vertical">
+                        <TextField
+                        size="lg"
+                        value={props.label}
+                        onValueChange={value => dispatch(links.actions.updateItem([
+                            props.id,
+                            { label: value }
+                        ]))}/>
+                    </Label>
+
+                    <Label
+                    block
+                    name="Länk"
+                    orientation="vertical">
+                        <TextField
+                        size="lg"
+                        value={props.url}
+                        onValueChange={value => dispatch(links.actions.updateItem([
+                            props.id,
+                            { url: value }
+                        ]))}/>
+                    </Label>
+                </Stack>
+            </AccordionItem>
+        </ListItemContent>
+    )
+}
+
+const LinksList: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const linksState = useAppSelector(store => store.links);
+    const items = useAppSelector(store => store.links.items);
+    
+    return (
+        <ItemsContainer
+        items={items}>
+            <List 
+            space="$6"
+            value={items}
+            onValueChange={value => dispatch(links.actions.changeItems(value))}>
+                {item => <LinksListItem {...item}/>}
+            </List>
+        </ItemsContainer>
+    )
+}
+
+const LinksHead: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const sectionTitle = useAppSelector(store => store.links.sectionTitle);
+
+    return (
+        <SubTitle
+        css={{
+            marginBottom: "$8"
+        }}>
+            <EditText
+            leftSlot={<ListItemDragHandler/>}
+            resetable={initialLinks.sectionTitle}
+            value={sectionTitle}
+            onValueChange={value => dispatch(links.actions.setSectionTitle(value))}/>
+        </SubTitle>
+    );
+}
+
+export const Links: React.FC = () => {
+
+    const dispatch = useAppDispatch();
 
     return (
         <Box
@@ -50,16 +135,7 @@ export const Links: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative"
         }}>
-            <SubTitle
-            css={{
-                marginBottom: "$8"
-            }}>
-                <EditText
-                leftSlot={<ListItemDragHandler/>}
-                resetable={initialLinks.sectionTitle}
-                value={linksState.sectionTitle}
-                onValueChange={value => dispatch(links.actions.setSectionTitle(value))}/>
-            </SubTitle>
+            <LinksHead/>
 
             <Text
             css={{
@@ -68,54 +144,7 @@ export const Links: React.FC = () => {
                 Du kan lägga till länkar till webbplatser som du vill att personalchefer ska se! Du kanske vill lägga till en länk till din portfölj, LinkedIn-profil eller personliga hemsida.
             </Text>
 
-            <ItemsContainer
-            items={linksState.items}>
-                <List 
-                space="$6"
-                value={linksState.items}
-                onValueChange={value => dispatch(links.actions.changeItems(value))}>
-                    {item => (
-                        <ListItemContent
-                        removeable>
-                            <AccordionItem
-                            title={item.label || "Etikett"}
-                            value={item.id}>
-                                <Stack
-                                fullX
-                                css={{
-                                    gap: "$6"
-                                }}>
-                                    <Label
-                                    block
-                                    name="Etikett"
-                                    orientation="vertical">
-                                        <TextField
-                                        size="lg"
-                                        value={item.label}
-                                        onValueChange={value => dispatch(links.actions.updateItem([
-                                            item.id,
-                                            { label: value }
-                                        ]))}/>
-                                    </Label>
-
-                                    <Label
-                                    block
-                                    name="Länk"
-                                    orientation="vertical">
-                                        <TextField
-                                        size="lg"
-                                        value={item.url}
-                                        onValueChange={value => dispatch(links.actions.updateItem([
-                                            item.id,
-                                            { url: value }
-                                        ]))}/>
-                                    </Label>
-                                </Stack>
-                            </AccordionItem>
-                        </ListItemContent>
-                    )}
-                </List>
-            </ItemsContainer>
+            <LinksList/>
 
             <Button
             block

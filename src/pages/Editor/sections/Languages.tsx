@@ -29,7 +29,7 @@ import {
 } 
 from "state";
 
-import { languages } from "state/slices";
+import { LanguageItem, languages } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
 
@@ -46,12 +46,101 @@ const languageLevelLabels = [
     "Modersmåltalare", 
 ];
 
-export const Languages: React.FC = () => {
+const LanguagesListItem: React.FC<LanguageItem> = props => {
 
     const dispatch = useAppDispatch();
 
-    const languagesState = useAppSelector(store => store.languages);
+    return (
+        <ListItemContent
+        removeable>
+            <AccordionItem
+            title={props.language || "(Ej specificerat)"}
+            value={props.id}>
+                <Stack
+                fullX
+                css={{
+                    gap: "$6"
+                }}>
+                    <Label
+                    block
+                    name="Språk"
+                    orientation="vertical">
+                        <TextField
+                        size="lg"
+                        value={props.language}
+                        onValueChange={value => dispatch(languages.actions.updateItem([
+                            props.id,
+                            { language: value }
+                        ]))}/>
+                    </Label>
+    
+                    <Label
+                    block
+                    name="Nivå"
+                    orientation="vertical">
+                        <Select
+                        value={languageLevelLabels[props.level]}
+                        onValueChange={value => dispatch(languages.actions.updateItem([
+                            props.id,
+                            { level: languageLevelLabels.indexOf(value) }
+                        ]))}
+                        size="lg">
+                            {languageLevelLabels.map(item => (
+                                <SelectItem 
+                                value={item}/>
+                            ))}
+                        </Select>
+                    </Label>
+                </Stack>
+            </AccordionItem>
+        </ListItemContent>
+    );
+}
 
+const LanguagesList: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const items = useAppSelector(store => store.languages.items);
+
+    return (
+        <ItemsContainer 
+        items={items}>
+            <List 
+            value={items}
+            onValueChange={value => dispatch(languages.actions.changeItems(value))}
+            space="$6">
+                {item => <LanguagesListItem {...item}/>}
+            </List>
+        </ItemsContainer>
+    );
+}
+
+const LanguagesHead: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const sectionTitle = useAppSelector(store => store.languages.sectionTitle);
+
+    return (
+        <SubTitle
+        css={{
+            marginBottom: "$8"
+        }}>
+            <EditText
+            leftSlot={<ListItemDragHandler/>}
+            rightSlot={<ListItemRemoveHandler/>}
+            resetable={initialLanguages.sectionTitle}
+            value={sectionTitle}
+            onValueChange={value => dispatch(languages.actions.setSectionTitle(value))}/>
+        </SubTitle>
+    );
+}
+
+export const Languages: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+    
     return (
         <Box
         css={{
@@ -59,71 +148,9 @@ export const Languages: React.FC = () => {
             position: "relative",
             marginTop: "$16"
         }}>
-            <SubTitle
-            css={{
-                marginBottom: "$8"
-            }}>
-                <EditText
-                leftSlot={<ListItemDragHandler/>}
-                rightSlot={<ListItemRemoveHandler/>}
-                resetable={initialLanguages.sectionTitle}
-                value={languagesState.sectionTitle}
-                onValueChange={value => dispatch(languages.actions.setSectionTitle(value))}/>
-            </SubTitle>
+            <LanguagesHead/>
 
-            <ItemsContainer 
-            items={languagesState.items}>
-                <List 
-                value={languagesState.items}
-                onValueChange={value => dispatch(languages.actions.changeItems(value))}
-                space="$6">
-                    {item => (
-                        <ListItemContent
-                        removeable>
-                            <AccordionItem
-                            title={item.language || "(Ej specificerat)"}
-                            value={item.id}>
-                                <Stack
-                                fullX
-                                css={{
-                                    gap: "$6"
-                                }}>
-                                    <Label
-                                    block
-                                    name="Språk"
-                                    orientation="vertical">
-                                        <TextField
-                                        size="lg"
-                                        value={item.language}
-                                        onValueChange={value => dispatch(languages.actions.updateItem([
-                                            item.id,
-                                            { language: value }
-                                        ]))}/>
-                                    </Label>
-
-                                    <Label
-                                    block
-                                    name="Nivå"
-                                    orientation="vertical">
-                                        <Select
-                                        value={languageLevelLabels[item.level]}
-                                        onValueChange={value => dispatch(languages.actions.updateItem([
-                                            item.id,
-                                            { level: languageLevelLabels.indexOf(value) }
-                                        ]))}
-                                        size="lg">
-                                            {languageLevelLabels.map(item => (
-                                                <SelectItem 
-                                                value={item}/>
-                                            ))}
-                                        </Select>
-                                    </Label>
-                                </Stack>
-                            </AccordionItem>
-                        </ListItemContent>
-                    )}
-                </List>
-            </ItemsContainer>
+            <LanguagesList/>
 
             <Button
             block

@@ -31,7 +31,7 @@ import {
 } 
 from "state";
 
-import { workExperience } from "state/slices";
+import { workExperience, WorkExperienceItem } from "state/slices";
 
 import { ListItemDragHandler } from "components/layout";
 
@@ -41,11 +41,160 @@ import { ItemsContainer } from "../ItemsContainer";
 
 const initialWorkExperience = workExperience.getInitialState();
 
-export const WorkExperience: React.FC = () => {
+const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
+
+    let title = "(Ej specificerat)";
+
+    if (props.jobTitle && props.employer) {
+
+        title = `${props.jobTitle}, ${props.employer}`;
+    }
+    else if (props.jobTitle) {
+
+        title = props.jobTitle;
+    }
+    else if (props.employer) {
+
+        title = props.employer;
+    }
 
     const dispatch = useAppDispatch();
 
-    const workExperienceState = useAppSelector(store => store.workExperience);
+    return (
+        <ListItemContent
+        removeable>
+            <AccordionItem
+            title={title}
+            value={props.id}>
+                <Box
+                css={{
+                    spaceY: "$6"
+                }}>
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Jobbtitel"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.jobTitle}
+                            onValueChange={jobTitle => dispatch(workExperience.actions.updateItem([
+                                props.id,
+                                { jobTitle }
+                            ]))}/>
+                        </Label>
+
+                        <Label
+                        block
+                        name="Arbetsgivare"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.employer}
+                            onValueChange={employer => dispatch(workExperience.actions.updateItem([
+                                props.id,
+                                { employer, }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Datum"
+                        orientation="vertical">
+                            <DatePickerRange
+                            size="lg"
+                            value={props.date}
+                            onValueChange={date => dispatch(workExperience.actions.updateItem([
+                                props.id,
+                                { date }
+                            ]))}/>
+                        </Label>
+
+                        <Label
+                        block
+                        name="Stad"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.city}
+                            onValueChange={city => dispatch(workExperience.actions.updateItem([
+                                props.id,
+                                { city }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+
+                    <Label
+                    block
+                    name="Beskrivning"
+                    orientation="vertical">
+                        <TextArea
+                        size="lg"
+                        value={props.description}
+                        onValueChange={description => dispatch(workExperience.actions.updateItem([
+                            props.id,
+                            { description }
+                        ]))}/>
+                    </Label>
+                </Box>
+            </AccordionItem>
+        </ListItemContent>
+    );
+}
+
+const WorkExperienceList: React.FC = () => {
+
+    const items = useAppSelector(store => store.workExperience.items);
+    
+    const dispatch = useAppDispatch();
+
+    return (
+        <ItemsContainer
+        items={items}>
+            <List 
+            space="$6"
+            value={items}
+            onValueChange={items => dispatch(workExperience.actions.changeItems(items))}>
+                {item => <WorkExperienceListItem {...item}/>}
+            </List>
+        </ItemsContainer>
+    );
+}
+
+const WorkExperienceHead: React.FC = () => {
+    
+    const dispatch = useAppDispatch();
+
+    const sectionTitle = useAppSelector(store => store.workExperience.sectionTitle);
+
+    return (
+        <SubTitle
+        css={{
+            marginBottom: "$8",
+            position: "relative"
+        }}>
+            <EditText
+            leftSlot={<ListItemDragHandler/>}
+            resetable={initialWorkExperience.sectionTitle}
+            value={sectionTitle}
+            onValueChange={value => dispatch(workExperience.actions.setSectionTitle(value))}/>
+        </SubTitle>
+    );
+}
+
+export const WorkExperience: React.FC = () => {
+
+    const dispatch = useAppDispatch();
 
     return (
         <Box
@@ -53,17 +202,7 @@ export const WorkExperience: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative",
         }}>
-            <SubTitle
-            css={{
-                marginBottom: "$8",
-                position: "relative"
-            }}>
-                <EditText
-                leftSlot={<ListItemDragHandler/>}
-                resetable={initialWorkExperience.sectionTitle}
-                value={workExperienceState.sectionTitle}
-                onValueChange={value => dispatch(workExperience.actions.setSectionTitle(value))}/>
-            </SubTitle>
+            <WorkExperienceHead/>
 
             <Text
             css={{
@@ -72,122 +211,7 @@ export const WorkExperience: React.FC = () => {
                 Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
             </Text>
             
-            <ItemsContainer
-            items={workExperienceState.items}>
-                <List 
-                space="$6"
-                value={workExperienceState.items}
-                onValueChange={items => dispatch(workExperience.actions.changeItems(items))}>
-                    {item => {
-
-                        let title = "(Ej specificerat)";
-
-                        if (item.jobTitle && item.employer) {
-
-                            title = `${item.jobTitle}, ${item.employer}`;
-                        }
-                        else if (item.jobTitle) {
-
-                            title = item.jobTitle;
-                        }
-                        else if (item.employer) {
-
-                            title = item.employer;
-                        }
-
-                        return (
-                            <ListItemContent
-                            removeable>
-                                <AccordionItem
-                                title={title}
-                                value={item.id}>
-                                    <Box
-                                    css={{
-                                        spaceY: "$6"
-                                    }}>
-                                        <Stack
-                                        fullX
-                                        css={{
-                                            gap: "$6"
-                                        }}>
-                                            <Label
-                                            block
-                                            name="Jobbtitel"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.jobTitle}
-                                                onValueChange={jobTitle => dispatch(workExperience.actions.updateItem([
-                                                    item.id,
-                                                    { jobTitle }
-                                                ]))}/>
-                                            </Label>
-
-                                            <Label
-                                            block
-                                            name="Arbetsgivare"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.employer}
-                                                onValueChange={employer => dispatch(workExperience.actions.updateItem([
-                                                    item.id,
-                                                    { employer, }
-                                                ]))}/>
-                                            </Label>
-                                        </Stack>
-
-                                        <Stack
-                                        fullX
-                                        css={{
-                                            gap: "$6"
-                                        }}>
-                                            <Label
-                                            block
-                                            name="Datum"
-                                            orientation="vertical">
-                                                <DatePickerRange
-                                                size="lg"
-                                                value={item.date}
-                                                onValueChange={date => dispatch(workExperience.actions.updateItem([
-                                                    item.id,
-                                                    { date }
-                                                ]))}/>
-                                            </Label>
-
-                                            <Label
-                                            block
-                                            name="Stad"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.city}
-                                                onValueChange={city => dispatch(workExperience.actions.updateItem([
-                                                    item.id,
-                                                    { city }
-                                                ]))}/>
-                                            </Label>
-                                        </Stack>
-
-                                        <Label
-                                        block
-                                        name="Beskrivning"
-                                        orientation="vertical">
-                                            <TextArea
-                                            size="lg"
-                                            value={item.description}
-                                            onValueChange={description => dispatch(workExperience.actions.updateItem([
-                                                item.id,
-                                                { description }
-                                            ]))}/>
-                                        </Label>
-                                    </Box>
-                                </AccordionItem>
-                            </ListItemContent>
-                        );
-                    }}
-                </List>
-            </ItemsContainer>
+            <WorkExperienceList/>
 
             <Button
             block

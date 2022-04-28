@@ -25,14 +25,12 @@ import { useGetFileName } from "helpers";
 
 
 
-export const Preview: React.FC = () => {
+export const Fullscreen: React.FC = () => {
 
     const to = useNavigate();
 
     const state = useAppSelector(state => state);
-
-    const pdf = <MadridCVTemplate {...state}/>;
-
+    
     const downloadName = useGetFileName();
 
     return (

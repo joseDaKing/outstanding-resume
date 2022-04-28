@@ -28,7 +28,7 @@ import {
 } 
 from "state";
 
-import { courses } from "state/slices";
+import { CourseItem, courses } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
 
@@ -36,118 +36,142 @@ import { ItemsContainer } from "../ItemsContainer";
 
 const initialCourses = courses.getInitialState();
 
-export const Courses: React.FC = () => {
+const CoursesListItem: React.FC<CourseItem> = props => {
 
     const dispatch = useAppDispatch();
 
-    const coursesState = useAppSelector(store => store.courses);
+    let title = "(Ej specificerat)";
 
+    if (props.name && props.institution) {
+
+        title = `${props.name}, ${props.institution}`;
+    }
+    else if (props.name) {
+
+        title = props.name;
+    }
+    else if (props.institution) {
+
+        title = props.institution;
+    }
+
+    return (
+        <ListItemContent
+        removeable>
+            <AccordionItem
+            title={title}
+            value={props.id}>
+                <Box
+                css={{
+                    spaceY: "$6"
+                }}>
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Kurs"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.name}
+                            onValueChange={value => dispatch(courses.actions.updateItem([
+                                props.id,
+                                { name: value }
+                            ]))}/>
+                        </Label>
+
+                        <Label
+                        block
+                        name="Arbetsgivare"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.institution}
+                            onValueChange={value => dispatch(courses.actions.updateItem([
+                                props.id,
+                                { institution: value }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+
+                    <Label
+                    block
+                    name="Datum"
+                    orientation="vertical"
+                    css={{
+                        width: "$1__2"
+                    }}>
+                        <DatePickerRange
+                        size="lg"
+                        value={props.date}
+                        onValueChange={value => dispatch(courses.actions.updateItem([
+                            props.id,
+                            { date: value }
+                        ]))}/>
+                    </Label>
+                </Box>
+            </AccordionItem>
+        </ListItemContent>
+    );
+}
+
+const CourseList: React.FC = props => {
+    
+    const items = useAppSelector(store => store.courses.items);
+
+    const dispatch = useAppDispatch();
+
+    return (
+        <ItemsContainer
+        items={items}>
+            <List 
+            space="$6"
+            value={items}
+            onValueChange={items => dispatch(courses.actions.changeItems(items))}>
+                {item => <CoursesListItem {...item}/>}
+            </List>
+        </ItemsContainer>
+    )
+}
+
+const CourseHead: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const sectionTitle = useAppSelector(store => store.courses.sectionTitle);
+    
+    return (
+        <SubTitle
+        css={{
+            marginBottom: "$8",
+            position: "relative"
+        }}>
+            <EditText
+            leftSlot={<ListItemDragHandler/>}
+            rightSlot={<ListItemRemoveHandler/>}
+            resetable={initialCourses.sectionTitle}
+            value={sectionTitle}
+            onValueChange={value => dispatch(courses.actions.setSectionTitle(value))}/>
+        </SubTitle>
+    );
+}
+
+export const Courses: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+    
     return (
         <Box
         css={{
             backgroundColor: "$inverted",
             position: "relative",
         }}>
-            <SubTitle
-            css={{
-                marginBottom: "$8",
-                position: "relative"
-            }}>
-                <EditText
-                leftSlot={<ListItemDragHandler/>}
-                rightSlot={<ListItemRemoveHandler/>}
-                resetable={initialCourses.sectionTitle}
-                value={coursesState.sectionTitle}
-                onValueChange={value => dispatch(courses.actions.setSectionTitle(value))}/>
-            </SubTitle>
+            <CourseHead/>
             
-            <ItemsContainer
-            items={coursesState.items}>
-                <List 
-                space="$6"
-                value={coursesState.items}
-                onValueChange={items => dispatch(courses.actions.changeItems(items))}>
-                    {item => {
-
-                        let title = "(Ej specificerat)";
-
-                        if (item.name && item.institution) {
-
-                            title = `${item.name}, ${item.institution}`;
-                        }
-                        else if (item.name) {
-
-                            title = item.name;
-                        }
-                        else if (item.institution) {
-
-                            title = item.institution;
-                        }
-
-                        return (
-                            <ListItemContent
-                            removeable>
-                                <AccordionItem
-                                title={title}
-                                value={item.id}>
-                                    <Box
-                                    css={{
-                                        spaceY: "$6"
-                                    }}>
-                                        <Stack
-                                        fullX
-                                        css={{
-                                            gap: "$6"
-                                        }}>
-                                            <Label
-                                            block
-                                            name="Kurs"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.name}
-                                                onValueChange={value => dispatch(courses.actions.updateItem([
-                                                    item.id,
-                                                    { name: value }
-                                                ]))}/>
-                                            </Label>
-
-                                            <Label
-                                            block
-                                            name="Arbetsgivare"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.institution}
-                                                onValueChange={value => dispatch(courses.actions.updateItem([
-                                                    item.id,
-                                                    { institution: value }
-                                                ]))}/>
-                                            </Label>
-                                        </Stack>
-
-                                        <Label
-                                        block
-                                        name="Datum"
-                                        orientation="vertical"
-                                        css={{
-                                            width: "$1__2"
-                                        }}>
-                                            <DatePickerRange
-                                            size="lg"
-                                            value={item.date}
-                                            onValueChange={value => dispatch(courses.actions.updateItem([
-                                                item.id,
-                                                { date: value }
-                                            ]))}/>
-                                        </Label>
-                                    </Box>
-                                </AccordionItem>
-                            </ListItemContent>
-                        );
-                    }}
-                </List>
-            </ItemsContainer>
+            <CourseList/>
 
             <Button
             block

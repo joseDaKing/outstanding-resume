@@ -25,28 +25,53 @@ import { hobbies } from "state/slices";
 
 const initialHobbies = hobbies.getInitialState();
 
-export const Hobbies: React.FC = () => {
+const HobbiesHead: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const hobbiesState = useAppSelector(store => store.hobbies);
+    const sectionTitle = useAppSelector(store => store.hobbies.sectionTitle);
 
+    return (
+        <SubTitle
+        css={{
+            marginBottom: "$8"
+        }}>
+            <EditText
+            leftSlot={<ListItemDragHandler/>}
+            rightSlot={<ListItemRemoveHandler/>}
+            resetable={initialHobbies.sectionTitle}
+            value={sectionTitle}
+            onValueChange={value => dispatch(hobbies.actions.setSectionTitle(value))}/>
+        </SubTitle>
+    );
+}
+
+const HobbiesBody: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const description = useAppSelector(store => store.hobbies.description);
+
+    return (
+        <TextArea 
+        css={{
+            minHeight: "$24"
+        }}
+        block
+        placeholder="t.ex skidåkning, fallskärmshoppning, målning"
+        value={description}
+        onValueChange={value => dispatch(hobbies.actions.setDescription(value))}/>
+    );
+}
+
+export const Hobbies: React.FC = () => {
+    
     return (
         <Box
         css={{
             backgroundColor: "$inverted",
         }}>
-            <SubTitle
-            css={{
-                marginBottom: "$8"
-            }}>
-                <EditText
-                leftSlot={<ListItemDragHandler/>}
-                rightSlot={<ListItemRemoveHandler/>}
-                resetable={initialHobbies.sectionTitle}
-                value={hobbiesState.sectionTitle}
-                onValueChange={value => dispatch(hobbies.actions.setSectionTitle(value))}/>
-            </SubTitle>
+            <HobbiesHead/>
 
             <Text
             css={{
@@ -55,14 +80,7 @@ export const Hobbies: React.FC = () => {
                 Vad tycker du om ?
             </Text>
 
-            <TextArea 
-            css={{
-                minHeight: "$24"
-            }}
-            block
-            placeholder="t.ex skidåkning, fallskärmshoppning, målning"
-            value={hobbiesState.description}
-            onValueChange={value => dispatch(hobbies.actions.setDescription(value))}/>
+            <HobbiesBody/>
         </Box>
     );
 }

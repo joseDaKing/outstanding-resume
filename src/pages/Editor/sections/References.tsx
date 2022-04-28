@@ -28,7 +28,7 @@ import {
 } 
 from "state";
 
-import { references } from "state/slices";
+import { references, RefrenceItem } from "state/slices";
 
 import { ItemsContainer } from "../ItemsContainer";
 
@@ -36,11 +36,167 @@ import { ItemsContainer } from "../ItemsContainer";
 
 const initialReferences = references.getInitialState();
 
-export const References: React.FC = () => {
+const ReferencesListItem: React.FC<RefrenceItem> = props => {
 
     const dispatch = useAppDispatch();
 
-    const referencesState = useAppSelector(store => store.references);
+    let title = "(Ej specificerat)";
+
+    if (props.nameOfTheReferenced && props.company) {
+
+        title = `${props.nameOfTheReferenced}, ${props.company}`;
+    }
+    else if (props.nameOfTheReferenced) {
+
+        title = props.nameOfTheReferenced;
+    }
+    else if (props.company) {
+
+        title = props.company;
+    }
+
+    return (
+        <ListItemContent
+        removeable>
+            <AccordionItem
+            title={title}
+            value={props.id}>
+                <Box
+                css={{
+                    spaceY: "$6"
+                }}>
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Referentens fullständiga namn"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.nameOfTheReferenced}
+                            onValueChange={value => dispatch(references.actions.updateItem([
+                                props.id,
+                                { nameOfTheReferenced: value }
+                            ]))}/>
+                        </Label>
+
+                        <Label
+                        block
+                        name="Företag"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.company}
+                            onValueChange={value => dispatch(references.actions.updateItem([
+                                props.id,
+                                { company: value }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+
+                    <Stack
+                    fullX
+                    css={{
+                        gap: "$6"
+                    }}>
+                        <Label
+                        block
+                        name="Telefon"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.mobileNumber}
+                            onValueChange={value => dispatch(references.actions.updateItem([
+                                props.id,
+                                { mobileNumber: value }
+                            ]))}/>
+                        </Label>
+
+                        <Label
+                        block
+                        name="E-post"
+                        orientation="vertical">
+                            <TextField
+                            size="lg"
+                            value={props.email}
+                            onValueChange={value => dispatch(references.actions.updateItem([
+                                props.id,
+                                { email: value }
+                            ]))}/>
+                        </Label>
+                    </Stack>
+                </Box>
+            </AccordionItem>
+        </ListItemContent>
+    );
+}
+
+const ReferencesList: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const items = useAppSelector(store => store.references.items);
+
+    return (
+        <ItemsContainer
+        items={items}>
+            <List 
+            space="$6"
+            value={items}
+            onValueChange={items => dispatch(references.actions.changeItems(items))}>
+                {item => <ReferencesListItem {...item}/>}
+            </List>
+        </ItemsContainer>
+    )
+}
+
+const ReferencesHead: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const sectionTitle = useAppSelector(store => store.references.sectionTitle);
+
+    return (
+        <SubTitle
+        css={{
+            marginBottom: "$8",
+            position: "relative"
+        }}>
+            <EditText
+            leftSlot={<ListItemDragHandler/>}
+            rightSlot={<ListItemRemoveHandler/>}
+            resetable={initialReferences.sectionTitle}
+            value={sectionTitle}
+            onValueChange={value => dispatch(references.actions.setSectionTitle(value))}/>
+        </SubTitle>
+    );
+}
+
+const ReferencesBody: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const isHidingReferences = useAppSelector(store => store.references.isHidingReferences);
+
+    return (
+        <Label
+        name="Jag vill dölja referenser och bara lämna ut dem på begäran"
+        css={{
+            marginBottom: "$6"
+        }}>
+            <Switch
+            checked={isHidingReferences}
+            onCheckedChange={value => dispatch(references.actions.setIsHidingReferences(value))}/>
+        </Label>
+    );
+}
+
+export const References: React.FC = () => {
+
+    const dispatch = useAppDispatch();
 
     return (
         <Box
@@ -48,132 +204,11 @@ export const References: React.FC = () => {
             backgroundColor: "$inverted",
             position: "relative",
         }}>
-            <SubTitle
-            css={{
-                marginBottom: "$8",
-                position: "relative"
-            }}>
-                <EditText
-                leftSlot={<ListItemDragHandler/>}
-                rightSlot={<ListItemRemoveHandler/>}
-                resetable={initialReferences.sectionTitle}
-                value={referencesState.sectionTitle}
-                onValueChange={value => dispatch(references.actions.setSectionTitle(value))}/>
-            </SubTitle>
+            <ReferencesHead/>
 
-            <Label
-            name="Jag vill dölja referenser och bara lämna ut dem på begäran"
-            css={{
-                marginBottom: "$6"
-            }}>
-                <Switch
-                checked={referencesState.isHidingReferences}
-                onCheckedChange={value => dispatch(references.actions.setIsHidingReferences(value))}/>
-            </Label>
-            
-            <ItemsContainer
-            items={referencesState.items}>
-                <List 
-                space="$6"
-                value={referencesState.items}
-                onValueChange={items => dispatch(references.actions.changeItems(items))}>
-                    {item => {
+            <ReferencesBody/>
 
-                        let title = "(Ej specificerat)";
-
-                        if (item.nameOfTheReferenced && item.company) {
-
-                            title = `${item.nameOfTheReferenced}, ${item.company}`;
-                        }
-                        else if (item.nameOfTheReferenced) {
-
-                            title = item.nameOfTheReferenced;
-                        }
-                        else if (item.company) {
-
-                            title = item.company;
-                        }
-
-                        return (
-                            <ListItemContent
-                            removeable>
-                                <AccordionItem
-                                title={title}
-                                value={item.id}>
-                                    <Box
-                                    css={{
-                                        spaceY: "$6"
-                                    }}>
-                                        <Stack
-                                        fullX
-                                        css={{
-                                            gap: "$6"
-                                        }}>
-                                            <Label
-                                            block
-                                            name="Referentens fullständiga namn"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.nameOfTheReferenced}
-                                                onValueChange={value => dispatch(references.actions.updateItem([
-                                                    item.id,
-                                                    { nameOfTheReferenced: value }
-                                                ]))}/>
-                                            </Label>
-
-                                            <Label
-                                            block
-                                            name="Företag"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.company}
-                                                onValueChange={value => dispatch(references.actions.updateItem([
-                                                    item.id,
-                                                    { company: value }
-                                                ]))}/>
-                                            </Label>
-                                        </Stack>
-
-                                        <Stack
-                                        fullX
-                                        css={{
-                                            gap: "$6"
-                                        }}>
-                                            <Label
-                                            block
-                                            name="Telefon"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.mobileNumber}
-                                                onValueChange={value => dispatch(references.actions.updateItem([
-                                                    item.id,
-                                                    { mobileNumber: value }
-                                                ]))}/>
-                                            </Label>
-
-                                            <Label
-                                            block
-                                            name="E-post"
-                                            orientation="vertical">
-                                                <TextField
-                                                size="lg"
-                                                value={item.email}
-                                                onValueChange={value => dispatch(references.actions.updateItem([
-                                                    item.id,
-                                                    { email: value }
-                                                ]))}/>
-                                            </Label>
-                                        </Stack>
-                                    </Box>
-                                </AccordionItem>
-                            </ListItemContent>
-                        );
-                    }}
-                </List>
-            </ItemsContainer>
+            <ReferencesList/>
 
             <Button
             block

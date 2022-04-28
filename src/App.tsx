@@ -1,6 +1,6 @@
 import { 
     Editor,
-    Preview
+    Fullscreen
 }
 from "pages";
 
@@ -17,7 +17,7 @@ const App = () => {
 
             <Route
             path="preview"
-            element={<Preview/>}/>
+            element={<Fullscreen/>}/>
 
             <Route
             path="*"
