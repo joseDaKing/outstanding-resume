@@ -2,8 +2,6 @@
 
 Outstanding-resumes is a free and open source resume generator.
 
-<br>
-
 [Link to website](https://outstanding-resumes.netlify.app/)
 
 ### Major frameworks used in the project
