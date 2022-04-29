@@ -2,7 +2,7 @@ import { useAppSelector } from "state";
 
 
 
-export const useGetFileName = () => {
+export const useFileName = () => {
 
     let firstName = useAppSelector(state => state.contactInformation.firstName);
 

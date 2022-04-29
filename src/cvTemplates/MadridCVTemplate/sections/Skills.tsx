@@ -19,6 +19,7 @@ export const Skills: React.FC<RootState["skills"]> = props => {
             level,
             name
         })}
+        hideLevel={props.isHidingLevel}
         items={props.items}/>
     );
 }

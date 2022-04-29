@@ -2,15 +2,13 @@ import { IconProps } from "types";
 
 import { Button, ButtonProps } from "../form";
 
-import { usePDF } from "@react-pdf/renderer";
-
 import { useRef } from "react";
 
 import { DownloadIcon } from "@radix-ui/react-icons";
 
 import { RootState } from "state";
 
-import { useOnChange } from "helpers";
+import { usePDFLink } from "helpers";
 
 
 
@@ -29,11 +27,7 @@ export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = props => {
         ...htmlProps
     } = props;
 
-    const [ instance, update ] = usePDF({
-        document: <PDFDocument {...state}/>
-    });
-
-    useOnChange(update, [ PDFDocument, JSON.stringify(state) ]);
+    const url = usePDFLink(props.state, props.Document);
 
     const ref = useRef<HTMLAnchorElement|null>(null);
 
@@ -51,9 +45,9 @@ export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = props => {
         EndIcon={DownloadIcon}>
             {props.children || "Ladda ner (pdf)"}
 
-            {instance.url &&
+            {url &&
             <a
-            href={instance.url}
+            href={url}
             download={downloadName}
             ref={ref}
             style={{

@@ -17,10 +17,6 @@ import {
 }
 from "state/slices";
 
-import { Header } from "./Header";
-
-import { ContactInformation } from "./ContactInformation";
-
 import { ProfessionalExperience } from "./ProfessionalExperience";
 
 import { WorkExperience } from "./WorkExperience";
