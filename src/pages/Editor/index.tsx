@@ -20,6 +20,9 @@ export const Editor: React.FC = () => {
             <ScrollArea 
             css={{
                 width: "$1__2",
+                "@2xl": {
+                    width: "$1__3"
+                },
                 height: "100%",
                 backgroundColor: "$inverted",
             }}>
@@ -49,10 +52,25 @@ export const Editor: React.FC = () => {
                     </Box>
                 </Accordion>
                 
-                <Sections.AddNewSections/>
+                <Box
+                css={{
+                    padding: "$10",
+                    paddingX: "$14",
+                }}>
+                    <Sections.AddNewSections/>
+                </Box>
             </ScrollArea>
         
-            <Sections.Preview/>
+            <Box
+            css={{
+                width: "$1__2",
+                "@2xl": {
+                    width: "$2__3"
+                },
+                height: "100vh"
+            }}>
+                <Sections.Preview/>
+            </Box>
         </Stack>
     );
 }

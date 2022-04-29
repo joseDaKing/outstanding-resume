@@ -16,6 +16,8 @@ import { Pencil1Icon, ResetIcon } from "@radix-ui/react-icons";
 
 import { VariantProps } from "@stitches/react";
 
+import { useIsDragging } from "../layout";
+
 
 
 const EditTextInputIconContainer = stitches.styled("span", {
@@ -231,9 +233,16 @@ export const EditText = forwardRef<HTMLInputElement, EditTextProps>((props, ref)
         }
     }
 
+    const isDragging = useIsDragging();
+
     return (
         <EditTextContainer 
-        css={css}>
+        css={{
+            ...css,
+            [`& ${EditTextInputIconContainer}`]: {
+                opacity: isDragging ? "1 !important" : undefined
+            },
+        }}>
             <EditTextInputContainer>
                 {!props.disabled && leftSlot &&
                 <EditTextInputIconContainer

@@ -29,13 +29,13 @@ import { createStyleObject } from "@capsizecss/core";
 
 
 export const media = {
-    "2xl": "@media (min-width: 1536px)",
-    xl: "@media (min-width: 1280px)",
-    lg: "@media (min-width: 1024px)",
-    md: "@media (min-width: 768px)",
-    sm: "@media (min-width: 512px)",
-    vertical: "@media (orientation: vertical)",
-    horizontal: "@media (orientation: horizontal)",
+    "2xl": "(min-width: 1536px)",
+    xl: "(min-width: 1280px)",
+    lg: "(min-width: 1024px)",
+    md: "(min-width: 768px)",
+    sm: "(min-width: 512px)",
+    vertical: "(orientation: vertical)",
+    horizontal: "(orientation: horizontal)",
 };
 
 const varThemeMap = {

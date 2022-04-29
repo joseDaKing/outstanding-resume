@@ -45,12 +45,13 @@ export const Preview: React.FC = () => {
         alignMain="center" 
         css={{
             gap: "$4",
-            width: "$1__2",
-            padding: "$8", 
+            width: "$full",
             gradientDirection: "45deg",
             gradientFrom: "$primary9",
             gradientTo: "$secondary9" ,
             position: "relative",
+            padding: "$10",
+            paddingX: "$14",
         }}>
             <Box
             css={{

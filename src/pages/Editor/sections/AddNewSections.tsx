@@ -50,11 +50,7 @@ export const AddNewSections: React.FC = () => {
     }
 
     return (
-        <Box
-        css={{
-            padding: "$10",
-            paddingX: "$14",
-        }}>
+        <>
             <SubTitle
             css={{
                 marginBottom: "$8"
@@ -88,7 +84,7 @@ export const AddNewSections: React.FC = () => {
                     </Stack>
                 ))}
             </Stack>
-        </Box>
+        </>
     );
 }
 
