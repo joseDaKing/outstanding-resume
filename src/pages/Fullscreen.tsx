@@ -9,7 +9,7 @@ import { ChevronLeftIcon } from "@radix-ui/react-icons";
 
 import { Button } from "components/form";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { 
     PDFView, 
@@ -23,11 +23,19 @@ import { useAppSelector } from "state";
 
 import { useFileName } from "helpers";
 
+import { useState } from "react";
+
 
 
 export const Fullscreen: React.FC = () => {
 
-    const to = useNavigate();
+    const navigate = useNavigate();
+
+    const locationState = (useLocation().state ?? {}) as any;
+
+    const initialPage = locationState.page ?? 1;
+
+    const [ page, setPage ] = useState(initialPage);
 
     const state = useAppSelector(state => state);
     
@@ -59,7 +67,11 @@ export const Fullscreen: React.FC = () => {
                     <Stack
                     alignMain="start">
                         <Button
-                        onClick={() => to("/")}
+                        onClick={() => navigate("/", {
+                            state: {
+                                page
+                            }
+                        })}
                         variant="text"
                         StartIcon={ChevronLeftIcon}>
                             Tillbaka till redigerare
@@ -91,6 +103,8 @@ export const Fullscreen: React.FC = () => {
                     <PDFView
                     scale={2}
                     state={state}
+                    page={page}
+                    onPageChange={setPage}
                     Document={MadridCVTemplate}/>
                 </Box>
             </ScrollArea>

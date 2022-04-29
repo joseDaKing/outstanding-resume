@@ -29,11 +29,11 @@ import { createStyleObject } from "@capsizecss/core";
 
 
 export const media = {
-    "2xl": "@media (max-width: 1536px)",
-    xl: "@media (max-width: 1280px)",
-    lg: "@media (max-width: 1024px)",
-    md: "@media (max-width: 768px)",
-    sm: "@media (max-width: 512px)",
+    "2xl": "@media (min-width: 1536px)",
+    xl: "@media (min-width: 1280px)",
+    lg: "@media (min-width: 1024px)",
+    md: "@media (min-width: 768px)",
+    sm: "@media (min-width: 512px)",
     vertical: "@media (orientation: vertical)",
     horizontal: "@media (orientation: horizontal)",
 };

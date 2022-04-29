@@ -12,7 +12,9 @@ import { PDFDownloadButton, PDFView } from "components/pdf";
 
 import { MadridCVTemplate } from "cvTemplates";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
 
 
 
@@ -20,12 +22,22 @@ export const Preview: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const onClikcHandler = () => navigate("/preview");
+    const locationState = (useLocation().state ?? {}) as any;
+
+    const initialPage = locationState.page ?? 1;
+
+    const [ page, setPage ] = useState(initialPage);
+
+    const onClikcHandler = () => navigate("/preview", {
+        state: {
+            page
+        }
+    });
 
     const state = useAppSelector(state => state);
     
     const downloadName = useFileName();
-
+    
     return (
         <Stack 
         fullY
@@ -45,6 +57,8 @@ export const Preview: React.FC = () => {
                 width: "52.5%",
             }}>
                 <PDFView
+                page={page}
+                onPageChange={setPage}
                 onClick={onClikcHandler}
                 state={state}
                 Document={MadridCVTemplate}
