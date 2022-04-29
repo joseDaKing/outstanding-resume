@@ -1,6 +1,7 @@
 import { 
     Editor,
-    Fullscreen
+    Fullscreen,
+    PageNotFound
 }
 from "pages";
 
@@ -21,11 +22,7 @@ const App = () => {
 
             <Route
             path="*"
-            element={
-                <div>
-                    Page Not Found
-                </div>
-            }/>
+            element={<PageNotFound/>}/>
         </Routes>
     );
 }
