@@ -1,4 +1,4 @@
-import { Box, Stack } from "components/layout";
+import { Stack } from "components/layout";
 
 import { Button } from "components/form";
 
