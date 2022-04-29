@@ -56,6 +56,9 @@ export const Preview: React.FC = () => {
             <Box
             css={{
                 width: "52.5%",
+                "@2xl": {
+                    width: "$2__5"
+                }
             }}>
                 <PDFView
                 page={page}

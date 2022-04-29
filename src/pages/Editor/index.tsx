@@ -65,7 +65,7 @@ export const Editor: React.FC = () => {
             css={{
                 width: "$1__2",
                 "@2xl": {
-                    width: "$2__3"
+                    flexGrow: 1
                 },
                 height: "100vh"
             }}>
