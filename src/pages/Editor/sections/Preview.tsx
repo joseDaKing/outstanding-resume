@@ -66,7 +66,7 @@ export const Preview: React.FC = () => {
                 onClick={onClikcHandler}
                 state={state}
                 Document={MadridCVTemplate}
-                scale={0.75}/>
+                scale={1}/>
             </Box>
 
             <PDFDownloadButton
