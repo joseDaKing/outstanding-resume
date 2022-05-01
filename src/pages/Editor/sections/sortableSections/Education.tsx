@@ -46,7 +46,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
     
     const dispatch = useAppDispatch();
     
-    let title = "(Ej specificerat)";
+    let title = "(Not specified)";
 
     if (props.school && props.exam) {
 
@@ -79,7 +79,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Examen"
+                            name="Exam"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -92,7 +92,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
                             
                             <Label
                             block
-                            name="Skola"
+                            name="School"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -111,7 +111,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Datum"
+                            name="Date"
                             orientation="vertical">
                                 <DatePickerRange
                                 size="lg"
@@ -124,7 +124,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
 
                             <Label
                             block
-                            name="Stad"
+                            name="City"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -138,7 +138,7 @@ const EducationListItem: React.FC<EducationItem> = props => {
 
                         <Label
                         block
-                        name="Beskrivning"
+                        name="Description"
                         orientation="vertical">
                             <TextArea
                             size="lg"
@@ -168,7 +168,7 @@ const EducationList: React.FC = () => {
             space="$6"
             value={items}
             onValueChange={items => dispatch(education.actions.changeItems(items))}>
-                {item => <EducationListItem {...item}/>}
+                {item => <EducationListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     );
@@ -210,7 +210,7 @@ export const Education: React.FC = () => {
             css={{
                 marginBottom: "$6"
             }}>
-                Om så är  relevant, lägg till dina senaste utbildningsresultat och datum här
+                If relevant, add your latest educational results and dates here
             </Text>
 
             <EducationList/>
@@ -222,7 +222,7 @@ export const Education: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(education.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till utbildning
+                Add education
             </Button>
         </Box>
     );

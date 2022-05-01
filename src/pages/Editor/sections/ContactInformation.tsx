@@ -57,7 +57,7 @@ const Country = createBinding("country");
 
 const City = createBinding("city");
 
-const Adress = createBinding("address");
+const Address = createBinding("address");
 
 const ZipCode = createBinding("zipCode");
 
@@ -113,12 +113,12 @@ export const ContactInformation: React.FC = () => {
                 }}>
                     <Label
                     block
-                    name="Jobbtitel"
+                    name="Job title"
                     orientation="vertical"
-                    help={`Lägg till en titel som "Senior marknadsförare" eller "Försäljningsansvarig som kort beskriver din övergripande erfarenhet eller den typ av roll du söker."`}>
+                    help={`Add a title like "Senior Marketer" or "Sales Manager that briefly describes your overall experience or the type of role you are looking for."`}>
                         <JobTitle
                         size="lg"
-                        placeholder="t.ex lärare"/>
+                        placeholder="eg teachers"/>
                     </Label>
                 </Stack>
 
@@ -131,7 +131,7 @@ export const ContactInformation: React.FC = () => {
                 }}>
                     <Label
                     block
-                    name="Förnamn"
+                    name="First name"
                     orientation="vertical">
                         <FirstName
                         size="lg"/>
@@ -139,7 +139,7 @@ export const ContactInformation: React.FC = () => {
 
                     <Label
                     block
-                    name="Efternamn"
+                    name="Surname"
                     orientation="vertical">
                         <LastName
                         size="lg"/>
@@ -149,7 +149,7 @@ export const ContactInformation: React.FC = () => {
                 <Collapsible
                 size="lg"
                 space="$6"
-                name="Vissa extra uppgifter">
+                name="View extra details">
                     <Stack 
                     orientation="vertical"
                     css={{
@@ -164,7 +164,7 @@ export const ContactInformation: React.FC = () => {
                         }}>
                             <Label
                             block
-                            name="E-post"
+                            name="Email"
                             orientation="vertical">
                                 <Email
                                 size="lg"/>
@@ -172,7 +172,7 @@ export const ContactInformation: React.FC = () => {
 
                             <Label
                             block
-                            name="Telefon"
+                            name="Mobilenumber"
                             orientation="vertical">
                                 <MobileNumber
                                 size="lg"/>
@@ -188,7 +188,7 @@ export const ContactInformation: React.FC = () => {
                         }}>
                             <Label
                             block
-                            name="Land"
+                            name="Country"
                             orientation="vertical">
                                 <Country
                                 size="lg"/>
@@ -196,7 +196,7 @@ export const ContactInformation: React.FC = () => {
 
                             <Label
                             block
-                            name="Stad"
+                            name="City"
                             orientation="vertical">
                                 <City
                                 size="lg"/>
@@ -212,15 +212,15 @@ export const ContactInformation: React.FC = () => {
                         }}>
                             <Label
                             block
-                            name="Adress"
+                            name="Address"
                             orientation="vertical">
-                                <Adress
+                                <Address
                                 size="lg"/>
                             </Label>
 
                             <Label
                             block
-                            name="Postnummer"
+                            name="ZIP code"
                             orientation="vertical">
                                 <ZipCode
                                 size="lg"/>
@@ -236,18 +236,18 @@ export const ContactInformation: React.FC = () => {
                         }}>
                             <Label
                             block
-                            name="Körkort"
+                            name="Driver license"
                             orientation="vertical"
-                            help="Lägg till denna del om ditt yrke kräver en vis typ av körkort. Lämna anars fältet tomt.">
+                            help="Add this part if your profession requires a certain type of driver's license. Otherwise leave the field blank.">
                                 <DriverLicense
                                 size="lg"/>
                             </Label>
 
                             <Label
                             block
-                            name="Nationalitet"
+                            name="Nationality"
                             orientation="vertical"
-                            help="Lägg bara till din nationalitet om det är ett relevant krav för tjänsten. I de flesta fall kan du lämna det tomt.">
+                            help="Only add your nationality if it is a relevant requirement for the service. In most cases, you can leave it blank.">
                                 <Nationality
                                 size="lg"/>
                             </Label>
@@ -262,7 +262,7 @@ export const ContactInformation: React.FC = () => {
                         }}>
                             <Label
                             block
-                            name="Födelseort"
+                            name="Birthplace"
                             orientation="vertical">
                                 <BirthPlace
                                 size="lg"/>
@@ -270,9 +270,9 @@ export const ContactInformation: React.FC = () => {
 
                             <Label
                             block
-                            name="Födelsedatum"
+                            name="Birth date"
                             orientation="vertical"
-                            help="Lägg bara till det födelsedatum om det är ett relevant krav för tjänsten. I de flesta fall kan du lämna fältet tomt.">
+                            help="Only add the date of birth if it is a relevant requirement for the service. In most cases, you can leave the field blank.">
                                 <BirthDate
                                 size="lg"/>
                             </Label>

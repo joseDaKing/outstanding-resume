@@ -74,7 +74,7 @@ export const Fullscreen: React.FC = () => {
                         })}
                         variant="text"
                         StartIcon={ChevronLeftIcon}>
-                            Tillbaka till redigerare
+                            Back to editor
                         </Button>
 
                         <PDFDownloadButton

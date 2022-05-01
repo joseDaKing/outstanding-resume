@@ -51,7 +51,7 @@ const LinksListItem: React.FC<LinkItem> = props => {
         removeable>
             <ItemContainer>
                 <AccordionItem
-                title={props.label || "Etikett"}
+                title={props.label || "(Not specified)"}
                 value={props.id}>
                     <Stack
                     fullX
@@ -60,7 +60,7 @@ const LinksListItem: React.FC<LinkItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Etikett"
+                        name="Label"
                         orientation="vertical">
                             <TextField
                             size="lg"
@@ -73,7 +73,7 @@ const LinksListItem: React.FC<LinkItem> = props => {
 
                         <Label
                         block
-                        name="Länk"
+                        name="Link"
                         orientation="vertical">
                             <TextField
                             size="lg"
@@ -103,7 +103,7 @@ const LinksList: React.FC = () => {
             space="$6"
             value={items}
             onValueChange={value => dispatch(links.actions.changeItems(value))}>
-                {item => <LinksListItem {...item}/>}
+                {item => <LinksListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     )
@@ -145,7 +145,7 @@ export const Links: React.FC = () => {
             css={{
                 marginBottom: "$6"
             }}>
-                Du kan lägga till länkar till webbplatser som du vill att personalchefer ska se! Du kanske vill lägga till en länk till din portfölj, LinkedIn-profil eller personliga hemsida.
+                You can add links to websites that you want HR managers to see! You may want to add a link to your portfolio, LinkedIn profile or personal website.
             </Text>
 
             <LinksList/>
@@ -157,7 +157,7 @@ export const Links: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(links.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till länk
+                Add link
             </Button>
         </Box>
     );

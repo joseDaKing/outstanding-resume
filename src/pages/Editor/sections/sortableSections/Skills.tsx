@@ -43,11 +43,11 @@ import { ItemContainer } from "../../ItemContainer";
 const initialSkills = skills.getInitialState();
 
 const skillLevelLabels = [
-    "Nybörjare",
-    "Kunning",
-    "Skicklig",
-    "Erfaren",
-    "Expert"
+    "Beginner",
+    "Knowledgeable",
+    "Skilled",
+    "Experienced",
+    "Expert",
 ];
 
 const SkillListItem: React.FC<SkillItem> = props => {
@@ -59,7 +59,7 @@ const SkillListItem: React.FC<SkillItem> = props => {
         removeable>
             <ItemContainer>
                 <AccordionItem
-                title={props.name || "(Ej specificerat)"}
+                title={props.name || "(Not specified)"}
                 value={props.id}>
                     <Stack
                     fullX
@@ -68,7 +68,7 @@ const SkillListItem: React.FC<SkillItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Färdighet"
+                        name="Skill"
                         orientation="vertical">
                             <TextField
                             size="lg"
@@ -81,7 +81,7 @@ const SkillListItem: React.FC<SkillItem> = props => {
 
                         <Label
                         block
-                        name={`Nivå - ${skillLevelLabels[props.level]}`}
+                        name={`Level - ${skillLevelLabels[props.level]}`}
                         orientation="vertical">
                             <Slider
                             max={4}
@@ -112,7 +112,7 @@ const SkillList: React.FC = () => {
             space="$6"
             value={items}
             onValueChange={value => dispatch(skills.actions.changeItems(value))}>
-                {item => <SkillListItem {...item}/>}
+                {item => <SkillListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     );
@@ -146,7 +146,7 @@ const SkillsBody: React.FC = () => {
 
     return (
         <Label
-        name="Dölj erfarenhetsnivå"
+        name="Hide experience level"
         css={{
             marginBottom: "$6"
         }}>
@@ -173,7 +173,7 @@ export const Skills: React.FC = () => {
             css={{
                 marginBottom: "$6"
             }}>
-                Lista kunskaper och erfarenhet för att låta arbetsgivare veta vad du är bra på och optimera dina nyckelord.
+                List skills and experience to let employers know what you are good at and optimize your keywords.
             </Text>
 
             <SkillsBody/>
@@ -187,7 +187,7 @@ export const Skills: React.FC = () => {
             variant="ghost"
             StartIcon={PlusIcon}
             onClick={() => dispatch(skills.actions.addItem())}>
-                Lägg till färdighet
+                Add skill
             </Button>
         </Box>
     );

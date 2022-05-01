@@ -14,7 +14,7 @@ export const ContactInformation: React.FC<RootState["contactInformation"]> = sta
                 !!state.driverLicense
                 || !!state.nationality
                 || !!state.birthDate
-                || !!state.birthDate
+                || !!state.birthPlace
             ) &&
             <View
             wrap={false}
@@ -41,7 +41,7 @@ export const ContactInformation: React.FC<RootState["contactInformation"]> = sta
                         width: "50%"
                     }}>
                         <Title>
-                            Körkort
+                            Driving license
                         </Title>
 
                         <Text>
@@ -55,7 +55,7 @@ export const ContactInformation: React.FC<RootState["contactInformation"]> = sta
                         width: "50%"
                     }}>
                         <Title>
-                            Nationalitet
+                            Nationality
                         </Title>
 
                         <Text>
@@ -78,7 +78,7 @@ export const ContactInformation: React.FC<RootState["contactInformation"]> = sta
                     width: "50%"
                 }}>
                     <Title>
-                        Datum / Födelseort
+                        {`${!!state.birthDate ? "Birthdate" : ""} ${state.birthDate && state.birthPlace ? "/" : ""} ${!!state.birthPlace ? "Birthplace" : ""}`}
                     </Title>
 
                     {!!state.birthDate &&

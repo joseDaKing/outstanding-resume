@@ -5,7 +5,7 @@ import { setSectionTitle } from "state/helpers";
 
 
 const initialProfessionalExperience = {
-    sectionTitle: "Yrkeserfarenhet",
+    sectionTitle: "Profile",
     description: ""
 }
 

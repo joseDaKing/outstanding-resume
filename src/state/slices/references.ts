@@ -31,7 +31,7 @@ const initialItem: Omit<RefrenceItem, "id"> = {
 }
 
 const initialReferences = {
-    sectionTitle: "Referenser",
+    sectionTitle: "References",
     items: [] as RefrenceItem[],
     isHidingReferences: false
 }

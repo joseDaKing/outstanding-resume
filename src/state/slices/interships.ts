@@ -38,7 +38,7 @@ const initialItem: Omit<InternshipItem, "id"> = {
 }
 
 const initialInterships = {
-    sectionTitle: "Praktikplatser",
+    sectionTitle: "Interhsips",
     items: [] as InternshipItem[]
 }
 

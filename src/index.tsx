@@ -1,18 +1,18 @@
-import { preflightStyles } from 'preflightStyles';
+import { preflightStyles } from "preflightStyles";
 
-import React from 'react';
+import React from "react";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
-import App from './App';
+import App from "./App";
 
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
 
 import { Provider as ReduxProvider } from "react-redux";
 
 import { store } from "state";
 
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 
 
 

@@ -43,7 +43,7 @@ export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = props => {
         {...htmlProps}
         onClick={onClickHandler}
         EndIcon={DownloadIcon}>
-            {props.children || "Ladda ner (pdf)"}
+            {props.children || "Download (PDF)"}
 
             {url &&
             <a
@@ -53,7 +53,7 @@ export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = props => {
             style={{
                 display: "none"
             }}>
-                {props.children || "Ladda ner (pdf)"}
+                {props.children || "Download (PDF)"}
             </a>}
         </Button>
     );

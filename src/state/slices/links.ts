@@ -23,7 +23,7 @@ const initialItem: Omit<LinkItem, "id"> = {
 }
 
 const initialLinks = {
-    sectionTitle: "Hemsidor & Sociala länkar",
+    sectionTitle: "Websites & Social links",
     items: [] as LinkItem[]
 }
 

@@ -38,7 +38,7 @@ const initialItem: Omit<ExtraActivityItem, "id"> = {
 }
 
 const initialExtraActivities = {
-    sectionTitle: "Extra Aktiviteter",
+    sectionTitle: "Extra Activities",
     items: [] as ExtraActivityItem[]
 }
 

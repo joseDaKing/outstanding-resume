@@ -38,7 +38,7 @@ const initialItem: Omit<WorkExperienceItem, "id"> = {
 }
 
 const initialWorkExperience = {
-    sectionTitle: "Arbetslivserfarenhet",
+    sectionTitle: "Work experience",
     items: [] as WorkExperienceItem[]
 }
 

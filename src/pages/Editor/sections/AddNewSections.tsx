@@ -41,12 +41,12 @@ export const AddNewSections: React.FC = () => {
     });
 
     const sectionData = {
-        ...createSectionDataGroup(extraActivities.name, "Extra aktiviteter"),
+        ...createSectionDataGroup(extraActivities.name, "Extra activities"),
         ...createSectionDataGroup(hobbies.name, "Hobbies"),
-        ...createSectionDataGroup(references.name, "Referenser"),
-        ...createSectionDataGroup(courses.name, "Kurser"),
-        ...createSectionDataGroup(interships.name, "Praktikplats"),
-        ...createSectionDataGroup(languages.name, "Språk"),
+        ...createSectionDataGroup(references.name, "References"),
+        ...createSectionDataGroup(courses.name, "Courses"),
+        ...createSectionDataGroup(interships.name, "Internship"),
+        ...createSectionDataGroup(languages.name, "Language"),
     }
 
     return (

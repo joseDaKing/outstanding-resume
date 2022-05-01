@@ -58,7 +58,7 @@ const HobbiesBody: React.FC = () => {
             minHeight: "$24"
         }}
         block
-        placeholder="t.ex skidåkning, fallskärmshoppning, målning"
+        placeholder="eg skiing, skydiving, painting"
         value={description}
         onValueChange={value => dispatch(hobbies.actions.setDescription(value))}/>
     );
@@ -77,7 +77,7 @@ export const Hobbies: React.FC = () => {
             css={{
                 marginBottom: "$6"
             }}>
-                Vad tycker du om ?
+                What do you like ?
             </Text>
 
             <HobbiesBody/>

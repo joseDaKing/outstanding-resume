@@ -40,12 +40,12 @@ import { ItemContainer } from "../../ItemContainer";
 const initialLanguages = languages.getInitialState();
 
 const languageLevelLabels = [
-    "Välj nivå",
-    "Yrkekunskaper",
-    "Bra praktiska kunskaper",
-    "Väldigt goda kunskaper",
-    "Mycket skicklig",
-    "Modersmåltalare", 
+    "Choose level",
+    "Professional skills",
+    "Good practical knowledge",
+    "Very good knowledge",
+    "Very skilled",
+    "Native speaker", 
 ];
 
 const LanguagesListItem: React.FC<LanguageItem> = props => {
@@ -57,7 +57,7 @@ const LanguagesListItem: React.FC<LanguageItem> = props => {
         removeable>
             <ItemContainer>
                 <AccordionItem
-                title={props.language || "(Ej specificerat)"}
+                title={props.language || "(Not specified)"}
                 value={props.id}>
                     <Stack
                     fullX
@@ -66,7 +66,7 @@ const LanguagesListItem: React.FC<LanguageItem> = props => {
                     }}>
                         <Label
                         block
-                        name="Språk"
+                        name="Language"
                         orientation="vertical">
                             <TextField
                             size="lg"
@@ -79,7 +79,7 @@ const LanguagesListItem: React.FC<LanguageItem> = props => {
         
                         <Label
                         block
-                        name="Nivå"
+                        name="Level"
                         orientation="vertical">
                             <Select
                             value={languageLevelLabels[props.level]}
@@ -114,7 +114,7 @@ const LanguagesList: React.FC = () => {
             value={items}
             onValueChange={value => dispatch(languages.actions.changeItems(value))}
             space="$6">
-                {item => <LanguagesListItem {...item}/>}
+                {item => <LanguagesListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     );
@@ -163,7 +163,7 @@ export const Languages: React.FC = () => {
             variant="ghost"
             StartIcon={PlusIcon}
             onClick={() => dispatch(languages.actions.addItem())}>
-                Lägg till språk
+                Add language
             </Button>
         </Box>
     );

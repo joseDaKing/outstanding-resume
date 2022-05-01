@@ -5,7 +5,7 @@ import { setSectionTitle } from "state/helpers";
 
 
 const initialContactInformation = {
-    sectionTitle: "Kontaktuppgifter",
+    sectionTitle: "Contact information",
     jobTitle: "",
     firstName: "",
     lastName: "",

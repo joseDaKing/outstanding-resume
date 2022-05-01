@@ -35,7 +35,7 @@ export const PageNotFound: React.FC = () => {
                 css={{
                     width: "$md",
                 }}>
-                    Sidan tu letar efter finns tyvär inte
+                    Sorry, the page you are looking for does not exist
                 </Display>
 
                 <SubTitle
@@ -43,13 +43,13 @@ export const PageNotFound: React.FC = () => {
                     opacity: "$90",
                     fontWeight: 300
                 }}>
-                    Kolla länkarna nedan - de kan vara användbara
+                    Check out the links below - they may be useful
                 </SubTitle>
 
                 <Button
                 onClick={onClickHandler}
                 size="lg">
-                    Skapa mitt cv
+                    Create my resume
                 </Button>
             </Stack>
         </Stack>

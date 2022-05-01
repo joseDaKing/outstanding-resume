@@ -23,7 +23,7 @@ const initialItem: Omit<LanguageItem, "id"> = {
 }
 
 const initialLanguages = {
-    sectionTitle: "Språk",
+    sectionTitle: "Language",
     items: [] as LanguageItem[]
 }
 

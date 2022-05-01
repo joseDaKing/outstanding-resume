@@ -16,6 +16,7 @@ export const Languages: React.FC<RootState["languages"]> = props => {
         maxLevel={maxLevel}
         filterItems={({ language }) => !!language}
         itemToLevel={({ language, level }) => ({
+            hide: level === 0,
             level,
             name: language
         })}

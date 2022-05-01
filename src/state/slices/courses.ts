@@ -34,7 +34,7 @@ const initialItem: Omit<CourseItem, "id"> = {
 }
 
 const initialCourses = {
-    sectionTitle: "Kurser",
+    sectionTitle: "Courses",
     items: [] as CourseItem[]
 }
 

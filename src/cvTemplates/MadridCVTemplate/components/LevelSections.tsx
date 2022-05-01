@@ -14,6 +14,7 @@ type LevelSectionsProps<T> = {
     maxLevel: number;
     filterItems: (item: T) => boolean;
     itemToLevel: (item: T) => {
+        hide?: boolean;
         level: number;
         name: string;
     };
@@ -83,16 +84,27 @@ export function LevelSections<T extends ListItemType>(props: LevelSectionsProps<
 
     const itemRenderer = (item: T, index: number, array: T[]) => {
 
-        const { level, name } = itemToLevel(item);
+        const { level, name, hide } = itemToLevel(item);
 
         const hasNextElement = !!array[index+1];
+
+        let hideItem = false;
+
+        if (hideLevel) {
+
+            hideItem = true
+        }
+        else {
+
+            hideItem = !!hide;
+        }
 
         return (
             <Col
             key={item.id}
             hasNextElement={hasNextElement}>
                 <LevelItem
-                hideLevel={hideLevel}
+                hideLevel={hideItem}
                 level={level}
                 maxLevel={maxLevel}>
                     {name}

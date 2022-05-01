@@ -48,7 +48,7 @@ const ProfessionalExperienceBody: React.FC = () => {
     return (
         <TextArea 
         block
-        placeholder="t.ex passionerad naturkunskapslärare med > 8 års erfarenhet och följande meriter"
+        placeholder="eg passionate science teacher with> 8 years of experience and the following qualifications"
         value={description}
         onValueChange={value => dispatch(professionalExperience.actions.setDescription(value))}/>
     );
@@ -67,7 +67,7 @@ export const ProfessionalExperience: React.FC = () => {
             css={{
                 marginBottom: "$6"
             }}>
-                Skriv 2-3 tydliga meningar om din allmänna erfarenhet
+                Write 2-3 clear sentences about your general experience
             </Text>
 
             <ProfessionalExperienceBody/>

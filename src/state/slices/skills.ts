@@ -23,7 +23,7 @@ const initialItem: Omit<SkillItem, "id"> = {
 }
 
 const initialSkills = {
-    sectionTitle: "Kompetenser",
+    sectionTitle: "Skills",
     isHidingLevel: false,
     items: [] as SkillItem[]
 }

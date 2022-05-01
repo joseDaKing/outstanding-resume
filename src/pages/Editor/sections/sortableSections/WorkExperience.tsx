@@ -45,7 +45,7 @@ const initialWorkExperience = workExperience.getInitialState();
 
 const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
 
-    let title = "(Ej specificerat)";
+    let title = "(Not specified)";
 
     if (props.jobTitle && props.employer) {
 
@@ -82,7 +82,7 @@ const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Jobbtitel"
+                            name="Job title"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -95,7 +95,7 @@ const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
 
                             <Label
                             block
-                            name="Arbetsgivare"
+                            name="Employer"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -114,7 +114,7 @@ const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Datum"
+                            name="Date"
                             orientation="vertical">
                                 <DatePickerRange
                                 size="lg"
@@ -127,7 +127,7 @@ const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
 
                             <Label
                             block
-                            name="Stad"
+                            name="City"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -141,7 +141,7 @@ const WorkExperienceListItem: React.FC<WorkExperienceItem> = props => {
 
                         <Label
                         block
-                        name="Beskrivning"
+                        name="Description"
                         orientation="vertical">
                             <TextArea
                             size="lg"
@@ -171,7 +171,7 @@ const WorkExperienceList: React.FC = () => {
             space="$6"
             value={items}
             onValueChange={items => dispatch(workExperience.actions.changeItems(items))}>
-                {item => <WorkExperienceListItem {...item}/>}
+                {item => <WorkExperienceListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     );
@@ -214,7 +214,7 @@ export const WorkExperience: React.FC = () => {
             css={{
                 marginBottom: "$6"
             }}>
-                Här lägger du till all relevant erfarenhet, inklusive datum, som du har från de senaste 10 åren. Den senaste tjänsten placerar du högst upp.
+                Here you add all the relevant experience, including dates, that you have from the last 10 years. You place the latest service at the top.
             </Text>
             
             <WorkExperienceList/>
@@ -226,7 +226,7 @@ export const WorkExperience: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(workExperience.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till jobb
+                Add job
             </Button>
         </Box>
     );

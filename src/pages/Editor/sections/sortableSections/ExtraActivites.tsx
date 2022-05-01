@@ -43,7 +43,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
 
     const dispatch = useAppDispatch();
 
-    let title = "(Ej specificerat)";
+    let title = "(Not specified)";
 
     if (props.jobTitle && props.employer) {
 
@@ -76,7 +76,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Jobbtitel"
+                            name="Job title"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -89,7 +89,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
 
                             <Label
                             block
-                            name="Arbetsgivare"
+                            name="Employer"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -108,7 +108,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Datum"
+                            name="Date"
                             orientation="vertical">
                                 <DatePickerRange
                                 size="lg"
@@ -121,7 +121,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
 
                             <Label
                             block
-                            name="Stad"
+                            name="City"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -135,7 +135,7 @@ const ExtraActivitiesListItem: React.FC<ExtraActivityItem> = props => {
 
                         <Label
                         block
-                        name="Beskrivning"
+                        name="Description"
                         orientation="vertical">
                             <TextArea
                             size="lg"
@@ -165,7 +165,7 @@ const ExtraActivitiesList: React.FC = () => {
             space="$6"
             value={items}
             onValueChange={items => dispatch(extraActivities.actions.changeItems(items))}>
-                {item => <ExtraActivitiesListItem {...item}/>}
+                {item => <ExtraActivitiesListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     );
@@ -214,7 +214,7 @@ export const ExtraActivities: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(extraActivities.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till extra aktivitet
+                Add extra activity
             </Button>
         </Box>
     );

@@ -42,7 +42,7 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
 
     const dispatch = useAppDispatch();
 
-    let title = "(Ej specificerat)";
+    let title = "(Not specified)";
 
     if (props.nameOfTheReferenced && props.company) {
 
@@ -75,7 +75,7 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Referentens fullständiga namn"
+                            name="The rapporteur's full name"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -88,7 +88,7 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
 
                             <Label
                             block
-                            name="Företag"
+                            name="Company"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -107,7 +107,7 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Telefon"
+                            name="Mobilenumber"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -120,7 +120,7 @@ const ReferencesListItem: React.FC<RefrenceItem> = props => {
 
                             <Label
                             block
-                            name="E-post"
+                            name="Email"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -151,7 +151,7 @@ const ReferencesList: React.FC = () => {
             space="$6"
             value={items}
             onValueChange={items => dispatch(references.actions.changeItems(items))}>
-                {item => <ReferencesListItem {...item}/>}
+                {item => <ReferencesListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     )
@@ -187,7 +187,7 @@ const ReferencesBody: React.FC = () => {
 
     return (
         <Label
-        name="Jag vill dölja referenser och bara lämna ut dem på begäran"
+        name="I want to hide references and only release them on request"
         css={{
             marginBottom: "$6"
         }}>
@@ -221,7 +221,7 @@ export const References: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(references.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till referens
+                Add reference
             </Button>
         </Box>
     );

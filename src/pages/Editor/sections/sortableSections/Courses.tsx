@@ -42,7 +42,7 @@ const CoursesListItem: React.FC<CourseItem> = props => {
 
     const dispatch = useAppDispatch();
 
-    let title = "(Ej specificerat)";
+    let title = "(Not specified)";
 
     if (props.name && props.institution) {
 
@@ -75,7 +75,7 @@ const CoursesListItem: React.FC<CourseItem> = props => {
                         }}>
                             <Label
                             block
-                            name="Kurs"
+                            name="Course"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -88,7 +88,7 @@ const CoursesListItem: React.FC<CourseItem> = props => {
 
                             <Label
                             block
-                            name="Arbetsgivare"
+                            name="Employer"
                             orientation="vertical">
                                 <TextField
                                 size="lg"
@@ -135,7 +135,7 @@ const CourseList: React.FC = props => {
             space="$6"
             value={items}
             onValueChange={items => dispatch(courses.actions.changeItems(items))}>
-                {item => <CoursesListItem {...item}/>}
+                {item => <CoursesListItem key={item.id} {...item}/>}
             </List>
         </ItemsContainer>
     )
@@ -184,7 +184,7 @@ export const Courses: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(courses.actions.addItem())}
             StartIcon={PlusIcon}>
-                Lägg till kurs
+                Add course
             </Button>
         </Box>
     );
