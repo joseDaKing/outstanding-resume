@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-import "dayjs/locale/sv";
+import "dayjs/locale/en";
 
 import localeData from "dayjs/plugin/localeData";
 

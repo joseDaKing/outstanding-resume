@@ -47,6 +47,8 @@ export type DatePickerProps = (
     }
 );
 
+const months = dayjs.monthsShort().concat([]);
+
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, ref) => {
 
     const {
@@ -86,21 +88,21 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
 
     useOnChange(() => {
 
-        const newDate = new Date(inputState)
+        const newDate = new Date(dateStrToIsoDateStr(inputState));
 
         const value = {
             month: newDate.getMonth(),
             year: newDate.getFullYear()
         }
 
-        if (isValidMonthDateStr(inputState)) {
+        if (isValidMonthDateStr(inputState) && isValidDate(value)) {
 
             setCalendarState({
                 active: "month",
                 ...value
             });
         }
-        if (isValidYearDateStr(inputState)) {
+        if (isValidYearDateStr(inputState) && isValidDate(value)) {
 
             setCalendarState({
                 active: "year",
@@ -118,8 +120,8 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>((props, 
             const newState = calendarStateToStr(calendarState); 
 
             const currentState = inputState;
-            
-            if (standarize(newState) !== standarize(currentState)) {
+
+            if (standarizeDateInput(newState) !== standarizeDateInput(currentState)) {
 
                 setInputState(newState);
             }
@@ -181,7 +183,35 @@ DatePicker.toString = () => StyledContent.selector;
 
 DatePicker.displayName = "DatePicker";
 
-function standarize(value: string): string {
+function dateStrToIsoDateStr(inputState: string): string {
+    
+    return (
+        standarizeDateInput(inputState)
+        .split(",")
+        .reverse()
+        .map(str => str.trim())
+        .map(str => {
+            const monthIndex = months.map(str => str.toLowerCase()).indexOf(str);
+
+            if (monthIndex < 0) {
+
+                return str;
+            }
+
+            let monthStr = `${monthIndex + 1}`;
+
+            if (monthStr.length === 1) {
+
+                monthStr = `0${monthStr}`;
+            }
+
+            return monthStr;
+        })
+        .join("-")
+    );
+} 
+
+function standarizeDateInput(value: string): string {
 
     const [month, year] = value.trim().replace(/\s{2,}/g, " ").split(",");
 
@@ -193,6 +223,25 @@ function standarize(value: string): string {
     return [month.trim(), year.trim()].join(", ").toLowerCase();
 }
 
+function isValidDate(value: Omit<CalendarState, "active">) {
+
+    let isMonthValid = true;
+
+    if (value.month !== undefined) {
+
+        isMonthValid = !isNaN(value.month);
+    }
+
+    let isYearValid = true;
+
+    if (value.year !== undefined) {
+
+        isYearValid = !isNaN(value.year);
+    }
+
+    return isYearValid && isMonthValid;
+}
+
 const isValidYearDateStrRegex = new RegExp(`^((\\s*)([0-9]{4,5})(\\s*))$`, "i");
 
 function isValidYearDateStr(value: string): boolean {
@@ -200,7 +249,7 @@ function isValidYearDateStr(value: string): boolean {
     return isValidYearDateStrRegex.test(value);
 }
 
-const isValidMonthDateStrRegex = new RegExp(`^((\\s*)(${dayjs.monthsShort().concat([]).map(v => v.toLowerCase()).join("|")})(\\s*),(\\s*)([0-9]{4,5})(\\s*))$`, "i");
+const isValidMonthDateStrRegex = new RegExp(`^((\\s*)(${months.map(v => v.toLowerCase()).join("|")})(\\s*),(\\s*)([0-9]{4,5})(\\s*))$`, "i");
 
 function isValidMonthDateStr(value: string): boolean {
 

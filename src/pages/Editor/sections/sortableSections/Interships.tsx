@@ -214,7 +214,7 @@ export const Interhships: React.FC = () => {
             variant="ghost"
             onClick={() => dispatch(interships.actions.addItem())}
             StartIcon={PlusIcon}>
-                Add internships
+                Add internship
             </Button>
         </Box>
     );

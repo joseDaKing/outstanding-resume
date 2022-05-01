@@ -45,7 +45,7 @@ export const AddNewSections: React.FC = () => {
         ...createSectionDataGroup(hobbies.name, "Hobbies"),
         ...createSectionDataGroup(references.name, "References"),
         ...createSectionDataGroup(courses.name, "Courses"),
-        ...createSectionDataGroup(interships.name, "Internship"),
+        ...createSectionDataGroup(interships.name, "Internships"),
         ...createSectionDataGroup(languages.name, "Language"),
     }
 

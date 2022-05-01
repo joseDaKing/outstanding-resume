@@ -147,7 +147,7 @@ export const Calendar = forwardRef<ElementRef<typeof PrimitiveToggleGroup.Root>,
     if (state.active === "month") {
 
         toggleValue = state.month?.toString();
-    }    
+    }
 
     return (
         <StyledCalendarRoot
