@@ -21,7 +21,7 @@ import { MadridCVTemplate } from "cvTemplates";
 
 import { useAppSelector } from "state";
 
-import { useFileName } from "helpers";
+import { useDownloadName } from "helpers";
 
 import { useState } from "react";
 
@@ -39,7 +39,7 @@ export const Fullscreen: React.FC = () => {
 
     const state = useAppSelector(state => state);
     
-    const downloadName = useFileName();
+    const downloadName = useDownloadName();
 
     return (
         <Box

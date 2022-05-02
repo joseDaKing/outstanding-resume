@@ -6,7 +6,7 @@ from "components/layout";
 
 import { useAppSelector } from "state";
 
-import { useFileName } from "helpers";
+import { useDownloadName } from "helpers";
 
 import { PDFDownloadButton, PDFView } from "components/pdf";
 
@@ -36,7 +36,7 @@ export const Preview: React.FC = () => {
 
     const state = useAppSelector(state => state);
     
-    const downloadName = useFileName();
+    const downloadName = useDownloadName();
     
     return (
         <Stack 

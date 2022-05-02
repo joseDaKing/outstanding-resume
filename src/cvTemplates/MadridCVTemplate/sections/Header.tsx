@@ -129,50 +129,50 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                 style={{
                     position: "absolute",
                     backgroundColor: "#f9ee54",
-                    height: "48pt",
+                    height: "48.5pt",
                     left: 0,
                     right: 0,
                     top: 0,
-                    marginTop: "-48pt"
+                    marginTop: "-48.5pt"
                 }}/>
                 <View
                 style={{
                     position: "absolute",
                     backgroundColor: "#f9ee54",
-                    width: "48pt",
+                    width: "48.5pt",
                     right: 0,
                     top: 0,
                     bottom: 0,
-                    marginRight: "-48pt"
+                    marginRight: "-48.5pt"
                 }}/>
                 <View
                 style={{
                     position: "absolute",
                     backgroundColor: "#f9ee54",                    
-                    width: "48pt",
+                    width: "48.5pt",
                     left: 0,
                     top: 0,
                     bottom: 0,
-                    marginLeft: "-48pt"
+                    marginLeft: "-48.5pt"
                 }}/>
                 <View
                 style={{
                     position: "absolute",
                     backgroundColor: "#f9ee54",
-                    width: "48pt",
-                    height: "48pt",
-                    marginLeft: "-48pt",
-                    marginTop: "-48pt"
+                    width: "48.5pt",
+                    height: "48.5pt",
+                    marginLeft: "-48.5pt",
+                    marginTop: "-48.5pt"
                 }}/>
                 <View
                 style={{
                     position: "absolute",
                     backgroundColor: "#f9ee54",
-                    width: "48pt",
-                    height: "48pt",
+                    width: "48.5pt",
+                    height: "48.5pt",
                     right: 0,
-                    marginRight: "-48pt",
-                    marginTop: "-48pt"
+                    marginRight: "-48.5pt",
+                    marginTop: "-48.5pt"
                 }}/>
             </View>}
         </>

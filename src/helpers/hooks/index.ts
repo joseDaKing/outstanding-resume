@@ -1,4 +1,4 @@
-export * from "./useFileName";
+export * from "./useDownloadName";
 
 export * from "./useItems";
 

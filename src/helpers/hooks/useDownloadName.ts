@@ -2,7 +2,7 @@ import { useAppSelector } from "state";
 
 
 
-export const useFileName = () => {
+export const useDownloadName = () => {
 
     let firstName = useAppSelector(state => state.contactInformation.firstName);
 
@@ -12,19 +12,19 @@ export const useFileName = () => {
 
     lastName = lastName.toLowerCase();
 
-    let downloadName = "cv";
+    let downloadName = "resume";
 
     if (firstName && lastName) {
 
-        downloadName = `${firstName}_${lastName}_cv`;
+        downloadName = `${firstName}_${lastName}_${downloadName}`;
     }
     else if (firstName) {
         
-        downloadName = `${firstName}_cv`;
+        downloadName = `${firstName}_${downloadName}`;
     }
     else if (lastName) {
 
-        downloadName = `${lastName}_cv`;
+        downloadName = `${lastName}_${downloadName}`;
     }
 
     return downloadName;

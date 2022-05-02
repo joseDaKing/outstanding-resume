@@ -167,6 +167,7 @@ export const ContactInformation: React.FC = () => {
                             name="Email"
                             orientation="vertical">
                                 <Email
+                                autoFocus
                                 size="lg"/>
                             </Label>
 
