@@ -3,7 +3,8 @@ import { RootState } from "state";
 import { 
     Document,
     Page,
-    View
+    View,
+    Image
 }
 from "@react-pdf/renderer";
 
@@ -24,22 +25,27 @@ export const MadridCVTemplate: React.FC<RootState> = state => {
             <Page
             style={{
                 padding: "48pt"
-            }}>
+            }}> 
                 <Header
                 {...state.contactInformation}/>
 
-                <ContactInformation
-                {...state.contactInformation}/>
+                <View
+                style={{
+                    top: "-48pt",
+                }}>
+                    <ContactInformation
+                    {...state.contactInformation}/>
 
-                <ProfessionalExperience
-                {...state.professionalExperience}/>
+                    <ProfessionalExperience
+                    {...state.professionalExperience}/>
 
-                <View>
-                    {state.sections.items.map(section => (
-                        <SortableSections
-                        section={section}
-                        state={state}/>
-                    ))}
+                    <View>
+                        {state.sections.items.map(section => (
+                            <SortableSections
+                            section={section}
+                            state={state}/>
+                        ))}
+                    </View>
                 </View>
             </Page>
         </Document>

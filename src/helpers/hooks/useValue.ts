@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useOnChange } from "./useOnChange";
 
@@ -28,9 +28,9 @@ export function useValue<T>({
 }: UseValueConfig<T>): UseValueState<T> {
 
     const [internalState, setInternalState] = useState(defaultValue ?? initialValue);
-
+    
     useOnChange(() => {
-        
+
         if (value !== undefined && onValueChange) {
 
             onValueChange(internalState);
@@ -41,20 +41,9 @@ export function useValue<T>({
 
     return [
         value ? value : internalState,
-        (state) => {
+        state => {
 
-            if (value !== undefined) {
-
-                if (typeof state === "function") {
-
-                    onValueChange((state as UseValueSetStateAction<T>)(value))
-                }
-                else {
-
-                    onValueChange(state);
-                }
-            }
-            else {
+            if (value === undefined) {
 
                 if (typeof state === "function") {
 
@@ -63,6 +52,17 @@ export function useValue<T>({
                 else {
 
                     setInternalState(state);
+                }
+            }
+            else {
+
+                if (typeof state === "function") {
+
+                    onValueChange((state as UseValueSetStateAction<T>)(value))
+                }
+                else {
+
+                    onValueChange(state);
                 }
             }
         }

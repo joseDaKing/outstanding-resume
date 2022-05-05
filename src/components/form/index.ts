@@ -1,5 +1,7 @@
 export { Button } from "./Button";
 
+export * from "./ImageUpload";
+
 export type { ButtonProps } from "./Button";
 
 export * from "./EditText";

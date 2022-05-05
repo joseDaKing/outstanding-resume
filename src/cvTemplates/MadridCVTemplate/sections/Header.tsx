@@ -4,7 +4,11 @@ import { RootState } from "state";
 
 import { mergeText } from "helpers";
 
-import { View } from "@react-pdf/renderer";
+import { 
+    View, 
+    Image
+}
+from "@react-pdf/renderer";
 
 import { 
     Display, 
@@ -13,7 +17,6 @@ import {
     Link
 }
 from "../components";
-
 
 
 
@@ -42,7 +45,10 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
             <View
             wrap={false}
             style={{
-                paddingBottom: "34pt",
+                position: "relative",
+                left: "-48pt",
+                top: "-48pt",
+                width: "100vw",
                 marginBottom: "17pt",
                 backgroundColor: "#f9ee54",
             }}>
@@ -50,130 +56,117 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                 style={{
                     display: "flex",
                     flexDirection: "row",
+                    alignItems: "stretch",
                 }}>
-                    {(
-                        !!state.firstName
-                        || !!state.lastName
-                    ) && 
-                    <View>
-                        {!!state.firstName && 
-                        <Display>
-                            {state.firstName.toUpperCase()}
-                        </Display>}
-                        
-                        {!!state.lastName && 
-                        <Display>
-                            {state.lastName.toUpperCase()}
-                        </Display>}
+                    {!!state.imageUrl
+                    &&
+                    <View
+                    style={{
+                        display: "flex",
+                        width: "25vw",
+                    }}>
+                        <Image
+                        style={{
+                            flexGrow: 1,
+                            flexShrink: 0,
+                            objectFit: "cover",
+                            objectPosition: "center"
+                        }}
+                        src={state.imageUrl}/>
                     </View>}
+
+                    {
+                    /*
+                    {!!state.contactInformation.imageUrl &&
+                    <Image
+                    src={state.contactInformation.imageUrl}/>}
+                    */
+                    }
 
                     <View
                     style={{
-                        width: "80pt"
-                    }}/>
-
-                    {(
-                        !!state.address
-                        || !!state.zipCode
-                        || !!state.city
-                        || !!state.country
-                        || !!state.jobTitle
-                        || !!state.email
-                        || !!state.mobileNumber
-                    ) &&
-                    <View>
-                        {!!state.jobTitle &&
-                        <Title>
-                            {state.jobTitle}
-                        </Title>}
+                        display: "flex",
+                        flexDirection: "row",
+                        paddingVertical: "34pt",
+                        paddingHorizontal: "48pt",
+                        paddingLeft: !!state.imageUrl ? "16pt" : undefined
+                    }}>
+                        {(
+                            !!state.firstName
+                            || !!state.lastName
+                        ) && 
+                        <View>
+                            {!!state.firstName && 
+                            <Display>
+                                {state.firstName.toUpperCase()}
+                            </Display>}
+                            
+                            {!!state.lastName && 
+                            <Display>
+                                {state.lastName.toUpperCase()}
+                            </Display>}
+                        </View>}
 
                         {(
                             !!state.address
                             || !!state.zipCode
                             || !!state.city
                             || !!state.country
+                            || !!state.jobTitle
+                            || !!state.email
+                            || !!state.mobileNumber
                         ) &&
                         <>
-                            {space}
-                            <Text>
-                                {mergeText(
-                                    ", ",
-                                    state.address,
-                                    state.zipCode,
-                                    state.city,
-                                    state.country
-                                )}
-                            </Text>
-                        </>}
+                            <View
+                            style={{
+                                width: "80pt"
+                            }}/>
+                            
+                            <View>
+                                {!!state.jobTitle &&
+                                <Title>
+                                    {state.jobTitle}
+                                </Title>}
 
-                        {!!state.email &&
-                        <>
-                            {space}
-                            <Link
-                            url={`mailto:${state.email}`}>
-                                {state.email}
-                            </Link>
-                        </>}
+                                {(
+                                    !!state.address
+                                    || !!state.zipCode
+                                    || !!state.city
+                                    || !!state.country
+                                ) &&
+                                <>
+                                    {space}
+                                    <Text>
+                                        {mergeText(
+                                            ", ",
+                                            state.address,
+                                            state.zipCode,
+                                            state.city,
+                                            state.country
+                                        )}
+                                    </Text>
+                                </>}
 
-                        {!!state.mobileNumber &&
-                        <>
-                            {space}
-                            <Text>
-                                {state.mobileNumber}
-                            </Text>
+                                {!!state.email &&
+                                <>
+                                    {space}
+                                    <Link
+                                    url={`mailto:${state.email}`}>
+                                        {state.email}
+                                    </Link>
+                                </>}
+
+                                {!!state.mobileNumber &&
+                                <>
+                                    {space}
+                                    <Text>
+                                        {state.mobileNumber}
+                                    </Text>
+                                </>}
+                            </View>
                         </>}
-                    </View>}
+                    </View>
                 </View>
-
-                <View
-                style={{
-                    position: "absolute",
-                    backgroundColor: "#f9ee54",
-                    height: "48.5pt",
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    marginTop: "-48.5pt"
-                }}/>
-                <View
-                style={{
-                    position: "absolute",
-                    backgroundColor: "#f9ee54",
-                    width: "48.5pt",
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    marginRight: "-48.5pt"
-                }}/>
-                <View
-                style={{
-                    position: "absolute",
-                    backgroundColor: "#f9ee54",                    
-                    width: "48.5pt",
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    marginLeft: "-48.5pt"
-                }}/>
-                <View
-                style={{
-                    position: "absolute",
-                    backgroundColor: "#f9ee54",
-                    width: "48.5pt",
-                    height: "48.5pt",
-                    marginLeft: "-48.5pt",
-                    marginTop: "-48.5pt"
-                }}/>
-                <View
-                style={{
-                    position: "absolute",
-                    backgroundColor: "#f9ee54",
-                    width: "48.5pt",
-                    height: "48.5pt",
-                    right: 0,
-                    marginRight: "-48.5pt",
-                    marginTop: "-48.5pt"
-                }}/>
             </View>}
         </>
     );

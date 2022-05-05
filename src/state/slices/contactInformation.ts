@@ -6,6 +6,7 @@ import { setSectionTitle } from "state/helpers";
 
 const initialContactInformation = {
     sectionTitle: "Contact information",
+    imageUrl: "",
     jobTitle: "",
     firstName: "",
     lastName: "",
@@ -26,57 +27,61 @@ export const contactInformation = createSlice({
     initialState: initialContactInformation,
     reducers: {
         setSectionTitle: setSectionTitle(),
-        setJobTitle: (state, { payload }: PayloadAction<string>) => {
+        setJobTitle: (state, { payload: jobTitle }: PayloadAction<string>) => {
 
-            state.jobTitle = payload;
+            state.jobTitle = jobTitle;
         },
-        setFirstName: (state, { payload }: PayloadAction<string>) => {
+        setFirstName: (state, { payload: firstName }: PayloadAction<string>) => {
 
-            state.firstName = payload;
+            state.firstName = firstName;
         },
-        setLastName: (state, { payload }: PayloadAction<string>) => {
+        setLastName: (state, { payload: lastName }: PayloadAction<string>) => {
 
-            state.lastName = payload;
+            state.lastName = lastName;
         },
-        setEmail: (state, { payload }: PayloadAction<string>) => {
+        setEmail: (state, { payload: email }: PayloadAction<string>) => {
 
-            state.email = payload;
+            state.email = email;
         },
-        setMobileNumber: (state, { payload }: PayloadAction<string>) => {
+        setMobileNumber: (state, { payload: mobileNumber }: PayloadAction<string>) => {
 
-            state.mobileNumber = payload;
+            state.mobileNumber = mobileNumber;
         },
-        setCountry: (state, { payload }: PayloadAction<string>) => {
+        setCountry: (state, { payload: country }: PayloadAction<string>) => {
 
-            state.country = payload;
+            state.country = country;
         },
-        setCity: (state, { payload }: PayloadAction<string>) => {
+        setCity: (state, { payload: city }: PayloadAction<string>) => {
 
-            state.city = payload;
+            state.city = city;
         },
-        setAddress: (state, { payload }: PayloadAction<string>) => {
+        setAddress: (state, { payload: address }: PayloadAction<string>) => {
 
-            state.address = payload;
+            state.address = address;
         },
-        setZipCode: (state, { payload }: PayloadAction<string>) => {
+        setZipCode: (state, { payload: zipCode }: PayloadAction<string>) => {
 
-            state.zipCode = payload;
+            state.zipCode = zipCode;
         },
-        setDriverLicense: (state, { payload }: PayloadAction<string>) => {
+        setDriverLicense: (state, { payload: driverLicense }: PayloadAction<string>) => {
 
-            state.driverLicense = payload;
+            state.driverLicense = driverLicense;
         },
-        setNationality: (state, { payload }: PayloadAction<string>) => {
+        setNationality: (state, { payload: nationality }: PayloadAction<string>) => {
 
-            state.nationality = payload;
+            state.nationality = nationality;
         },
-        setBirthPlace: (state, { payload }: PayloadAction<string>) => {
+        setBirthPlace: (state, { payload: birthPlace }: PayloadAction<string>) => {
 
-            state.birthPlace = payload;
+            state.birthPlace = birthPlace;
         },
-        setBirthDate: (state, { payload }: PayloadAction<string>) => {
+        setBirthDate: (state, { payload: birthDate }: PayloadAction<string>) => {
 
-            state.birthDate = payload;
+            state.birthDate = birthDate;
         },
+        setImageUrl: (state, { payload: imageUrl }: PayloadAction<string>) => {
+
+            state.imageUrl = imageUrl;
+        }
     }
 });

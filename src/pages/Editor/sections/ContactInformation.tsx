@@ -7,6 +7,7 @@ from "components/layout";
 
 import {  
     EditText,
+    ImageUpload,
     Label,
     TextField,
     TextFieldProps
@@ -90,6 +91,19 @@ const ContactInformationHeader: React.FC = () => {
     );
 }
 
+const PortraitImageUploader: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    const image = useAppSelector(store => store.contactInformation.imageUrl);
+
+    return (
+        <ImageUpload
+        value={image}
+        onValueChange={image => dispatch(contactInformation.actions.setImageUrl(image))}/>
+    );
+}
+
 export const ContactInformation: React.FC = () => {
 
     return (
@@ -120,6 +134,14 @@ export const ContactInformation: React.FC = () => {
                         size="lg"
                         placeholder="eg teachers"/>
                     </Label>
+
+                    <Box
+                    css={{
+                        width: "100%",
+                        flexShrink: 1
+                    }}>
+                        <PortraitImageUploader/>
+                    </Box>
                 </Stack>
 
                 <Stack
