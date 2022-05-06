@@ -28,23 +28,18 @@ export const MadridCVTemplate: React.FC<RootState> = state => {
                 <Header
                 {...state.contactInformation}/>
 
-                <View
-                style={{
-                    top: "-48pt",
-                }}>
-                    <ContactInformation
-                    {...state.contactInformation}/>
+                <ContactInformation
+                {...state.contactInformation}/>
 
-                    <ProfessionalExperience
-                    {...state.professionalExperience}/>
+                <ProfessionalExperience
+                {...state.professionalExperience}/>
 
-                    <View>
-                        {state.sections.items.map(section => (
-                            <SortableSections
-                            section={section}
-                            state={state}/>
-                        ))}
-                    </View>
+                <View>
+                    {state.sections.items.map(section => (
+                        <SortableSections
+                        section={section}
+                        state={state}/>
+                    ))}
                 </View>
             </Page>
         </Document>

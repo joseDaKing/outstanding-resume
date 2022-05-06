@@ -49,7 +49,6 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                 left: "-48pt",
                 top: "-48pt",
                 width: "100vw",
-                marginBottom: "17pt",
                 backgroundColor: "#f9ee54",
             }}>
                 <View

@@ -19,7 +19,7 @@ export const ContactInformation: React.FC<RootState["contactInformation"]> = sta
             <View
             wrap={false}
             style={{
-                paddingVertical: "17pt",
+                paddingBottom: "17pt",
             }}>
                 {!!state.sectionTitle &&
                 <SectionTitle>
