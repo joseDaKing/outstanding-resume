@@ -39,10 +39,7 @@ const acceptableFiles = [
     "jpeg",
     "png"
 ]
-.map(extension => `image/${extension}`)
-.join(",")
-
-console.log(acceptableFiles);
+.map(extension => `image/${extension}`).join(",");
 
 export const ImageUpload: React.FC<ImageUploadProps> = props => {
 
