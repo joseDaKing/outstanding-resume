@@ -3,8 +3,7 @@ import { RootState } from "state";
 import { 
     Document,
     Page,
-    View,
-    Image
+    View
 }
 from "@react-pdf/renderer";
 
