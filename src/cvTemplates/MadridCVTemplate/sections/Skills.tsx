@@ -13,10 +13,10 @@ export const Skills: React.FC<RootState["skills"]> = props => {
     return (
         <LevelSections
         sectionTitle={props.sectionTitle}
-        maxLevel={maxLevel}
+        maxLevel={maxLevel + 1}
         filterItems={({ name }) => !!name}
         itemToLevel={({ level, name }) => ({
-            level,
+            level: level + 1,
             name
         })}
         hideLevel={props.isHidingLevel}

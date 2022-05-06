@@ -1,6 +1,6 @@
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 
 import { Box, Stack } from "components/layout";
 
@@ -29,29 +29,21 @@ const PDFViewPaginater: React.FC<PDFViewPaginaterProps> = props => {
         ...props
     });
 
-    const prevPage = () => setPageNumber(prevPageNumber => {
+    const offsetPage = (offset: number) => setPageNumber(prevPage => {
 
-        const newPageNumber = prevPageNumber - 1;
+        const newPageNumber = prevPage + offset;
 
-        if (0 < newPageNumber) {
+        if (newPageNumber < 1 || props.amountOfPages < newPageNumber) {
 
-            return newPageNumber;
+            return prevPage;
         }
 
-        return prevPageNumber;
+        return newPageNumber;
     });
 
-    const nextPage = () => setPageNumber(prevPageNumber => {
+    const prevPage = () => offsetPage(-1);
 
-        const newPageNumber = prevPageNumber +  1;
-
-        if (prevPageNumber < props.amountOfPages) {
-
-            return newPageNumber;
-        }
-
-        return prevPageNumber;
-    });
+    const nextPage = () => offsetPage(1);
 
     return (
         <Stack
