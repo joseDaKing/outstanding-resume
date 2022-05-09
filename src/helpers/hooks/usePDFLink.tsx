@@ -1,10 +1,26 @@
 import { pdf, } from "@react-pdf/renderer";
 
-import React, { useEffect, useMemo, useState } from "react";
-
 import { RootState } from "state";
 
-import { courses, education, extraActivities, interships, links, references, skills, workExperience } from "state/slices";
+import React, { 
+    useEffect, 
+    useMemo, 
+    useState 
+} 
+from "react";
+
+import { 
+    courses, 
+    education, 
+    extraActivities, 
+    interships, 
+    languages, 
+    links, 
+    references, 
+    skills, 
+    workExperience 
+}
+from "state/slices";
 
 import { useDebounce } from "use-debounce";
 
@@ -109,11 +125,18 @@ function cleanState(state: RootState): RootState {
         newState.sections.items = newState.sections.items.filter(section => section !== courses.name);
     }
 
-    newState.interships.items = state.extraActivities.items.filter(({ jobTitle }) => !!jobTitle);
+    newState.interships.items = state.interships.items.filter(({ jobTitle }) => !!jobTitle);
 
     if (newState.interships.items.length === 0) {
 
         newState.sections.items = newState.sections.items.filter(section => section !== interships.name);
+    }
+    
+    newState.languages.items = state.languages.items.filter(({ language }) => !!language);
+
+    if (newState.languages.items.length === 0) {
+
+        newState.sections.items = newState.sections.items.filter(section => section !== languages.name);
     }
 
     return newState;
