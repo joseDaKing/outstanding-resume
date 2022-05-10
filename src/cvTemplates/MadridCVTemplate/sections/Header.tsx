@@ -49,6 +49,7 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                 left: "-48pt",
                 top: "-48pt",
                 width: "100vw",
+                height: "15vh",
                 backgroundColor: "#f9ee54",
             }}>
                 <View
@@ -56,6 +57,7 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "stretch",
+                    overflow: "hidden"
                 }}>
                     {!!state.imageUrl
                     &&
@@ -63,6 +65,8 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                     style={{
                         display: "flex",
                         width: "25vw",
+                        height: "100%",
+                        overflow: "hidden"
                     }}>
                         <Image
                         style={{
@@ -73,14 +77,6 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                         }}
                         src={state.imageUrl}/>
                     </View>}
-
-                    {
-                    /*
-                    {!!state.contactInformation.imageUrl &&
-                    <Image
-                    src={state.contactInformation.imageUrl}/>}
-                    */
-                    }
 
                     <View
                     style={{
