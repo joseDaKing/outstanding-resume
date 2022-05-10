@@ -80,11 +80,12 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
 
                     <View
                     style={{
+                        width: !!state.imageUrl ? "75vw" : undefined,
                         display: "flex",
                         flexDirection: "row",
                         paddingVertical: "34pt",
                         paddingHorizontal: "48pt",
-                        paddingLeft: !!state.imageUrl ? "16pt" : undefined
+                        paddingLeft: !!state.imageUrl ? "16pt" : undefined,
                     }}>
                         {(
                             !!state.firstName
@@ -133,14 +134,32 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                                     {space}
                                     <View>
                                         <Text>
+                                            {!!state.imageUrl ? 
+                                                mergeText(
+                                                    ", ",
+                                                    state.address,
+                                                    state.zipCode,
+                                                )
+                                            : 
+                                                mergeText(
+                                                    ", ",
+                                                    state.address,
+                                                    state.zipCode,
+                                                    state.city,
+                                                    state.country
+                                                )}
+                                        </Text>
+                                        
+                                        {space}
+
+                                        {!!state.imageUrl &&
+                                        <Text>
                                             {mergeText(
                                                 ", ",
-                                                state.address,
-                                                state.zipCode,
                                                 state.city,
                                                 state.country
                                             )}
-                                        </Text>
+                                        </Text>}
                                     </View>
                                 </>}
 
