@@ -27,7 +27,7 @@ export const Links: React.FC<RootState["links"]> = state => {
             <Link
             key={item.id}
             url={item.url}>
-                {item.url}
+                {item.label}
             </Link>
         </>
     )

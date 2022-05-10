@@ -36,7 +36,15 @@ export const Items: React.FC<ItemsProps> = props => {
                 {restItems.map(item => (
                     <View
                     key={item.id}>
-                        {itemRenderer(item)}
+                        
+                        <View
+                        style={{
+                            marginTop: "12pt"
+                        }}/>
+
+                        <View>
+                            {itemRenderer(item)}
+                        </View>
                     </View>
                 ))}
             </>}

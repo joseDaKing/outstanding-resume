@@ -10,6 +10,8 @@ import { Sidebar } from "./Sidebar";
 
 import { Body } from "./Body";
 
+import img from "./dublin_preview.jpg";
+
 
 
 const DublinCVTemplate: React.FC<RootState> = state => {
@@ -34,6 +36,6 @@ const DublinCVTemplate: React.FC<RootState> = state => {
 
 export const dublin = {
     template: DublinCVTemplate,
-    img: "https://s3.resume.io/uploads/local_template_image/image/446/persistent-resource/dublin-cv-mallar.jpg",
-    name: "dublin"
+    name: "dublin",
+    img,
 }

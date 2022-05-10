@@ -15,6 +15,8 @@ import {
 }
 from "./sections";
 
+import img from "./madrid_preview.jpg";
+
 
 
 const MadridCVTemplate: React.FC<RootState> = state => {
@@ -48,6 +50,6 @@ const MadridCVTemplate: React.FC<RootState> = state => {
 
 export const madrid = {
     template: MadridCVTemplate,
-    img: "https://s3.resume.io/uploads/local_template_image/image/456/persistent-resource/madrid-cv-mallar.jpg",
-    name: "madrid"
+    name: "madrid",
+    img,
 }

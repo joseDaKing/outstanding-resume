@@ -135,15 +135,17 @@ export const Header: React.FC<RootState["contactInformation"]> = state => {
                                 ) &&
                                 <>
                                     {space}
-                                    <Text>
-                                        {mergeText(
-                                            ", ",
-                                            state.address,
-                                            state.zipCode,
-                                            state.city,
-                                            state.country
-                                        )}
-                                    </Text>
+                                    <View>
+                                        <Text>
+                                            {mergeText(
+                                                ", ",
+                                                state.address,
+                                                state.zipCode,
+                                                state.city,
+                                                state.country
+                                            )}
+                                        </Text>
+                                    </View>
                                 </>}
 
                                 {!!state.email &&
