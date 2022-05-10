@@ -55,7 +55,7 @@ export const AddNewSections: React.FC = () => {
             css={{
                 marginBottom: "$8"
             }}>
-                Lägg till avsnitt
+                Add new sections
             </SubTitle>
 
             <Stack
