@@ -12,9 +12,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 
 import { SizeIcon } from "@radix-ui/react-icons";
 
-import { RootState } from "state";
-
-import { usePDFLink, useValue, UseValueProps } from "helpers";
+import { useValue, UseValueProps } from "helpers";
 
 
 
@@ -168,8 +166,7 @@ const PDFViewBody: React.FC<PDFViewBodyProps> = props => {
 
 
 type PDFViewProps = {
-    Document: React.FC<RootState>;
-    state: RootState;
+    src: string;
     onClick?: () => void;
     scale?: number,
     page?: number;
@@ -187,8 +184,6 @@ export const PDFView: React.FC<PDFViewProps> = props => {
         defaultValue: props.defaultPage,
         onValueChange: props.onPageChange
     });
-
-    const url = usePDFLink(props.state, props.Document);
     
     return (
         <Box
@@ -201,7 +196,7 @@ export const PDFView: React.FC<PDFViewProps> = props => {
             amountOfPages={amountOfPages}/>
 
             <PDFViewBody
-            url={url}
+            url={props.src}
             pageNumber={pageNumber}
             scale={props.scale}
             onClick={props.onClick}

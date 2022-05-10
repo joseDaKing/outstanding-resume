@@ -6,28 +6,16 @@ import { useRef } from "react";
 
 import { DownloadIcon } from "@radix-ui/react-icons";
 
-import { RootState } from "state";
-
-import { usePDFLink } from "helpers";
-
 
 
 type PDFDownloadButtonProps = Omit<ButtonProps, keyof IconProps> & {
     downloadName: string;
-    Document: React.FC<RootState>;
-    state: RootState;
+    src: string;
 };
 
 export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = props => {
 
-    const {
-        downloadName,
-        Document: PDFDocument,
-        state,
-        ...htmlProps
-    } = props;
-
-    const url = usePDFLink(props.state, props.Document);
+    const { downloadName, src, ...htmlProps } = props;
 
     const ref = useRef<HTMLAnchorElement|null>(null);
 
@@ -45,9 +33,9 @@ export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = props => {
         EndIcon={DownloadIcon}>
             {props.children || "Download (PDF)"}
 
-            {url &&
+            {src &&
             <a
-            href={url}
+            href={src}
             download={downloadName}
             ref={ref}
             style={{

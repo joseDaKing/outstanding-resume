@@ -13,17 +13,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { 
     PDFView, 
-    PDFDownloadButton
+    PDFDownloadButton,
+    PDFTemplatePreview
 }
 from "components/pdf";
 
-import { MadridCVTemplate } from "cvTemplates";
-
-import { useAppSelector } from "state";
-
-import { useDownloadName } from "helpers";
+import { useDownloadName, usePDFLink } from "helpers";
 
 import { useState } from "react";
+
+import * as cvTemplates from "cvTemplates";
 
 
 
@@ -35,34 +34,36 @@ export const Fullscreen: React.FC = () => {
 
     const initialPage = locationState.page ?? 1;
 
-    const [ page, setPage ] = useState(initialPage);
-
-    const state = useAppSelector(state => state);
+    const [ page, setPage ] = useState(initialPage); 
     
     const downloadName = useDownloadName();
 
+    const url = usePDFLink() || "";
+
     return (
-        <Box
+        <Stack
+        orientation="vertical" 
+        wrap={false}
         css={{
-            height: "100vh",
-            overflow: "hidden",
-            gradientDirection: "45deg",
-            gradientFrom: "$primary9",
-            gradientTo: "$secondary9",
+            alignItems: "stretch",
+            justifyContent: "stretch",
+            maxHeight: "100vh",
+            maxWidth: "100vw",
         }}>
             <Box
             css={{
+                flexShrink: 1,
                 position: "relative",
                 zIndex: 1000,
                 boxShadow: "$xl",
                 padding: "$3",
-                backgroundColor: "$inverted"
+                backgroundColor: "$inverted",
             }}>
                 <Box
                 css={{
                     margin: "auto",
                     maxWidth: "$5xl",
-                    width: "100%"
+                    width: "100%",
                 }}>
                     <Stack
                     alignMain="start">
@@ -81,33 +82,67 @@ export const Fullscreen: React.FC = () => {
                         css={{
                             marginLeft: "auto"
                         }}
-                        state={state}
-                        Document={MadridCVTemplate}
+                        src={url}
                         downloadName={downloadName}
                         variant="text"/>
                     </Stack>
                 </Box>
             </Box>
-            
-            <ScrollArea
+           
+            <Stack
             css={{
-                height: "100%"
+                flexShrink: 1,
+                overflow: "hidden",
+                maxHeight: "100%",
+                width: "100%",
+                justifyContent: "stretch",
+                alignItems: "stretch"
             }}>
                 <Box
                 css={{
-                    padding: "$10",
-                    paddingBottom: "$20",
-                    margin: "auto",
-                    width: "65%"
+                    flexShrink: 1,
+                    width: "$1__3",
                 }}>
-                    <PDFView
-                    scale={2}
-                    state={state}
-                    page={page}
-                    onPageChange={setPage}
-                    Document={MadridCVTemplate}/>
+                    <ScrollArea>
+                        <Stack
+                        wrap
+                        css={{
+                            justifyContent: "space-between",
+                            padding: "$8",
+                            gap: "$6"
+                        }}>
+                            {Object.values(cvTemplates).reverse().map(({ img, name }) => (
+                                <PDFTemplatePreview 
+                                name={name}
+                                src={img}/>
+                            ))}
+                        </Stack>
+                    </ScrollArea>
                 </Box>
-            </ScrollArea>
-        </Box>
+
+                <ScrollArea
+                css={{
+                    flexGrow: 1,
+                    width: "$2__3",
+                    gradientDirection: "45deg",
+                    gradientFrom: "$primary9",
+                    gradientTo: "$secondary9",
+                }}>
+                    <Box
+                    css={{
+                        padding: "$10",
+                        paddingBottom: "$20",
+                        margin: "auto",
+                        width: "75%"
+                    }}>
+                        <PDFView
+                        src={url}
+                        scale={2}
+                        page={page}
+                        onPageChange={setPage}/>
+                    </Box>
+                </ScrollArea>
+            </Stack>
+        </Stack>
     );
 }

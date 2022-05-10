@@ -1,6 +1,6 @@
 import { pdf, } from "@react-pdf/renderer";
 
-import { RootState } from "state";
+import { RootState, useAppSelector } from "state";
 
 import React, { 
     useEffect, 
@@ -24,9 +24,13 @@ from "state/slices";
 
 import { useDebounce } from "use-debounce";
 
+import * as cvTemplates from "cvTemplates";
 
 
-export function usePDFLink(state: RootState, Document: React.FC<RootState>) {
+
+export function usePDFLink() {
+
+    const state = useAppSelector(store => store);
 
     const [ debouncedState ] = useDebounce(state, 600, {
         equalityFn: (previous, next) => JSON.stringify(previous) === JSON.stringify(next)
@@ -35,6 +39,8 @@ export function usePDFLink(state: RootState, Document: React.FC<RootState>) {
     const cleanedState = cleanState(debouncedState);
 
     const dependency = JSON.stringify(cleanedState);
+
+    const Document = cvTemplates[state.resume.name as keyof typeof cvTemplates].template;
 
     /* eslint-disable */
     const urlPromise = useMemo(async () => {

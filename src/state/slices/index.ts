@@ -23,3 +23,5 @@ export * from "./references";
 export * from "./hobbies";
 
 export * from "./extraActivities";
+
+export * from "./resume";

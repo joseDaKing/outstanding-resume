@@ -17,7 +17,7 @@ from "./sections";
 
 
 
-export const MadridCVTemplate: React.FC<RootState> = state => {
+const MadridCVTemplate: React.FC<RootState> = state => {
 
     return (
         <Document>
@@ -44,4 +44,10 @@ export const MadridCVTemplate: React.FC<RootState> = state => {
             </Page>
         </Document>
     );
+}
+
+export const madrid = {
+    template: MadridCVTemplate,
+    img: "https://s3.resume.io/uploads/local_template_image/image/456/persistent-resource/madrid-cv-mallar.jpg",
+    name: "madrid"
 }

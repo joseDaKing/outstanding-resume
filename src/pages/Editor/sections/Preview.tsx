@@ -4,17 +4,15 @@ import {
 }
 from "components/layout";
 
-import { useAppSelector } from "state";
-
-import { useDownloadName } from "helpers";
+import { useDownloadName, usePDFLink } from "helpers";
 
 import { PDFDownloadButton, PDFView } from "components/pdf";
-
-import { MadridCVTemplate } from "cvTemplates";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
+
+import { Button } from "components/form";
 
 
 
@@ -34,7 +32,7 @@ export const Preview: React.FC = () => {
         }
     });
 
-    const state = useAppSelector(state => state);
+    const url = usePDFLink() || "";
     
     const downloadName = useDownloadName();
     
@@ -64,16 +62,25 @@ export const Preview: React.FC = () => {
                 page={page}
                 onPageChange={setPage}
                 onClick={onClikcHandler}
-                state={state}
-                Document={MadridCVTemplate}
+                src={url}
                 scale={1}/>
             </Box>
 
-            <PDFDownloadButton
-            variant="inverted"
-            state={state}
-            downloadName={downloadName}
-            Document={MadridCVTemplate}/>
+            <Stack
+            css={{
+                gap: "$4"
+            }}>
+                <Button
+                onClick={onClikcHandler}
+                variant="inverted">
+                    Choose template
+                </Button>
+
+                <PDFDownloadButton
+                src={url}
+                variant="inverted"
+                downloadName={downloadName}/>
+            </Stack>
         </Stack>
     )
 }

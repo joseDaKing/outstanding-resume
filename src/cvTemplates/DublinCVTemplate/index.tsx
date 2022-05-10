@@ -12,7 +12,7 @@ import { Body } from "./Body";
 
 
 
-export const DublinCVTemplate: React.FC<RootState> = state => {
+const DublinCVTemplate: React.FC<RootState> = state => {
 
     return (
         <Document>
@@ -30,4 +30,10 @@ export const DublinCVTemplate: React.FC<RootState> = state => {
             </Page>
         </Document>
     );
+}
+
+export const dublin = {
+    template: DublinCVTemplate,
+    img: "https://s3.resume.io/uploads/local_template_image/image/446/persistent-resource/dublin-cv-mallar.jpg",
+    name: "dublin"
 }
