@@ -10,7 +10,7 @@ import {
 }
 from "@radix-ui/react-icons";
 
-import { useValue, UseValueProps } from "helpers";
+import { useValue, UseValueProps, blobToBase64 } from "helpers";
 
 import { stitches } from "stitches";
 
@@ -52,7 +52,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = props => {
 
     const hasUploaded = !!image;
 
-    const imageUploadHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const imageUploadHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
         if (!event.currentTarget.files || event.currentTarget.files.length === 0) {
 
@@ -61,9 +61,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = props => {
 
         const blob = event.currentTarget.files[0];
 
-        const src = URL.createObjectURL(blob);
-
-        setImage(src);
+        setImage(await blobToBase64(blob));
     } 
 
     const inputRef = useRef<HTMLInputElement|null>(null);
