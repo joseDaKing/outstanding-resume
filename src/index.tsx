@@ -14,6 +14,10 @@ import { store } from "state";
 
 import { BrowserRouter } from "react-router-dom";
 
+import { PersistGate } from "redux-persist/integration/react";
+
+import { persistStore } from "redux-persist";
+
 
 
 document.body.className = preflightStyles();
@@ -23,7 +27,11 @@ ReactDOM.render(
         <BrowserRouter>
             <ReduxProvider 
             store={store}>
-                <App/>
+                <PersistGate 
+                loading={null}
+                persistor={persistStore(store)}>
+                    <App/>
+                </PersistGate>
             </ReduxProvider>
         </BrowserRouter>
     </React.StrictMode>,
