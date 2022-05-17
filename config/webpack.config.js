@@ -1,4 +1,5 @@
 'use strict';
+
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -292,15 +293,16 @@ module.exports = function (webpackEnv) {
       ],
     },
     resolve: {
-        // Webpack 5 pollyfiles
+        // Node js pollyfill
         fallback: {
             process: require.resolve("process/browser"),
             zlib: require.resolve("browserify-zlib"),
             stream: require.resolve("stream-browserify"),
             util: require.resolve("util"),
             buffer: require.resolve("buffer"),
-            asset: require.resolve("assert"),
+            assert: require.resolve("assert"),
         },
+      
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
@@ -571,12 +573,11 @@ module.exports = function (webpackEnv) {
       ].filter(Boolean),
     },
     plugins: [
-        // Pollyfill
+        // Node js pollyfills for @react-pdf/renderer
         new webpack.ProvidePlugin({
             Buffer: ["buffer", "Buffer"],
             process: "process/browser",
         }),
-      
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
