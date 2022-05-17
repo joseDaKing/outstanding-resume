@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Oustanding resumes",
+  "name": "Outstanding resumes",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "white",
   "background_color": "#ffffff"
 }
