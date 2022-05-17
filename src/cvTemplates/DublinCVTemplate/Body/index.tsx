@@ -10,12 +10,15 @@ import { Education } from "./Education";
 
 import { References } from "./References";
 
+import { Courses } from "./Courses";
+
 import { 
     workExperience,
     interships,
     extraActivities,
     education,
-    references
+    references,
+    courses
 } 
 from "state/slices";
 
@@ -55,6 +58,10 @@ export const Body: React.FC<RootState> = state => {
                     {section === references.name &&
                     <References
                     {...state.references}/>}
+
+                    {section === courses.name &&
+                    <Courses
+                    {...state.courses}/>}
                 </View>
             ))}
         </View>
