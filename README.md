@@ -10,3 +10,6 @@ Outstanding-resumes is a free and open source resume generator.
 * Redux
 * radix-primitives
 * @stitches/react
+
+### This is a legacy version
+This is legacy project and it will be rewritten in a new [repo](https://github.com/joseDaKing/oustanding-resumes)
